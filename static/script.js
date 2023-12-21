@@ -42,7 +42,9 @@ Promise.all(promises).then(function () {
 
     // 背景颜色填充为白色
     let bgColor = "#ffffff";
+    let originalBgColor = bgColor;
     let fontColor = "#E4007F";
+    let originalFontColor = fontColor;
     ctx.fillStyle = bgColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -85,10 +87,18 @@ Promise.all(promises).then(function () {
 
     // 透明背景
     transparentBgCheckbox.addEventListener('change', function () {
-      if (this.checked) {
-        bgColor = 'black';
+      if (!swapBgCheckbox.checked) {
+        if (this.checked) {
+          bgColor = 'black';
+        } else {
+          bgColor = '#ffffff';
+        }
       } else {
-        bgColor = "#ffffff";
+        if (this.checked) {
+          fontColor = 'black';
+        } else {
+          fontColor = '#ffffff';
+        }
       }
       updateCanvas();
     });
