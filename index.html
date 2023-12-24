@@ -1,45 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Artistic Text Editor</title>
-  <link rel="stylesheet" href="./static/styles.css">  
-</head>
-<body>
-  <div id="editor-container">
-    <div id="canvas-container">
-      <canvas id="art-canvas" width="1000" height="500"></canvas>
-      <img id="art-image">
-    </div>
-    <div id="input-container">
-      <div id="canvas-settings">
-        <div>
-          <label for="transparent-bg">透明背景</label>
-          <input type="checkbox" id="transparent-bg">
-        </div>
-        <div>
-          <label for="text-place">下排居中</label>
-          <input type="checkbox" id="text-place">
-        </div>
-        <div>
-          <label for="color-swap">互换底色</label>
-          <input type="checkbox" id="color-swap">
-        </div>
-        <div>
-          <label for="text-stroke">文字描边</label>
-          <input type="checkbox" id="text-stroke">
-        </div>
-      </div>
-      <br>
-      <input type="text" id="text-input1" placeholder="LoveLive!" style="margin-bottom: 10px;">
-      <br>
-      <input type="text" id="text-input2" placeholder="School idol project">
-      <br>
-      <button id="download-btn">下载图片</button>
-    </div>
-  </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js"></script>
-  <script type="module" src="./static/script.js"></script>
-</body>
+<html lang="zh-cn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Logo Generator</title>
+    <script type="module" crossorigin src="/assets/index-b8042714.js"></script>
+    <link rel="stylesheet" href="/assets/index-5a30d71a.css">
+  </head>
+  <body>
+    <div id="app"></div>
+    
+  </body>
 </html>
+
+<style>
+@font-face {
+  font-family: 'FFMC';
+  src: url('/assets/FF Magda Clean Mono OT Regular-071b6ebc.ttf');
+}
+@font-face {
+  font-family: 'LIST';
+  src: url('/assets/LISTFCEI-07dfc66d.TTF');
+}
+body {
+  font-family: 'FFMC', 'LIST', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: #f6f8fa;
+  margin: 0;
+}
+</style>
