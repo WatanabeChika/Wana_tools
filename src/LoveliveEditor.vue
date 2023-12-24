@@ -40,6 +40,8 @@ function updateCanvas() {
   const text2Width = getTextWidth(text2.value || text2_ph, '30px FFMC');
   if (text1Width > originWidth-36 || text2Width > (originWidth/2 + text1Width/2 - 36)) {
     canvas.value.width = Math.max(text1Width+36, (text2Width+36 - text1Width/2)*2);
+  } else {
+    canvas.value.width = originWidth;
   }
   
   // 绘制背景
