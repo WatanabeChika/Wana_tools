@@ -1,0 +1,261 @@
+<script setup>
+import {ref, onMounted, watch} from 'vue';
+import FontFaceObserver from 'font-face-observer';
+import {fillCanvas, getTextWidth} from './utils.js';
+
+// -------变量声明-------
+const canvas = ref(null)
+const image = ref(null)
+const text1 = ref('');
+const text2 = ref('');
+
+const transparentBg = ref(false);
+const centerText = ref(false);
+const swapColor = ref(false);
+const textStroke = ref(false);
+
+const font1 = new FontFaceObserver('LIST');
+const font2 = new FontFaceObserver('FFMC');
+
+const modeItems = ref([
+  { name: '透明背景', mark: transparentBg },
+  { name: '下排居中', mark: centerText },
+  { name: '互换底色', mark: swapColor },
+  { name: '文字描边', mark: textStroke },
+]);
+
+let text1_ph = 'LoveLive!';
+let text2_ph = 'School idol project';
+let ctx, originWidth;
+let bgColor, fontColor;
+
+
+// -------主要功能-------
+// 更新Canvas
+function updateCanvas() {
+  ctx = canvas.value.getContext('2d');
+  
+  // 获取文本
+  const text1Width = getTextWidth(text1.value || text1_ph, 'bold italic 120px LIST');
+  const text2Width = getTextWidth(text2.value || text2_ph, '30px FFMC');
+  if (text1Width > originWidth-36 || text2Width > (originWidth/2 + text1Width/2 - 36)) {
+    canvas.value.width = Math.max(text1Width+36, (text2Width+36 - text1Width/2)*2);
+  }
+  
+  // 绘制背景
+  ctx.fillStyle = bgColor;
+  ctx.fillRect(0, 0, canvas.value.width, canvas.value.height);
+  
+  // 绘制文本
+  if (!transparentBg.value && swapColor.value && textStroke.value) {
+    const temp = fontColor;
+    fontColor = bgColor;
+    fillCanvas(ctx, fontColor, 'bold italic 120px LIST', textStroke.value, canvas.value.width/2, canvas.value.height/2-30, text1.value || text1_ph);
+    if (centerText.value) {
+      fillCanvas(ctx, fontColor, '32px FFMC', textStroke.value, canvas.value.width/2, canvas.value.height/2+40, text2.value || text2_ph);
+    } else {
+      fillCanvas(ctx, fontColor, '30px FFMC', textStroke.value, canvas.value.width/2 + text1Width/2 - text2Width/2, canvas.value.height/2+40, text2.value || text2_ph);
+    }
+    fontColor = temp;
+  } else {
+    fillCanvas(ctx, fontColor, 'bold italic 120px LIST', textStroke.value, canvas.value.width/2, canvas.value.height/2-30, text1.value || text1_ph);
+    if (centerText.value) {
+      fillCanvas(ctx, fontColor, '32px FFMC', textStroke.value, canvas.value.width/2, canvas.value.height/2+40, text2.value || text2_ph);
+    } else {
+      fillCanvas(ctx, fontColor, '30px FFMC', textStroke.value, canvas.value.width/2 + text1Width/2 - text2Width/2, canvas.value.height/2+40, text2.value || text2_ph);
+    }
+  }
+  
+  const dataURL = canvas.value.toDataURL('image/png');
+  image.value.src = dataURL; 
+}
+
+// 下载图片
+function downloadImage() {
+  const dataURL = canvas.value.toDataURL(transparentBg.value ? 'image/png' : 'image/jpeg');
+  const downloadLink = document.createElement('a');
+
+  downloadLink.href = dataURL;
+  downloadLink.download = transparentBg.value ? 'artistic_text.png' : 'artistic_text.jpg';
+
+  downloadLink.click();
+}
+
+
+// -------事件侦听-------
+// 初始化
+onMounted(async () => {
+  try {
+    // 加载字体
+    await Promise.all([font1.check(), font2.check()]);
+
+    ctx = canvas.value.getContext('2d');
+    originWidth = canvas.value.width;
+    // 设置 Canvas 初始样式
+    bgColor = "white";
+    fontColor = "#E4007F";
+    ctx.fillStyle = bgColor;
+    ctx.fillRect(0, 0, canvas.value.width, canvas.value.height);
+
+    // 初始化显示的文本
+    const text1Width = getTextWidth(text1_ph, 'bold italic 120px LIST');
+    const text2Width = getTextWidth(text2_ph, '30px FFMC');
+
+    fillCanvas(ctx, fontColor, 'bold italic 120px LIST', false, canvas.value.width/2, canvas.value.height/2-30, text1_ph);
+    fillCanvas(ctx, fontColor, '30px FFMC', false, canvas.value.width/2 + text1Width/2 - text2Width/2, canvas.value.height/2+40, text2_ph);
+
+    // 更新图片
+    const dataURL = canvas.value.toDataURL('image/png');
+    image.value.src = dataURL; 
+  } catch (error) {
+    console.error('字体加载失败:', error);
+  }
+});
+
+// 文本输入
+watch([text1, text2], () => {
+  updateCanvas();
+});
+
+// 模式切换
+watch(transparentBg, () => {
+  if (!swapColor.value) {
+    if (transparentBg.value) {
+      bgColor = 'black';
+    } else {
+      bgColor = 'white';
+    }
+  } else {
+    if (transparentBg.value) {
+      fontColor = 'black';
+    } else {
+      fontColor = 'white';
+    }
+  }
+  updateCanvas();
+});
+
+watch(centerText, () => {
+  if (centerText.value) {
+    text2_ph = 'School idol project series';
+  } else {
+    text2_ph = 'School idol project';
+  }
+  updateCanvas();
+});
+
+watch(swapColor, () => {
+  const temp = bgColor;
+  bgColor = fontColor;
+  fontColor = temp;
+  updateCanvas();
+});
+
+watch(textStroke, () => {
+  updateCanvas();
+});
+
+</script>
+
+
+
+<template>
+    <div id="canvas-container">
+      <canvas id="art-canvas" ref="canvas" width="1000" height="500"></canvas>
+      <img id="art-image" ref="image" width="1000" height="500" />
+    </div>
+    <div id="input-container">
+      <div id="canvas-settings">
+        <div v-for="item in modeItems" :key="item.name">
+          <label :for="item.name">{{ item.name }}</label>
+          <input v-model="item.mark" type="checkbox" :id="item.name">
+        </div>
+      </div>
+      <br>
+      <input v-model="text1" type="text" id="text-input1" :placeholder="text1_ph">
+      <br>
+      <input v-model="text2" type="text" id="text-input2" :placeholder="text2_ph">
+      <br>
+      <button @click="downloadImage" id="download-btn">下载图片</button>
+    </div>
+</template>
+
+
+
+<style>
+#canvas-container {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+#art-canvas {
+  display: none;
+}
+#art-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid #d1d5da;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+#input-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#canvas-settings {
+  display: flex;
+  flex-direction: row;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  font-weight: 600;
+}
+
+input[type="checkbox"] {
+  display: inline-block;
+  margin-bottom: 10px;
+  margin-right: 30px;
+}
+
+input[type="text"] {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #d1d5da;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+button {
+  background-color: #28a745;
+  color: #fff;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+</style>
