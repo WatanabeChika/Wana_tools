@@ -17,6 +17,10 @@ const textStroke = ref(false);
 const font1 = new FontFaceObserver('LIST');
 const font2 = new FontFaceObserver('FFMC');
 
+const textfont1 = 'bold italic 120px LIST';
+const textfont2 = '30px FFMC';
+const centerTextfont2 = '32px FFMC';
+
 const modeItems = ref([
   { name: '透明背景', mark: transparentBg },
   { name: '下排居中', mark: centerText },
@@ -36,8 +40,8 @@ function updateCanvas() {
   ctx = canvas.value.getContext('2d');
   
   // 获取文本
-  const text1Width = getTextWidth(text1.value || text1_ph, 'bold italic 120px LIST');
-  const text2Width = getTextWidth(text2.value || text2_ph, '30px FFMC');
+  const text1Width = getTextWidth(text1.value || text1_ph, textfont1);
+  const text2Width = getTextWidth(text2.value || text2_ph, textfont2);
   if (text1Width > originWidth-36 || text2Width > (originWidth/2 + text1Width/2 - 36)) {
     canvas.value.width = Math.max(text1Width+36, (text2Width+36 - text1Width/2)*2);
   } else {
@@ -52,19 +56,31 @@ function updateCanvas() {
   if (!transparentBg.value && swapColor.value && textStroke.value) {
     const temp = fontColor;
     fontColor = bgColor;
-    fillCanvas(ctx, fontColor, 'bold italic 120px LIST', textStroke.value, canvas.value.width/2, canvas.value.height/2-30, text1.value || text1_ph);
+    fillCanvas(ctx, fontColor, textfont1, textStroke.value, canvas.value.width/2, canvas.value.height/2-30, text1.value || text1_ph);
     if (centerText.value) {
-      fillCanvas(ctx, fontColor, '32px FFMC', textStroke.value, canvas.value.width/2, canvas.value.height/2+40, text2.value || text2_ph);
+      fillCanvas(ctx, fontColor, centerTextfont2, textStroke.value, canvas.value.width/2, canvas.value.height/2+40, text2.value || text2_ph);
     } else {
-      fillCanvas(ctx, fontColor, '30px FFMC', textStroke.value, canvas.value.width/2 + text1Width/2 - text2Width/2, canvas.value.height/2+40, text2.value || text2_ph);
+      fillCanvas(ctx, fontColor, textfont2, textStroke.value, canvas.value.width/2 + text1Width/2 - text2Width/2, canvas.value.height/2+40, text2.value || text2_ph);
     }
     fontColor = temp;
-  } else {
-    fillCanvas(ctx, fontColor, 'bold italic 120px LIST', textStroke.value, canvas.value.width/2, canvas.value.height/2-30, text1.value || text1_ph);
+  } else if (transparentBg.value && swapColor.value) {
+    const temp = fontColor;
+    fontColor = 'blue'; // 和背景不同
+    ctx.globalCompositeOperation = 'destination-out';
+    fillCanvas(ctx, fontColor, textfont1, textStroke.value, canvas.value.width/2, canvas.value.height/2-30, text1.value || text1_ph);
     if (centerText.value) {
-      fillCanvas(ctx, fontColor, '32px FFMC', textStroke.value, canvas.value.width/2, canvas.value.height/2+40, text2.value || text2_ph);
+      fillCanvas(ctx, fontColor, centerTextfont2, textStroke.value, canvas.value.width/2, canvas.value.height/2+40, text2.value || text2_ph);
     } else {
-      fillCanvas(ctx, fontColor, '30px FFMC', textStroke.value, canvas.value.width/2 + text1Width/2 - text2Width/2, canvas.value.height/2+40, text2.value || text2_ph);
+      fillCanvas(ctx, fontColor, textfont2, textStroke.value, canvas.value.width/2 + text1Width/2 - text2Width/2, canvas.value.height/2+40, text2.value || text2_ph);
+    }
+    ctx.globalCompositeOperation = 'source-over';
+    fontColor = temp;
+  } else {
+    fillCanvas(ctx, fontColor, textfont1, textStroke.value, canvas.value.width/2, canvas.value.height/2-30, text1.value || text1_ph);
+    if (centerText.value) {
+      fillCanvas(ctx, fontColor, centerTextfont2, textStroke.value, canvas.value.width/2, canvas.value.height/2+40, text2.value || text2_ph);
+    } else {
+      fillCanvas(ctx, fontColor, textfont2, textStroke.value, canvas.value.width/2 + text1Width/2 - text2Width/2, canvas.value.height/2+40, text2.value || text2_ph);
     }
   }
   
@@ -100,17 +116,17 @@ onMounted(async () => {
     ctx.fillRect(0, 0, canvas.value.width, canvas.value.height);
 
     // 初始化显示的文本
-    const text1Width = getTextWidth(text1_ph, 'bold italic 120px LIST');
-    const text2Width = getTextWidth(text2_ph, '30px FFMC');
+    const text1Width = getTextWidth(text1_ph, textfont1);
+    const text2Width = getTextWidth(text2_ph, textfont2);
 
-    fillCanvas(ctx, fontColor, 'bold italic 120px LIST', false, canvas.value.width/2, canvas.value.height/2-30, text1_ph);
-    fillCanvas(ctx, fontColor, '30px FFMC', false, canvas.value.width/2 + text1Width/2 - text2Width/2, canvas.value.height/2+40, text2_ph);
+    fillCanvas(ctx, fontColor, textfont1, false, canvas.value.width/2, canvas.value.height/2-30, text1_ph);
+    fillCanvas(ctx, fontColor, textfont2, false, canvas.value.width/2 + text1Width/2 - text2Width/2, canvas.value.height/2+40, text2_ph);
 
     // 更新图片
     const dataURL = canvas.value.toDataURL('image/png');
     image.value.src = dataURL; 
   } catch (error) {
-    console.error('字体加载失败:', error);
+    console.error(error);
   }
 });
 
@@ -123,13 +139,13 @@ watch([text1, text2], () => {
 watch(transparentBg, () => {
   if (!swapColor.value) {
     if (transparentBg.value) {
-      bgColor = 'black';
+      bgColor = 'rgba(0, 0, 0, 0)';
     } else {
       bgColor = 'white';
     }
   } else {
     if (transparentBg.value) {
-      fontColor = 'black';
+      fontColor = 'rgba(0, 0, 0, 0)';
     } else {
       fontColor = 'white';
     }

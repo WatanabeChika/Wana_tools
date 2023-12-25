@@ -1,11 +1,14 @@
 <script setup>
 import {ref} from 'vue';
 import LoveLiveEditor from './LoveliveEditor.vue'
+import LoveliveSSEditor from './LoveliveSSEditor.vue'
+
+const currentPage = ref(LoveLiveEditor)
 
 const navItems = ref([
-  { name: 'LoveLive!', path: '/' },
-  { name: 'LoveLive! Sunshine!!', path: '/' },
-  { name: 'Contact', path: '/' },
+  { name: 'LoveLive', path: LoveLiveEditor },
+  { name: 'LLSS', path: LoveliveSSEditor },
+  // { name: 'Contact', path: LoveLiveEditor },
 ]);
 
 </script>
@@ -16,13 +19,14 @@ const navItems = ref([
   <div style="display: flex;">
     <div id="navbar">
         <div class="container">
-            <button class="navbutton" v-for="item in navItems" :key="item.name">
+            <button v-for="item in navItems" :key="item.name" @click="currentPage = item.path"
+               :class="['navbutton', {active: currentPage === item.path}]">
                 {{ item.name }}
             </button>
         </div>
     </div>
     <div id="editor-container">
-      <LoveLiveEditor />
+      <component :is="currentPage"></component>
     </div>
   </div>
 </template>
@@ -58,6 +62,9 @@ const navItems = ref([
 .navbutton:hover{
   background-color: #D9D99B;
 }
+.navbutton.active{
+  background-color: #D9D99B;
+}
 
 /* 编辑器 */
 #editor-container {
@@ -66,7 +73,7 @@ const navItems = ref([
   margin: auto;
   margin-top: 50px;
   text-align: center;
-  background-color: #fff;
+  background-color: #f5f5f5;
   padding: 20px;
   border: 1px solid #e1e4e8;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
