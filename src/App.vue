@@ -1,13 +1,13 @@
 <script setup>
 import {ref} from 'vue';
-import LoveLiveEditor from './LoveliveEditor.vue'
-import LoveliveSSEditor from './LoveliveSSEditor.vue'
+import LoveLiveEditor from './LoveLiveEditor.vue'
+import LoveLiveSSEditor from './LoveLiveSSEditor.vue'
 
 const currentPage = ref(LoveLiveEditor)
 
 const navItems = ref([
   { name: 'LoveLive', path: LoveLiveEditor },
-  { name: 'LLSS', path: LoveliveSSEditor },
+  { name: 'LLSS', path: LoveLiveSSEditor },
   // { name: 'Contact', path: LoveLiveEditor },
 ]);
 
@@ -16,18 +16,16 @@ const navItems = ref([
 
 
 <template>
-  <div style="display: flex;">
-    <div id="navbar">
-        <div class="container">
-            <button v-for="item in navItems" :key="item.name" @click="currentPage = item.path"
-               :class="['navbutton', {active: currentPage === item.path}]">
-                {{ item.name }}
-            </button>
-        </div>
-    </div>
-    <div id="editor-container">
-      <component :is="currentPage"></component>
-    </div>
+  <div id="navbar">
+      <div class="container">
+          <button v-for="item in navItems" :key="item.name" @click="currentPage = item.path"
+              :class="['navbutton', {active: currentPage === item.path}]">
+              {{ item.name }}
+          </button>
+      </div>
+  </div>
+  <div id="editor-container">
+    <component :is="currentPage"></component>
   </div>
 </template>
 
@@ -36,28 +34,26 @@ const navItems = ref([
 <style>
 /* 导航栏 */
 #navbar {
-  height: 100vh;
-  width: 150px;
-  z-index: 1;
-  top: 0;
-  left: 0;
+  height: 60px;
   background-color: #F5F5DC;
-  overflow-x: hidden;
-  padding-top: 20px;
+  padding: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
 }
 .container {
   padding: 10px;
   text-align: center;
 }
 .navbutton {
-  margin: 10px 0px 10px 0px;
+  margin: 0px 15px 0px 15px;
   background-color: #F5F5DC;
   color: black;
   padding: 16px;
   font-size: 16px;
   border: none;
   cursor: pointer;
-  width: 100%;
+  height: 100%;
 }
 .navbutton:hover{
   background-color: #D9D99B;
@@ -68,10 +64,9 @@ const navItems = ref([
 
 /* 编辑器 */
 #editor-container {
-  width: 800px;
-  margin-top: 50px;
+  max-width: 800px;
   margin: auto;
-  margin-top: 50px;
+  margin-top: 20px;
   text-align: center;
   background-color: #f5f5f5;
   padding: 20px;

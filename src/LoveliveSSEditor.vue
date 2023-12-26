@@ -1,7 +1,7 @@
 <script setup>
 import {ref, onMounted, watch} from 'vue';
 import FontFaceObserver from 'font-face-observer';
-import {fillCanvas, getTextWidth, loadImage} from './utils.js';
+import {fillCanvasText, getTextWidth, loadImage} from './utils.js';
 
 // -------变量声明-------
 const canvas = ref(null)
@@ -24,7 +24,7 @@ const textfont3 = 'bold italic 66px LIST';
 
 const modeItems = ref([
   { name: '透明背景', mark: transparentBg },
-  { name: 'Superstar', mark: swapImage },
+  { name: '超级新星', mark: swapImage },
   { name: '互换底色', mark: swapColor },
   { name: '文字描边', mark: textStroke },
 ]);
@@ -32,57 +32,92 @@ const modeItems = ref([
 let text1_ph = 'LoveLive!';
 let text2_ph = 'School idol project';
 let text3_ph = 'Sunshine!!';
-let imgSrc = '../static/images/LLSS_star.png';
+let imgSrc = 'images/LLSS_star';
+let imgMode = '';
 let ctx, originWidth;
 let bgColor, fontColor;
 
 
 // -------主要功能-------
 // 更新Canvas
-// async function updateCanvas() {
-//   ctx = canvas.value.getContext('2d');
+async function updateCanvas(SP) {
+  ctx = canvas.value.getContext('2d');
   
-//   // 获取文本
-//   const text1Width = getTextWidth(text1.value || text1_ph, textfont1);
-//   const text2Width = getTextWidth(text2.value || text2_ph, textfont2);
-//   const text3Width = getTextWidth(text3.value || text3_ph, textfont3);
+  // 获取文本
+  const text1Width = getTextWidth(text1.value || text1_ph, textfont1);
+  const text2Width = getTextWidth(text2.value || text2_ph, textfont2);
+  const text3Width = getTextWidth(text3.value || text3_ph, textfont3);
   
-//   if (text1Width > originWidth-36 || text2Width > (originWidth/2 + text1Width/2 - 36) || text3Width > (originWidth/2 + text1Width/2 - 36)) {
-//     canvas.value.width = Math.max(text1Width+36, (text2Width+36 - text1Width/2)*2, (text3Width+36 - text1Width/2)*2);
-//   } else {
-//     canvas.value.width = originWidth;
-//   }
+  if (text1Width > originWidth-36 || text2Width > (originWidth/2 + text1Width/2 - 25 - 36) || text3Width > (originWidth/2 + text1Width/2 - 30 - 36)) {
+    canvas.value.width = Math.max(text1Width+36, (text2Width+36+25 - text1Width/2)*2, (text3Width+36+30 - text1Width/2)*2);
+  } else {
+    canvas.value.width = originWidth;
+  }
   
-//   // 绘制背景
-//   ctx.fillStyle = bgColor;
-//   ctx.fillRect(0, 0, canvas.value.width, canvas.value.height);
+  // 绘制背景
+  ctx.fillStyle = bgColor;
+  ctx.fillRect(0, 0, canvas.value.width, canvas.value.height);
 
-//   // 用于确定图片位置
-//   const [text3_x, text3_y] = [canvas.value.width/2 + text1Width/2 - text3Width/2 - 30, canvas.value.height/2+63];
+  // 用于确定图片位置
+  const [text3_x, text3_y] = [canvas.value.width/2 + text1Width/2 - text3Width/2 - 30, canvas.value.height/2+63];
   
-//   // 绘制文本
-//   if (!transparentBg.value && swapColor.value && textStroke.value) {
-//     const temp = fontColor;
-//     fontColor = bgColor;
-//     fillCanvas(ctx, fontColor, textfont1, textStroke.value, canvas.value.width/2, canvas.value.height/2-35, text1.value || text1_ph);
-//     fillCanvas(ctx, fontColor, textfont2, textStroke.value, canvas.value.width/2 + text1Width/2 - text2Width/2, canvas.value.height/2+18, text2.value || text2_ph);
-//     fillCanvas(ctx, fontColor, textfont2, textStroke.value, text3_x, text3_y, text3.value || text2_ph);
-//     fontColor = temp;
-//   } else {
-//     fillCanvas(ctx, fontColor, textfont1, textStroke.value, canvas.value.width/2, canvas.value.height/2-35, text1.value || text1_ph);
-//     fillCanvas(ctx, fontColor, textfont2, textStroke.value, canvas.value.width/2 + text1Width/2 - text2Width/2, canvas.value.height/2+18, text2.value || text2_ph);
-//     fillCanvas(ctx, fontColor, textfont2, textStroke.value, text3_x, text3_y, text3.value || text2_ph);
-//   }
+  // 选择图片
+  if (textStroke.value) {
+    imgMode = '_stroke';
+  } else if (swapColor.value) {
+    imgMode = '_white';
+  }
 
-//   // 绘制图像
-//   const img = await loadImage(imgSrc);
-//   ctx.drawImage(img, text3_x-240, text3_y-88, img.width/2.1, img.height/2.1);
+  // 图片位置和大小
+  const img = await loadImage(imgSrc+imgMode+'.png');
+  const [x, y, w, h] = SP ? [text3_x-248, text3_y-75, img.width/4, img.height/4] : [text3_x-310, text3_y-145, img.width/2, img.height/2];
+
+  // 绘制文本和图像
+  if (!transparentBg.value && swapColor.value && textStroke.value) {
+    const temp = fontColor;
+    fontColor = bgColor;
+    fillCanvasText(ctx, fontColor, textfont1, textStroke.value, canvas.value.width/2, canvas.value.height/2-50, text1.value || text1_ph);
+    fillCanvasText(ctx, fontColor, textfont2, textStroke.value, canvas.value.width/2 + text1Width/2 - text2Width/2 - 25, canvas.value.height/2+16, text2.value || text2_ph);
+    fillCanvasText(ctx, fontColor, textfont3, textStroke.value, text3_x, text3_y, text3.value || text3_ph);
+    fontColor = temp;
+    ctx.drawImage(img, x, y, w, h);
+  } 
+  else if (transparentBg.value && swapColor.value) {
+    const temp = fontColor;
+    fontColor = 'blue'; // 和背景不同
+    ctx.globalCompositeOperation = 'destination-out';
+    fillCanvasText(ctx, fontColor, textfont1, textStroke.value, canvas.value.width/2, canvas.value.height/2-50, text1.value || text1_ph);
+    fillCanvasText(ctx, fontColor, textfont2, textStroke.value, canvas.value.width/2 + text1Width/2 - text2Width/2 - 25, canvas.value.height/2+16, text2.value || text2_ph);
+    fillCanvasText(ctx, fontColor, textfont3, textStroke.value, text3_x, text3_y, text3.value || text3_ph);
+    ctx.drawImage(img, x, y, w, h);
+    ctx.globalCompositeOperation = 'source-over';
+    fontColor = temp;
+    if (textStroke.value) {
+      const img2 = await loadImage(imgSrc+'_empty.png');
+      ctx.drawImage(img2, x, y, w, h);
+    }
+  } 
+  else {
+    fillCanvasText(ctx, fontColor, textfont1, textStroke.value, canvas.value.width/2, canvas.value.height/2-50, text1.value || text1_ph);
+    fillCanvasText(ctx, fontColor, textfont2, textStroke.value, canvas.value.width/2 + text1Width/2 - text2Width/2 - 25, canvas.value.height/2+16, text2.value || text2_ph);
+    fillCanvasText(ctx, fontColor, textfont3, textStroke.value, text3_x, text3_y, text3.value || text3_ph);
+    ctx.drawImage(img, x, y, w, h);
+  }
   
-//   const dataURL = canvas.value.toDataURL('image/png');
-//   image.value.src = dataURL; 
-// }
+  imgMode = '';
+  image.value.src = canvas.value.toDataURL('image/png'); 
+}
 
+// 下载图片
+function downloadImage() {
+  const dataURL = canvas.value.toDataURL(transparentBg.value ? 'image/png' : 'image/jpeg');
+  const downloadLink = document.createElement('a');
 
+  downloadLink.href = dataURL;
+  downloadLink.download = transparentBg.value ? `${text1.value || text3_ph}.png` : `${text1.value || text3_ph}.jpg`;
+
+  downloadLink.click();
+}
 
 // -------事件侦听-------
 // 初始化
@@ -106,66 +141,65 @@ onMounted(async () => {
     const [text3_x, text3_y] = [canvas.value.width/2 + text1Width/2 - text3Width/2 - 30, canvas.value.height/2+63];
 
     // 初始化显示的文本
-    fillCanvas(ctx, fontColor, textfont1, false, canvas.value.width/2, canvas.value.height/2-50, text1_ph);
-    fillCanvas(ctx, fontColor, textfont2, false, canvas.value.width/2 + text1Width/2 - text2Width/2 - 25, canvas.value.height/2+13, text2_ph);
-    fillCanvas(ctx, fontColor, textfont3, false, text3_x, text3_y, text3_ph);
+    fillCanvasText(ctx, fontColor, textfont1, false, canvas.value.width/2, canvas.value.height/2-50, text1_ph);
+    fillCanvasText(ctx, fontColor, textfont2, false, canvas.value.width/2 + text1Width/2 - text2Width/2 - 25, canvas.value.height/2+16, text2_ph);
+    fillCanvasText(ctx, fontColor, textfont3, false, text3_x, text3_y, text3_ph);
 
     // 初始化图像
-    const img = await loadImage(imgSrc);
-    ctx.drawImage(img, text3_x-245, text3_y-90, img.width/2, img.height/2);
+    const img = await loadImage(imgSrc+'.png');
+    ctx.drawImage(img, text3_x-310, text3_y-145, img.width/2, img.height/2);
 
     // 更新图片
-    const dataURL = canvas.value.toDataURL('image/png');
-    image.value.src = dataURL; 
+    image.value.src = canvas.value.toDataURL('image/png'); 
   } catch (error) {
     console.error(error);
   }
 });
 
-// // 文本输入
-// watch([text1, text2, text3], () => {
-//   updateCanvas();
-// });
+// 文本输入
+watch([text1, text2, text3], () => {
+  updateCanvas(swapImage.value);
+});
 
-// // 模式切换
-// watch(transparentBg, () => {
-//   if (!swapColor.value) {
-//     if (transparentBg.value) {
-//       bgColor = 'black';
-//     } else {
-//       bgColor = 'white';
-//     }
-//   } else {
-//     if (transparentBg.value) {
-//       fontColor = 'black';
-//     } else {
-//       fontColor = 'white';
-//     }
-//   }
-//   updateCanvas();
-// });
+// 模式切换
+watch(transparentBg, () => {
+  if (!swapColor.value) {
+    if (transparentBg.value) {
+      bgColor = 'transparent';
+    } else {
+      bgColor = 'white';
+    }
+  } else {
+    if (transparentBg.value) {
+      fontColor = 'transparent';
+    } else {
+      fontColor = 'white';
+    }
+  }
+  updateCanvas(swapImage.value);
+});
 
-// watch(swapImage, () => {
-//   if (swapImage.value) {
-//     text3_ph = 'Superstar!!';
-//     imgSrc = '../static/images/LLSP_star.png';
-//   } else {
-//     text3_ph = 'Sunshine!!';
-//     imgSrc = '../static/images/LLSS_star.png';
-//   }
-//   updateCanvas();
-// });
+watch(swapImage, () => {
+  if (swapImage.value) {
+    text3_ph = 'Superstar!!';
+    imgSrc = 'images/LLSP_star';
+  } else {
+    text3_ph = 'Sunshine!!';
+    imgSrc = 'images/LLSS_star';
+  }
+  updateCanvas(swapImage.value);
+});
 
-// watch(swapColor, () => {
-//   const temp = bgColor;
-//   bgColor = fontColor;
-//   fontColor = temp;
-//   updateCanvas();
-// });
+watch(swapColor, () => {
+  const temp = bgColor;
+  bgColor = fontColor;
+  fontColor = temp;
+  updateCanvas(swapImage.value);
+});
 
-// watch(textStroke, () => {
-//   updateCanvas();
-// });
+watch(textStroke, () => {
+  updateCanvas(swapImage.value);
+});
 
 </script>
 

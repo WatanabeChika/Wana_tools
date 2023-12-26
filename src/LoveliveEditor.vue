@@ -1,7 +1,7 @@
 <script setup>
 import {ref, onMounted, watch} from 'vue';
 import FontFaceObserver from 'font-face-observer';
-import {fillCanvas, getTextWidth} from './utils.js';
+import {fillCanvasText, getTextWidth} from './utils.js';
 
 // -------变量声明-------
 const canvas = ref(null)
@@ -56,36 +56,37 @@ function updateCanvas() {
   if (!transparentBg.value && swapColor.value && textStroke.value) {
     const temp = fontColor;
     fontColor = bgColor;
-    fillCanvas(ctx, fontColor, textfont1, textStroke.value, canvas.value.width/2, canvas.value.height/2-30, text1.value || text1_ph);
+    fillCanvasText(ctx, fontColor, textfont1, textStroke.value, canvas.value.width/2, canvas.value.height/2-30, text1.value || text1_ph);
     if (centerText.value) {
-      fillCanvas(ctx, fontColor, centerTextfont2, textStroke.value, canvas.value.width/2, canvas.value.height/2+40, text2.value || text2_ph);
+      fillCanvasText(ctx, fontColor, centerTextfont2, textStroke.value, canvas.value.width/2, canvas.value.height/2+40, text2.value || text2_ph);
     } else {
-      fillCanvas(ctx, fontColor, textfont2, textStroke.value, canvas.value.width/2 + text1Width/2 - text2Width/2, canvas.value.height/2+40, text2.value || text2_ph);
+      fillCanvasText(ctx, fontColor, textfont2, textStroke.value, canvas.value.width/2 + text1Width/2 - text2Width/2, canvas.value.height/2+40, text2.value || text2_ph);
     }
     fontColor = temp;
-  } else if (transparentBg.value && swapColor.value) {
+  } 
+  else if (transparentBg.value && swapColor.value) {
     const temp = fontColor;
     fontColor = 'blue'; // 和背景不同
     ctx.globalCompositeOperation = 'destination-out';
-    fillCanvas(ctx, fontColor, textfont1, textStroke.value, canvas.value.width/2, canvas.value.height/2-30, text1.value || text1_ph);
+    fillCanvasText(ctx, fontColor, textfont1, textStroke.value, canvas.value.width/2, canvas.value.height/2-30, text1.value || text1_ph);
     if (centerText.value) {
-      fillCanvas(ctx, fontColor, centerTextfont2, textStroke.value, canvas.value.width/2, canvas.value.height/2+40, text2.value || text2_ph);
+      fillCanvasText(ctx, fontColor, centerTextfont2, textStroke.value, canvas.value.width/2, canvas.value.height/2+40, text2.value || text2_ph);
     } else {
-      fillCanvas(ctx, fontColor, textfont2, textStroke.value, canvas.value.width/2 + text1Width/2 - text2Width/2, canvas.value.height/2+40, text2.value || text2_ph);
+      fillCanvasText(ctx, fontColor, textfont2, textStroke.value, canvas.value.width/2 + text1Width/2 - text2Width/2, canvas.value.height/2+40, text2.value || text2_ph);
     }
     ctx.globalCompositeOperation = 'source-over';
     fontColor = temp;
-  } else {
-    fillCanvas(ctx, fontColor, textfont1, textStroke.value, canvas.value.width/2, canvas.value.height/2-30, text1.value || text1_ph);
+  } 
+  else {
+    fillCanvasText(ctx, fontColor, textfont1, textStroke.value, canvas.value.width/2, canvas.value.height/2-30, text1.value || text1_ph);
     if (centerText.value) {
-      fillCanvas(ctx, fontColor, centerTextfont2, textStroke.value, canvas.value.width/2, canvas.value.height/2+40, text2.value || text2_ph);
+      fillCanvasText(ctx, fontColor, centerTextfont2, textStroke.value, canvas.value.width/2, canvas.value.height/2+40, text2.value || text2_ph);
     } else {
-      fillCanvas(ctx, fontColor, textfont2, textStroke.value, canvas.value.width/2 + text1Width/2 - text2Width/2, canvas.value.height/2+40, text2.value || text2_ph);
+      fillCanvasText(ctx, fontColor, textfont2, textStroke.value, canvas.value.width/2 + text1Width/2 - text2Width/2, canvas.value.height/2+40, text2.value || text2_ph);
     }
   }
   
-  const dataURL = canvas.value.toDataURL('image/png');
-  image.value.src = dataURL; 
+  image.value.src = canvas.value.toDataURL('image/png');
 }
 
 // 下载图片
@@ -94,7 +95,7 @@ function downloadImage() {
   const downloadLink = document.createElement('a');
 
   downloadLink.href = dataURL;
-  downloadLink.download = transparentBg.value ? 'artistic_text.png' : 'artistic_text.jpg';
+  downloadLink.download = transparentBg.value ? `${text1.value || text1_ph}.png` : `${text1.value || text1_ph}.jpg`;
 
   downloadLink.click();
 }
@@ -119,12 +120,11 @@ onMounted(async () => {
     const text1Width = getTextWidth(text1_ph, textfont1);
     const text2Width = getTextWidth(text2_ph, textfont2);
 
-    fillCanvas(ctx, fontColor, textfont1, false, canvas.value.width/2, canvas.value.height/2-30, text1_ph);
-    fillCanvas(ctx, fontColor, textfont2, false, canvas.value.width/2 + text1Width/2 - text2Width/2, canvas.value.height/2+40, text2_ph);
+    fillCanvasText(ctx, fontColor, textfont1, false, canvas.value.width/2, canvas.value.height/2-30, text1_ph);
+    fillCanvasText(ctx, fontColor, textfont2, false, canvas.value.width/2 + text1Width/2 - text2Width/2, canvas.value.height/2+40, text2_ph);
 
     // 更新图片
-    const dataURL = canvas.value.toDataURL('image/png');
-    image.value.src = dataURL; 
+    image.value.src = canvas.value.toDataURL('image/png'); 
   } catch (error) {
     console.error(error);
   }
@@ -139,13 +139,13 @@ watch([text1, text2], () => {
 watch(transparentBg, () => {
   if (!swapColor.value) {
     if (transparentBg.value) {
-      bgColor = 'rgba(0, 0, 0, 0)';
+      bgColor = 'transparent';
     } else {
       bgColor = 'white';
     }
   } else {
     if (transparentBg.value) {
-      fontColor = 'rgba(0, 0, 0, 0)';
+      fontColor = 'transparent';
     } else {
       fontColor = 'white';
     }
