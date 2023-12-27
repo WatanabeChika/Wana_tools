@@ -14,6 +14,11 @@ const transparentBg = ref(false);
 const swapImage = ref(false);
 const swapColor = ref(false);
 const textStroke = ref(false);
+const imgExist = ref(true);
+const imageX = ref(0);
+const imageY = ref(0);
+const maxWidth = ref(0);
+const maxHeight = ref(0);
 
 const font1 = new FontFaceObserver('LIST');
 const font2 = new FontFaceObserver('FFMC');
@@ -27,6 +32,7 @@ const modeItems = ref([
   { name: '超级新星', mark: swapImage },
   { name: '互换底色', mark: swapColor },
   { name: '文字描边', mark: textStroke },
+  { name: '图片组件', mark: imgExist },
 ]);
 
 let text1_ph = 'LoveLive!';
@@ -34,13 +40,14 @@ let text2_ph = 'School idol project';
 let text3_ph = 'Sunshine!!';
 let imgSrc = 'images/LLSS_star';
 let imgMode = '';
+let manualImg = false;
 let ctx, originWidth;
 let bgColor, fontColor;
 
 
 // -------主要功能-------
 // 更新Canvas
-async function updateCanvas(SP) {
+async function updateCanvas(swapImage, manualImg) {
   ctx = canvas.value.getContext('2d');
   
   // 获取文本
@@ -50,8 +57,10 @@ async function updateCanvas(SP) {
   
   if (text1Width > originWidth-36 || text2Width > (originWidth/2 + text1Width/2 - 25 - 36) || text3Width > (originWidth/2 + text1Width/2 - 30 - 36)) {
     canvas.value.width = Math.max(text1Width+36, (text2Width+36+25 - text1Width/2)*2, (text3Width+36+30 - text1Width/2)*2);
+    maxWidth.value = canvas.value.width;
   } else {
     canvas.value.width = originWidth;
+    maxWidth.value = canvas.value.width;
   }
   
   // 绘制背景
@@ -70,7 +79,10 @@ async function updateCanvas(SP) {
 
   // 图片位置和大小
   const img = await loadImage(imgSrc+imgMode+'.png');
-  const [x, y, w, h] = SP ? [text3_x-248, text3_y-75, img.width/4, img.height/4] : [text3_x-310, text3_y-145, img.width/2, img.height/2];
+  const [x, y, w, h] = swapImage 
+                      ? [manualImg?imageX.value-62.5:text3_x-248, manualImg?imageY.value-55:text3_y-75, img.width/4, img.height/4] 
+                      : [manualImg?imageX.value-125:text3_x-310, manualImg?imageY.value-110:text3_y-145, img.width/2, img.height/2];
+  [imageX.value, imageY.value]= [x, y];
 
   // 绘制文本和图像
   if (!transparentBg.value && swapColor.value && textStroke.value) {
@@ -80,7 +92,7 @@ async function updateCanvas(SP) {
     fillCanvasText(ctx, fontColor, textfont2, textStroke.value, canvas.value.width/2 + text1Width/2 - text2Width/2 - 25, canvas.value.height/2+16, text2.value || text2_ph);
     fillCanvasText(ctx, fontColor, textfont3, textStroke.value, text3_x, text3_y, text3.value || text3_ph);
     fontColor = temp;
-    ctx.drawImage(img, x, y, w, h);
+    if(imgExist.value) ctx.drawImage(img, x, y, w, h);
   } 
   else if (transparentBg.value && swapColor.value) {
     const temp = fontColor;
@@ -89,19 +101,19 @@ async function updateCanvas(SP) {
     fillCanvasText(ctx, fontColor, textfont1, textStroke.value, canvas.value.width/2, canvas.value.height/2-50, text1.value || text1_ph);
     fillCanvasText(ctx, fontColor, textfont2, textStroke.value, canvas.value.width/2 + text1Width/2 - text2Width/2 - 25, canvas.value.height/2+16, text2.value || text2_ph);
     fillCanvasText(ctx, fontColor, textfont3, textStroke.value, text3_x, text3_y, text3.value || text3_ph);
-    ctx.drawImage(img, x, y, w, h);
+    if(imgExist.value) ctx.drawImage(img, x, y, w, h);
     ctx.globalCompositeOperation = 'source-over';
     fontColor = temp;
     if (textStroke.value) {
       const img2 = await loadImage(imgSrc+'_empty.png');
-      ctx.drawImage(img2, x, y, w, h);
+      if(imgExist.value) ctx.drawImage(img2, x, y, w, h);
     }
   } 
   else {
     fillCanvasText(ctx, fontColor, textfont1, textStroke.value, canvas.value.width/2, canvas.value.height/2-50, text1.value || text1_ph);
     fillCanvasText(ctx, fontColor, textfont2, textStroke.value, canvas.value.width/2 + text1Width/2 - text2Width/2 - 25, canvas.value.height/2+16, text2.value || text2_ph);
     fillCanvasText(ctx, fontColor, textfont3, textStroke.value, text3_x, text3_y, text3.value || text3_ph);
-    ctx.drawImage(img, x, y, w, h);
+    if(imgExist.value) ctx.drawImage(img, x, y, w, h);
   }
   
   imgMode = '';
@@ -128,6 +140,8 @@ onMounted(async () => {
 
     ctx = canvas.value.getContext('2d');
     originWidth = canvas.value.width;
+    maxWidth.value = canvas.value.width;
+    maxHeight.value = canvas.value.height;
     // 设置 Canvas 初始样式
     bgColor = "white";
     fontColor = "#E4007F";
@@ -147,7 +161,8 @@ onMounted(async () => {
 
     // 初始化图像
     const img = await loadImage(imgSrc+'.png');
-    ctx.drawImage(img, text3_x-310, text3_y-145, img.width/2, img.height/2);
+    [imageX.value, imageY.value]= [text3_x-310, text3_y-145];
+    ctx.drawImage(img, imageX.value, imageY.value, img.width/2, img.height/2);
 
     // 更新图片
     image.value.src = canvas.value.toDataURL('image/png'); 
@@ -156,9 +171,20 @@ onMounted(async () => {
   }
 });
 
+// 手动调整图片位置
+function manualAdjust() {
+  manualImg = true;
+  updateCanvas(swapImage.value, manualImg);
+}
+
 // 文本输入
 watch([text1, text2, text3], () => {
-  updateCanvas(swapImage.value);
+  updateCanvas(swapImage.value, manualImg);
+});
+
+// 图片位置
+watch([imageX, imageY], () => {
+  updateCanvas(swapImage.value, manualImg);
 });
 
 // 模式切换
@@ -176,7 +202,7 @@ watch(transparentBg, () => {
       fontColor = 'white';
     }
   }
-  updateCanvas(swapImage.value);
+  updateCanvas(swapImage.value, manualImg);
 });
 
 watch(swapImage, () => {
@@ -187,19 +213,25 @@ watch(swapImage, () => {
     text3_ph = 'Sunshine!!';
     imgSrc = 'images/LLSS_star';
   }
-  updateCanvas(swapImage.value);
+  updateCanvas(swapImage.value, manualImg);
 });
 
 watch(swapColor, () => {
   const temp = bgColor;
   bgColor = fontColor;
   fontColor = temp;
-  updateCanvas(swapImage.value);
+  updateCanvas(swapImage.value, manualImg);
 });
 
 watch(textStroke, () => {
-  updateCanvas(swapImage.value);
+  updateCanvas(swapImage.value, manualImg);
 });
+
+watch(imgExist, () => {
+  updateCanvas(swapImage.value, manualImg);
+});
+
+
 
 </script>
 
@@ -208,13 +240,25 @@ watch(textStroke, () => {
 <template>
     <div id="canvas-container">
       <canvas id="art-canvas" ref="canvas" width="1000" height="500"></canvas>
-      <img id="art-image" ref="image" width="1000" height="500" />
+      <img id="art-image" ref="image"/>
     </div>
     <div id="input-container">
       <div id="canvas-settings">
         <div v-for="item in modeItems" :key="item.name">
           <label :for="item.name">{{ item.name }}</label>
           <input v-model="item.mark" type="checkbox" :id="item.name">
+        </div>
+        <div v-if="imgExist" id="imgExist">
+          <div class="image-manual">
+            <label for="imageX">X</label>
+            <input type="range" id="imageX" min="0" :max="maxWidth" step="1" v-model="imageX" @change="manualAdjust">
+            <input type="number" id="imageX" v-model="imageX" @input="manualAdjust">
+          </div>
+          <div class="image-manual">
+            <label for="imageY">Y</label>
+            <input type="range" id="imageY" min="0" :max="maxHeight" step="1" v-model="imageY" @change="manualAdjust">
+            <input type="number" id="imageX" v-model="imageY" @input="manualAdjust">
+          </div>
         </div>
       </div>
       <br>
@@ -239,6 +283,7 @@ watch(textStroke, () => {
 #art-canvas {
   display: none;
 }
+
 #art-image {
   max-width: 100%;
   height: auto;
@@ -258,6 +303,7 @@ watch(textStroke, () => {
 
 #canvas-settings {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
 }
 
@@ -304,6 +350,29 @@ button {
 
 button:hover {
   background-color: #218838;
+}
+
+#imgExist {
+  display: flex; 
+  flex-direction: column; 
+  align-items: center;
+}
+
+.image-manual {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+input[type="range"] {
+  width: 150px;
+  margin-left: 15px;
+  margin-right: 10px;
+}
+
+input[type="number"] {
+  width: 60px;
+  margin-right: 15px;
 }
 
 </style>

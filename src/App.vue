@@ -64,7 +64,7 @@ const navItems = ref([
 
 /* 编辑器 */
 #editor-container {
-  max-width: 800px;
+  max-width: 900px;
   margin: auto;
   margin-top: 20px;
   text-align: center;
