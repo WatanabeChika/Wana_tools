@@ -82,7 +82,7 @@ async function updateCanvas(swapImage, manualImg) {
   const [x, y, w, h] = swapImage 
                       ? [manualImg?imageX.value-62.5:text3_x-248, manualImg?imageY.value-55:text3_y-75, img.width/4, img.height/4] 
                       : [manualImg?imageX.value-125:text3_x-310, manualImg?imageY.value-110:text3_y-145, img.width/2, img.height/2];
-  [imageX.value, imageY.value]= [x, y];
+  if (!manualImg) [imageX.value, imageY.value]= [x, y];
 
   // 绘制文本和图像
   if (!transparentBg.value && swapColor.value && textStroke.value) {
@@ -182,11 +182,6 @@ watch([text1, text2, text3], () => {
   updateCanvas(swapImage.value, manualImg);
 });
 
-// 图片位置
-watch([imageX, imageY], () => {
-  updateCanvas(swapImage.value, manualImg);
-});
-
 // 模式切换
 watch(transparentBg, () => {
   if (!swapColor.value) {
@@ -230,8 +225,6 @@ watch(textStroke, () => {
 watch(imgExist, () => {
   updateCanvas(swapImage.value, manualImg);
 });
-
-
 
 </script>
 
