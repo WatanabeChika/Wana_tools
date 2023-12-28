@@ -161,8 +161,8 @@ onMounted(async () => {
 
     // 初始化图像
     const img = await loadImage(imgSrc+'.png');
-    [imageX.value, imageY.value]= [text3_x-310, text3_y-145];
-    ctx.drawImage(img, imageX.value, imageY.value, img.width/2, img.height/2);
+    [imageX.value, imageY.value]= [text3_x-310+125, text3_y-145+110];
+    ctx.drawImage(img, text3_x-310, text3_y-145, img.width/2, img.height/2);
 
     // 更新图片
     image.value.src = canvas.value.toDataURL('image/png'); 
@@ -212,9 +212,7 @@ watch(swapImage, () => {
 });
 
 watch(swapColor, () => {
-  const temp = bgColor;
-  bgColor = fontColor;
-  fontColor = temp;
+  [bgColor, fontColor] = [fontColor, bgColor];
   updateCanvas(swapImage.value, manualImg);
 });
 
@@ -244,12 +242,12 @@ watch(imgExist, () => {
         <div v-if="imgExist" id="imgExist">
           <div class="image-manual">
             <label for="imageX">X</label>
-            <input type="range" id="imageX" min="0" :max="maxWidth" step="1" v-model="imageX" @change="manualAdjust">
+            <input type="range" id="imageX" min="0" :max="maxWidth" step="1" v-model="imageX" @input="manualAdjust">
             <input type="number" id="imageX" v-model="imageX" @input="manualAdjust">
           </div>
           <div class="image-manual">
             <label for="imageY">Y</label>
-            <input type="range" id="imageY" min="0" :max="maxHeight" step="1" v-model="imageY" @change="manualAdjust">
+            <input type="range" id="imageY" min="0" :max="maxHeight" step="1" v-model="imageY" @input="manualAdjust">
             <input type="number" id="imageX" v-model="imageY" @input="manualAdjust">
           </div>
         </div>
