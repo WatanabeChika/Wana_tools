@@ -163,9 +163,7 @@ watch(centerText, () => {
 });
 
 watch(swapColor, () => {
-  const temp = bgColor;
-  bgColor = fontColor;
-  fontColor = temp;
+  [bgColor, fontColor] = [fontColor, bgColor];
   updateCanvas();
 });
 
