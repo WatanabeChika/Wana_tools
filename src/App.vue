@@ -90,7 +90,7 @@ const Items = ref([
 
 /* 编辑器 */
 #editor-container {
-  max-width: 900px;
+  max-width: 1000px;
   margin: auto;
   margin-top: 20px;
   text-align: center;

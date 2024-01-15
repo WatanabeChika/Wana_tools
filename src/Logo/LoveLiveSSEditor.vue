@@ -82,7 +82,7 @@ async function updateCanvas(swapImage, manualImg) {
   const [x, y, w, h] = swapImage 
                       ? [manualImg?imageX.value-62.5:text3_x-248, manualImg?imageY.value-55:text3_y-75, img.width/4, img.height/4] 
                       : [manualImg?imageX.value-125:text3_x-310, manualImg?imageY.value-110:text3_y-145, img.width/2, img.height/2];
-  if (!manualImg) [imageX.value, imageY.value]= [x, y];
+  if (!manualImg) [imageX.value, imageY.value]= [swapImage?x+62.5:x+125, swapImage?y+55:y+110];
 
   // 绘制文本和图像
   if (!transparentBg.value && swapColor.value && textStroke.value) {
@@ -177,6 +177,11 @@ function manualAdjust() {
   updateCanvas(swapImage.value, manualImg);
 }
 
+function autoAdjust() {
+  manualImg = false;
+  updateCanvas(swapImage.value, manualImg);
+}
+
 // 文本输入
 watch([text1, text2, text3], () => {
   updateCanvas(swapImage.value, manualImg);
@@ -250,6 +255,9 @@ watch(imgExist, () => {
             <input type="range" id="imageY" min="0" :max="maxHeight" step="1" v-model="imageY" @input="manualAdjust">
             <input type="number" id="imageX" v-model="imageY" @input="manualAdjust">
           </div>
+        </div>
+        <div v-if="imgExist" class="image-manual">
+            <button @click="autoAdjust" id="autoAdjust-btn">恢复默认</button>
         </div>
       </div>
       <br>
