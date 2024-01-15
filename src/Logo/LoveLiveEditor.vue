@@ -1,7 +1,7 @@
 <script setup>
 import {ref, onMounted, watch} from 'vue';
 import FontFaceObserver from 'font-face-observer';
-import {fillCanvasText, getTextWidth} from './utils.js';
+import {fillCanvasText, getTextWidth} from '../utils.js';
 
 // -------变量声明-------
 const canvas = ref(null)

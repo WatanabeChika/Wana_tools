@@ -1,14 +1,23 @@
 <script setup>
 import {ref} from 'vue';
-import LoveLiveEditor from './LoveLiveEditor.vue'
-import LoveLiveSSEditor from './LoveLiveSSEditor.vue'
+import LoveLiveEditor from './Logo/LoveLiveEditor.vue'
+import LoveLiveSSEditor from './Logo/LoveLiveSSEditor.vue'
 
 const currentPage = ref(LoveLiveEditor)
 
-const navItems = ref([
+const logoItems = ref([
   { name: 'LoveLive', path: LoveLiveEditor },
   { name: 'LLSS', path: LoveLiveSSEditor },
-  // { name: 'Contact', path: LoveLiveEditor },
+]);
+
+const musicItems = ref([
+  { name: 'flac->ogg', path: '/'},
+]);
+
+
+const Items = ref([
+  { type: 'Logo', apps: logoItems },
+  { type: 'Music', apps: musicItems },
 ]);
 
 </script>
@@ -17,13 +26,23 @@ const navItems = ref([
 
 <template>
   <div id="navbar">
-      <div class="container">
-          <button v-for="item in navItems" :key="item.name" @click="currentPage = item.path"
-              :class="['navbutton', {active: currentPage === item.path}]">
-              {{ item.name }}
-          </button>
-      </div>
+    <div class="container">
+      <el-dropdown v-for="item in Items" :key="item.type">
+          <el-button class="navbutton">
+            {{ item.type }}
+          </el-button>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item v-for="page in item.apps" :key="page.name" @click="currentPage = page.path"
+              :class="['dropdownbutton', {active: currentPage === page.path}]">
+              {{ page.name }}
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
+    </div>
   </div>
+
   <div id="editor-container">
     <component :is="currentPage"></component>
   </div>
@@ -35,7 +54,7 @@ const navItems = ref([
 /* 导航栏 */
 #navbar {
   height: 60px;
-  background-color: #F5F5DC;
+  background-color: #dceef5;
   padding: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -47,7 +66,7 @@ const navItems = ref([
 }
 .navbutton {
   margin: 0px 15px 0px 15px;
-  background-color: #F5F5DC;
+  background-color: #dceef5;
   color: black;
   padding: 16px;
   font-size: 16px;
@@ -55,11 +74,18 @@ const navItems = ref([
   cursor: pointer;
   height: 100%;
 }
-.navbutton:hover{
-  background-color: #D9D99B;
+.dropdownbutton {
+  margin: 0px 15px 0px 15px;
+  background-color: #ffffff;
+  color: black;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  height: 100%;
 }
-.navbutton.active{
-  background-color: #D9D99B;
+.dropdownbutton.active{
+  background-color: #d5cccc;
 }
 
 /* 编辑器 */
