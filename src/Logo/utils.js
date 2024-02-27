@@ -42,3 +42,4 @@ export function loadImage(src) {
         img.onerror = reject;
     });
 }
+

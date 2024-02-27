@@ -1,7 +1,7 @@
 <script setup>
 import {ref, onMounted, watch} from 'vue';
 import FontFaceObserver from 'font-face-observer';
-import {fillCanvasText, getTextWidth, loadImage} from '../utils.js';
+import {fillCanvasText, getTextWidth, loadImage} from './utils.js';
 
 // -------变量声明-------
 const canvas = ref(null)
@@ -172,13 +172,8 @@ onMounted(async () => {
 });
 
 // 手动调整图片位置
-function manualAdjust() {
-  manualImg = true;
-  updateCanvas(swapImage.value, manualImg);
-}
-
-function autoAdjust() {
-  manualImg = false;
+function manualAdjust(m) {
+  manualImg = m;
   updateCanvas(swapImage.value, manualImg);
 }
 
@@ -247,17 +242,17 @@ watch(imgExist, () => {
         <div v-if="imgExist" id="imgExist">
           <div class="image-manual">
             <label for="imageX">X</label>
-            <input type="range" id="imageX" min="0" :max="maxWidth" step="1" v-model="imageX" @input="manualAdjust">
-            <input type="number" id="imageX" v-model="imageX" @input="manualAdjust">
+            <input type="range" id="imageX" min="0" :max="maxWidth" step="1" v-model="imageX" @input="manualAdjust(true)">
+            <input type="number" id="imageX" v-model="imageX" @input="manualAdjust(true)">
           </div>
           <div class="image-manual">
             <label for="imageY">Y</label>
-            <input type="range" id="imageY" min="0" :max="maxHeight" step="1" v-model="imageY" @input="manualAdjust">
-            <input type="number" id="imageX" v-model="imageY" @input="manualAdjust">
+            <input type="range" id="imageY" min="0" :max="maxHeight" step="1" v-model="imageY" @input="manualAdjust(true)">
+            <input type="number" id="imageX" v-model="imageY" @input="manualAdjust(true)">
           </div>
         </div>
         <div v-if="imgExist" class="image-manual">
-            <button @click="autoAdjust" id="autoAdjust-btn">恢复默认</button>
+            <button @click="manualAdjust(false)" id="autoAdjust-btn">恢复默认</button>
         </div>
       </div>
       <br>
