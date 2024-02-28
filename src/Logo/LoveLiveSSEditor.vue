@@ -229,6 +229,7 @@ watch(imgExist, () => {
 
 
 <template>
+    <h1>LoveLive!Sunshine!!风格Logo生成器</h1>
     <div id="canvas-container">
       <canvas id="art-canvas" ref="canvas" width="1000" height="500"></canvas>
       <img id="art-image" ref="image"/>
@@ -263,6 +264,11 @@ watch(imgExist, () => {
       <input v-model="text3" type="text" id="text-input3" :placeholder="text3_ph">
       <br>
       <button @click="downloadImage" id="download-btn">下载图片</button>
+    </div>
+    <div id="notice">
+      <p>使用字体：Lido Bold Italic、FF Magda Clean Mono。无中文fallback字体。参考：
+        <a href="https://zhuanlan.zhihu.com/p/20356949">链接</a>
+      </p>
     </div>
 </template>
 

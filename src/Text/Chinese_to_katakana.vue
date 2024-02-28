@@ -28,7 +28,7 @@ function numconv(str) {
 
 // 拼音转片假名
 function convert(ini, finh, finb, fint) {
-  // 没有声母
+  // 无声母
   if (ini == '') {
     // 特殊：er音
     if (finh == '' && finb == 'e' && fint == 'r') 
@@ -127,12 +127,15 @@ const update_format = (item) => {
   margin-top: 30px;
 }
 h1 {
+  font-family: sans-serif;
   color: #333;
   text-align: center;
   margin-bottom: 50px;
 }
-label#number{
-  margin-left: 100px;
+p {
+  font-family: sans-serif;
+  color: rgba(128,128,128,0.75);
+  text-align: left;
 }
 label#in-out{
   display: block;
@@ -150,8 +153,8 @@ textarea {
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
-  resize: none; /* 禁止用户手动调整大小 */
-  overflow-y: display; /* 隐藏滚动条 */
+  resize: none; 
+  overflow-y: display; 
 }
 
 
