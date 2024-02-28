@@ -92,3 +92,77 @@ export function fin_ini_conv(ini, fin, tail) {
     }
 }
 
+// 读数字
+export function num_conv(num) {
+    let res = '';
+    let float = false;
+    let digit = 0;      // 位数
+    let zero = true;    // 末尾的0
+    // 注：不做二和两的区分，语境十分复杂
+    const num_map = {
+        '0': '零', '1': '一', '2': '二', '3': '三', '4': '四', '5': '五',
+        '6': '六', '7': '七', '8': '八', '9': '九'
+    };
+    const digit_map = {
+        0: '', 1: '十', 2: '百', 3: '千', 4: '万',
+        5: '十', 6: '百', 7: '千', 8: '亿', 9: '十',
+        10: '百', 11: '千', 12: '兆', 13: '十', 14: '百',
+        15: '千', 16: '京', 17: '十', 18: '百', 19: '千'
+    };
+    // 判断是不是小数
+    if (num.indexOf('.') != -1) float = true;
+    // 读数
+    for (let i = num.length-1; i >= 0; --i) {
+        // 正负号
+        if (num[i] == '-') {
+            res = '负' + res;
+            continue;
+        }
+        if (num[i] == '+') {
+            res = '正' + res;
+            continue;
+        }
+        // 小数点前后读数方法不同
+        if (num[i] == '.') {
+            res = '点' + res;
+            float = false;
+            continue;
+        }
+        // 小数部分
+        if (float) {
+            res = num_map[num[i]] + res;
+        } 
+        // 整数部分
+        else {
+            if (num[i] == '0') {
+                // 末尾的0
+                if (!zero) {
+                    if (digit % 4 == 0) {
+                        res = digit_map[digit] + res;
+                    } else {
+                        res = num_map[num[i]] + res;
+                    }
+                }
+            } else {
+                // 高位处理
+                if (zero) {
+                    zero = false;
+                    // 万、亿、兆、京等防止重复
+                    if (digit % 4 == 0) {
+                        res = num_map[num[i]] + digit_map[digit] + res;
+                    } else {
+                        res = num_map[num[i]] + digit_map[digit] + digit_map[Math.floor(digit/4)*4] + res;
+                    }
+                } else {
+                    res = num_map[num[i]] + digit_map[digit] + res;
+                }
+            }
+            ++digit;
+        }
+    }
+    // 小于1的小数
+    if (digit == 1 && zero) res = '零' + res;
+    // 合并连续的零
+    res = res.replace(/零+/g, '零');
+    return res;
+  }

@@ -1,13 +1,14 @@
 <script setup>
 import { ref } from 'vue';
 import { pinyin } from 'pinyin-pro';
-import { fin_conv, fin_ini_conv, fin2_conv } from './utils.js';
+import { fin_conv, fin_ini_conv, fin2_conv, num_conv } from './utils.js';
 
 const inputText = ref('');
 const outputText = ref('');
 const empty = ref(true);
 const space = ref(false);
 const dot = ref(false);
+const number = ref(false);
 
 const modeItems = ref([
   { name: '不分隔', mark: empty},
@@ -15,7 +16,17 @@ const modeItems = ref([
   { name: '以点分隔', mark: dot}
 ])
 
+// 数字预处理
+function numconv(str) {
+  // 匹配数字并转换
+  const regex = /([+-]?\b\d+(\.\d+)?\b)/g;
+  const res = str.replace(regex, (match) => {
+    return num_conv(match);
+  });
+  return res;
+}
 
+// 拼音转片假名
 function convert(ini, finh, finb, fint) {
   // 没有声母
   if (ini == '') {
@@ -38,16 +49,18 @@ function convert(ini, finh, finb, fint) {
   }
 }
 
-
 const update_output = () => {
   let res = [];
-  const message = pinyin(inputText.value, { type: 'array' });
-  const initial = pinyin(inputText.value, { pattern: 'initial', type: 'array' });
-  const finalhead = pinyin(inputText.value, { pattern: 'finalHead', toneType: 'none', v: true, type: 'array' });
-  const finalbody = pinyin(inputText.value, { pattern: 'finalBody', toneType: 'none', v: true, type: 'array' });
-  const finaltail = pinyin(inputText.value, { pattern: 'finalTail', toneType: 'none', v: true, type: 'array' });
-  console.log(message, initial, finalhead, finalbody, finaltail);
-  console.log(empty.value, space.value, dot.value)
+  let input = inputText.value;
+
+  if (!number.value) input = numconv(inputText.value);
+  
+  const message = pinyin(input, { type: 'array' });
+  const initial = pinyin(input, { pattern: 'initial', type: 'array' });
+  const finalhead = pinyin(input, { pattern: 'finalHead', toneType: 'none', v: true, type: 'array' });
+  const finalbody = pinyin(input, { pattern: 'finalBody', toneType: 'none', v: true, type: 'array' });
+  const finaltail = pinyin(input, { pattern: 'finalTail', toneType: 'none', v: true, type: 'array' });
+
   for (let i = 0; i < finalbody.length; ++i) {
     if (finalbody[i] == '') {
       res.push(message[i]);
@@ -95,6 +108,8 @@ const update_format = (item) => {
           <label :for="item.name">{{ item.name }}</label>
           <input type="radio" name="check" :checked="item.mark" :value="item.mark" :id="item.name" @change="update_format(item)">
     </div>
+    <label id="number">保留数字</label>
+    <input type="checkbox" id="numberBox" v-model="number" @change="update_output">
     <label id="in-out">片假名: </label>
     <textarea type="text" id="outputBox" v-model="outputText" placeholder="シュルハンズジウクイドダオドイインドインドジアミンラ！" readonly></textarea>
   </div>
@@ -115,6 +130,9 @@ h1 {
   color: #333;
   text-align: center;
   margin-bottom: 50px;
+}
+label#number{
+  margin-left: 100px;
 }
 label#in-out{
   display: block;

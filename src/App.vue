@@ -2,7 +2,7 @@
 import {ref} from 'vue';
 import LoveLiveEditor from './Logo/LoveLiveEditor.vue'
 import LoveLiveSSEditor from './Logo/LoveLiveSSEditor.vue'
-import Mandakana from './Text/Mandarin_to_katakana.vue'
+import Chinkana from './Text/Chinese_to_katakana.vue'
 
 const currentPage = ref(LoveLiveEditor)
 
@@ -12,7 +12,7 @@ const logoItems = ref([
 ]);
 
 const textItems = ref([
-  { name: 'Mandakana', path: Mandakana},
+  { name: 'Chinkana', path: Chinkana},
 ]);
 
 
