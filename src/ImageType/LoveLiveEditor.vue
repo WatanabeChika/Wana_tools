@@ -5,7 +5,6 @@ import {fillCanvasText, getTextWidth} from './utils.js';
 
 // -------变量声明-------
 const canvas = ref(null)
-const image = ref(null)
 const text1 = ref('');
 const text2 = ref('');
 
@@ -85,8 +84,6 @@ function updateCanvas() {
       fillCanvasText(ctx, fontColor, textfont2, textStroke.value, canvas.value.width/2 + text1Width/2 - text2Width/2, canvas.value.height/2+40, text2.value || text2_ph);
     }
   }
-  
-  image.value.src = canvas.value.toDataURL('image/png');
 }
 
 // 下载图片
@@ -123,8 +120,6 @@ onMounted(async () => {
     fillCanvasText(ctx, fontColor, textfont1, false, canvas.value.width/2, canvas.value.height/2-30, text1_ph);
     fillCanvasText(ctx, fontColor, textfont2, false, canvas.value.width/2 + text1Width/2 - text2Width/2, canvas.value.height/2+40, text2_ph);
 
-    // 更新图片
-    image.value.src = canvas.value.toDataURL('image/png'); 
   } catch (error) {
     console.error(error);
   }
@@ -179,7 +174,6 @@ watch(textStroke, () => {
     <h1>LoveLive!风格Logo生成器</h1>
     <div id="canvas-container">
       <canvas id="art-canvas" ref="canvas" width="1000" height="500"></canvas>
-      <img id="art-image" ref="image" width="1000" height="500" />
     </div>
     <div id="input-container">
       <div id="canvas-settings">
@@ -249,9 +243,6 @@ button:hover {
 }
 
 #art-canvas {
-  display: none;
-}
-#art-image {
   max-width: 100%;
   height: auto;
   display: block;

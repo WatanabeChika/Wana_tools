@@ -5,7 +5,6 @@ import {fillCanvasText, getTextWidth, loadImage} from './utils.js';
 
 // -------变量声明-------
 const canvas = ref(null)
-const image = ref(null)
 const text1 = ref('');
 const text2 = ref('');
 const text3 = ref('');
@@ -116,8 +115,7 @@ async function updateCanvas(swapImage, manualImg) {
     if(imgExist.value) ctx.drawImage(img, x, y, w, h);
   }
   
-  imgMode = '';
-  image.value.src = canvas.value.toDataURL('image/png'); 
+  imgMode = ''; 
 }
 
 // 下载图片
@@ -164,8 +162,6 @@ onMounted(async () => {
     [imageX.value, imageY.value]= [text3_x-310+125, text3_y-145+110];
     ctx.drawImage(img, text3_x-310, text3_y-145, img.width/2, img.height/2);
 
-    // 更新图片
-    image.value.src = canvas.value.toDataURL('image/png'); 
   } catch (error) {
     console.error(error);
   }
@@ -232,7 +228,6 @@ watch(imgExist, () => {
     <h1>LoveLive!Sunshine!!风格Logo生成器</h1>
     <div id="canvas-container">
       <canvas id="art-canvas" ref="canvas" width="1000" height="500"></canvas>
-      <img id="art-image" ref="image"/>
     </div>
     <div id="input-container">
       <div id="canvas-settings">
