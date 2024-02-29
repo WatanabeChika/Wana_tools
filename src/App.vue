@@ -1,14 +1,14 @@
 <script setup>
 import {ref} from 'vue';
-import LoveLiveEditor from './Logo/LoveLiveEditor.vue'
-import LoveLiveSSEditor from './Logo/LoveLiveSSEditor.vue'
-import Chinkana from './Text/Chinese_to_katakana.vue'
+import LoveLive from './ImageType/LoveLiveEditor.vue'
+import LLSS from './ImageType/LoveLiveSSEditor.vue'
+import Chinkana from './TextType/Chinese_to_katakana.vue'
 
-const currentPage = ref(LoveLiveEditor)
+const currentPage = ref(LoveLive)
 
-const logoItems = ref([
-  { name: 'LoveLive', path: LoveLiveEditor },
-  { name: 'LLSS', path: LoveLiveSSEditor },
+const imageItems = ref([
+  { name: 'LoveLive', path: LoveLive },
+  { name: 'LLSS', path: LLSS },
 ]);
 
 const textItems = ref([
@@ -17,7 +17,7 @@ const textItems = ref([
 
 
 const Items = ref([
-  { type: 'Logo', apps: logoItems },
+  { type: 'Image', apps: imageItems },
   { type: 'Text', apps: textItems },
 ]);
 

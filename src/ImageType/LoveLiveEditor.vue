@@ -205,6 +205,44 @@ watch(textStroke, () => {
 
 
 <style>
+/* 全局 */
+label {
+  display: inline-block;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  font-weight: 600;
+}
+
+input[type="checkbox"] {
+  display: inline-block;
+  margin-bottom: 10px;
+  margin-right: 30px;
+}
+
+input[type="text"] {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #d1d5da;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+button {
+  background-color: #28a745;
+  color: #fff;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+/* 局部 */
 #canvas-container {
   position: relative;
   margin-bottom: 20px;
@@ -240,50 +278,12 @@ watch(textStroke, () => {
   text-align: left;
   margin-top: 30px;
 }
-
-label {
-  display: inline-block;
-  margin-bottom: 10px;
-  margin-left: 10px;
-  font-weight: 600;
-}
-
-input[type="checkbox"] {
-  display: inline-block;
-  margin-bottom: 10px;
-  margin-right: 30px;
-}
-
-input[type="text"] {
-  padding: 8px;
-  font-size: 14px;
-  border: 1px solid #d1d5da;
-  border-radius: 4px;
-  margin-bottom: 10px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
 #button-container {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   margin-bottom: 20px;
-}
-
-button {
-  background-color: #28a745;
-  color: #fff;
-  padding: 10px 15px;
-  font-size: 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #218838;
 }
 
 </style>

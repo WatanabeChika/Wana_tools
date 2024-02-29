@@ -275,83 +275,19 @@ watch(imgExist, () => {
 
 
 <style>
-#canvas-container {
-  position: relative;
-  margin-bottom: 20px;
+/* 全局 */
+input[type="range"] {
+  width: 150px;
+  margin-left: 15px;
+  margin-right: 10px;
 }
 
-#art-canvas {
-  display: none;
+input[type="number"] {
+  width: 60px;
+  margin-right: 15px;
 }
 
-#art-image {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  border: 1px solid #d1d5da;
-  border-radius: 6px;
-  margin-bottom: 20px;
-}
-
-#input-container {
-  width: 100%;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-#canvas-settings {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-}
-
-label {
-  display: inline-block;
-  margin-bottom: 10px;
-  margin-left: 10px;
-  font-weight: 600;
-}
-
-input[type="checkbox"] {
-  display: inline-block;
-  margin-bottom: 10px;
-  margin-right: 30px;
-}
-
-input[type="text"] {
-  padding: 8px;
-  font-size: 14px;
-  border: 1px solid #d1d5da;
-  border-radius: 4px;
-  margin-bottom: 10px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-#button-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-button {
-  background-color: #28a745;
-  color: #fff;
-  padding: 10px 15px;
-  font-size: 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #218838;
-}
-
+/* 局部 */
 #imgExist {
   display: flex; 
   flex-direction: column; 
@@ -362,17 +298,6 @@ button:hover {
   display: flex;
   flex-direction: row;
   align-items: center;
-}
-
-input[type="range"] {
-  width: 150px;
-  margin-left: 15px;
-  margin-right: 10px;
-}
-
-input[type="number"] {
-  width: 60px;
-  margin-right: 15px;
 }
 
 </style>

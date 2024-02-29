@@ -118,14 +118,7 @@ const update_format = (item) => {
 
 
 <style>
-#m2kcontainer {
-  width: 100%;
-}
-#settings {
-  display: inline-block;
-  margin-right: 20px;
-  margin-top: 30px;
-}
+/* 全局 */
 h1 {
   font-family: sans-serif;
   color: #333;
@@ -136,14 +129,6 @@ p {
   font-family: sans-serif;
   color: rgba(128,128,128,0.75);
   text-align: left;
-}
-label#in-out{
-  display: block;
-  text-align: left;
-  margin-top: 30px;
-  margin-bottom: 10px;
-  margin-left: 5px;
-  font-weight: 600;
 }
 textarea {
   width: 100%;
@@ -157,5 +142,22 @@ textarea {
   overflow-y: display; 
 }
 
+/* 局部 */
+#m2kcontainer {
+  width: 100%;
+}
+#settings {
+  display: inline-block;
+  margin-right: 20px;
+  margin-top: 30px;
+}
+#in-out{
+  display: block;
+  text-align: left;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  font-weight: 600;
+}
 
 </style>
