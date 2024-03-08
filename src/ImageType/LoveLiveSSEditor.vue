@@ -235,7 +235,9 @@ watch(imgExist, () => {
           <label :for="item.name">{{ item.name }}</label>
           <input v-model="item.mark" type="checkbox" :id="item.name">
         </div>
-        <div v-if="imgExist" id="imgExist">
+      </div>
+      <div v-if="imgExist" id="image-settings">
+        <div id="imgExist">
           <div class="image-manual">
             <label for="imageX">X</label>
             <input type="range" id="imageX" min="0" :max="maxWidth" step="1" v-model="imageX" @input="manualAdjust(true)">
@@ -247,7 +249,7 @@ watch(imgExist, () => {
             <input type="number" id="imageX" v-model="imageY" @input="manualAdjust(true)">
           </div>
         </div>
-        <div v-if="imgExist" class="image-manual">
+        <div class="image-manual">
             <button @click="manualAdjust(false)" id="autoAdjust-btn">恢复默认</button>
         </div>
       </div>
@@ -283,6 +285,12 @@ input[type="number"] {
 }
 
 /* 局部 */
+#image-settings {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+}
+
 #imgExist {
   display: flex; 
   flex-direction: column; 

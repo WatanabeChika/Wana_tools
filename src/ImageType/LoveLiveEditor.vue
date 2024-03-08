@@ -225,7 +225,7 @@ input[type="text"] {
 button {
   background-color: #28a745;
   color: #fff;
-  padding: 10px 15px;
+  padding: 9px 13px;
   font-size: 16px;
   border: none;
   border-radius: 4px;
