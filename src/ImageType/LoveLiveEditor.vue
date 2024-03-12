@@ -262,6 +262,7 @@ button:hover {
 
 #canvas-settings {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
 }
 

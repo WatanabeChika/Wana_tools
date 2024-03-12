@@ -266,7 +266,8 @@ tr:nth-child(even) {
 
 /* 局部 */
 #settings {
-  display: inline-block;
+  display: flex;
+  flex-wrap: wrap;
   margin-right: 20px;
   margin-top: 30px;
 }
@@ -284,6 +285,7 @@ tr:nth-child(even) {
 
 #modes-settings {
   display: flex;
+  flex-wrap: wrap;
   margin-bottom: 20px;
 }
 
