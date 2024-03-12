@@ -263,6 +263,7 @@ watch(imgExist, () => {
       <button @click="downloadImage" id="download-btn">下载图片</button>
     </div>
     <div id="notice">
+      <p>注意：输入文字过长会导致图片崩坏。</p>
       <p>使用字体：Lido Bold Italic、FF Magda Clean Mono。无中文fallback字体。参考：
         <a href="https://zhuanlan.zhihu.com/p/20356949">链接</a>
       </p>

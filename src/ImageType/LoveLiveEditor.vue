@@ -190,6 +190,7 @@ watch(textStroke, () => {
       <button @click="downloadImage" id="download-btn">下载图片</button>
     </div>
     <div id="notice">
+      <p>注意：输入文字过长会导致图片崩坏。</p>
       <p>使用字体：Lido Bold Italic、FF Magda Clean Mono。无中文fallback字体。参考：
         <a href="https://zhuanlan.zhihu.com/p/20356949">链接</a>
       </p>
@@ -268,13 +269,6 @@ button:hover {
   width: 100%;
   text-align: left;
   margin-top: 30px;
-}
-#button-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 20px;
 }
 
 </style>

@@ -2,17 +2,19 @@
 import {ref} from 'vue';
 import LoveLive from './ImageType/LoveLiveEditor.vue'
 import LLSS from './ImageType/LoveLiveSSEditor.vue'
+import MatchingMeme from './ImageType/MatchingMemeEditor.vue'
 import Chinkana from './TextType/Chinese_to_katakana.vue'
 
-const currentPage = ref(LoveLive)
+const currentPage = ref(MatchingMeme)
 
 const imageItems = ref([
   { name: 'LoveLive', path: LoveLive },
   { name: 'LLSS', path: LLSS },
+  { name: 'Matching', path: MatchingMeme}
 ]);
 
 const textItems = ref([
-  { name: 'Chinkana', path: Chinkana},
+  { name: 'Chinkana', path: Chinkana },
 ]);
 
 

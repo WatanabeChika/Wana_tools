@@ -105,13 +105,16 @@ const update_format = (item) => {
     <label id="in-out">汉字: </label>
     <textarea type="text" id="inputBox" v-model="inputText" placeholder="输入汉字就可以得到对应读音的假名啦！" @input="update_output"></textarea>
     <div v-for="item in modeItems" :key="item.name" id="settings">
-          <label :for="item.name">{{ item.name }}</label>
-          <input type="radio" name="check" :checked="item.mark" :value="item.mark" :id="item.name" @change="update_format(item)">
+      <label :for="item.name">{{ item.name }}</label>
+      <input type="radio" name="check" :checked="item.mark" :value="item.mark" :id="item.name" @change="update_format(item)">
     </div>
     <label id="number">保留数字</label>
     <input type="checkbox" id="numberBox" v-model="number" @change="update_output">
     <label id="in-out">片假名: </label>
     <textarea type="text" id="outputBox" v-model="outputText" placeholder="シュルハンズジウクイドダオドイインドインドジアミンラ！" readonly></textarea>
+  </div>
+  <div id="notice">
+      <p>注意：英文保留原样，将“2”一律读作“二”。</p>
   </div>
 </template>
 
