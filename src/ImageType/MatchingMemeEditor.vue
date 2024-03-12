@@ -12,7 +12,7 @@ const Font1 = new FontFaceObserver('KaiTi');
 
 const titleFont = 'bold 50px KaiTi';
 const normalFont = '35px KaiTi';
-const imgPath = '/images/character_icons/'
+const imgPath = 'images/character_icons/'
 
 const bgColor = 'white';
 const fontColor = 'black';
@@ -34,58 +34,58 @@ const color_modes = ref([
 ]);
 
 const characters = ref([
-  { label: '高坂穗乃果'     , checked: false    , color: "#f38500" },
-  { label: '绚濑绘里'       , checked: false    , color: "#7aeeff" },
-  { label: '南小鸟'         , checked: false    , color: "#cebfbf"},
-  { label: '园田海未'       , checked: false    , color: "#1769ff"},
-  { label: '星空凛'         , checked: false    , color: "#fff832"},
-  { label: '西木野真姬'     , checked: false    , color: "#ff503e"},
-  { label: '东条希'         , checked: false    , color: "#c455f6"},
-  { label: '小泉花阳'       , checked: false    , color: "#6ae673"},
-  { label: '矢泽妮可'       , checked: false    , color: "#ff4f91"},
-  { label: '高海千歌'       , checked: false    , color: "#ff9547"},
-  { label: '樱内梨子'       , checked: false    , color: "#ff9eac"},
-  { label: '松浦果南'       , checked: false    , color: "#27c1b7"},
-  { label: '黑泽黛雅'       , checked: false    , color: "#db0839"},
-  { label: '渡边曜'         , checked: false    , color: "#66c0ff"},
-  { label: '津岛善子'       , checked: false    , color: "#c1cad4"},
-  { label: '国木田花丸'     , checked: false    , color: "#ffd010"},
-  { label: '小原鞠莉'       , checked: false    , color: "#c252c6"},
-  { label: '黑泽露比'       , checked: false    , color: "#ff6fbe"},
-  { label: '鹿角圣良'       , checked: false    , color: "#00ccff"},
-  { label: '鹿角理亚'       , checked: false    , color: "#bbbbbb"},
-  { label: '高咲侑'         , checked: false    , color: "#1d1d1d"},
-  { label: '上原步梦'       , checked: false    , color: "#ed7d95"},
-  { label: '中须霞'         , checked: false    , color: "#e7d600"},
-  { label: '樱坂雫'         , checked: false    , color: "#01b7ed"},
-  { label: '朝香果林'       , checked: false    , color: "#485ec6"},
-  { label: '宫下爱'         , checked: false    , color: "#ff5800"},
-  { label: '近江彼方'       , checked: false    , color: "#a664a0"},
-  { label: '优木雪菜'       , checked: false    , color: "#d81c2f"},
-  { label: '艾玛·维尔德'    , checked: false    , color: "#84c36e"},
-  { label: '天王寺璃奈'     , checked: false    , color: "#9ca5b9"},
-  { label: '三船栞子'       , checked: false    , color: "#37b484"},
-  { label: '米娅·泰勒'      , checked: false    , color: "#a9a898"},
-  { label: '钟岚珠'         , checked: false    , color: "#f8c8c4"},
-  { label: '涩谷香音'       , checked: false    , color: "#ff7f27"},
-  { label: '唐可可'         , checked: false    , color: "#a0fff9"},
-  { label: '岚千砂都'       , checked: false    , color: "#ff6e90"},
-  { label: '平安名堇'       , checked: false    , color: "#74f466"},
-  { label: '叶月恋'         , checked: false    , color: "#0000a0"},
-  { label: '樱小路希奈子'   , checked: false    , color: "#fff442"},
-  { label: '米女芽衣'       , checked: false    , color: "#ff3535"},
-  { label: '若菜四季'       , checked: false    , color: "#b2ffdd"},
-  { label: '鬼冢夏美'       , checked: false    , color: "#ff51c4"},
-  { label: '薇恩·玛格丽特'  , checked: false    , color: "#e49dfd"},
-  { label: '鬼冢冬毬'       , checked: false    , color: "#4cd2e2"},
-  { label: '柊摩央'         , checked: false    , color: "#b05bd4"},
-  { label: '圣泽悠奈'       , checked: false    , color: "#e7c030"},
-  { label: '日野下花帆'     , checked: false    , color: "#f8b500"},
-  { label: '村野沙耶香'     , checked: false    , color: "#5383c3"},
-  { label: '乙宗梢'         , checked: false    , color: "#68be8d"},
-  { label: '夕雾缀理'       , checked: false    , color: "#ba2636"},
-  { label: '大泽瑠璃乃'     , checked: false    , color: "#e7609e"},
-  { label: '藤岛慈'         , checked: false    , color: "#c8c2c6"},
+  { label: '高坂穗乃果'    , Eng: 'Honoka'   , checked: false, color: "#f38500" },
+  { label: '绚濑绘里'      , Eng: 'Eli'      , checked: false, color: "#7aeeff" },
+  { label: '南小鸟'        , Eng: 'Kotori'   , checked: false, color: "#cebfbf"},
+  { label: '园田海未'      , Eng: 'Umi'      , checked: false, color: "#1769ff"},
+  { label: '星空凛'        , Eng: 'Rin'      , checked: false, color: "#fff832"},
+  { label: '西木野真姬'    , Eng: 'Maki'     , checked: false, color: "#ff503e"},
+  { label: '东条希'        , Eng: 'Nozomi'   , checked: false, color: "#c455f6"},
+  { label: '小泉花阳'      , Eng: 'Hanayo'   , checked: false, color: "#6ae673"},
+  { label: '矢泽妮可'      , Eng: 'Nico'     , checked: false, color: "#ff4f91"},
+  { label: '高海千歌'      , Eng: 'Chika'    , checked: false, color: "#ff9547"},
+  { label: '樱内梨子'      , Eng: 'Riko'     , checked: false, color: "#ff9eac"},
+  { label: '松浦果南'      , Eng: 'Kanan'    , checked: false, color: "#27c1b7"},
+  { label: '黑泽黛雅'      , Eng: 'Dia'      , checked: false, color: "#db0839"},
+  { label: '渡边曜'        , Eng: 'You'      , checked: false, color: "#66c0ff"},
+  { label: '津岛善子'      , Eng: 'Yoshiko'  , checked: false, color: "#c1cad4"},
+  { label: '国木田花丸'    , Eng: 'Hanamaru' , checked: false, color: "#ffd010"},
+  { label: '小原鞠莉'      , Eng: 'Mari'     , checked: false, color: "#c252c6"},
+  { label: '黑泽露比'      , Eng: 'Ruby'     , checked: false, color: "#ff6fbe"},
+  { label: '鹿角圣良'      , Eng: 'Sarah'    , checked: false, color: "#00ccff"},
+  { label: '鹿角理亚'      , Eng: 'Leah'     , checked: false, color: "#bbbbbb"},
+  { label: '高咲侑'        , Eng: 'Yuu'      , checked: false, color: "#1d1d1d"},
+  { label: '上原步梦'      , Eng: 'Ayumu'    , checked: false, color: "#ed7d95"},
+  { label: '中须霞'        , Eng: 'Kasumi'   , checked: false, color: "#e7d600"},
+  { label: '樱坂雫'        , Eng: 'Shizuku'  , checked: false, color: "#01b7ed"},
+  { label: '朝香果林'      , Eng: 'Karin'    , checked: false, color: "#485ec6"},
+  { label: '宫下爱'        , Eng: 'Ai'       , checked: false, color: "#ff5800"},
+  { label: '近江彼方'      , Eng: 'Kanata'   , checked: false, color: "#a664a0"},
+  { label: '优木雪菜'      , Eng: 'Setsuna'  , checked: false, color: "#d81c2f"},
+  { label: '艾玛·维尔德'   , Eng: 'Verde'    , checked: false, color: "#84c36e"},
+  { label: '天王寺璃奈'    , Eng: 'Rina'     , checked: false, color: "#9ca5b9"},
+  { label: '三船栞子'      , Eng: 'Shiyoriko', checked: false, color: "#37b484"},
+  { label: '米娅·泰勒'     , Eng: 'Taylor'   , checked: false, color: "#a9a898"},
+  { label: '钟岚珠'        , Eng: 'Lanzhu'   , checked: false, color: "#f8c8c4"},
+  { label: '涩谷香音'      , Eng: 'Kanon'    , checked: false, color: "#ff7f27"},
+  { label: '唐可可'        , Eng: 'Keke'     , checked: false, color: "#a0fff9"},
+  { label: '岚千砂都'      , Eng: 'Chisato'  , checked: false, color: "#ff6e90"},
+  { label: '平安名堇'      , Eng: 'Sumire'   , checked: false, color: "#74f466"},
+  { label: '叶月恋'        , Eng: 'Ren'      , checked: false, color: "#0000a0"},
+  { label: '樱小路希奈子'  , Eng: 'Kinako'   , checked: false, color: "#fff442"},
+  { label: '米女芽衣'      , Eng: 'Mei'      , checked: false, color: "#ff3535"},
+  { label: '若菜四季'      , Eng: 'Shiki'    , checked: false, color: "#b2ffdd"},
+  { label: '鬼冢夏美'      , Eng: 'Natsumi'  , checked: false, color: "#ff51c4"},
+  { label: '薇恩·玛格丽特' , Eng: 'Margarete', checked: false, color: "#e49dfd"},
+  { label: '鬼冢冬毬'      , Eng: 'Tomari'   , checked: false, color: "#4cd2e2"},
+  { label: '柊摩央'        , Eng: 'Mao'      , checked: false, color: "#b05bd4"},
+  { label: '圣泽悠奈'      , Eng: 'Yuna'     , checked: false, color: "#e7c030"},
+  { label: '日野下花帆'    , Eng: 'Kaho'     , checked: false, color: "#f8b500"},
+  { label: '村野沙耶香'    , Eng: 'Sayaka'   , checked: false, color: "#5383c3"},
+  { label: '乙宗梢'        , Eng: 'Kozue'    , checked: false, color: "#68be8d"},
+  { label: '夕雾缀理'      , Eng: 'Tsuzuri'  , checked: false, color: "#ba2636"},
+  { label: '大泽瑠璃乃'    , Eng: 'Rurino'   , checked: false, color: "#e7609e"},
+  { label: '藤岛慈'        , Eng: 'Megumi'   , checked: false, color: "#c8c2c6"},
 ]);
 
 let ctx, originHeight;
@@ -122,7 +122,7 @@ async function update_canvas() {
   const basicY = 300;
   for (let i = 0; i < charList.length; i++) {
     // fillCanvasText(ctx, fontColor, normalFont, false, basicX, basicY + i * 175, charList[i].label);
-    const img = await loadImage(imgPath + charList[i].label + '.png');
+    const img = await loadImage(imgPath + charList[i].Eng + '.png');
     ctx.drawImage(img, basicX - 80, basicY + i * 175 - 70, 130, 130);
   }
 
