@@ -174,13 +174,7 @@ function downloadAnswer() {
 // 初始化
 onMounted(async () => {
   try {
-    // 提前加载全部数据
-    // await Font1.check();
-    // for (let i = 0; i < characters.value.length; i++) {
-    //   await loadImage(imgPath + characters.value[i].Eng + '.png');
-    // }
-    // display.value = true;
-    await Promise.all([characters.value.map((char) => loadImage(imgPath + char.Eng + '.png')), Font1.check()]);
+    await Font1.check();
 
     ctx = canvas.value.getContext('2d');
     ctxAns = canvas_ans.value.getContext('2d');
@@ -201,11 +195,10 @@ const empty_char = () => {
   for (let i = 0; i < color_modes.value.length; i++) {
     color_modes.value[i].checked = false;
   }
-  update_canvas();
 };
 
 // 快捷勾选
-async function modesAdjust() {
+const modesAdjust = () => {
   // 清空
   for (let i = 0; i < characters.value.length; i++) {
     characters.value[i].checked = false;
@@ -218,7 +211,6 @@ async function modesAdjust() {
       }
     }
   }
-  update_canvas();
 };
 
 // 角色表格相关
@@ -229,12 +221,11 @@ const chunkedOptions = () => {
   }
   return chunked;
 };
-async function toggleCheck(char) {
+const toggleCheck = (char) => {
   for (let i = 0; i < color_modes.value.length; i++) {
     color_modes.value[i].checked = false;
   }
   char.checked = !char.checked;
-  update_canvas();
 };
 
 </script>
@@ -266,7 +257,8 @@ async function toggleCheck(char) {
       </div>
     </div>
     <div id="button-container">
-      <button @click="empty_char" class="btns">清空选择</button>
+      <button @click="update_canvas" class="btns" style="background-color: cornflowerblue;">绘制图片</button>
+      <button @click="empty_char" class="btns" style="background-color: gray;">清空选择</button>
       <button @click="downloadImage" class="btns">下载图片</button>
       <button @click="downloadAnswer" class="btns">下载答案</button>
     </div>
