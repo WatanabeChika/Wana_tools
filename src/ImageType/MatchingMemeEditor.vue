@@ -175,10 +175,12 @@ function downloadAnswer() {
 onMounted(async () => {
   try {
     // 提前加载全部数据
-    await Font1.check();
-    for (let i = 0; i < characters.value.length; i++) {
-      await loadImage(imgPath + characters.value[i].Eng + '.png');
-    }
+    // await Font1.check();
+    // for (let i = 0; i < characters.value.length; i++) {
+    //   await loadImage(imgPath + characters.value[i].Eng + '.png');
+    // }
+    // display.value = true;
+    await Promise.all([characters.value.map((char) => loadImage(imgPath + char.Eng + '.png')), Font1.check()]);
 
     ctx = canvas.value.getContext('2d');
     ctxAns = canvas_ans.value.getContext('2d');
