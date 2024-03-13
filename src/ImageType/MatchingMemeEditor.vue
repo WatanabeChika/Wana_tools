@@ -174,7 +174,7 @@ function downloadAnswer() {
 // 初始化
 onMounted(async () => {
   try {
-    await Font1.check();
+    await Promise.all(Font1.check());
 
     ctx = canvas.value.getContext('2d');
     ctxAns = canvas_ans.value.getContext('2d');
