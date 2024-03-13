@@ -310,7 +310,7 @@ tr:nth-child(even) {
 }
 
 .character_selected {
-  background-color: green;
+  background-color: aquamarine;
 }
 
 </style>
