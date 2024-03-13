@@ -203,7 +203,7 @@ const empty_char = () => {
 };
 
 // 快捷勾选
-const modesAdjust = () => {
+async function modesAdjust() {
   // 清空
   for (let i = 0; i < characters.value.length; i++) {
     characters.value[i].checked = false;
@@ -227,7 +227,7 @@ const chunkedOptions = () => {
   }
   return chunked;
 };
-const toggleCheck = (char) => {
+async function toggleCheck(char) {
   for (let i = 0; i < color_modes.value.length; i++) {
     color_modes.value[i].checked = false;
   }
