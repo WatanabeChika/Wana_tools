@@ -1,10 +1,11 @@
 <script setup>
 import {onMounted, ref} from 'vue';
 import FontFaceObserver from 'font-face-observer';
-import { fillCanvasText, loadImage, shuffleArray } from './utils';
+import { fillCanvasText, loadImage, shuffleLogArray } from './utils';
 
 // -------变量声明-------
 const canvas = ref(null)
+const canvas_ans = ref(null)
 
 const character_color = ref(true);
 
@@ -88,7 +89,7 @@ const characters = ref([
   { label: '藤岛慈'        , Eng: 'Megumi'   , checked: false, color: "#c8c2c6"},
 ]);
 
-let ctx, originHeight;
+let ctx, ctxAns, originHeight;
 
 
 // -------主要功能-------
@@ -102,6 +103,7 @@ async function update_canvas() {
     }
   }
   canvas.value.height = originHeight + charList.length * 175 + 50;
+  canvas_ans.value.height = originHeight + charList.length * 175 + 50;
 
   // 白色背景
   ctx.fillStyle = bgColor;
@@ -127,11 +129,21 @@ async function update_canvas() {
   }
 
   // 色块绘制
-  let colorList = charList;
-  shuffleArray(colorList);
+  const [colorList, relation] = shuffleLogArray(charList);
   for (let i = 0; i < colorList.length; i++) {
     ctx.fillStyle = colorList[i].color;
     ctx.fillRect(basicX + 570, basicY + i * 175 - 50, 180, 100);
+  }
+
+  // 连线（答案）
+  ctxAns.drawImage(canvas.value, 0, 0);
+  for (let i = 0; i < relation.length; i++) {
+    ctxAns.beginPath();
+    ctxAns.moveTo(basicX + 75, basicY + relation[i][0] * 175);
+    ctxAns.lineTo(basicX + 550, basicY + relation[i][1] * 175);
+    ctxAns.strokeStyle = 'black';
+    ctxAns.lineWidth = 3;
+    ctxAns.stroke();
   }
 }
 
@@ -146,6 +158,18 @@ function downloadImage() {
   downloadLink.click();
 }
 
+// 下载答案
+function downloadAnswer() {
+  const dataURL = canvas_ans.value.toDataURL('image/png');
+  const downloadLink = document.createElement('a');
+
+  downloadLink.href = dataURL;
+  downloadLink.download = `答案.png`;
+
+  downloadLink.click();
+}
+
+
 // -------事件侦听-------
 // 初始化
 onMounted(async () => {
@@ -153,6 +177,7 @@ onMounted(async () => {
     await Font1.check();
 
     ctx = canvas.value.getContext('2d');
+    ctxAns = canvas_ans.value.getContext('2d');
     originHeight = canvas.value.height;
 
     update_canvas();
@@ -213,9 +238,12 @@ const toggleCheck = (char) => {
 <template>
   <h1>LoveLive!连线梗图制作器</h1>
   <div id="input-container">
-    <div v-for="item in modeItems" :key="item.name" id="settings">
-      <label :for="item.name">{{ item.name }}</label>
-      <input type="radio" name="check" :checked="item.mark" :value="item.mark" :id="item.name" @change="update_canvas()">
+    <div id="modes-settings">
+      <span style="margin-right: 25px;">主题选择: </span>
+      <div v-for="item in modeItems" :key="item.name">
+        <label :for="item.name">{{ item.name }}</label>
+        <input type="radio" name="check" :checked="item.mark" :value="item.mark" :id="item.name" @change="update_canvas()">
+      </div>
     </div>
     <table>
       <tr v-for="row in chunkedOptions()" :key="row[0].label">
@@ -226,7 +254,7 @@ const toggleCheck = (char) => {
     </table>
     <div id="modes-settings">
       <span style="margin-right: 25px;">快捷选项: </span>
-      <div v-for="item in color_modes" :key="item.label" v-if="character_color">
+      <div v-if="character_color" v-for="item in color_modes" :key="item.label">
         <label :for="item.label">{{ item.label }}</label>
         <input v-model="item.checked" type="checkbox" :id="item.label" @change="modesAdjust()">
       </div>
@@ -234,10 +262,12 @@ const toggleCheck = (char) => {
     <div id="button-container">
       <button @click="empty_char" class="btns">清空选择</button>
       <button @click="downloadImage" class="btns">下载图片</button>
+      <button @click="downloadAnswer" class="btns">下载答案</button>
     </div>
   </div>
   <div id="canvas-container">
     <canvas id="art-canvas" ref="canvas" width="1000" height="200"></canvas>
+    <canvas id="art-canvas-ans" ref="canvas_ans" width="1000" height="200" style="display: none"></canvas>
   </div>
 </template>
 
@@ -249,7 +279,6 @@ table {
   width: 100%;
   border-collapse: collapse;
   text-align: center;
-  margin-top: 30px;
   margin-bottom: 30px;
 }
 
@@ -265,13 +294,6 @@ tr:nth-child(even) {
 }
 
 /* 局部 */
-#settings {
-  display: flex;
-  flex-wrap: wrap;
-  margin-right: 20px;
-  margin-top: 30px;
-}
-
 #button-container {
   display: flex;
   justify-content: space-between;

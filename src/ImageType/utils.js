@@ -43,12 +43,18 @@ export function loadImage(src) {
     });
 }
 
-// func: 打乱数组
-export function shuffleArray(array) {
+// func: 打乱数组并记录相对位置
+export function shuffleLogArray(originArray) {
+    let array = originArray.slice();
+    let relativePositions = [];
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       // 交换元素
       [array[i], array[j]] = [array[j], array[i]];
+    } 
+    for (let i = 0; i < originArray.length; i++) {
+        const element = originArray[i];
+        relativePositions.push([i, array.indexOf(element)]);      
     }
-    
+    return [array, relativePositions];
 }  
