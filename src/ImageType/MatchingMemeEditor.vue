@@ -174,7 +174,11 @@ function downloadAnswer() {
 // 初始化
 onMounted(async () => {
   try {
+    // 提前加载全部数据
     await Font1.check();
+    for (let i = 0; i < characters.value.length; i++) {
+      await loadImage(imgPath + characters.value[i].Eng + '.png');
+    }
 
     ctx = canvas.value.getContext('2d');
     ctxAns = canvas_ans.value.getContext('2d');
