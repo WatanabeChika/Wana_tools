@@ -10,17 +10,21 @@ const currentPage = ref(MatchingMeme)
 const imageItems = ref([
   { name: 'LoveLive', path: LoveLive },
   { name: 'LLSS', path: LLSS },
-  { name: 'Matching', path: MatchingMeme}
 ]);
 
 const textItems = ref([
   { name: 'Chinkana', path: Chinkana },
 ]);
 
+const memeItems = ref([
+  { name: 'Matching', path: MatchingMeme }
+]);
+
 
 const Items = ref([
   { type: 'Image', apps: imageItems },
   { type: 'Text', apps: textItems },
+  { type: 'Meme', apps: memeItems }
 ]);
 
 </script>

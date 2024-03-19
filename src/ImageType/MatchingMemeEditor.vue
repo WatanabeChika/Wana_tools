@@ -9,12 +9,13 @@ const canvas_ans = ref(null)
 
 const character_color = ref(true);
 const character_birthday = ref(false);
+const eye_color = ref(false);
 
 const Font1 = new FontFaceObserver('KaiTi');
 
 const titleFont = 'bold 50px KaiTi';
 const normalFont = '35px KaiTi';
-const imgPath = 'images/character_icons/'
+const basicPath = 'images/'
 
 const bgColor = 'white';
 const fontColor = 'black';
@@ -24,6 +25,7 @@ const titleText2 = '请将各角色连至其对应的'
 const modeItems = ref([
   { name: '应援色', mark: character_color },
   { name: '生日'  , mark: character_birthday },
+  { name: '瞳色'  , mark: eye_color },
 ]);
 
 const color_modes = ref([
@@ -49,6 +51,14 @@ const birthday_modes = ref ([
   { label: '10月', checked: false , char: [1,30,39] },
   { label: '11月', checked: false , char: [4,29,37,49] },
   { label: '12月', checked: false , char: [19,26,31,43,51] },
+]);
+
+const school_modes = ref([
+  { label: 'μ\'s', checked: false , char: [0,1,2,3,4,5,6,7,8]},
+  { label: 'Aqours', checked: false , char: [9,10,11,12,13,14,15,16,17]},
+  { label: '虹ヶ咲', checked: false , char: [20,21,22,23,24,25,26,27,28,29,30,31,32]},
+  { label: 'Liella!', checked: false , char: [33,34,35,36,37,38,39,40,41,42,43]},
+  { label: '蓮ノ空', checked: false , char: [46,47,48,49,50,51]},
 ]);
 
 const characters = ref([
@@ -80,10 +90,10 @@ const characters = ref([
   { label: '宫下爱'        , Eng: 'Ai'       ,  color: "#ff5800",  birthday: "5月30日" ,  checked: false},
   { label: '近江彼方'      , Eng: 'Kanata'   ,  color: "#a664a0",  birthday: "12月16日",  checked: false},
   { label: '优木雪菜'      , Eng: 'Setsuna'  ,  color: "#d81c2f",  birthday: "8月8日"  ,  checked: false},
-  { label: '艾玛·维尔德'   , Eng: 'Verde'    ,  color: "#84c36e",  birthday: "2月5日"  ,  checked: false},
+  { label: '艾玛·维尔德'   , Eng: 'Emma'     ,  color: "#84c36e",  birthday: "2月5日"  ,  checked: false},
   { label: '天王寺璃奈'    , Eng: 'Rina'     ,  color: "#9ca5b9",  birthday: "11月13日",  checked: false},
   { label: '三船栞子'      , Eng: 'Shiyoriko',  color: "#37b484",  birthday: "10月5日" ,  checked: false},
-  { label: '米娅·泰勒'     , Eng: 'Taylor'   ,  color: "#a9a898",  birthday: "12月6日" ,  checked: false},
+  { label: '米娅·泰勒'     , Eng: 'Mia'      ,  color: "#a9a898",  birthday: "12月6日" ,  checked: false},
   { label: '钟岚珠'        , Eng: 'Lanzhu'   ,  color: "#f8c8c4",  birthday: "2月15日" ,  checked: false},
   { label: '涩谷香音'      , Eng: 'Kanon'    ,  color: "#ff7f27",  birthday: "5月1日"  ,  checked: false},
   { label: '唐可可'        , Eng: 'Keke'     ,  color: "#a0fff9",  birthday: "7月17日" ,  checked: false},
@@ -94,7 +104,7 @@ const characters = ref([
   { label: '米女芽衣'      , Eng: 'Mei'      ,  color: "#ff3535",  birthday: "10月29日",  checked: false},
   { label: '若菜四季'      , Eng: 'Shiki'    ,  color: "#b2ffdd",  birthday: "6月17日" ,  checked: false},
   { label: '鬼冢夏美'      , Eng: 'Natsumi'  ,  color: "#ff51c4",  birthday: "8月7日"  ,  checked: false},
-  { label: '薇恩·玛格丽特' , Eng: 'Margarete',  color: "#e49dfd",  birthday: "1月20日" ,  checked: false},
+  { label: '薇恩·玛格丽特' , Eng: 'Wien'     ,  color: "#e49dfd",  birthday: "1月20日" ,  checked: false},
   { label: '鬼冢冬毬'      , Eng: 'Tomari'   ,  color: "#4cd2e2",  birthday: "12月28日",  checked: false},
   { label: '柊摩央'        , Eng: 'Mao'      ,  color: "#b05bd4",  birthday: "暂无"    ,  checked: false},
   { label: '圣泽悠奈'      , Eng: 'Yuna'     ,  color: "#e7c030",  birthday: "暂无"    ,  checked: false},
@@ -107,6 +117,7 @@ const characters = ref([
 ]);
 
 let ctx, ctxAns, originHeight;
+let imgPath = basicPath + 'character_icons/';
 
 
 // -------主要功能-------
@@ -136,26 +147,43 @@ async function update_canvas() {
     }
   }
 
-  // 角色绘制
+  // 左半部分
   const basicX = 170;
   const basicY = 300;
   for (let i = 0; i < charList.length; i++) {
-    // fillCanvasText(ctx, fontColor, normalFont, false, basicX, basicY + i * 175, charList[i].label);
-    const img = await loadImage(imgPath + charList[i].Eng + '.png');
-    ctx.drawImage(img, basicX - 80, basicY + i * 175 - 70, 130, 130);
+    // 瞳色连线写角色名
+    if (eye_color.value) {
+      fillCanvasText(ctx, fontColor, normalFont, false, basicX - 30, basicY + i * 175, charList[i].label);
+    }
+    // 其余情况绘制角色头像
+    else {
+      const img = await loadImage(imgPath + charList[i].Eng + '.png');
+      ctx.drawImage(img, basicX - 80, basicY + i * 175 - 70, 130, 130);
+    }
   }
 
-  // 色块绘制
+  // 右半部分
   const [themeList, relation] = shuffleLogArray(charList);
+  // 应援色 -> 色块
   if (character_color.value) {
     for (let i = 0; i < themeList.length; i++) {
       ctx.fillStyle = themeList[i].color;
       ctx.fillRect(basicX + 570, basicY + i * 175 - 50, 180, 100);
     }
   }
+  // 生日 -> 文字
   else if (character_birthday.value) {
     for (let i = 0; i < themeList.length; i++) {
       fillCanvasText(ctx, fontColor, normalFont, false, basicX + 640, basicY + i * 175, themeList[i].birthday);
+    }
+  }
+  // 瞳色 -> 图片
+  else if (eye_color.value) {
+    // 调整图片路径
+    imgPath = basicPath + 'eye_color/';
+    for (let i = 0; i < themeList.length; i++) {
+      const img = await loadImage(imgPath + themeList[i].Eng + '.png');
+      ctx.drawImage(img, basicX + 570, basicY + i * 175 - 70, 130, 130);
     }
   }
   
@@ -223,6 +251,9 @@ const empty_char = () => {
   for (let i = 0; i < birthday_modes.value.length; i++) {
     birthday_modes.value[i].checked = false;
   }
+  for (let i = 0; i < school_modes.value.length; i++) {
+    school_modes.value[i].mark = false;
+  }
 };
 
 // 快捷勾选
@@ -238,6 +269,9 @@ const modesAdjust = (modes) => {
         const index = modes[i].char[j];
         // 排除无数据的情况
         if (character_birthday.value && characters.value[index].birthday == "暂无") {
+          continue;
+        }
+        if (eye_color.value && (characters.value[index].Eng == "Wien" || characters.value[index].Eng == "Tomari")) {
           continue;
         }
         characters.value[index].checked = true;
@@ -279,6 +313,10 @@ const toggleCheck = (char) => {
     alert("该角色暂无生日信息！");
     return;
   }
+  if (eye_color.value && (char.Eng == "Wien" || char.Eng == "Tomari")) {
+    alert("该角色暂无瞳色信息！");  // 薇恩、冬毬暂无瞳色信息
+    return;
+  }
   char.checked = !char.checked;
 };
 
@@ -314,6 +352,10 @@ const toggleCheck = (char) => {
         <label :for="item.label">{{ item.label }}</label>
         <input v-model="item.checked" type="checkbox" :id="item.label" @change="modesAdjust(birthday_modes)">
       </div>
+      <div v-if="eye_color" v-for="item in school_modes" :key="item.label">
+        <label :for="item.label">{{ item.label }}</label>
+        <input v-model="item.checked" type="checkbox" :id="item.label" @change="modesAdjust(school_modes)">
+      </div>
     </div>
     <div id="button-container">
       <button @click="update_canvas" class="btns" style="background-color: cornflowerblue;">绘制图片</button>
@@ -325,6 +367,15 @@ const toggleCheck = (char) => {
   <div id="canvas-container">
     <canvas id="art-canvas" ref="canvas" width="1000" height="200"></canvas>
     <canvas id="art-canvas-ans" ref="canvas_ans" width="1000" height="200" style="display: none"></canvas>
+  </div>
+  <div id="notice">
+    <p>注意：某些角色数据有相应缺失，已做标注。</p>
+    <p>应援色和生日数据来源：
+      <a href="https://llwiki.org/">LLWiki</a>
+    </p>
+    <p>瞳色数据来源：
+      <a href="https://twitter.com/makoteau/status/1704457996808437882">@makoteau</a>
+    </p>
   </div>
 </template>
 
@@ -348,6 +399,11 @@ td {
 
 tr:nth-child(even) {
   background-color: #f2f2f2;
+}
+
+input[type="radio"] {
+  display: inline-block;
+  margin-right: 30px;
 }
 
 /* 局部 */
