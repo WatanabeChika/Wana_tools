@@ -29,26 +29,26 @@ const modeItems = ref([
 ]);
 
 const color_modes = ref([
-  { label: '蓝色系', checked: false , char: [1,3,13,18,23,24,34,37,43,47]},
+  { label: '蓝色系', checked: false , char: [1,3,13,18,23,24,34,37,43,47,52]},
   { label: '红色系', checked: false , char: [5,12,27,39,49]},
-  { label: '黄色系', checked: false , char: [0,4,9,15,22,25,33,38,45,46]},
+  { label: '黄色系', checked: false , char: [0,4,9,15,22,25,33,38,45,46,53]},
   { label: '绿色系', checked: false , char: [7,11,28,30,36,40,48]},
-  { label: '紫色系', checked: false , char: [6,16,26,42,44]},
+  { label: '紫色系', checked: false , char: [6,16,26,42,44,54]},
   { label: '粉色系', checked: false , char: [8,10,17,21,32,35,41,50]},
   { label: '白色系', checked: false , char: [2,14,19,29,31,51]},
 ]);
 
 const birthday_modes = ref ([
   { label: '1月' , checked: false , char: [7,12,22,42,47] },
-  { label: '2月' , checked: false , char: [11,28,32,35] },
+  { label: '2月' , checked: false , char: [11,28,32,35,53] },
   { label: '3月' , checked: false , char: [3,15,21] },
   { label: '4月' , checked: false , char: [5,13,23,38] },
   { label: '5月' , checked: false , char: [18,25,33,46] },
   { label: '6月' , checked: false , char: [6,16,24,40,48] },
   { label: '7月' , checked: false , char: [8,14,34] },
   { label: '8月' , checked: false , char: [0,9,27,41,50] },
-  { label: '9月' , checked: false , char: [2,10,17,36] },
-  { label: '10月', checked: false , char: [1,30,39] },
+  { label: '9月' , checked: false , char: [2,10,17,36,54] },
+  { label: '10月', checked: false , char: [1,30,39,52] },
   { label: '11月', checked: false , char: [4,29,37,49] },
   { label: '12月', checked: false , char: [19,26,31,43,51] },
 ]);
@@ -114,6 +114,9 @@ const characters = ref([
   { label: '夕雾缀理'      , Eng: 'Tsuzuri'  ,  color: "#ba2636",  birthday: "11月17日",  checked: false},
   { label: '大泽瑠璃乃'    , Eng: 'Rurino'   ,  color: "#e7609e",  birthday: "8月31日" ,  checked: false},
   { label: '藤岛慈'        , Eng: 'Megumi'   ,  color: "#c8c2c6",  birthday: "12月20日",  checked: false},
+  { label: '百生吟子'      , Eng: 'Ginko'    ,  color: "#a2d7dd",  birthday: "10月20日",  checked: false},
+  { label: '徒町小铃'      , Eng: 'Kosuzu'   ,  color: "#fad764",  birthday: "2月28日" ,  checked: false},
+  { label: '安养寺姬芽'    , Eng: 'Hime'     ,  color: "#9d8de2",  birthday: "9月24日" ,  checked: false},
 ]);
 
 let ctx, ctxAns, originHeight;
@@ -313,8 +316,9 @@ const toggleCheck = (char) => {
     alert("该角色暂无生日信息！");
     return;
   }
-  if (eye_color.value && (char.Eng == "Wien" || char.Eng == "Tomari")) {
-    alert("该角色暂无瞳色信息！");  // 薇恩、冬毬暂无瞳色信息
+  if (eye_color.value && (char.Eng == "Wien" || char.Eng == "Tomari" || 
+                          char.Eng == "Ginko" || char.Eng == "Kosuzu" || char.Eng == "Hime")) {
+    alert("该角色暂无瞳色信息！");  // 薇恩、冬毬、莲104期暂无瞳色信息
     return;
   }
   char.checked = !char.checked;
@@ -329,7 +333,7 @@ const toggleCheck = (char) => {
   <h1>LoveLive!连线梗图制作器</h1>
   <div id="input-container">
     <div id="modes-settings">
-      <span style="margin-right: 25px;">主题选择: </span>
+      <span id="matching-hint">主题选择: </span>
       <div v-for="item in modeItems" :key="item.name">
         <label :for="item.name">{{ item.name }}</label>
         <input type="radio" name="check" :checked="item.mark" :value="item.mark" :id="item.name" @change="update_settings(item)">
@@ -343,7 +347,7 @@ const toggleCheck = (char) => {
       </tr>
     </table>
     <div id="modes-settings">
-      <span style="margin-right: 25px;">快捷选项: </span>
+      <span id="matching-hint">快捷选项: </span>
       <div v-if="character_color" v-for="item in color_modes" :key="item.label">
         <label :for="item.label">{{ item.label }}</label>
         <input v-model="item.checked" type="checkbox" :id="item.label" @change="modesAdjust(color_modes)">
@@ -369,7 +373,7 @@ const toggleCheck = (char) => {
     <canvas id="art-canvas-ans" ref="canvas_ans" width="1000" height="200" style="display: none"></canvas>
   </div>
   <div id="notice">
-    <p>注意：某些角色数据有相应缺失，已做标注。</p>
+    <p>注意：某些角色数据有相应缺失，选择时会做提醒。</p>
     <p>应援色和生日数据来源：
       <a href="https://llwiki.org/">LLWiki</a>
     </p>
@@ -407,6 +411,14 @@ input[type="radio"] {
 }
 
 /* 局部 */
+#matching-hint {
+  margin-right: 25px;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #button-container {
   display: flex;
   justify-content: space-between;
