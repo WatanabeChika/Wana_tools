@@ -7,6 +7,7 @@ import { LoveLive_characters, LoveLive_groups } from './data';
 
 const canvas = ref(null);
 const images = ref([]);
+const loading = ref(false);
 
 const anime = ref(true);
 const seiyuu = ref(false);
@@ -41,6 +42,11 @@ async function update_canvas() {
 
   // 标题
   fillCanvasText(ctx, fontColor, titleFont, false, 210, 75, titleText);
+  if (document.getElementById("image-container").getElementsByTagName("img").length > 0){
+    document.getElementById("image-container").removeChild(document.getElementById("image-container").getElementsByTagName("img")[0]);
+  }
+  images.value = [];
+  loading.value = true;
 
   // 绘制角色/声优，添加到图片数组
   for (let i = 0; i < characters.value.length; i++) {
@@ -56,27 +62,24 @@ async function update_canvas() {
       ctx.fillRect(48, 130, canvas.value.width, canvas.value.height);
     }
   }
-
   create();
 }
 
 // 绘制GIF图
 const create = () => {
-    if (document.getElementById("image-container").getElementsByTagName("img").length > 0){
-        document.getElementById("image-container").removeChild(document.getElementById("image-container").getElementsByTagName("img")[0]);
+  createGIF({
+    'images': images.value,
+    'gifWidth': canvas.value.width,
+    'gifHeight': canvas.value.height,
+    }, function(obj) {
+    if(!obj.error) {
+      var image = obj.image,
+      animatedImage = document.createElement('img');
+      animatedImage.src = image;
+      loading.value = false;
+      document.getElementById("image-container").appendChild(animatedImage);
     }
-    createGIF({
-        'images': images.value,
-        'gifWidth': canvas.value.width,
-        'gifHeight': canvas.value.height,
-        }, function(obj) {
-        if(!obj.error) {
-            var image = obj.image,
-            animatedImage = document.createElement('img');
-            animatedImage.src = image;
-            document.getElementById("image-container").appendChild(animatedImage);
-        }
-    })
+  })
 };
 
 // 下载图片
@@ -195,6 +198,7 @@ const toggleCheck = (char) => {
     </div>
     <div id="image-container">
       <canvas id="GIF-canvas" ref="canvas" width="400" height="500" style="display: none;"></canvas>
+      <span v-if="loading" style="text-align: center">生成中······</span>
     </div>
 </template>
 
