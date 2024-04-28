@@ -5,7 +5,7 @@ import LLSS from './ImageType/LoveLiveSSEditor.vue'
 import MatchingMeme from './ImageType/MatchingMemeEditor.vue'
 import Chinkana from './TextType/Chinese_to_katakana.vue'
 
-const currentPage = ref(MatchingMeme)
+const currentPage = ref(LoveLive)
 
 const imageItems = ref([
   { name: 'LoveLive', path: LoveLive },
