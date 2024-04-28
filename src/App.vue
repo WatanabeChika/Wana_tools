@@ -3,9 +3,10 @@ import {ref} from 'vue';
 import LoveLive from './ImageType/LoveLiveEditor.vue'
 import LLSS from './ImageType/LoveLiveSSEditor.vue'
 import MatchingMeme from './ImageType/MatchingMemeEditor.vue'
+import GIFMeme from './ImageType/GIFMemeEditor.vue'
 import Chinkana from './TextType/Chinese_to_katakana.vue'
 
-const currentPage = ref(LoveLive)
+const currentPage = ref(GIFMeme)
 
 const imageItems = ref([
   { name: 'LoveLive', path: LoveLive },
@@ -17,7 +18,8 @@ const textItems = ref([
 ]);
 
 const memeItems = ref([
-  { name: 'Matching', path: MatchingMeme }
+  { name: 'Matching', path: MatchingMeme },
+  { name: 'OshiGIF', path: GIFMeme }
 ]);
 
 

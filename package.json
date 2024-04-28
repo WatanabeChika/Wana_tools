@@ -11,6 +11,7 @@
   "dependencies": {
     "element-plus": "^2.5.1",
     "font-face-observer": "^1.0.0",
+    "gifshot": "^0.4.5",
     "pinyin-pro": "^3.19.6",
     "vue": "^3.2.45"
   },
