@@ -1,5 +1,5 @@
 <script setup>
-import {onMounted, ref} from 'vue';
+import { onMounted, ref } from 'vue';
 import FontFaceObserver from 'font-face-observer';
 import { fillCanvasText, loadImage, shuffleLogArray } from './utils';
 import { LoveLive_characters, LoveLive_groups } from './data';
