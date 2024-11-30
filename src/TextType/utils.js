@@ -167,3 +167,8 @@ export function num_conv(num) {
     return res;
   }
 
+// 判断该字符是否为字母
+export function isLetter(char) {
+    return /^[A-Za-z]$/.test(char);
+}
+

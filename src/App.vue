@@ -5,8 +5,9 @@ import LLSS from './ImageType/LoveLiveSSEditor.vue'
 import MatchingMeme from './ImageType/MatchingMemeEditor.vue'
 import GIFMeme from './ImageType/GIFMemeEditor.vue'
 import Chinkana from './TextType/Chinese_to_katakana.vue'
+import Leetspeak from './TextType/Leetspeak.vue';
 
-const currentPage = ref(GIFMeme)
+const currentPage = ref(Leetspeak)
 
 const imageItems = ref([
   { name: 'LoveLive', path: LoveLive },
@@ -15,6 +16,7 @@ const imageItems = ref([
 
 const textItems = ref([
   { name: 'Chinkana', path: Chinkana },
+  { name: 'Leetspeak', path: Leetspeak },
 ]);
 
 const memeItems = ref([
