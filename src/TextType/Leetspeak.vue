@@ -51,7 +51,7 @@ const update_output = () => {
     }
     // 下划线输出模式
     if (space.value) {
-        new_input = new_input.replace(/[^A-Za-z0-9]/g, '_');
+        new_input = new_input.replace(/[^A-Za-z0-9|$]/g, '_');
         // 去掉头尾下划线，连续下划线合并
         new_input = new_input.replace(/_+/g, '_').replace(/^_|_$/g, '');
     }
@@ -134,3 +134,5 @@ textarea {
 }
 
 </style>
+
+
