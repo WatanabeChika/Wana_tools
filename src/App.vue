@@ -6,8 +6,9 @@ import MatchingMeme from './ImageType/MatchingMemeEditor.vue'
 import GIFMeme from './ImageType/GIFMemeEditor.vue'
 import Chinkana from './TextType/Chinese_to_katakana.vue'
 import Leetspeak from './TextType/Leetspeak.vue';
+import Decomposition from './CalcType/SudokuComb.vue';
 
-const currentPage = ref(Leetspeak)
+const currentPage = ref(Decomposition)
 
 const imageItems = ref([
   { name: 'LoveLive', path: LoveLive },
@@ -19,6 +20,10 @@ const textItems = ref([
   { name: 'Leetspeak', path: Leetspeak },
 ]);
 
+const CalcItems = ref([
+  { name: 'Decomposition', path: Decomposition },
+]);
+
 const memeItems = ref([
   { name: 'Matching', path: MatchingMeme },
   { name: 'OshiGIF', path: GIFMeme }
@@ -28,6 +33,7 @@ const memeItems = ref([
 const Items = ref([
   { type: 'Image', apps: imageItems },
   { type: 'Text', apps: textItems },
+  { type: 'Calculation', apps: CalcItems },
   { type: 'Meme', apps: memeItems }
 ]);
 
