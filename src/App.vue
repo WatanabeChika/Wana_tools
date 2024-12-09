@@ -6,9 +6,10 @@ import MatchingMeme from './ImageType/MatchingMemeEditor.vue'
 import GIFMeme from './ImageType/GIFMemeEditor.vue'
 import Chinkana from './TextType/Chinese_to_katakana.vue'
 import Leetspeak from './TextType/Leetspeak.vue';
+import Remove_backslash from './TextType/Remove_backslash.vue';
 import Decomposition from './CalcType/SudokuComb.vue';
 
-const currentPage = ref(Decomposition)
+const currentPage = ref(Remove_backslash)
 
 const imageItems = ref([
   { name: 'LoveLive', path: LoveLive },
@@ -18,6 +19,7 @@ const imageItems = ref([
 const textItems = ref([
   { name: 'Chinkana', path: Chinkana },
   { name: 'Leetspeak', path: Leetspeak },
+  { name: 'NoBackslash', path: Remove_backslash },
 ]);
 
 const CalcItems = ref([

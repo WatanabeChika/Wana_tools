@@ -91,31 +91,7 @@ const update_format = (item) => {
 
 
 <style>
-/* 全局 */
-h1 {
-  font-family: sans-serif;
-  color: #333;
-  text-align: center;
-  margin-bottom: 50px;
-}
-p {
-  font-family: sans-serif;
-  color: rgba(128,128,128,0.75);
-  text-align: left;
-}
-textarea {
-  width: 100%;
-  height: 230px;
-  padding: 10px;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  resize: none; 
-  overflow-y: display; 
-}
 
-/* 局部 */
 #m2kcontainer {
   width: 100%;
 }
