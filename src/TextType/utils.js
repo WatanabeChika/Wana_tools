@@ -37,7 +37,7 @@ export function fin_ini_conv(ini, fin, tail) {
                 't': 'ト', 'n': 'ノ', 'l': 'ロ', 'g': 'ゴ', 'k': 'コ', 'h': 'ホ',
                 'j': 'ジョ', 'q': 'チョ', 'x': 'ショ', 'zh': 'ジョ', 'ch': 'チョ',
                 'sh': 'ショ', 'r': 'ロ', 'z': 'ゾ', 'c': 'ツォ', 's': 'ソ',
-                'y': 'ヨ', 'w': 'ヲ'
+                'y': 'ヨ', 'w': 'ウォ'
             };
             return fin_map_o[ini];
         case 'e':
