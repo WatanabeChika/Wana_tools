@@ -45,7 +45,6 @@ const Items = ref([
 
 <template>
   <div id="navbar">
-    <div class="container">
       <el-dropdown v-for="item in Items" :key="item.type">
           <el-button class="navbutton">
             {{ item.type }}
@@ -59,7 +58,6 @@ const Items = ref([
           </el-dropdown-menu>
         </template>
       </el-dropdown>
-    </div>
   </div>
 
   <div id="editor-container">
@@ -77,27 +75,26 @@ const Items = ref([
   padding: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  white-space: nowrap; /* Prevent wrapping */
   align-items: center;
 }
-.container {
-  padding: 10px;
-  text-align: center;
-}
 .navbutton {
-  margin: 0px 15px 0px 15px;
+  display: inline-block;
+  margin: 0px 5px 0px 5px;
   background-color: #dceef5;
   color: black;
-  padding: 16px;
+  padding: 18px;
   font-size: 16px;
   border: none;
   cursor: pointer;
   height: 100%;
 }
 .dropdownbutton {
-  margin: 0px 15px 0px 15px;
+  margin: 2px 10px 2px 10px;
   background-color: #ffffff;
   color: black;
-  padding: 16px;
+  padding: 13px;
   font-size: 16px;
   border: none;
   cursor: pointer;

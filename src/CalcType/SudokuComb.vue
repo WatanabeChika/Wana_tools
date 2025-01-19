@@ -1,6 +1,7 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
+const mainContainer = ref(null);
 const sum = ref(0);
 const n = ref(0);
 const results = ref([]);
@@ -153,13 +154,40 @@ const chunkOfNumber = () => {
 }
 
 // 将结果分组
-const chunkOfResult = () => {
-  const chunk = [];
-  for (let i = 0; i < results.value.length; i += 7) {
-    chunk.push(results.value.slice(i, i + 7));
+const chunkOfRows = () => {
+  // get editor_container width
+  const screenWidth = mainContainer.value.getBoundingClientRect().width;
+  const itemWidth = results.value[0].length * 28;
+  const columns = Math.floor(screenWidth / itemWidth); // 每行放置的格子数
+  let rows = [];
+
+  let currentRow = [];
+  let count = 0;
+
+  // 将格子分行
+  for (let i = 0; i < results.value.length; i++) {
+    currentRow.push(results.value[i]);
+    count++;
+
+    if (count >= columns) {
+      rows.push(currentRow);
+      currentRow = [];
+      count = 0;
+    }
   }
-  return chunk;
-}
+
+  // 处理最后一行
+  if (currentRow.length > 0) {
+    rows.push(currentRow);
+  }
+
+  return rows;
+};
+
+// 监听窗口大小变化
+onMounted(() => {
+  window.addEventListener('resize', chunkOfRows);
+});
 
 
 </script>
@@ -168,7 +196,7 @@ const chunkOfResult = () => {
   <h1>和分解器</h1>
   <p style="margin-bottom: 10px; margin-top: 0px">输入一个目标和与数字个数，找出所有和为目标和的数字组合。</p>
   <p style="margin-bottom: 10px; margin-top: 0px">可以选择排除某些数字或者包含某些数字。</p>
-    <div id="main-container">
+    <div id="main-container" ref="mainContainer">
       <div id="sum-input">
         <label style="margin-left: 0px;">目标和 </label>
         <table>
@@ -213,14 +241,14 @@ const chunkOfResult = () => {
     </div>
 
     <div id="results">
-      <table v-if="results.length!=0&&results[0].length!=0">
-        <tr v-for="row in chunkOfResult()" :key="row[0].label">
-          <td v-for="result in row" :key="num">
-            {{ result.join(', ') }}
-          </td>
-        </tr>
-      </table>
-    </div>
+    <table v-if="results.length!=0&&results[0].length!=0">
+      <tr v-for="(row, index) in chunkOfRows()" :key="index">
+        <td v-for="(result, idx) in row" :key="idx">
+          {{ result.join(', ') }}
+        </td>
+      </tr>
+    </table>
+  </div>
 
 </template>
 
@@ -232,6 +260,7 @@ const chunkOfResult = () => {
 
 #main-container {
   display: flex;
+  flex-wrap: wrap;
   margin-top: 30px;
 }
 
@@ -246,5 +275,7 @@ const chunkOfResult = () => {
 .number_included {
   background-color: aquamarine;
 }
+
+
 
 </style>
