@@ -126,6 +126,7 @@ async function update_canvas() {
       const img = await loadImage(imgPath + themeList[i].Eng + '.png');
       ctx.drawImage(img, basicX + 570, basicY + i * 175 - 70, 130, 130);
     }
+    imgPath = basicPath + 'character_icons/';
   }
   
 
