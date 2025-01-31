@@ -8,8 +8,9 @@ import Chinkana from './TextType/Chinese_to_katakana.vue'
 import Leetspeak from './TextType/Leetspeak.vue';
 import Backslash from './TextType/Backslash.vue';
 import Decomposition from './CalcType/SudokuComb.vue';
+import Morse from './GameType/Morse.vue';
 
-const currentPage = ref(Decomposition)
+const currentPage = ref(Morse)
 
 const imageItems = ref([
   { name: 'LoveLive', path: LoveLive },
@@ -19,7 +20,7 @@ const imageItems = ref([
 const textItems = ref([
   { name: 'Chinkana', path: Chinkana },
   { name: 'Leetspeak', path: Leetspeak },
-  { name: 'NoBackslash', path: Backslash },
+  { name: 'Backslash', path: Backslash },
 ]);
 
 const CalcItems = ref([
@@ -28,7 +29,11 @@ const CalcItems = ref([
 
 const memeItems = ref([
   { name: 'Matching', path: MatchingMeme },
-  { name: 'OshiGIF', path: GIFMeme }
+  { name: 'OshiGIF', path: GIFMeme },
+]);
+
+const gameItems = ref([
+  { name: 'Morse', path: Morse },
 ]);
 
 
@@ -36,7 +41,8 @@ const Items = ref([
   { type: 'Image', apps: imageItems },
   { type: 'Text', apps: textItems },
   { type: 'Calculation', apps: CalcItems },
-  { type: 'Meme', apps: memeItems }
+  { type: 'Meme', apps: memeItems },
+  { type: 'Game', apps: gameItems },
 ]);
 
 </script>

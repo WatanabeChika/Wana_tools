@@ -196,51 +196,51 @@ onMounted(() => {
   <h1>和分解器</h1>
   <p style="margin-bottom: 10px; margin-top: 0px">输入一个目标和与数字个数，找出所有和为目标和的数字组合。</p>
   <p style="margin-bottom: 10px; margin-top: 0px">可以选择排除某些数字或者包含某些数字。</p>
-    <div id="main-container" ref="mainContainer">
-      <div id="sum-input">
-        <label style="margin-left: 0px;">目标和 </label>
-        <table>
-          <tr v-for="row in chunkOfSum()" :key="row[0].label">
-            <td v-for="sum in row" :key="sum.name" :class="{ sum_checked: sum.checked }" @click="toggleSum(sum)">
-              {{ sum.name }}
-            </td>
-          </tr>
-        </table>
-      </div>
-      <div id="number-input">
-        <label style="margin-left: 0px;">数字个数 </label>
-        <table>
-          <tr v-for="row in chunkOfNumber()" :key="row[0].label">
-            <td v-for="num in row" :key="num.name" :class="{ number_checked: num.checked }" @click="toggleNumber(num, 0)">
-              {{ num.name }}
-            </td>
-          </tr>
-        </table>
-      </div>
-      <div id="exclude">
-        <label style="margin-left: 0px;">排除</label>
-        <table>
-          <tr v-for="row in chunkOfNumber()" :key="row[0].label">
-            <td v-for="num in row" :key="num.name" :class="{ number_excluded: num.excluded }" @click="toggleNumber(num, 1)">
-              {{ num.name }}
-            </td>
-          </tr>
-        </table>
-      </div>
-      <div id="include">
-        <label style="margin-left: 0px;">包含</label>
-        <table>
-          <tr v-for="row in chunkOfNumber()" :key="row[0].label">
-            <td v-for="num in row" :key="num.name" :class="{ number_included: num.included }" @click="toggleNumber(num, 2)">
-              {{ num.name }}
-            </td>
-          </tr>
-        </table>
-      </div>
-      
+  <div id="main-container" ref="mainContainer">
+    <div id="sum-input">
+      <label style="margin-left: 0px;">目标和 </label>
+      <table>
+        <tr v-for="row in chunkOfSum()" :key="row[0].label">
+          <td v-for="sum in row" :key="sum.name" :class="{ sum_checked: sum.checked }" @click="toggleSum(sum)">
+            {{ sum.name }}
+          </td>
+        </tr>
+      </table>
     </div>
+    <div id="number-input">
+      <label style="margin-left: 0px;">数字个数 </label>
+      <table>
+        <tr v-for="row in chunkOfNumber()" :key="row[0].label">
+          <td v-for="num in row" :key="num.name" :class="{ number_checked: num.checked }" @click="toggleNumber(num, 0)">
+            {{ num.name }}
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div id="exclude">
+      <label style="margin-left: 0px;">排除</label>
+      <table>
+        <tr v-for="row in chunkOfNumber()" :key="row[0].label">
+          <td v-for="num in row" :key="num.name" :class="{ number_excluded: num.excluded }" @click="toggleNumber(num, 1)">
+            {{ num.name }}
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div id="include">
+      <label style="margin-left: 0px;">包含</label>
+      <table>
+        <tr v-for="row in chunkOfNumber()" :key="row[0].label">
+          <td v-for="num in row" :key="num.name" :class="{ number_included: num.included }" @click="toggleNumber(num, 2)">
+            {{ num.name }}
+          </td>
+        </tr>
+      </table>
+    </div>
+    
+  </div>
 
-    <div id="results">
+  <div>
     <table v-if="results.length!=0&&results[0].length!=0">
       <tr v-for="(row, index) in chunkOfRows()" :key="index">
         <td v-for="(result, idx) in row" :key="idx">
@@ -252,16 +252,54 @@ onMounted(() => {
 
 </template>
 
-<style>
+<style scoped>
 
-#exclude, #include, #sum-input, #number-input {
-  margin-right: 30px;
+h1 {
+  font-family: sans-serif;
+  color: #333;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+p {
+  font-family: sans-serif;
+  color: rgba(128,128,128,0.75);
+  text-align: left;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  font-weight: 600;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+td {
+  width: 14.28%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
 
 #main-container {
   display: flex;
   flex-wrap: wrap;
   margin-top: 30px;
+}
+
+#exclude, #include, #sum-input, #number-input {
+  margin-right: 30px;
 }
 
 .sum_checked, .number_checked {

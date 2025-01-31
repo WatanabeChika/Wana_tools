@@ -24,6 +24,8 @@ const update_input = () => {
 
 </script>
 
+
+
 <template>
   <div id="m2kcontainer">
     <h1>反斜杠</h1>
@@ -36,16 +38,40 @@ const update_input = () => {
   </div>
 </template>
 
-<style>
+
+
+<style scoped>
+
+h1 {
+  font-family: sans-serif;
+  color: #333;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  font-weight: 600;
+}
+
+textarea {
+  width: 100%;
+  height: 230px;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  resize: none; 
+  overflow-y: display; 
+}
 
 #m2kcontainer {
   width: 100%;
 }
-#settings {
-  display: inline-block;
-  margin-right: 20px;
-  margin-top: 30px;
-}
+
 #in-out{
   display: block;
   text-align: left;
@@ -54,4 +80,6 @@ const update_input = () => {
   margin-left: 5px;
   font-weight: 600;
 }
+
+
 </style>

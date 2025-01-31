@@ -24,13 +24,12 @@ export function fillCanvasText(ctx, color, font, stroke, x, y, input) {
   
 // func: 获取文本宽度
 export function getTextWidth(text, font) {
-    const span = document.createElement('span');
-    span.style.font = font;
-    span.textContent = text;
-    document.body.appendChild(span);
-    const width = span.offsetWidth;
-    document.body.removeChild(span);
-    return width;
+    // 创建临时Canvas元素
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    context.font = font;
+    const metrics = context.measureText(text);
+    return Math.ceil(metrics.width);  // 向上取整更符合实际渲染
 }
 
 // func: 加载图片

@@ -326,8 +326,33 @@ const toggleCheck = (char) => {
 
 
 
-<style>
-/* 全局 */
+<style scoped>
+
+h1 {
+  font-family: sans-serif;
+  color: #333;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  font-weight: 600;
+}
+
+input[type="radio"] {
+  display: inline-block;
+  margin-right: 30px;
+}
+
+input[type="checkbox"] {
+  display: inline-block;
+  margin-bottom: 10px;
+  margin-right: 30px;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -346,12 +371,38 @@ tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-input[type="radio"] {
-  display: inline-block;
-  margin-right: 30px;
+button {
+  background-color: #28a745;
+  color: #fff;
+  padding: 9px 13px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-/* 局部 */
+p {
+  font-family: sans-serif;
+  color: rgba(128,128,128,0.75);
+  text-align: left;
+}
+
+
+
+#input-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#modes-settings {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
 #matching-hint {
   margin-right: 25px;
   margin-bottom: 5px;
@@ -366,14 +417,19 @@ input[type="radio"] {
   margin-bottom: 30px;
 }
 
-.btns {
-  margin-right: 20px;
+#canvas-container {
+  position: relative;
+  margin-bottom: 20px;
 }
 
-#modes-settings {
-  display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
+#notice {
+  width: 100%;
+  text-align: left;
+  margin-top: 30px;
+}
+
+.btns {
+  margin-right: 20px;
 }
 
 .character_selected {

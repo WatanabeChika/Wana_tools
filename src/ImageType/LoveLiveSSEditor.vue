@@ -272,8 +272,28 @@ watch(imgExist, () => {
 
 
 
-<style>
-/* 全局 */
+<style scoped>
+
+h1 {
+  font-family: sans-serif;
+  color: #333;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  font-weight: 600;
+}
+
+input[type="checkbox"] {
+  display: inline-block;
+  margin-bottom: 10px;
+  margin-right: 30px;
+}
+
 input[type="range"] {
   width: 150px;
   margin-left: 15px;
@@ -285,7 +305,64 @@ input[type="number"] {
   margin-right: 15px;
 }
 
-/* 局部 */
+input[type="text"] {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #d1d5da;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #28a745;
+  color: #fff;
+  padding: 9px 13px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+p {
+  font-family: sans-serif;
+  color: rgba(128,128,128,0.75);
+  text-align: left;
+}
+
+#canvas-container {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+#art-canvas {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid #d1d5da;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+#input-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#canvas-settings {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
 #image-settings {
   display: flex;
   flex-direction: row;
@@ -296,6 +373,12 @@ input[type="number"] {
   display: flex; 
   flex-direction: column; 
   align-items: center;
+}
+
+#notice {
+  width: 100%;
+  text-align: left;
+  margin-top: 30px;
 }
 
 .image-manual {

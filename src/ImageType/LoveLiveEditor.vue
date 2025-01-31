@@ -199,8 +199,15 @@ watch(textStroke, () => {
 
 
 
-<style>
-/* 全局 */
+<style scoped>
+
+h1 {
+  font-family: sans-serif;
+  color: #333;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
 label {
   display: inline-block;
   margin-bottom: 10px;
@@ -223,6 +230,7 @@ input[type="text"] {
   width: 100%;
   box-sizing: border-box;
 }
+
 button {
   background-color: #28a745;
   color: #fff;
@@ -237,7 +245,12 @@ button:hover {
   background-color: #218838;
 }
 
-/* 局部 */
+p {
+  font-family: sans-serif;
+  color: rgba(128,128,128,0.75);
+  text-align: left;
+}
+
 #canvas-container {
   position: relative;
   margin-bottom: 20px;

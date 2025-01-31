@@ -10,7 +10,7 @@ const space = ref(false);
 const modeItems = ref([
   { name: '保持原格式', mark: empty},
   { name: '下划线格式', mark: space},
-])
+]);
 
 const update_output = () => {
     let input = inputText.value;
@@ -56,7 +56,7 @@ const update_output = () => {
         new_input = new_input.replace(/_+/g, '_').replace(/^_|_$/g, '');
     }
     outputText.value = new_input;
-}
+};
 
 const update_format = (item) => {
   if (item.name == '保持原格式') {
@@ -68,7 +68,7 @@ const update_format = (item) => {
     space.value = true;
   }
   update_output();
-}
+};
 
 </script>
 
@@ -90,16 +90,43 @@ const update_format = (item) => {
 
 
 
-<style>
+<style scoped>
+
+h1 {
+  font-family: sans-serif;
+  color: #333;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  font-weight: 600;
+}
+
+textarea {
+  width: 100%;
+  height: 230px;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  resize: none; 
+  overflow-y: display; 
+}
+
+input[type="radio"] {
+  display: inline-block;
+  margin-right: 30px;
+}
 
 #m2kcontainer {
   width: 100%;
 }
-#settings {
-  display: inline-block;
-  margin-right: 20px;
-  margin-top: 30px;
-}
+
 #in-out{
   display: block;
   text-align: left;

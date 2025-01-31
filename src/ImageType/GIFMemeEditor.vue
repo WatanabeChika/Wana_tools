@@ -202,6 +202,95 @@ const toggleCheck = (char) => {
     </div>
 </template>
 
-<style>
+<style scoped>
+
+h1 {
+  font-family: sans-serif;
+  color: #333;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  font-weight: 600;
+}
+
+input[type="radio"] {
+  display: inline-block;
+  margin-right: 30px;
+}
+
+input[type="checkbox"] {
+  display: inline-block;
+  margin-bottom: 10px;
+  margin-right: 30px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+td {
+  width: 14.28%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+button {
+  background-color: #28a745;
+  color: #fff;
+  padding: 9px 13px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#input-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#modes-settings {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+#matching-hint {
+  margin-right: 25px;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.btns {
+  margin-right: 20px;
+}
+
+.character_selected {
+  background-color: aquamarine;
+}
 
 </style>

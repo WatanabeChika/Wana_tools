@@ -120,19 +120,22 @@ const update_format = (item) => {
 
 
 
-<style>
-/* 全局 */
+<style scoped>
+
 h1 {
   font-family: sans-serif;
   color: #333;
   text-align: center;
   margin-bottom: 50px;
 }
-p {
-  font-family: sans-serif;
-  color: rgba(128,128,128,0.75);
-  text-align: left;
+
+label {
+  display: inline-block;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  font-weight: 600;
 }
+
 textarea {
   width: 100%;
   height: 230px;
@@ -145,15 +148,33 @@ textarea {
   overflow-y: display; 
 }
 
-/* 局部 */
+input[type="radio"] {
+  display: inline-block;
+  margin-right: 30px;
+}
+
+input[type="checkbox"] {
+  display: inline-block;
+  margin-bottom: 10px;
+  margin-right: 30px;
+}
+
+p {
+  font-family: sans-serif;
+  color: rgba(128,128,128,0.75);
+  text-align: left;
+}
+
 #m2kcontainer {
   width: 100%;
 }
+
 #settings {
   display: inline-block;
   margin-right: 20px;
   margin-top: 30px;
 }
+
 #in-out{
   display: block;
   text-align: left;
@@ -161,6 +182,12 @@ textarea {
   margin-bottom: 10px;
   margin-left: 5px;
   font-weight: 600;
+}
+
+#notice {
+  width: 100%;
+  text-align: left;
+  margin-top: 30px;
 }
 
 </style>
