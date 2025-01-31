@@ -46,7 +46,6 @@ let timer = null
 const startMorseDisplay = () => {
   let index = 0;
   const sequence = wordToMorse(currentWord.value).split('');
-  console.log(sequence);
   
   const playNext = () => {
     if (index >= sequence.length) {
