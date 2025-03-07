@@ -136,6 +136,12 @@ input[type="radio"] {
   font-weight: 600;
 }
 
+#settings {
+  display: inline-block;
+  margin-right: 20px;
+  margin-top: 30px;
+}
+
 </style>
 
 
