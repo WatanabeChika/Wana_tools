@@ -106,6 +106,7 @@ onMounted(() => {
 });
 </script>
 
+
 <template>
   <h1>摩斯电码</h1>
   <div class="container">
@@ -136,6 +137,7 @@ onMounted(() => {
   </div>
 </template>
 
+
 <style scoped>
 
 h1 {
@@ -143,6 +145,27 @@ h1 {
   color: #333;
   text-align: center;
   margin-bottom: 50px;
+}
+
+input {
+  width: 95%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  flex: 1;
+  min-width: 120px;
 }
 
 .container {
@@ -221,32 +244,11 @@ h1 {
   margin-right: 20px;
 }
 
-input {
-  width: 95%;
-  padding: 12px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 16px;
-}
-
 .buttons {
   display: flex;
   gap: 15px;
   margin-top: 15px;
   flex-wrap: wrap;
-}
-
-button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 6px;
-  background-color: #28a745;
-  color: white;
-  cursor: pointer;
-  font-size: 14px;
-  flex: 1;
-  min-width: 120px;
 }
 
 .result {

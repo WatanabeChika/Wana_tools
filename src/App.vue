@@ -1,39 +1,33 @@
 <script setup>
-import {ref} from 'vue';
-import LoveLive from './ImageType/LoveLiveEditor.vue'
-import LLSS from './ImageType/LoveLiveSSEditor.vue'
-import MatchingMeme from './ImageType/MatchingMemeEditor.vue'
-import GIFMeme from './ImageType/GIFMemeEditor.vue'
-import Chinkana from './TextType/Chinese_to_katakana.vue'
-import Leetspeak from './TextType/Leetspeak.vue';
-import Backslash from './TextType/Backslash.vue';
-import Decomposition from './CalcType/SudokuComb.vue';
-import Morse from './GameType/Morse.vue';
+import { ref, defineAsyncComponent } from 'vue';
 
-const currentPage = ref(Morse)
+import deepseek from './TextType/Deepseek.vue';
+
+const currentPage = ref(deepseek);
 
 const imageItems = ref([
-  { name: 'LoveLive', path: LoveLive },
-  { name: 'LLSS', path: LLSS },
+  { name: 'LoveLive', path: defineAsyncComponent(() => import('./ImageType/LoveLiveEditor.vue')) },
+  { name: 'LLSS', path: defineAsyncComponent(() => import('./ImageType/LoveLiveSSEditor.vue')) },
 ]);
 
 const textItems = ref([
-  { name: 'Chinkana', path: Chinkana },
-  { name: 'Leetspeak', path: Leetspeak },
-  { name: 'Backslash', path: Backslash },
+  { name: 'Chinkana', path: defineAsyncComponent(() => import('./TextType/Chinese_to_katakana.vue')) },
+  { name: 'Leetspeak', path: defineAsyncComponent(() => import('./TextType/Leetspeak.vue')) },
+  { name: 'Backslash', path: defineAsyncComponent(() => import('./TextType/Backslash.vue')) },
+  { name: 'Deepseek', path: deepseek },
 ]);
 
 const CalcItems = ref([
-  { name: 'Decomposition', path: Decomposition },
+  { name: 'Decomposition', path: defineAsyncComponent(() => import('./CalcType/SudokuComb.vue')) },
 ]);
 
 const memeItems = ref([
-  { name: 'Matching', path: MatchingMeme },
-  { name: 'OshiGIF', path: GIFMeme },
+  { name: 'Matching', path: defineAsyncComponent(() => import('./ImageType/MatchingMemeEditor.vue')) },
+  { name: 'OshiGIF', path: defineAsyncComponent(() => import('./ImageType/GIFMemeEditor.vue')) },
 ]);
 
 const gameItems = ref([
-  { name: 'Morse', path: Morse },
+  { name: 'Morse', path: defineAsyncComponent(() => import('./GameType/Morse.vue')) },
 ]);
 
 
