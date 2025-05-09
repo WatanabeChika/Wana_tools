@@ -1,0 +1,44 @@
+name: auto-deploy
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: 设置 Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: 安装依赖
+        run: npm ci
+
+      - name: 构建项目
+        run: npm run build
+
+      - name: 生成部署文件
+        run: |
+          # 创建防止 Jekyll 处理的空文件（适用于 GitHub Pages）
+          touch ./dist/.nojekyll
+          # 可选的 CNAME 文件（如果你有自定义域名）
+          # echo 'yourdomain.com' > ./dist/CNAME
+
+      - name: 部署到 GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages      # 部署目标分支
+          folder: dist          # 构建输出目录
+          clean: true           # 每次部署前清理目标分支
