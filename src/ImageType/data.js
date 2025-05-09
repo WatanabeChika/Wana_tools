@@ -65,5 +65,5 @@ export var LoveLive_groups = [
     { label: '虹ヶ咲', checked: false , char: [20,21,22,23,24,25,26,27,28,29,30,31,32]},
     { label: 'Liella!', checked: false , char: [33,34,35,36,37,38,39,40,41,42,43]},
     { label: 'Sunny Passion', checked: false , char: [44, 45]},
-    { label: '蓮ノ空', checked: false , char: [46,47,48,49,50,51,52,53,54]},
+    { label: '蓮ノ空', checked: false , char: [46,47,48,49,50,51,52,53,54,55,56]},
   ]

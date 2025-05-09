@@ -33,8 +33,8 @@ const modeItems = ref([
 ]);
 
 const color_modes = ref([
-  { label: '蓝色系', checked: false , char: [1,3,13,18,23,24,34,37,43,47,52]},
-  { label: '红色系', checked: false , char: [5,12,27,39,49]},
+  { label: '蓝色系', checked: false , char: [1,3,13,18,23,24,34,37,43,47,52,56]},
+  { label: '红色系', checked: false , char: [5,12,27,39,49,55]},
   { label: '黄色系', checked: false , char: [0,4,9,15,22,25,33,38,45,46,53]},
   { label: '绿色系', checked: false , char: [7,11,28,30,36,40,48]},
   { label: '紫色系', checked: false , char: [6,16,26,42,44,54]},
@@ -48,13 +48,13 @@ const birthday_modes = ref ([
   { label: '3月' , checked: false , char: [3,15,21] },
   { label: '4月' , checked: false , char: [5,13,23,38] },
   { label: '5月' , checked: false , char: [18,25,33,46] },
-  { label: '6月' , checked: false , char: [6,16,24,40,48] },
+  { label: '6月' , checked: false , char: [6,16,24,40,48,55] },
   { label: '7月' , checked: false , char: [8,14,34] },
   { label: '8月' , checked: false , char: [0,9,27,41,50] },
   { label: '9月' , checked: false , char: [2,10,17,36,54] },
   { label: '10月', checked: false , char: [1,30,39,52] },
   { label: '11月', checked: false , char: [4,29,37,49] },
-  { label: '12月', checked: false , char: [19,26,31,43,51] },
+  { label: '12月', checked: false , char: [19,26,31,43,51,56] },
 ]);
 
 let ctx, ctxAns, originHeight;
