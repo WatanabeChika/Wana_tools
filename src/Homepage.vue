@@ -1,6 +1,6 @@
 <template>
   <div class="homepage">
-    <img src="../public/images/logo.png" alt="Logo" class="logo">
+    <img src="/images/logo.png" alt="Logo" class="logo">
     <div class="description">
       <h1>这里是Wanakachi的工具小站</h1>
       <p>这里集合了各种实用 (?) 工具，请通过上方导航栏进行选择。</p>

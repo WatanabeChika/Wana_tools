@@ -41,7 +41,7 @@ const Items = ref([
 
 <template>
   <div id="navbar">
-      <img src="../public/favicon.ico" alt="logo" width="50" height="50" style="margin-right: 10px; margin-left: 10px;"
+      <img src="/favicon.ico" alt="logo" width="50" height="50" style="margin-right: 10px; margin-left: 10px;"
         @click="currentPage = Homepage" />
       <el-dropdown v-for="item in Items" :key="item.type">
           <el-button class="navbutton">
