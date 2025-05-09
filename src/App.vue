@@ -8,6 +8,8 @@ const currentPage = ref(Homepage);
 const imageItems = ref([
   { name: 'LoveLive', path: defineAsyncComponent(() => import('./ImageType/LoveLiveEditor.vue')) },
   { name: 'LLSS', path: defineAsyncComponent(() => import('./ImageType/LoveLiveSSEditor.vue')) },
+  { name: 'Matching', path: defineAsyncComponent(() => import('./ImageType/MatchingMemeEditor.vue')) },
+  { name: 'OshiGIF', path: defineAsyncComponent(() => import('./ImageType/GIFMemeEditor.vue')) },
 ]);
 
 const textItems = ref([
@@ -21,11 +23,6 @@ const CalcItems = ref([
   { name: 'Decomposition', path: defineAsyncComponent(() => import('./CalcType/SudokuComb.vue')) },
 ]);
 
-const memeItems = ref([
-  { name: 'Matching', path: defineAsyncComponent(() => import('./ImageType/MatchingMemeEditor.vue')) },
-  { name: 'OshiGIF', path: defineAsyncComponent(() => import('./ImageType/GIFMemeEditor.vue')) },
-]);
-
 const gameItems = ref([
   { name: 'Morse', path: defineAsyncComponent(() => import('./GameType/Morse.vue')) },
 ]);
@@ -35,7 +32,6 @@ const Items = ref([
   { type: 'Image', apps: imageItems },
   { type: 'Text', apps: textItems },
   { type: 'Calculation', apps: CalcItems },
-  { type: 'Meme', apps: memeItems },
   { type: 'Game', apps: gameItems },
 ]);
 
