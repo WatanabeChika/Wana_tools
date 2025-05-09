@@ -14,7 +14,7 @@
 - [x] 生成 [Leetspeak](https://en.wikipedia.org/wiki/Leet) 风格的文字
 - [x] 将带反斜杠的多行命令转换为一行，或反之
 - [x] 简易AI对话实现（需要密钥以使用API）
-- [] 将文字改造成 [Bionic Reading](https://bionic-reading.com/) 形式
+- [ ] 将文字改造成 [Bionic Reading](https://bionic-reading.com/) 形式
 
 ### 数学/计算类
 - [x] 限于1~45的和分解器
