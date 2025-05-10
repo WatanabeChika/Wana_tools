@@ -288,7 +288,7 @@ select {
   border-radius: 4px;
   background: white;
   font-size: 14px;
-  min-width: 320px;
+  min-width: 100px;
   max-width: 400px;
   white-space: normal;
 }

@@ -12,23 +12,6 @@
 </template>
 
 <style scoped>
-.homepage {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40px;
-  text-align: center;
-}
-
-.logo {
-  width: 1000px;
-  height: 312.5px;
-  margin-bottom: 10px;
-}
-
-.description {
-  max-width: 800px;
-}
 
 h1 {
   color: #2c3e50;
@@ -39,5 +22,22 @@ p {
   color: #666;
   line-height: 1.6;
   margin: 10px 0;
+}
+
+.homepage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  text-align: center;
+}
+
+.logo {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.description {
+  max-width: 800px;
 }
 </style>
