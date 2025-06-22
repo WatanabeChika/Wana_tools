@@ -3,93 +3,155 @@ import { ref, onMounted } from 'vue';
 
 // 24点计算函数
 function judgePoint24(nums) {
-  const EPSILON = 1e-6;
-  const results = new Set();
-  
-  function dfs(currentNums, currentExprs) {
-    if (currentNums.length === 1) {
-      if (Math.abs(currentNums[0] - 24) < EPSILON) {
-        const expr = currentExprs[0];
-        results.add(expr.startsWith('(') && expr.endsWith(')') ? expr.slice(1, -1) : expr);
-      }
-      return;
+    const EPSILON = 1e-6;
+    const exprMap = new Map(); // 存储表达式树结构的哈希值
+    const solutions = new Set(); // 最终结果集
+
+    function dfs(current) {
+        if (current.length === 1) {
+            if (Math.abs(current[0].value - 24) < EPSILON) {
+                const expr = current[0].expr;
+                // 去掉最外层冗余括号
+                const cleanExpr = expr.startsWith('(') && expr.endsWith(')') ? 
+                    expr.slice(1, -1) : expr;
+                // 计算表达式树哈希值
+                const hash = exprTreeHash(current[0]);
+                if (!exprMap.has(hash)) {
+                    exprMap.set(hash, true);
+                    solutions.add(cleanExpr);
+                }
+            }
+            return;
+        }
+
+        const n = current.length;
+        for (let i = 0; i < n; i++) {
+            for (let j = i + 1; j < n; j++) {
+                const next = [];
+                // 收集未被选中的元素
+                for (let k = 0; k < n; k++) {
+                    if (k !== i && k !== j) {
+                        next.push(current[k]);
+                    }
+                }
+
+                const a = current[i];
+                const b = current[j];
+                const newItems = [];
+
+                // 加法：标准化操作数顺序
+                const addExpr = `(${a.expr} + ${b.expr})`;
+                const addValue = a.value + b.value;
+                newItems.push({
+                    value: addValue,
+                    expr: addExpr,
+                    left: a,
+                    op: '+',
+                    right: b
+                });
+
+                // 减法：两种顺序
+                newItems.push({
+                    value: a.value - b.value,
+                    expr: `(${a.expr} - ${b.expr})`,
+                    left: a,
+                    op: '-',
+                    right: b
+                });
+                newItems.push({
+                    value: b.value - a.value,
+                    expr: `(${b.expr} - ${a.expr})`,
+                    left: b,
+                    op: '-',
+                    right: a
+                });
+
+                // 乘法：标准化操作数顺序
+                let multExprA = a.expr;
+                let multExprB = b.expr;
+                // 确保操作数按特定顺序排列
+                if (shouldSwap(a, b)) {
+                    [multExprA, multExprB] = [multExprB, multExprA];
+                }
+                const multExpr = `(${multExprA} * ${multExprB})`;
+                newItems.push({
+                    value: a.value * b.value,
+                    expr: multExpr,
+                    left: shouldSwap(a, b) ? b : a,
+                    op: '*',
+                    right: shouldSwap(a, b) ? a : b
+                });
+
+                // 除法：两种顺序
+                if (Math.abs(b.value) > EPSILON) {
+                    newItems.push({
+                        value: a.value / b.value,
+                        expr: `(${a.expr} / ${b.expr})`,
+                        left: a,
+                        op: '/',
+                        right: b
+                    });
+                }
+                if (Math.abs(a.value) > EPSILON) {
+                    newItems.push({
+                        value: b.value / a.value,
+                        expr: `(${b.expr} / ${a.expr})`,
+                        left: b,
+                        op: '/',
+                        right: a
+                    });
+                }
+
+                // 继续递归计算
+                for (const item of newItems) {
+                    next.push(item);
+                    dfs(next);
+                    next.pop();
+                }
+            }
+        }
     }
-    
-    const n = currentNums.length;
-    for (let i = 0; i < n; i++) {
-      for (let j = 0; j < n; j++) {
-        if (i === j) continue;
-        
-        const nextNums = [];
-        const nextExprs = [];
-        for (let k = 0; k < n; k++) {
-          if (k !== i && k !== j) {
-            nextNums.push(currentNums[k]);
-            nextExprs.push(currentExprs[k]);
-          }
+
+    // 判断是否需要交换操作数位置（标准化）
+    function shouldSwap(a, b) {
+        // 优先选择数值小的在前
+        if (Math.abs(a.value - b.value) > EPSILON) {
+            return a.value > b.value;
         }
-        
-        const a = currentNums[i];
-        const b = currentNums[j];
-        const expA = currentExprs[i];
-        const expB = currentExprs[j];
-        
-        // 加法
-        nextNums.push(a + b);
-        nextExprs.push(`(${expA} + ${expB})`);
-        dfs(nextNums, nextExprs);
-        nextNums.pop();
-        nextExprs.pop();
-        
-        // 减法（a - b）
-        nextNums.push(a - b);
-        nextExprs.push(`(${expA} - ${expB})`);
-        dfs(nextNums, nextExprs);
-        nextNums.pop();
-        nextExprs.pop();
-        
-        // 减法（b - a）
-        nextNums.push(b - a);
-        nextExprs.push(`(${expB} - ${expA})`);
-        dfs(nextNums, nextExprs);
-        nextNums.pop();
-        nextExprs.pop();
-        
-        // 乘法
-        nextNums.push(a * b);
-        nextExprs.push(`(${expA} × ${expB})`);
-        dfs(nextNums, nextExprs);
-        nextNums.pop();
-        nextExprs.pop();
-        
-        // 除法（a / b）
-        if (Math.abs(b) > EPSILON) {
-          nextNums.push(a / b);
-          nextExprs.push(`(${expA} ÷ ${expB})`);
-          dfs(nextNums, nextExprs);
-          nextNums.pop();
-          nextExprs.pop();
+        // 数值相同则选择表达式字符串小的在前
+        if (a.expr !== b.expr) {
+            return a.expr > b.expr;
         }
-        
-        // 除法（b / a）
-        if (Math.abs(a) > EPSILON) {
-          nextNums.push(b / a);
-          nextExprs.push(`(${expB} ÷ ${expA})`);
-          dfs(nextNums, nextExprs);
-          nextNums.pop();
-          nextExprs.pop();
-        }
-      }
+        // 表达式也相同则保持原顺序
+        return false;
     }
-  }
-  
-  const exprs = nums.map(num => num.toString());
-  dfs(nums, exprs);
-  
-  return {
-    isValid: results.size > 0,
-    solutions: Array.from(results)
-  };
+
+    // 计算表达式树的哈希值（用于识别相同思路）
+    function exprTreeHash(node) {
+        if (!node.left && !node.right) {
+            return node.value.toString();
+        }
+        const leftHash = exprTreeHash(node.left);
+        const rightHash = exprTreeHash(node.right);
+        // 对可交换运算标准化顺序
+        if (node.op === '+' || node.op === '*') {
+            return [node.op, leftHash < rightHash ? leftHash + rightHash : rightHash + leftHash].join(':');
+        }
+        return [node.op, leftHash, rightHash].join(':');
+    }
+
+    // 初始化节点
+    const nodes = nums.map(num => ({
+        value: num,
+        expr: num.toString()
+    }));
+
+    dfs(nodes);
+
+    return {
+        isValid: solutions.size > 0,
+        solutions: Array.from(solutions)
+    };
 }
 
 // 游戏状态
