@@ -25,6 +25,7 @@ const CalcItems = ref([
 
 const gameItems = ref([
   { name: 'Morse', path: defineAsyncComponent(() => import('./GameType/Morse.vue')) },
+  { name: '24', path: defineAsyncComponent(() => import('./GameType/24points.vue')) }
 ]);
 
 
