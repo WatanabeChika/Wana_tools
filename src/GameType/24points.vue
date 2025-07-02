@@ -383,7 +383,7 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: rgba(128,128,128,0.75);
   font-size: 2.5rem;
   font-weight: bold;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
