@@ -54,8 +54,18 @@ export var LoveLive_characters = [
     { label: '百生吟子'           , Eng: 'Ginko'    ,  color: "#a2d7dd",  birthday: "10月20日",  checked: false,  eye: false,},
     { label: '徒町小铃'           , Eng: 'Kosuzu'   ,  color: "#fad764",  birthday: "2月28日" ,  checked: false,  eye: false,},
     { label: '安养寺姬芽'         , Eng: 'Hime'     ,  color: "#9d8de2",  birthday: "9月24日" ,  checked: false,  eye: false,},
-    { label: '塞拉斯柳田利林菲尔德', Eng: 'Ceras'     ,  color: "#f56455",  birthday: "6月26日" ,  checked: false,  eye: false,},
-    { label: '桂城泉'             , Eng: 'Izumi'     ,  color: "#1ebecd",  birthday: "12月1日" ,  checked: false,  eye: false,},
+    { label: '塞拉斯柳田利林菲尔德', Eng: 'Ceras'    ,  color: "#f56455",  birthday: "6月26日" ,  checked: false,  eye: false,},
+    { label: '桂城泉'             , Eng: 'Izumi'    ,  color: "#1ebecd",  birthday: "12月1日" ,  checked: false,  eye: false,},
+    { label: '高桥波尔卡'         , Eng: 'Polka'    ,  color: "#ccb12e",  birthday: "8月18日" ,  checked: false,  eye: false,},
+    { label: '麻布麻衣'           , Eng: 'Mai'      ,  color: "#009fdf",  birthday: "2月13日" ,  checked: false,  eye: false,},
+    { label: '五桐玲'             , Eng: 'Akira'    ,  color: "#88d66e",  birthday: "7月9日" ,  checked: false,  eye: false,},
+    { label: '驹形花火'           , Eng: 'Hanabi'   ,  color: "#ff2021",  birthday: "6月11日" ,  checked: false,  eye: false,},
+    { label: '金泽奇迹'           , Eng: 'Miracle'  ,  color: "#ffb7f1",  birthday: "3月2日" ,  checked: false,  eye: false,},
+    { label: '调布乃理子'         , Eng: 'Noriko'   ,  color: "#ae62ff",  birthday: "4月4日" ,  checked: false,  eye: false,},
+    { label: '春宫悠可里'         , Eng: 'Yukuri'   ,  color: "#5ecbd1",  birthday: "9月22日" ,  checked: false,  eye: false,},
+    { label: '此花辉夜'           , Eng: 'Aurora'   ,  color: "#fd589e",  birthday: "1月3日" ,  checked: false,  eye: false,},
+    { label: '山田真绿'           , Eng: 'Midori'   ,  color: "#16b500",  birthday: "5月7日" ,  checked: false,  eye: false,},
+    { label: '佐佐木翔音'         , Eng: 'Shion'    ,  color: "#9b9b9b",  birthday: "11月11日" ,  checked: false,  eye: false,},
 ];
 
 export var LoveLive_groups = [
@@ -66,4 +76,30 @@ export var LoveLive_groups = [
     { label: 'Liella!', checked: false , char: [33,34,35,36,37,38,39,40,41,42,43]},
     { label: 'Sunny Passion', checked: false , char: [44, 45]},
     { label: '蓮ノ空', checked: false , char: [46,47,48,49,50,51,52,53,54,55,56]},
-  ]
+    { label: 'イキヅライブ', checked: false , char: [57,58,59,60,61,62,63,64,65,66]},
+]
+
+export var LoveLive_support_colors = [
+  { label: '蓝色系', checked: false , char: [1,3,13,18,23,24,34,37,43,47,52,56,58,63]},
+  { label: '红色系', checked: false , char: [5,12,27,39,49,55,60]},
+  { label: '黄色系', checked: false , char: [0,4,9,15,22,25,33,38,45,46,53,57]},
+  { label: '绿色系', checked: false , char: [7,11,28,30,36,40,48,59,65]},
+  { label: '紫色系', checked: false , char: [6,16,26,42,44,54,62]},
+  { label: '粉色系', checked: false , char: [8,10,17,21,32,35,41,50,61,64]},
+  { label: '白色系', checked: false , char: [2,14,19,29,31,51,66]},
+];
+
+export var LoveLive_character_birthdays = [
+  { label: '1月' , checked: false , char: [7,12,22,42,47,64] },
+  { label: '2月' , checked: false , char: [11,28,32,35,53,58] },
+  { label: '3月' , checked: false , char: [3,15,21,61] },
+  { label: '4月' , checked: false , char: [5,13,23,38,62] },
+  { label: '5月' , checked: false , char: [18,25,33,46,65] },
+  { label: '6月' , checked: false , char: [6,16,24,40,48,55,60] },
+  { label: '7月' , checked: false , char: [8,14,34,59] },
+  { label: '8月' , checked: false , char: [0,9,27,41,50,57] },
+  { label: '9月' , checked: false , char: [2,10,17,36,54,63] },
+  { label: '10月', checked: false , char: [1,30,39,52] },
+  { label: '11月', checked: false , char: [4,29,37,49,66] },
+  { label: '12月', checked: false , char: [19,26,31,43,51,56] },
+];
