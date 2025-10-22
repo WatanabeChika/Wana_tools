@@ -14,17 +14,18 @@ const tokenUsage = ref(0);
 const showToken = ref(false);
 const models = ref({
   'GLM-4-9B-0414 (free)': 'THUDM/GLM-4-9B-0414',
-  'DeepSeek-R1-Distill-Qwen-7B (free, inference)': 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B',
+  'DeepSeek-R1-0528-Qwen3-8B (free, inference)': 'deepseek-ai/DeepSeek-R1-0528-Qwen3-8B',
   'Qwen3-8B (free, inference)': 'Qwen/Qwen3-8B',
 
   'Pro-DeepSeek-R1 (¥16/M, inference, MoE, No bonus)': 'Pro/deepseek-ai/DeepSeek-R1',
-  'Pro-DeepSeek-V3 (¥8/M, inference, MoE, No bonus)': 'Pro/deepseek-ai/DeepSeek-V3',
+  'Pro-DeepSeek-V3.1-Terminus (¥12/M, inference, MoE, No bonus)': 'Pro/deepseek-ai/DeepSeek-V3.1-Terminus',
   'DeepSeek-R1 (¥16/M, inference, MoE)': 'deepseek-ai/DeepSeek-R1',
-  'DeepSeek-V3 (¥8/M, inference, MoE)': 'deepseek-ai/DeepSeek-V3',
+  'DeepSeek-V3.1-Terminus (¥12/M, inference, MoE)': 'deepseek-ai/DeepSeek-V3.1-Terminus',
 
-  'Qwen3-235B-A22B (¥5/M, inference, MoE)': 'Qwen/Qwen3-235B-A22B',
-  'Qwen3-30B-A3B (¥1.4/M, inference, MoE)': 'Qwen/Qwen3-30B-A3B',
-  'Qwen3-32B (¥2/M, inference)': 'Qwen/Qwen3-32B',
+  'GLM-4.6 (¥14/M, inference, MoE)': 'zai-org/GLM-4.6',
+
+  'Qwen3-Next-80B-A3B-Instruct (¥4/M, MoE)': 'Qwen/Qwen3-Next-80B-A3B-Instruct',
+  'Qwen3-Next-80B-A3B-Thinking (¥4/M, inference, MoE)': 'Qwen/Qwen3-Next-80B-A3B-Thinking',
 })
 
 const selectedModel = ref(Object.values(models.value)[0]);
