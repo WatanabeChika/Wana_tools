@@ -12,6 +12,7 @@ const character_color = ref(true);
 const character_birthday = ref(false);
 const character_icon = ref(false);
 const eye_color = ref(false);
+const black_and_white = ref(false);
 
 const Font1 = new FontFaceObserver('KaiTi');
 
@@ -103,7 +104,11 @@ async function update_canvas() {
     imgPath = basicPath + 'character_icons/';
     for (let i = 0; i < themeList.length; i++) {
       const img = await loadImage(imgPath + themeList[i].Eng + '.png');
+      if (black_and_white.value) {
+        ctx.filter = 'grayscale(100%)';
+      }
       ctx.drawImage(img, basicX + 570, basicY + i * 175 - 70, 130, 130);
+      ctx.filter = 'none';
     }
     imgPath = basicPath + 'characters/';
   }
@@ -296,6 +301,13 @@ const toggleCheck = (char) => {
       <div v-if="eye_color || character_icon" v-for="item in school_modes" :key="item.label">
         <label :for="item.label">{{ item.label }}</label>
         <input v-model="item.checked" type="checkbox" :id="item.label" @change="modesAdjust(school_modes)">
+      </div>
+    </div>
+    <div id="modes-settings" v-if="character_icon">
+      <span id="matching-hint">难度调整: </span>
+      <div>
+        <label for="black-and-white">黑白图标</label>
+        <input v-model="black_and_white" type="checkbox" id="black-and-white">
       </div>
     </div>
     <div id="button-container">
