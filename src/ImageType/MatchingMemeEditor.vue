@@ -10,6 +10,7 @@ const canvas_ans = ref(null);
 
 const character_color = ref(true);
 const character_birthday = ref(false);
+const character_icon = ref(false);
 const eye_color = ref(false);
 
 const Font1 = new FontFaceObserver('KaiTi');
@@ -31,11 +32,12 @@ const characters = ref(LoveLive_characters);
 const modeItems = ref([
   { name: '应援色', mark: character_color },
   { name: '生日'  , mark: character_birthday },
+  { name: '图标'  , mark: character_icon },
   { name: '瞳色'  , mark: eye_color },
 ]);
 
 let ctx, ctxAns, originHeight;
-let imgPath = basicPath + 'character_icons/';
+let imgPath = basicPath + 'characters/';
 
 
 // -------主要功能-------
@@ -95,6 +97,16 @@ async function update_canvas() {
       fillCanvasText(ctx, fontColor, normalFont, false, basicX + 640, basicY + i * 175, themeList[i].birthday);
     }
   }
+  // 图标 -> 图片
+  else if (character_icon.value) {
+    // 调整图片路径
+    imgPath = basicPath + 'character_icons/';
+    for (let i = 0; i < themeList.length; i++) {
+      const img = await loadImage(imgPath + themeList[i].Eng + '.png');
+      ctx.drawImage(img, basicX + 570, basicY + i * 175 - 70, 130, 130);
+    }
+    imgPath = basicPath + 'characters/';
+  }
   // 瞳色 -> 图片
   else if (eye_color.value) {
     // 调整图片路径
@@ -103,7 +115,7 @@ async function update_canvas() {
       const img = await loadImage(imgPath + themeList[i].Eng + '.png');
       ctx.drawImage(img, basicX + 570, basicY + i * 175 - 70, 130, 130);
     }
-    imgPath = basicPath + 'character_icons/';
+    imgPath = basicPath + 'characters/';
   }
   
 
@@ -190,6 +202,9 @@ const modesAdjust = (modes) => {
         if (character_birthday.value && characters.value[index].birthday == "暂无") {
           continue;
         }
+        if (character_icon.value && (!characters.value[index].icon)) {
+          continue;
+        }
         if (eye_color.value && (!characters.value[index].eye)) {
           continue;
         }
@@ -232,7 +247,11 @@ const toggleCheck = (char) => {
     school_modes.value[i].checked = false;
   }
   if (character_birthday.value && char.birthday == "暂无") {
-    alert("该角色暂无生日信息！");
+    alert("该角色暂无生日信息！"); // 高咲侑暂无生日信息
+    return;
+  }
+  if (character_icon.value && (!char.icon)) {
+    alert("该角色暂无图标信息！"); // 高咲侑暂无图标信息
     return;
   }
   if (eye_color.value && (!char.eye)) {
@@ -274,7 +293,7 @@ const toggleCheck = (char) => {
         <label :for="item.label">{{ item.label }}</label>
         <input v-model="item.checked" type="checkbox" :id="item.label" @change="modesAdjust(birthday_modes)">
       </div>
-      <div v-if="eye_color" v-for="item in school_modes" :key="item.label">
+      <div v-if="eye_color || character_icon" v-for="item in school_modes" :key="item.label">
         <label :for="item.label">{{ item.label }}</label>
         <input v-model="item.checked" type="checkbox" :id="item.label" @change="modesAdjust(school_modes)">
       </div>
