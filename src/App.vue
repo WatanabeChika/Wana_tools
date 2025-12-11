@@ -5,11 +5,15 @@ import Homepage from './Homepage.vue';
 
 const currentPage = ref(Homepage);
 
-const imageItems = ref([
+const loveliveItems = ref([
   { name: 'LoveLive', path: defineAsyncComponent(() => import('./ImageType/LoveLiveEditor.vue')) },
   { name: 'LLSS', path: defineAsyncComponent(() => import('./ImageType/LoveLiveSSEditor.vue')) },
   { name: 'Matching', path: defineAsyncComponent(() => import('./ImageType/MatchingMemeEditor.vue')) },
   { name: 'OshiGIF', path: defineAsyncComponent(() => import('./ImageType/GIFMemeEditor.vue')) },
+]);
+
+const ygoItems = ref([
+  { name: 'TypeGuess', path: defineAsyncComponent(() => import('./ImageType/YGOGuessingEditor.vue')) },
 ]);
 
 const textItems = ref([
@@ -31,7 +35,8 @@ const gameItems = ref([
 
 
 const Items = ref([
-  { type: 'Image', apps: imageItems },
+  { type: 'LoveLive', apps: loveliveItems },
+  { type: 'Yu-Gi-Oh', apps: ygoItems },
   { type: 'Text', apps: textItems },
   { type: 'Calculation', apps: CalcItems },
   { type: 'Game', apps: gameItems },

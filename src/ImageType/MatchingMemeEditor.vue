@@ -16,8 +16,9 @@ const black_and_white = ref(false);
 
 const Font1 = new FontFaceObserver('KaiTi');
 
-const titleFont = 'bold 50px KaiTi';
-const normalFont = '35px KaiTi';
+const baseFont = 'KaiTi';
+const titleFont = `bold 50px ${baseFont}`;
+const normalFont = `35px ${baseFont}`;
 const basicPath = 'images/'
 
 const bgColor = 'white';
@@ -122,7 +123,12 @@ async function update_canvas() {
     }
     imgPath = basicPath + 'characters/';
   }
-  
+
+  // 底部水印
+  ctx.fillStyle = '#999';
+  ctx.font = `14px ${baseFont}`;
+  ctx.textAlign = 'right';
+  ctx.fillText('Created by Wanakachi', canvas.value.width - 8, canvas.value.height - 10);
 
   // 连线（答案）
   ctxAns.drawImage(canvas.value, 0, 0);
