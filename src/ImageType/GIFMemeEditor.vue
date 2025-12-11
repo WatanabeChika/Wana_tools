@@ -35,9 +35,9 @@ let ctx, imgPath;
 async function update_canvas() {
   // 角色 or 声优
   if (anime.value) {
-    imgPath = basicPath + 'character_icons/';
+    imgPath = basicPath + 'characters/';
   } else {
-    imgPath = basicPath + 'seiyuu_icons/';
+    imgPath = basicPath + 'seiyuus/';
   }
 
   // 标题
