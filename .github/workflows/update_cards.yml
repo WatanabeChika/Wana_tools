@@ -1,0 +1,103 @@
+name: Update YGO Common Cards
+
+on:
+  # 北京/新加坡时间 10号和25号 凌晨03:00 = UTC时间 9号和24号 19:00
+  schedule:
+    - cron: '0 19 9,24 * *'
+  
+  # 手动触发
+  workflow_dispatch:
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+
+    steps:
+      # 1. 检出 B 仓库 (main 分支)
+      - name: Checkout Repository B
+        uses: actions/checkout@v4
+        with:
+          # 为了触发 deploy.yml，使用 PAT
+          token: ${{ secrets.GH_PAT }}
+
+      # 2. 检出 A 仓库 (获取脚本)
+      - name: Checkout Repository A
+        uses: actions/checkout@v4
+        with:
+          repository: WatanabeChika/scattered_scripts
+          path: script_repo
+
+      # 3. 环境准备
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      # 4. 运行脚本并移动结果
+      - name: Run script and move output
+        run: |
+          cd script_repo
+          python common_ygo_cards.py
+          cd ..
+          
+          # 创建文件夹并移动 JSON
+          mkdir -p public/cards
+          mv -f script_repo/common_cards.json public/cards/common_cards.json
+          
+          # 清理代码文件夹
+          rm -rf script_repo
+
+      # 5. 下载并解压 YGOPro Database
+      - name: Download and Extract YGOPro DB
+        run: |
+          echo "正在下载 cards.zip..."
+          # 下载文件重命名为 cards.zip
+          wget -q https://ygocdb.com/api/v0/cards.zip -O cards.zip
+          
+          echo "正在解压..."
+          # -o: 覆盖已存在文件
+          # -j: 不创建压缩包内的目录结构（虽然这个包本身只有一层）
+          # -d: 指定解压目录
+          unzip -o -j cards.zip cards.json -d public/cards/
+          
+          # 删除下载的压缩包
+          rm cards.zip
+          echo "cards.json 已部署到 public/cards/"
+
+      # 6. 更新 README.md 中的日期
+      - name: Update README date
+        run: |
+          # 获取当前日期，格式例如 2025.12.12
+          TODAY=$(date +"%Y.%m.%d")
+          
+          # 使用 sed 修改 README.md
+          sed -i "/看游戏王卡图猜种族/s/数据更新至 \*\*[0-9.]\+\*\*/数据更新至 **$TODAY**/" README.md
+          
+          echo "README 日期已更新为: $TODAY"
+
+      # 7. 提交所有更改
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          if [[ -n $(git status -s) ]]; then
+            echo "检测到文件更新，准备提交..."
+            
+            # 同时添加两个 json 文件和 README
+            git add public/cards/common_cards.json public/cards/cards.json README.md
+            
+            git commit -m "Auto-update: cards data and README date [skip ci]"
+            
+            # 拉取最新代码防止冲突，然后推送
+            git pull --rebase origin main
+            git push origin main
+          else
+            echo "没有变化，跳过提交。"
+          fi

@@ -24,16 +24,59 @@ const SUB_CATEGORIES = [
 const guessMode = ref('race'); 
 const rows = ref(3);
 const cols = ref(4);
+const useCommonCards = ref(false);
 const loading = ref(false);
+const dataLoading = ref(true);
 const generated = ref(false);
 
-const canvasVisible = ref(null); // 可见的画布（题目）
-const canvasHidden = ref(null);  // 隐藏的画布（答案）
+const canvasVisible = ref(null); 
+const canvasHidden = ref(null);  
+
+// 缓存数据池
+let poolMonster = [];
+let poolSpell = [];
+let poolTrap = [];
+let poolAll = [];
+let commonCardIds = new Set();
 
 // 字体加载
 const Font1 = new FontFaceObserver('KaiTi');
 onMounted(async () => {
-  await Promise.all([Font1.check()]);
+  const fontPromise = Font1.check();
+  
+  // 1. 预加载卡片数据
+  const dataPromise = fetch('cards/cards.json')
+    .then(res => res.json())
+    .then(raw => {
+      const dataSource = raw.default || raw;
+      const allCards = Object.values(dataSource);
+      poolAll = allCards;
+
+      poolMonster = allCards.filter(c => c.text && c.text.types && c.text.types.includes('怪兽'));
+      poolSpell = allCards.filter(c => c.text && c.text.types && c.text.types.includes('魔法'));
+      poolTrap = allCards.filter(c => c.text && c.text.types && c.text.types.includes('陷阱'));
+    });
+
+  // 2. 新增：预加载常用卡ID数据
+  const commonDataPromise = fetch('cards/common_cards.json')
+    .then(res => res.json())
+    .then(data => {
+      const ids = data.default || data;
+      // 转换为 Set 方便快速查找 (确保 ID 类型一致，通常 ID 为数字)
+      commonCardIds = new Set(ids.map(id => Number(id)));
+    })
+    .catch(err => {
+      console.warn("常用卡数据加载失败", err);
+      // 即使加载失败也不阻塞主流程，只是该功能不可用
+    });
+
+  try {
+    await Promise.all([fontPromise, dataPromise, commonDataPromise]);
+    dataLoading.value = false;
+  } catch (err) {
+    console.error("初始化失败", err);
+    alert("数据加载发生错误，请刷新重试");
+  }
 });
 
 // --- 核心逻辑 ---
@@ -107,20 +150,33 @@ const getCardAnswer = (card) => {
 
 // 获取符合条件的随机卡片
 const getRandomCards = async () => {
-  const cardDataRaw = await (await fetch('cards.json')).json();
-  const dataSource = cardDataRaw.default || cardDataRaw;
-  const allCards = Object.values(dataSource);
-
-  let filtered = [];
-  
-  if (guessMode.value === 'category' || guessMode.value === 'subcategory') {
-    filtered = allCards;
-  } else {
-    filtered = allCards.filter(c => c.text && c.text.types && c.text.types.includes('怪兽'));
+  if (dataLoading.value) {
+    alert("数据正在初始化，请稍后再试...");
+    return [];
   }
 
-  const shuffled = shuffleLogArray([...filtered]);
-  return shuffled[0].slice(0, rows.value * cols.value);
+  let sourcePool = [];
+
+  // 1. 根据模式选择基础池
+  if (guessMode.value === 'category') {
+    sourcePool = poolAll;
+  } else if (guessMode.value === 'subcategory') {
+    sourcePool = poolAll;
+  } else {
+    // 种族 或 属性 -> 只猜怪兽
+    sourcePool = poolMonster;
+  }
+
+  // 2. 新增：如果勾选了“只看常用卡”，进行二次筛选
+  if (useCommonCards.value) {
+    // 过滤出 ID 存在于 commonCardIds 中的卡片
+    // 注意类型转换，确保比较时都是数字
+    sourcePool = sourcePool.filter(c => commonCardIds.has(Number(c.id)));
+  }
+
+  // 3. 随机打乱
+  const shuffled = shuffleLogArray([...sourcePool], false);
+  return shuffled.slice(0, rows.value * cols.value);
 };
 
 // 组件内部的自动换行文本绘制函数
@@ -177,7 +233,12 @@ const handleGenerate = async () => {
     const cards = await getRandomCards();
     if (cards.length === 0) {
         loading.value = false;
-        alert("未找到数据");
+        // 如果开启了常用卡筛选但没有结果，提示用户可能筛选过严
+        if (useCommonCards.value) {
+          alert("未找到符合条件的常用卡数据");
+        } else {
+          alert("未找到数据");
+        }
         return;
     }
     
@@ -200,7 +261,6 @@ const handleGenerate = async () => {
           img, 
           isPendulum, 
           answer: getCardAnswer(card),
-          // 新增：优先使用中文名，其次日文名
           name: card.cn_name || card.jp_name || '未知卡名'
         };
       } catch (e) {
@@ -237,7 +297,6 @@ const draw = (canvas, cardImages, optionsList, showAnswer) => {
   const gapX = 20;
   const gapY = 60; 
   
-  // 保持 KaiTi 字体
   const baseFont = 'KaiTi';
   const headerFontSize = 48;
   const optionFontSize = 28;
@@ -296,7 +355,7 @@ const draw = (canvas, cardImages, optionsList, showAnswer) => {
   // 5. 绘制选项列表
   ctx.font = `${optionFontSize}px ${baseFont}`;
   ctx.textAlign = 'left';
-  ctx.textBaseline = 'alphabetic'; // 显式重置基线
+  ctx.textBaseline = 'alphabetic'; 
   ctx.fillStyle = '#333';
   const optionsBottomY = drawTextWrapped(ctx, optionStr, margin, margin + headerHeight, contentWidth, optionFontSize + 15);
 
@@ -354,40 +413,35 @@ const draw = (canvas, cardImages, optionsList, showAnswer) => {
       const indexText = index !== -1 ? `${index + 1}.` : '';
       ctx.fillText(`( ${indexText}${item.answer} )`, centerX, bracketY);
 
-      // 绘制卡名覆盖层
       if (item.name) {
-        ctx.save(); // 保存当前状态，防止影响下一次循环
+        ctx.save(); 
 
         const nameFontSize = 24;
-        // 必须先设置字体，measureText 才能准确计算
         ctx.font = `bold ${nameFontSize}px ${baseFont}`;
         
         let textWidth = ctx.measureText(item.name).width;
-        const maxNameWidth = cardW - 10; // 左右留5px padding
+        const maxNameWidth = cardW - 10; 
         let actualFontSize = nameFontSize;
         
-        // 自动缩放字体
         if (textWidth > maxNameWidth) {
            const ratio = maxNameWidth / textWidth;
            actualFontSize = Math.floor(nameFontSize * ratio);
-           ctx.font = `bold ${actualFontSize}px ${baseFont}`; // 应用新字体大小
+           ctx.font = `bold ${actualFontSize}px ${baseFont}`; 
            textWidth = maxNameWidth;
         }
 
         const boxHeight = actualFontSize + 14; 
         const boxY = y + 256 - boxHeight; 
         
-        // 绘制半透明背景
         ctx.fillStyle = 'rgba(0, 0, 0, 0.65)';
         ctx.fillRect(x, boxY, cardW, boxHeight);
 
-        // 绘制白色文字
         ctx.fillStyle = '#fff';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle'; 
         ctx.fillText(item.name, x + cardW / 2, boxY + boxHeight / 2);
 
-        ctx.restore(); // 恢复状态
+        ctx.restore(); 
       }
 
     } else {
@@ -440,9 +494,16 @@ const download = (isAnswer) => {
       </div>
     </div>
 
+    <div id="modes-settings">
+      <span id="matching-hint">筛选设置: </span>
+      <div>
+        <label><input type="checkbox" v-model="useCommonCards"> 只看常用卡</label>
+      </div>
+    </div>
+
     <div id="button-container">
-      <button @click="handleGenerate" :disabled="loading" class="btns primary-btn">
-        {{ loading ? '生成中...' : '绘制图片' }}
+      <button @click="handleGenerate" :disabled="loading || dataLoading" class="btns primary-btn">
+        {{ dataLoading ? '数据初始化...' : (loading ? '生成中...' : '绘制图片') }}
       </button>
       <button @click="download(false)" :disabled="!generated" class="btns download-btn">下载图片</button>
       <button @click="download(true)" :disabled="!generated" class="btns download-btn">下载答案</button>
@@ -456,8 +517,11 @@ const download = (isAnswer) => {
 
   <div id="notice">
     <p>注意：数据更新至 2025.12.11。</p>
-    <p>图片及数据来源：
+    <p>卡图及卡片数据来源：
       <a href="https://ygocdb.com">百鸽</a>
+    </p>
+    <p>常用卡统计来源：
+      <a href="https://mycard.world/ygopro/arena/index.html">MCPro 决斗数据库</a>
     </p>
     <p>种族/属性/种类信息摘自：
       <a href="https://zh.wikipedia.org/wiki/%E9%81%8A%E6%88%B2%E7%8E%8B%E9%9B%86%E6%8F%9B%E7%B4%99%E7%89%8C%E9%81%8A%E6%88%B2">游戏王中文维基</a>
@@ -485,6 +549,12 @@ label {
 input[type="radio"] {
   display: inline-block;
   margin-right: 5px;
+}
+
+input[type="checkbox"] {
+  display: inline-block;
+  margin-right: 5px;
+  vertical-align: middle;
 }
 
 .radio-group label {

@@ -44,7 +44,7 @@ export function loadImage(src) {
 }
 
 // func: 打乱数组并记录相对位置
-export function shuffleLogArray(originArray) {
+export function shuffleLogArray(originArray, saveRelativePositions) {
     let array = originArray.slice();
     let relativePositions = [];
     for (let i = array.length - 1; i > 0; i--) {
@@ -52,6 +52,9 @@ export function shuffleLogArray(originArray) {
       // 交换元素
       [array[i], array[j]] = [array[j], array[i]];
     } 
+    if (!saveRelativePositions) {
+        return array;
+    }
     for (let i = 0; i < originArray.length; i++) {
         const element = originArray[i];
         relativePositions.push([i, array.indexOf(element)]);      

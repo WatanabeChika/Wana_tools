@@ -85,7 +85,7 @@ async function update_canvas() {
   }
 
   // 右半部分
-  const [themeList, relation] = shuffleLogArray(charList);
+  const [themeList, relation] = shuffleLogArray(charList, true);
   // 应援色 -> 色块
   if (character_color.value) {
     for (let i = 0; i < themeList.length; i++) {
