@@ -237,15 +237,6 @@ const update_settings = (item) => {
   empty_char();
 };
 
-// 角色表格填充
-const chunkedOptions = () => {
-  const chunked = [];
-  for (let i = 0; i < characters.value.length; i += 7) {
-    chunked.push(characters.value.slice(i, i + 7));
-  }
-  return chunked;
-};
-
 // 角色表格选择
 const toggleCheck = (char) => {
   for (let i = 0; i < color_modes.value.length; i++) {
@@ -258,11 +249,11 @@ const toggleCheck = (char) => {
     school_modes.value[i].checked = false;
   }
   if (character_birthday.value && char.birthday == "暂无") {
-    alert("该角色暂无生日信息！"); // 高咲侑暂无生日信息
+    alert("该角色暂无生日信息！");  // 高咲侑暂无生日信息
     return;
   }
   if (character_icon.value && (!char.icon)) {
-    alert("该角色暂无图标信息！"); // 高咲侑暂无图标信息
+    alert("该角色暂无图标信息！");  // 高咲侑暂无图标信息
     return;
   }
   if (eye_color.value && (!char.eye)) {
@@ -278,69 +269,90 @@ const toggleCheck = (char) => {
 
 
 <template>
-  <h1>LoveLive!连线梗图制作器</h1>
-  <div id="input-container">
-    <div id="modes-settings">
-      <span id="matching-hint">主题选择: </span>
-      <div v-for="item in modeItems" :key="item.name">
-        <label :for="item.name">{{ item.name }}</label>
-        <input type="radio" name="check" :checked="item.mark" :value="item.mark" :id="item.name" @change="update_settings(item)">
+  <div class="page-container">
+    <h1>LoveLive!连线梗图制作器</h1>
+    <div id="input-container">
+      <div id="modes-settings">
+        <span id="matching-hint">主题选择: </span>
+        <div class="radio-group">
+          <div v-for="item in modeItems" :key="item.name" class="radio-item">
+            <input type="radio" name="check" :checked="item.mark" :value="item.mark" :id="item.name" @change="update_settings(item)">
+            <label :for="item.name">{{ item.name }}</label>
+          </div>
+        </div>
       </div>
-    </div>
-    <table>
-      <tr v-for="row in chunkedOptions()" :key="row[0].label">
-        <td v-for="char in row" :key="char.label" :class="{ character_selected: char.checked }" @click="toggleCheck(char)">
+
+      <div class="character-grid">
+        <div 
+          v-for="char in characters" 
+          :key="char.label" 
+          class="grid-item"
+          :class="{ character_selected: char.checked }" 
+          @click="toggleCheck(char)"
+        >
           {{ char.label }}
-        </td>
-      </tr>
-    </table>
-    <div id="modes-settings">
-      <span id="matching-hint">快捷选项: </span>
-      <div v-if="character_color" v-for="item in color_modes" :key="item.label">
-        <label :for="item.label">{{ item.label }}</label>
-        <input v-model="item.checked" type="checkbox" :id="item.label" @change="modesAdjust(color_modes)">
+        </div>
       </div>
-      <div v-if="character_birthday" v-for="item in birthday_modes" :key="item.label">
-        <label :for="item.label">{{ item.label }}</label>
-        <input v-model="item.checked" type="checkbox" :id="item.label" @change="modesAdjust(birthday_modes)">
+
+      <div id="modes-settings">
+        <span id="matching-hint">快捷选项: </span>
+        <div class="checkbox-group">
+          <div v-if="character_color" v-for="item in color_modes" :key="item.label" class="checkbox-item">
+            <input v-model="item.checked" type="checkbox" :id="item.label" @change="modesAdjust(color_modes)">
+            <label :for="item.label">{{ item.label }}</label>
+          </div>
+          <div v-if="character_birthday" v-for="item in birthday_modes" :key="item.label" class="checkbox-item">
+            <input v-model="item.checked" type="checkbox" :id="item.label" @change="modesAdjust(birthday_modes)">
+            <label :for="item.label">{{ item.label }}</label>
+          </div>
+          <div v-if="eye_color || character_icon" v-for="item in school_modes" :key="item.label" class="checkbox-item">
+            <input v-model="item.checked" type="checkbox" :id="item.label" @change="modesAdjust(school_modes)">
+            <label :for="item.label">{{ item.label }}</label>
+          </div>
+        </div>
       </div>
-      <div v-if="eye_color || character_icon" v-for="item in school_modes" :key="item.label">
-        <label :for="item.label">{{ item.label }}</label>
-        <input v-model="item.checked" type="checkbox" :id="item.label" @change="modesAdjust(school_modes)">
+
+      <div id="modes-settings" v-if="character_icon">
+        <span id="matching-hint">难度调整: </span>
+        <div>
+          <input v-model="black_and_white" type="checkbox" id="black-and-white">
+          <label for="black-and-white">黑白图标</label>
+        </div>
+      </div>
+
+      <div id="button-container">
+        <button @click="update_canvas" class="btns primary-btn">绘制图片</button>
+        <button @click="empty_char" class="btns reset-btn">清空选择</button>
+        <button @click="downloadImage" class="btns download-btn">下载图片</button>
+        <button @click="downloadAnswer" class="btns download-btn">下载答案</button>
       </div>
     </div>
-    <div id="modes-settings" v-if="character_icon">
-      <span id="matching-hint">难度调整: </span>
-      <div>
-        <label for="black-and-white">黑白图标</label>
-        <input v-model="black_and_white" type="checkbox" id="black-and-white">
-      </div>
+
+    <div id="canvas-container">
+      <canvas id="art-canvas" ref="canvas" width="1000" height="200"></canvas>
+      <canvas id="art-canvas-ans" ref="canvas_ans" width="1000" height="200" style="display: none"></canvas>
     </div>
-    <div id="button-container">
-      <button @click="update_canvas" class="btns" style="background-color: cornflowerblue;">绘制图片</button>
-      <button @click="empty_char" class="btns" style="background-color: gray;">清空选择</button>
-      <button @click="downloadImage" class="btns">下载图片</button>
-      <button @click="downloadAnswer" class="btns">下载答案</button>
+
+    <div id="notice">
+      <p>注意：某些角色数据有相应缺失，选择时会做提醒。</p>
+      <p>应援色和生日数据来源：
+        <a href="https://llwiki.org/">LLWiki</a>
+      </p>
+      <p>瞳色数据来源：
+        <a href="https://twitter.com/makoteau/status/1704457996808437882">@makoteau</a>
+      </p>
     </div>
-  </div>
-  <div id="canvas-container">
-    <canvas id="art-canvas" ref="canvas" width="1000" height="200"></canvas>
-    <canvas id="art-canvas-ans" ref="canvas_ans" width="1000" height="200" style="display: none"></canvas>
-  </div>
-  <div id="notice">
-    <p>注意：某些角色数据有相应缺失，选择时会做提醒。</p>
-    <p>应援色和生日数据来源：
-      <a href="https://llwiki.org/">LLWiki</a>
-    </p>
-    <p>瞳色数据来源：
-      <a href="https://twitter.com/makoteau/status/1704457996808437882">@makoteau</a>
-    </p>
   </div>
 </template>
 
 
 
 <style scoped>
+.page-container {
+  padding: 10px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
 
 h1 {
   font-family: sans-serif;
@@ -349,44 +361,105 @@ h1 {
   margin-bottom: 50px;
 }
 
+/* 角色网格布局 */
+.character-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));
+  grid-auto-rows: 55px; 
+  gap: 0;
+  width: 100%;
+  margin-bottom: 30px;
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  
+  background-image: repeating-linear-gradient(
+    to bottom,
+    #f9f9f9 0px,
+    #f9f9f9 55px, 
+    #ffffff 55px,
+    #ffffff 110px  
+  );
+}
+
+.grid-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  padding: 0 4px;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  
+  line-height: 1.2; 
+  user-select: none;
+  background-color: transparent; 
+}
+
+.character_selected {
+  background-color: aquamarine !important;
+}
+
 label {
   display: inline-block;
-  margin-bottom: 10px;
-  margin-left: 10px;
-  font-weight: 600;
+  margin-left: 5px;
+  font-weight: 500;
 }
 
-input[type="radio"] {
-  display: inline-block;
-  margin-right: 30px;
+input[type="radio"], input[type="checkbox"] {
+  vertical-align: middle;
 }
 
-input[type="checkbox"] {
-  display: inline-block;
-  margin-bottom: 10px;
-  margin-right: 30px;
-}
-
-table {
+#input-container {
   width: 100%;
-  border-collapse: collapse;
-  text-align: center;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+#modes-settings {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 600px) {
+  #modes-settings {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+#matching-hint {
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-right: 5px;
+  min-width: 80px;
+}
+
+.radio-group, .checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.radio-item, .checkbox-item {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+  margin-bottom: 5px;
+}
+
+#button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  gap: 20px;
   margin-bottom: 30px;
 }
 
-td {
-  width: 14.28%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  cursor: pointer;
-}
-
-tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
 button {
-  background-color: #28a745;
+  flex: 0 0 auto;
   color: #fff;
   padding: 9px 13px;
   font-size: 16px;
@@ -395,59 +468,31 @@ button {
   cursor: pointer;
 }
 
-p {
-  font-family: sans-serif;
-  color: rgba(128,128,128,0.75);
-  text-align: left;
-}
-
-
-
-#input-container {
-  width: 100%;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-#modes-settings {
-  display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-}
-
-#matching-hint {
-  margin-right: 25px;
-  margin-bottom: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#button-container {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 30px;
-}
+.primary-btn { background-color: cornflowerblue; }
+.reset-btn { background-color: gray; }
+.download-btn { background-color: #28a745; }
 
 #canvas-container {
-  position: relative;
-  margin-bottom: 20px;
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+}
+
+canvas {
+  max-width: 100%;
+  height: auto !important;
 }
 
 #notice {
   width: 100%;
   text-align: left;
   margin-top: 30px;
+  font-size: 12px;
 }
 
-.btns {
-  margin-right: 20px;
+p {
+  font-family: sans-serif;
+  color: rgba(128,128,128,0.75);
+  margin: 5px 0;
 }
-
-.character_selected {
-  background-color: aquamarine;
-}
-
 </style>

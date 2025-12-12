@@ -210,7 +210,7 @@ h1 {
 
 label {
   display: inline-block;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   margin-left: 10px;
   font-weight: 600;
 }
@@ -226,7 +226,7 @@ input[type="text"] {
   font-size: 14px;
   border: 1px solid #d1d5da;
   border-radius: 4px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   width: 100%;
   box-sizing: border-box;
 }
@@ -239,6 +239,7 @@ button {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin-bottom: 20px;
 }
 
 button:hover {
@@ -283,6 +284,7 @@ p {
   width: 100%;
   text-align: left;
   margin-top: 30px;
+  font-size: 12px;
 }
 
 </style>

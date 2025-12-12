@@ -2,20 +2,20 @@
 import { ref, onMounted } from 'vue'
 import FontFaceObserver from 'font-face-observer';
 import { createGIF } from 'gifshot'
-import { fillCanvasText, loadImage, shuffleLogArray } from './utils';
+import { fillCanvasText, loadImage } from './utils';
 import { LoveLive_characters, LoveLive_groups } from './data';
 
+// ------- 变量声明 -------
 const canvas = ref(null);
 const images = ref([]);
 const loading = ref(false);
+const resultGif = ref(null);
 
 const anime = ref(true);
 const seiyuu = ref(false);
 
 const Font1 = new FontFaceObserver('KaiTi');
-
 const titleFont = 'bold 50px KaiTi';
-const normalFont = '35px KaiTi';
 const basicPath = 'images/'
 
 const bgColor = 'white';
@@ -32,6 +32,8 @@ const modeItems = ref([
 
 let ctx, imgPath;
 
+// ------- 主要逻辑 -------
+
 async function update_canvas() {
   // 角色 or 声优
   if (anime.value) {
@@ -42,9 +44,9 @@ async function update_canvas() {
 
   // 标题
   fillCanvasText(ctx, fontColor, titleFont, false, 210, 75, titleText);
-  if (document.getElementById("image-container").getElementsByTagName("img").length > 0){
-    document.getElementById("image-container").removeChild(document.getElementById("image-container").getElementsByTagName("img")[0]);
-  }
+  
+  // 清空之前的图片状态
+  resultGif.value = null; 
   images.value = [];
   loading.value = true;
 
@@ -62,6 +64,13 @@ async function update_canvas() {
       ctx.fillRect(48, 130, canvas.value.width, canvas.value.height);
     }
   }
+  
+  if (images.value.length === 0) {
+    loading.value = false;
+    alert("请至少选择一个角色！");
+    return;
+  }
+  
   create();
 }
 
@@ -73,28 +82,25 @@ const create = () => {
     'gifHeight': canvas.value.height,
     }, function(obj) {
     if(!obj.error) {
-      var image = obj.image,
-      animatedImage = document.createElement('img');
-      animatedImage.src = image;
       loading.value = false;
-      document.getElementById("image-container").appendChild(animatedImage);
+      // 修改点：直接将生成的 Base64 赋值给响应式变量，而非操作 DOM
+      resultGif.value = obj.image; 
     }
   })
 };
 
 // 下载图片
 function downloadImage() {
-  const dataURL = document.getElementById("image-container").getElementsByTagName("img")[0].src;
+  if (!resultGif.value) return;
+
   const downloadLink = document.createElement('a');
-
-  downloadLink.href = dataURL;
+  downloadLink.href = resultGif.value;
   downloadLink.download = `今天单推谁.gif`;
-
   downloadLink.click();
 }
 
 
-// -------事件侦听-------
+// ------- 事件侦听 -------
 // 初始化
 onMounted(async () => {
   try {
@@ -115,15 +121,16 @@ const empty_char = () => {
   for (let i = 0; i < school_modes.value.length; i++) {
     school_modes.value[i].checked = false;
   }
+  resultGif.value = null; // 同时清空结果图
 };
 
 // 快捷勾选
 const modesAdjust = (modes) => {
-  // 清空
+  // 先清空
   for (let i = 0; i < characters.value.length; i++) {
     characters.value[i].checked = false;
   }
-  // 勾选
+  // 再勾选
   for (let i = 0; i < modes.length; i++) {
     if (modes[i].checked) {
       for (let j = 0; j < modes[i].char.length; j++) {
@@ -146,18 +153,9 @@ const update_settings = (item) => {
   empty_char();
 };
 
-
-// 角色表格填充
-const chunkedOptions = () => {
-  const chunked = [];
-  for (let i = 0; i < characters.value.length; i += 7) {
-    chunked.push(characters.value.slice(i, i + 7));
-  }
-  return chunked;
-};
-
 // 角色表格选择
 const toggleCheck = (char) => {
+  // 点击单个角色时，取消所有快捷分组的勾选状态，避免逻辑冲突
   for (let i = 0; i < school_modes.value.length; i++) {
     school_modes.value[i].checked = false;
   }
@@ -167,42 +165,69 @@ const toggleCheck = (char) => {
 </script>
 
 <template>
+  <div class="page-container">
     <h1>"今天单推谁"GIF生成器</h1>
     <div id="input-container">
+      
       <div id="modes-settings">
         <span id="matching-hint">类型选择: </span>
-        <div v-for="item in modeItems" :key="item.name">
-          <label :for="item.name">{{ item.name }}</label>
-          <input type="radio" name="check" :checked="item.mark" :value="item.mark" :id="item.name" @change="update_settings(item)">
+        <div class="radio-group">
+          <div v-for="item in modeItems" :key="item.name" class="radio-item">
+            <input type="radio" name="check" :checked="item.mark" :value="item.mark" :id="item.name" @change="update_settings(item)">
+            <label :for="item.name">{{ item.name }}</label>
+          </div>
         </div>
       </div>
-      <table>
-        <tr v-for="row in chunkedOptions()" :key="row[0].label">
-            <td v-for="char in row" :key="char.label" :class="{ character_selected: char.checked }" @click="toggleCheck(char)">
-            {{ char.label }}
-            </td>
-        </tr>
-      </table>
+
+      <div class="character-grid">
+        <div 
+          v-for="char in characters" 
+          :key="char.label" 
+          class="grid-item"
+          :class="{ character_selected: char.checked }" 
+          @click="toggleCheck(char)"
+        >
+          {{ char.label }}
+        </div>
+      </div>
+
       <div id="modes-settings">
         <span id="matching-hint">快捷选项: </span>
-        <div v-for="item in school_modes" :key="item.label">
-          <label :for="item.label">{{ item.label }}</label>
-          <input v-model="item.checked" type="checkbox" :id="item.label" @change="modesAdjust(school_modes)">
+        <div class="checkbox-group">
+          <div v-for="item in school_modes" :key="item.label" class="checkbox-item">
+            <input v-model="item.checked" type="checkbox" :id="item.label" @change="modesAdjust(school_modes)">
+            <label :for="item.label">{{ item.label }}</label>
+          </div>
         </div>
       </div>
+
       <div id="button-container">
-        <button @click="update_canvas" class="btns" style="background-color: cornflowerblue;">绘制GIF图</button>
-        <button @click="empty_char" class="btns" style="background-color: gray;">清空选择</button>
-        <button @click="downloadImage" class="btns">下载GIF图</button>
+        <button @click="update_canvas" class="btns primary-btn">绘制GIF图</button>
+        <button @click="empty_char" class="btns reset-btn">清空选择</button>
+        <button @click="downloadImage" class="btns download-btn">下载GIF图</button>
       </div>
     </div>
-    <div id="image-container">
+
+    <div id="image-container-wrapper">
       <canvas id="GIF-canvas" ref="canvas" width="400" height="500" style="display: none;"></canvas>
-      <span v-if="loading" style="text-align: center">生成中······</span>
+      
+      <span v-if="loading" style="text-align: center; display: block; margin: 20px 0;">生成中······</span>
+      
+      <div v-if="resultGif" class="result-box">
+        <img :src="resultGif" class="generated-gif" alt="Result GIF" />
+      </div>
     </div>
+
+  </div>
 </template>
 
 <style scoped>
+/* 全局容器 */
+.page-container {
+  padding: 10px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
 
 h1 {
   font-family: sans-serif;
@@ -211,44 +236,105 @@ h1 {
   margin-bottom: 50px;
 }
 
+/* 角色网格布局 */
+.character-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));
+  grid-auto-rows: 55px; 
+  gap: 0;
+  width: 100%;
+  margin-bottom: 30px;
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  
+  background-image: repeating-linear-gradient(
+    to bottom,
+    #f9f9f9 0px,
+    #f9f9f9 55px, 
+    #ffffff 55px,
+    #ffffff 110px  
+  );
+}
+
+.grid-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  line-height: 1.2; 
+  user-select: none;
+  background-color: transparent; 
+}
+
+.character_selected {
+  background-color: aquamarine !important;
+}
+
+/* 输入控件样式 */
 label {
   display: inline-block;
-  margin-bottom: 10px;
-  margin-left: 10px;
-  font-weight: 600;
+  margin-left: 5px;
+  font-weight: 500;
 }
 
-input[type="radio"] {
-  display: inline-block;
-  margin-right: 30px;
+input[type="radio"], input[type="checkbox"] {
+  vertical-align: middle;
 }
 
-input[type="checkbox"] {
-  display: inline-block;
-  margin-bottom: 10px;
-  margin-right: 30px;
-}
-
-table {
+#input-container {
   width: 100%;
-  border-collapse: collapse;
-  text-align: center;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+#modes-settings {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 600px) {
+  #modes-settings {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+#matching-hint {
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-right: 5px;
+  min-width: 80px;
+}
+
+.radio-group, .checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.radio-item, .checkbox-item {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+  margin-bottom: 5px;
+}
+
+/* 按钮样式 */
+#button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  gap: 20px;
   margin-bottom: 30px;
 }
 
-td {
-  width: 14.28%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  cursor: pointer;
-}
-
-tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
 button {
-  background-color: #28a745;
+  flex: 0 0 auto;
   color: #fff;
   padding: 9px 13px;
   font-size: 16px;
@@ -257,40 +343,27 @@ button {
   cursor: pointer;
 }
 
-#input-container {
+.primary-btn { background-color: cornflowerblue; }
+.reset-btn { background-color: gray; }
+.download-btn { background-color: #28a745; }
+
+/* 结果展示区关键样式 */
+#image-container-wrapper {
   width: 100%;
+  text-align: center;
+  padding-bottom: 50px;
+}
+
+.result-box {
+  display: inline-block;
+  max-width: 100%;
+}
+
+.generated-gif {
+  max-width: 100%;
   height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-#modes-settings {
-  display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-}
-
-#matching-hint {
-  margin-right: 25px;
-  margin-bottom: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#button-container {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 30px;
-}
-
-.btns {
-  margin-right: 20px;
-}
-
-.character_selected {
-  background-color: aquamarine;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border-radius: 4px;
 }
 
 </style>

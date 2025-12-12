@@ -351,11 +351,11 @@ const download = (isAnswer) => {
     </div>
 
     <div id="button-container">
-      <button @click="handleGenerate" :disabled="loading" class="btns" style="background-color: cornflowerblue;">
+      <button @click="handleGenerate" :disabled="loading" class="btns primary-btn">
         {{ loading ? '生成中...' : '绘制图片' }}
       </button>
-      <button @click="download(false)" :disabled="!generated" class="btns">下载图片</button>
-      <button @click="download(true)" :disabled="!generated" class="btns">下载答案</button>
+      <button @click="download(false)" :disabled="!generated" class="btns download-btn">下载图片</button>
+      <button @click="download(true)" :disabled="!generated" class="btns download-btn">下载答案</button>
     </div>
   </div>
 
@@ -388,7 +388,7 @@ label {
   display: inline-block;
   margin-bottom: 10px;
   margin-left: 10px;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
 }
 
@@ -398,19 +398,21 @@ input[type="radio"] {
 }
 
 .radio-group label {
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .num-input {
   width: 50px;
   padding: 5px;
-  margin: 0 5px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
 button {
-  background-color: #28a745;
+  flex: 0 0 auto;
   color: #fff;
   padding: 9px 13px;
   font-size: 16px;
@@ -418,6 +420,9 @@ button {
   border-radius: 4px;
   cursor: pointer;
 }
+
+.primary-btn { background-color: cornflowerblue; }
+.download-btn { background-color: #28a745; }
 
 button:disabled {
   background-color: #6c757d;
@@ -447,8 +452,8 @@ p {
 }
 
 #matching-hint {
-  margin-right: 25px;
-  margin-bottom: 5px;
+  margin-right: 10px;
+  margin-bottom: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -457,16 +462,16 @@ p {
 
 #button-container {
   display: flex;
-  justify-content: flex-start;
-  margin-bottom: 30px;
+  flex-wrap: wrap;
+  justify-content: left;
   gap: 20px;
+  margin-bottom: 30px;
 }
 
 #canvas-container {
   position: relative;
   margin-bottom: 20px;
   width: 100%;
-  overflow-x: auto; /* 防止画布过大撑破布局 */
   text-align: center;
 }
 
@@ -480,5 +485,6 @@ canvas {
   width: 100%;
   text-align: left;
   margin-top: 30px;
+  font-size: 12px;
 }
 </style>
