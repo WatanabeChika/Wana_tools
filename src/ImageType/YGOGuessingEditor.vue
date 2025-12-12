@@ -13,8 +13,15 @@ const RACES = [
 const ATTRIBUTES = ['暗', '光', '地', '水', '炎', '风', '神'];
 const CATEGORIES = ['怪兽', '魔法', '陷阱'];
 
+// 17种细分种类
+const SUB_CATEGORIES = [
+  '通常怪兽', '效果怪兽', '仪式怪兽', '融合怪兽', '同调怪兽', '超量怪兽', '灵摆怪兽', '连接怪兽',
+  '通常魔法', '仪式魔法', '速攻魔法', '永续魔法', '装备魔法', '场地魔法',
+  '通常陷阱', '永续陷阱', '反击陷阱'
+];
+
 // --- 状态 ---
-const guessMode = ref('race'); // 'race' | 'attribute' | 'category'
+const guessMode = ref('race'); 
 const rows = ref(3);
 const cols = ref(4);
 const loading = ref(false);
@@ -22,9 +29,9 @@ const generated = ref(false);
 
 const canvasVisible = ref(null); // 可见的画布（题目）
 const canvasHidden = ref(null);  // 隐藏的画布（答案）
+
 // 字体加载
 const Font1 = new FontFaceObserver('KaiTi');
-
 onMounted(async () => {
   await Promise.all([Font1.check()]);
 });
@@ -43,6 +50,35 @@ const getCardAnswer = (card) => {
     return '未知';
   } 
   
+  if (guessMode.value === 'subcategory') {
+    if (types.includes('魔法')) {
+      if (types.includes('仪式')) return '仪式魔法';
+      if (types.includes('速攻')) return '速攻魔法';
+      if (types.includes('永续')) return '永续魔法';
+      if (types.includes('装备')) return '装备魔法';
+      if (types.includes('场地')) return '场地魔法';
+      return '通常魔法'; 
+    }
+    else if (types.includes('陷阱')) {
+      if (types.includes('永续')) return '永续陷阱';
+      if (types.includes('反击')) return '反击陷阱';
+      return '通常陷阱'; 
+    }
+    else {
+      if (types.includes('仪式')) return '仪式怪兽';
+      if (types.includes('融合')) return '融合怪兽';
+      if (types.includes('同调')) return '同调怪兽';
+      if (types.includes('超量')) return '超量怪兽';
+      if (types.includes('连接')) return '连接怪兽';
+
+      if (types.includes('灵摆')) return '灵摆怪兽';
+
+      if (types.includes('通常')) return '通常怪兽';
+      
+      return '效果怪兽'; 
+    }
+  }
+
   const typeRegex = /](.*?)\/(.*?)(\n|$)/;
   const match = types.match(typeRegex);
 
@@ -71,29 +107,25 @@ const getCardAnswer = (card) => {
 
 // 获取符合条件的随机卡片
 const getRandomCards = async () => {
-  // 从 public/cards.json 中获取数据
   const cardDataRaw = await (await fetch('cards.json')).json();
-  
-  // 将字典对象转换为数组
-  const allCards = Object.values(cardDataRaw);
+  const dataSource = cardDataRaw.default || cardDataRaw;
+  const allCards = Object.values(dataSource);
 
   let filtered = [];
-  if (guessMode.value === 'category') {
+  
+  if (guessMode.value === 'category' || guessMode.value === 'subcategory') {
     filtered = allCards;
   } else {
-    // 筛选怪兽卡
     filtered = allCards.filter(c => c.text && c.text.types && c.text.types.includes('怪兽'));
   }
 
-  // 随机打乱
   const shuffled = shuffleLogArray([...filtered]);
-  // 注意：此处保留您提供的逻辑 shuffled[0]
   return shuffled[0].slice(0, rows.value * cols.value);
 };
 
 // 组件内部的自动换行文本绘制函数
 const drawTextWrapped = (ctx, text, x, y, maxWidth, lineHeight) => {
-  const words = text.split('  '); // 按双空格分割选项
+  const words = text.split('  '); 
   let line = '';
   let currentY = y;
 
@@ -118,7 +150,6 @@ const drawTextWrapped = (ctx, text, x, y, maxWidth, lineHeight) => {
 const calculateTextHeight = (ctx, text, maxWidth, lineHeight) => {
   const words = text.split('  ');
   let line = '';
-  // 只需要计算行数
   let lineCount = 1; 
 
   for (let n = 0; n < words.length; n++) {
@@ -128,12 +159,11 @@ const calculateTextHeight = (ctx, text, maxWidth, lineHeight) => {
 
     if (testWidth > maxWidth && n > 0) {
       line = words[n] + '  ';
-      lineCount++; // 增加一行
+      lineCount++; 
     } else {
       line = testLine;
     }
   }
-  // 返回总高度 = 行数 * 行高
   return lineCount * lineHeight;
 };
 
@@ -151,22 +181,27 @@ const handleGenerate = async () => {
         return;
     }
     
-    const optionsList = guessMode.value === 'race' ? RACES : (guessMode.value === 'attribute' ? ATTRIBUTES : CATEGORIES);
+    let optionsList = [];
+    if (guessMode.value === 'race') optionsList = RACES;
+    else if (guessMode.value === 'attribute') optionsList = ATTRIBUTES;
+    else if (guessMode.value === 'category') optionsList = CATEGORIES;
+    else if (guessMode.value === 'subcategory') optionsList = SUB_CATEGORIES;
 
     // 预加载图片
     const cardImages = await Promise.all(cards.map(async (card) => {
       const isPendulum = card.text.types.includes('灵摆');
       const suffix = isPendulum ? '!artp' : '!art'; 
       const originalUrl = `cdn.233.momobako.com/ygopro/pics/${card.id}.jpg${suffix}`;
-      // 使用 wsrv.nl 代理解决 CORS 问题
-      const url = `https://wsrv.nl/?url=${encodeURIComponent(originalUrl)}`;
+      const url = `https://wsrv.nl/?url=${encodeURIComponent(originalUrl)}&t=${new Date().getTime()}_${Math.random()}`;
       
       try {
         const img = await loadImage(url);
         return { 
           img, 
           isPendulum, 
-          answer: getCardAnswer(card) 
+          answer: getCardAnswer(card),
+          // 新增：优先使用中文名，其次日文名
+          name: card.cn_name || card.jp_name || '未知卡名'
         };
       } catch (e) {
         console.warn(`Failed to load image for card ${card.id}`, e);
@@ -174,13 +209,10 @@ const handleGenerate = async () => {
       }
     }));
 
-    // 绘制
     setTimeout(() => {
       generated.value = true;
       setTimeout(() => {
-        // 可见画布：不显示答案
         draw(canvasVisible.value, cardImages, optionsList, false);
-        // 隐藏画布：显示答案（用于下载）
         draw(canvasHidden.value, cardImages, optionsList, true);
         loading.value = false;
       }, 50);
@@ -205,15 +237,20 @@ const draw = (canvas, cardImages, optionsList, showAnswer) => {
   const gapX = 20;
   const gapY = 60; 
   
-  // 字体统一改为 KaiTi
+  // 保持 KaiTi 字体
   const baseFont = 'KaiTi';
   const headerFontSize = 48;
   const optionFontSize = 28;
-  const bracketFontSize = 32;
+  const bracketFontSize = 28;
   const indexFontSize = 24;
 
   // 1. 计算画布尺寸
-  const modeName = guessMode.value === 'race' ? '种族' : (guessMode.value === 'attribute' ? '属性' : '种类');
+  let modeName = '';
+  if (guessMode.value === 'race') modeName = '种族';
+  else if (guessMode.value === 'attribute') modeName = '属性';
+  else if (guessMode.value === 'category') modeName = '卡片种类';
+  else if (guessMode.value === 'subcategory') modeName = '细分种类';
+
   const titleText = `看游戏王卡图猜${modeName}`;
   const headerHeight = 100;
 
@@ -223,16 +260,20 @@ const draw = (canvas, cardImages, optionsList, showAnswer) => {
   const totalWidth = Math.max(minWidth, gridWidth + margin * 2);
   const contentWidth = totalWidth - margin * 2;
 
-  // 1. 设置字体，确保测量准确
+  // 1. 字体设置
   ctx.font = `${optionFontSize}px ${baseFont}`;
-  const lineHeight = optionFontSize + 15; // 定义行高
+  const lineHeight = optionFontSize + 15; 
 
-  // 2. 使用新函数准确计算选项区域所需高度
-  // 以前是估算： const estLines = Math.ceil(measure.width / contentWidth);
+  // 2. 计算选项区域高度
   const calculatedTextHeight = calculateTextHeight(ctx, optionStr, contentWidth, lineHeight);
   
-  // 3. 加上一些上下边距 (padding)
-  const optionBlockHeight = calculatedTextHeight + 20;
+  let hintHeight = 0;
+  if (guessMode.value === 'subcategory') {
+    hintHeight = 40; 
+  }
+
+  // 3. 计算总选项块高度
+  const optionBlockHeight = calculatedTextHeight + 20 + hintHeight;
 
   const gridStartY = margin + headerHeight + optionBlockHeight;
   const totalHeight = gridStartY + rows.value * (cardH + gapY) + margin;
@@ -255,8 +296,17 @@ const draw = (canvas, cardImages, optionsList, showAnswer) => {
   // 5. 绘制选项列表
   ctx.font = `${optionFontSize}px ${baseFont}`;
   ctx.textAlign = 'left';
+  ctx.textBaseline = 'alphabetic'; // 显式重置基线
   ctx.fillStyle = '#333';
-  drawTextWrapped(ctx, optionStr, margin, margin + headerHeight, contentWidth, optionFontSize + 15);
+  const optionsBottomY = drawTextWrapped(ctx, optionStr, margin, margin + headerHeight, contentWidth, optionFontSize + 15);
+
+  // 绘制细分种类提示
+  if (guessMode.value === 'subcategory') {
+    ctx.fillStyle = '#666'; 
+    ctx.font = `20px ${baseFont}`; 
+    const hintText = "“通常怪兽”/“效果怪兽”是非额外非灵摆怪兽，“灵摆怪兽”是非额外怪兽。";
+    ctx.fillText(hintText, margin, optionsBottomY + 10);
+  }
 
   // 6. 绘制卡图矩阵
   const actualGridWidth = cols.value * cardW + (cols.value - 1) * gapX;
@@ -289,11 +339,12 @@ const draw = (canvas, cardImages, optionsList, showAnswer) => {
     ctx.font = `bold ${indexFontSize}px ${baseFont}`;
     ctx.fillStyle = '#000';
     ctx.textAlign = 'left';
-    ctx.fillText(`#${i + 1}`, x + 5, y + cardH + 15);
+    ctx.textBaseline = 'alphabetic';
+    ctx.fillText(`#${i + 1}`, x + 5, y + cardH + 33);
 
     // 绘制括号和答案
-    const centerX = x + cardW / 2 + 10;
-    const bracketY = y + cardH + 10; 
+    const centerX = x + cardW / 2 + 13;
+    const bracketY = y + cardH + 33; 
 
     ctx.font = `${bracketFontSize}px ${baseFont}`;
     ctx.textAlign = 'center';
@@ -302,6 +353,43 @@ const draw = (canvas, cardImages, optionsList, showAnswer) => {
       const index = optionsList.indexOf(item.answer);
       const indexText = index !== -1 ? `${index + 1}.` : '';
       ctx.fillText(`( ${indexText}${item.answer} )`, centerX, bracketY);
+
+      // 绘制卡名覆盖层
+      if (item.name) {
+        ctx.save(); // 保存当前状态，防止影响下一次循环
+
+        const nameFontSize = 24;
+        // 必须先设置字体，measureText 才能准确计算
+        ctx.font = `bold ${nameFontSize}px ${baseFont}`;
+        
+        let textWidth = ctx.measureText(item.name).width;
+        const maxNameWidth = cardW - 10; // 左右留5px padding
+        let actualFontSize = nameFontSize;
+        
+        // 自动缩放字体
+        if (textWidth > maxNameWidth) {
+           const ratio = maxNameWidth / textWidth;
+           actualFontSize = Math.floor(nameFontSize * ratio);
+           ctx.font = `bold ${actualFontSize}px ${baseFont}`; // 应用新字体大小
+           textWidth = maxNameWidth;
+        }
+
+        const boxHeight = actualFontSize + 14; 
+        const boxY = y + 256 - boxHeight; 
+        
+        // 绘制半透明背景
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.65)';
+        ctx.fillRect(x, boxY, cardW, boxHeight);
+
+        // 绘制白色文字
+        ctx.fillStyle = '#fff';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle'; 
+        ctx.fillText(item.name, x + cardW / 2, boxY + boxHeight / 2);
+
+        ctx.restore(); // 恢复状态
+      }
+
     } else {
       ctx.fillText('(          )', centerX, bracketY);
     }
@@ -311,6 +399,7 @@ const draw = (canvas, cardImages, optionsList, showAnswer) => {
   ctx.fillStyle = '#999';
   ctx.font = `14px ${baseFont}`;
   ctx.textAlign = 'right';
+  ctx.textBaseline = 'alphabetic';
   ctx.fillText('Created by Wanakachi', totalWidth - 10, totalHeight - 18);
 };
 
@@ -337,7 +426,8 @@ const download = (isAnswer) => {
       <div class="radio-group">
         <label><input type="radio" v-model="guessMode" value="race"> 种族</label>
         <label><input type="radio" v-model="guessMode" value="attribute"> 属性</label>
-        <label><input type="radio" v-model="guessMode" value="category"> 种类</label>
+        <label><input type="radio" v-model="guessMode" value="category"> 卡片种类</label>
+        <label><input type="radio" v-model="guessMode" value="subcategory"> 细分种类</label>
       </div>
     </div>
 
@@ -369,7 +459,7 @@ const download = (isAnswer) => {
     <p>图片及数据来源：
       <a href="https://ygocdb.com">百鸽</a>
     </p>
-    <p>种族/属性信息摘自：
+    <p>种族/属性/种类信息摘自：
       <a href="https://zh.wikipedia.org/wiki/%E9%81%8A%E6%88%B2%E7%8E%8B%E9%9B%86%E6%8F%9B%E7%B4%99%E7%89%8C%E9%81%8A%E6%88%B2">游戏王中文维基</a>
     </p>
   </div>
