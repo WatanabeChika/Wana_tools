@@ -454,7 +454,7 @@ const draw = (canvas, cardImages, optionsList, showAnswer) => {
   ctx.font = `14px ${baseFont}`;
   ctx.textAlign = 'right';
   ctx.textBaseline = 'alphabetic';
-  ctx.fillText('Created by Wanakachi', totalWidth - 10, totalHeight - 18);
+  ctx.fillText('Created by Wanakachi', totalWidth - 10, totalHeight - 10);
 };
 
 // 下载功能
@@ -516,7 +516,6 @@ const download = (isAnswer) => {
   </div>
 
   <div id="notice">
-    <p>注意：数据更新至 2025.12.11。</p>
     <p>卡图及卡片数据来源：
       <a href="https://ygocdb.com">百鸽</a>
     </p>
@@ -525,6 +524,10 @@ const download = (isAnswer) => {
     </p>
     <p>种族/属性/种类信息摘自：
       <a href="https://zh.wikipedia.org/wiki/%E9%81%8A%E6%88%B2%E7%8E%8B%E9%9B%86%E6%8F%9B%E7%B4%99%E7%89%8C%E9%81%8A%E6%88%B2">游戏王中文维基</a>
+    </p>
+    <p>注意：数据更新有延迟。请查看
+      <a href="https://github.com/WatanabeChika/Wana_tools/blob/main/README.md"> README </a>
+      获取最近更新时间。
     </p>
   </div>
 </template>

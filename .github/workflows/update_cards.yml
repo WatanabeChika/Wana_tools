@@ -93,7 +93,7 @@ jobs:
             # 同时添加两个 json 文件和 README
             git add public/cards/common_cards.json public/cards/cards.json README.md
             
-            git commit -m "Auto-update: cards data and README date [skip ci]"
+            git commit -m "Auto-update: cards data and README date"
             
             # 拉取最新代码防止冲突，然后推送
             git pull --rebase origin main
