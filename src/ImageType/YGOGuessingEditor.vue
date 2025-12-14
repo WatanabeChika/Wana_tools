@@ -94,7 +94,6 @@ onMounted(async () => {
 });
 
 // --- 核心逻辑 ---
-
 const checkCardMatch = (card, target) => {
   if (!card || !card.text || !card.text.types) return false;
   const types = card.text.types;
@@ -114,15 +113,20 @@ const checkCardMatch = (card, target) => {
     return types.includes(keyword);
   }
   else if (mode === 'race') {
+     // 种族匹配：必须精确匹配提取出的字段，防止"兽战士"包含"战士"，"海龙"包含"龙"
      const typeRegex = /](.*?)\/(.*?)(\n|$)/;
      const match = types.match(typeRegex);
-     if (match) return match[1].includes(target);
-     return types.includes(target);
+     if (match) {
+         const raceRaw = match[1].trim();
+         return raceRaw === target;
+     }
+     // 兜底逻辑：如果正则失败，严格限制边界（虽然后面的 fallback 很少用到）
+     return false; 
   }
   else if (mode === 'attribute') {
      const typeRegex = /](.*?)\/(.*?)(\n|$)/;
      const match = types.match(typeRegex);
-     if (match) return match[2].includes(target);
+     if (match) return match[2].trim() === target; // 属性也建议精确匹配
      return types.includes(target);
   }
   return false;
@@ -173,9 +177,16 @@ const getCardAnswer = (card) => {
     const attrRaw = match[2].trim();     
 
     if (guessMode.value === 'race') {
-      const foundRace = RACES.find(r => raceRaw === r || raceRaw.includes(r));
+      // 优先：精确全等匹配 (解决 海龙 vs 龙 的问题)
+      const exactRace = RACES.find(r => raceRaw === r);
+      if (exactRace) return exactRace;
+
+      // 兜底：按长度降序排列后包含匹配 (解决 兽战士 vs 战士 的问题)
+      const sortedRaces = [...RACES].sort((a, b) => b.length - a.length);
+      const foundRace = sortedRaces.find(r => raceRaw.includes(r));
       return foundRace || '未知';
-    } else if (guessMode.value === 'attribute') {
+    } 
+    else if (guessMode.value === 'attribute') {
       const foundAttr = ATTRIBUTES.find(a => attrRaw === a || attrRaw.includes(a));
       return foundAttr || '未知';
     }
@@ -185,6 +196,7 @@ const getCardAnswer = (card) => {
      const found = ATTRIBUTES.find(a => types.includes('/' + a) || types.includes('/ ' + a));
      return found || '未知';
   } else {
+     // 兜底逻辑同样需要按长度排序
      const sortedRaces = [...RACES].sort((a, b) => b.length - a.length);
      const found = sortedRaces.find(r => types.includes(r));
      return found || '未知';
