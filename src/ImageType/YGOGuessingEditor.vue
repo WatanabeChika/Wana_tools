@@ -416,6 +416,7 @@ const draw = (canvas, cardImages, showAnswer) => {
   
   // 2. 计算总宽度：取 预设最小宽、矩阵所需宽、标题所需宽 中的最大值
   const totalWidth = Math.max(minWidth, gridWidth + margin * 2, titleWidth + margin * 2);
+  const contentWidth = totalWidth - margin * 2;
 
   if (quizMode.value === 'fill') {
     ctx.font = `${optionFontSize}px ${baseFont}`;
@@ -494,63 +495,80 @@ const draw = (canvas, cardImages, showAnswer) => {
     ctx.lineWidth = 2;
     ctx.strokeRect(x, y, 256, 256);
 
-    ctx.font = `bold ${indexFontSize}px ${baseFont}`;
-    ctx.fillStyle = '#000';
-    ctx.textAlign = 'left';
-    ctx.textBaseline = 'alphabetic';
-    ctx.fillText(`#${i + 1}`, x + 5, y + cardH + 33);
-
-    const centerX = x + cardW / 2 + 13;
-    const bracketY = y + cardH + 33; 
-
-    ctx.font = `${bracketFontSize}px ${baseFont}`;
-    ctx.textAlign = 'center';
-    
-    if (showAnswer) {
-      // 填空题逻辑
-      if (quizMode.value === 'fill') {
-        const index = currentOptionsList.value.indexOf(item.answer);
-        const indexText = index !== -1 ? `${index + 1}.` : '';
-        ctx.fillText(`( ${indexText}${item.answer} )`, centerX, bracketY);
-      } 
-      // 判断题逻辑
-      else {
-        const invert = judgeInvert.value;
-        const isTarget = item.isMatchTarget;
+    // 分别处理填空题和判断题的文字绘制
+    if (quizMode.value === 'fill') {
+        // === 填空题模式：左侧编号，中间括号 ===
         
-        // 判定该卡是否为题目要求找出的卡
-        // 如果题目是“找X”，则 isTarget 为 true 的是答案
-        // 如果题目是“找不是X”，则 isTarget 为 false 的是答案
-        const isCorrectAnswer = invert ? !isTarget : isTarget;
+        // 1. 绘制左下角编号
+        ctx.font = `bold ${indexFontSize}px ${baseFont}`;
+        ctx.fillStyle = '#000';
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'alphabetic';
+        ctx.fillText(`#${i + 1}`, x + 5, y + cardH + 33);
 
-        if (isCorrectAnswer) {
-          // 1. 绘制加粗红色边框
-          ctx.save();
-          ctx.strokeStyle = '#dc3545'; 
-          ctx.lineWidth = 6;
-          ctx.strokeRect(x, y, 256, 256);
-          ctx.restore();
+        // 2. 绘制中间括号/答案
+        const centerX = x + cardW / 2 + 13;
+        const bracketY = y + cardH + 33; 
 
-          // 2. 文字标红
-          ctx.fillStyle = '#dc3545'; 
+        ctx.font = `${bracketFontSize}px ${baseFont}`;
+        ctx.textAlign = 'center';
+
+        if (showAnswer) {
+            const index = currentOptionsList.value.indexOf(item.answer);
+            const indexText = index !== -1 ? `${index + 1}.` : '';
+            ctx.fillText(`( ${indexText}${item.answer} )`, centerX, bracketY);
         } else {
-          // 1. 绘制半透明白色遮罩，使图片变淡
-          ctx.save();
-          ctx.fillStyle = 'rgba(255, 255, 255, 0.65)';
-          ctx.fillRect(x, y, 256, 256);
-          ctx.restore();
-
-          // 2. 文字变灰
-          ctx.fillStyle = '#999';
+            ctx.fillText('(          )', centerX, bracketY);
         }
-        
-        // 判断题不显示序号，直接显示答案文本
-        ctx.fillText(`( ${item.answer} )`, centerX, bracketY);
-        
-        ctx.fillStyle = 'black'; // 重置颜色
-      }
 
-      if (item.name) {
+    } else {
+        // === 判断题模式：正下方居中 ===
+        
+        const centerX = x + cardW / 2;
+        const textY = y + cardH + 33;
+
+        ctx.font = `bold ${bracketFontSize}px ${baseFont}`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'alphabetic';
+
+        if (showAnswer) {
+            // 答案模式：显示文字答案（带颜色/边框/遮罩）
+            const invert = judgeInvert.value;
+            const isTarget = item.isMatchTarget;
+            const isCorrectAnswer = invert ? !isTarget : isTarget;
+
+            if (isCorrectAnswer) {
+                // 正确答案：红框 + 红字
+                ctx.save();
+                ctx.strokeStyle = '#dc3545'; 
+                ctx.lineWidth = 6;
+                ctx.strokeRect(x, y, 256, 256);
+                ctx.restore();
+
+                ctx.fillStyle = '#dc3545'; 
+            } else {
+                // 干扰项：遮罩 + 灰字
+                ctx.save();
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.65)';
+                ctx.fillRect(x, y, 256, 256);
+                ctx.restore();
+
+                ctx.fillStyle = '#999';
+            }
+            
+            // 直接显示答案，无括号，无编号
+            ctx.fillText(item.answer, centerX, textY);
+            ctx.fillStyle = 'black'; // 重置颜色
+
+        } else {
+            // 题目模式：只显示编号，无括号
+            ctx.fillStyle = '#000';
+            ctx.fillText(`#${i + 1}`, centerX, textY);
+        }
+    }
+
+    // --- 通用：绘制卡名覆盖层 (仅在答案显示时) ---
+    if (showAnswer && item.name) {
         ctx.save(); 
 
         const nameFontSize = 24;
@@ -570,17 +588,13 @@ const draw = (canvas, cardImages, showAnswer) => {
         const boxHeight = actualFontSize + 14; 
         const boxY = y + 256 - boxHeight; 
         
+        // 背景透明度逻辑
         let bgAlpha = 0.65;
-        
-        // 如果是判断题，需要区分答案和干扰项
         if (quizMode.value === 'judge') {
            const invert = judgeInvert.value;
            const isTarget = item.isMatchTarget;
            const isCorrectAnswer = invert ? !isTarget : isTarget;
-           
-           if (!isCorrectAnswer) {
-             bgAlpha = 0.42;
-           }
+           if (!isCorrectAnswer) bgAlpha = 0.42;
         }
         
         ctx.fillStyle = `rgba(0, 0, 0, ${bgAlpha})`;
@@ -592,10 +606,6 @@ const draw = (canvas, cardImages, showAnswer) => {
         ctx.fillText(item.name, x + cardW / 2, boxY + boxHeight / 2);
 
         ctx.restore(); 
-      }
-
-    } else {
-      ctx.fillText('(          )', centerX, bracketY);
     }
   }
   
