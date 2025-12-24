@@ -28,8 +28,16 @@ const useCommonCards = ref(false);
 
 // 判断题专用配置
 const judgeTarget = ref(''); 
-const judgeQuantity = ref(1); // 数量，默认为1
-const judgeInvert = ref(false); // 是否反选（找“不是”的）
+const judgeQuantity = ref(1); 
+const judgeInvert = ref(false); 
+
+// 搜索专用状态
+const enableSearch = ref(false);
+const searchQuery = ref('');
+const searchResults = ref([]);
+const selectedCards = ref([]); 
+const isSearching = ref(false);
+const showSearchResults = ref(false);
 
 const loading = ref(false);
 const dataLoading = ref(true);
@@ -93,6 +101,47 @@ onMounted(async () => {
   }
 });
 
+// --- 搜索逻辑 ---
+const handleSearch = async () => {
+  if (!searchQuery.value.trim()) return;
+  isSearching.value = true;
+  searchResults.value = [];
+  showSearchResults.value = false;
+
+  try {
+    const res = await fetch(`https://ygocdb.com/api/v0/?search=${encodeURIComponent(searchQuery.value)}`);
+    const data = await res.json();
+    if (data && data.result) {
+      searchResults.value = data.result.filter(c => c.id && (c.cn_name || c.jp_name));
+      showSearchResults.value = true;
+    }
+  } catch (e) {
+    console.error("搜索失败", e);
+    alert("搜索失败，请检查网络或稍后重试");
+  } finally {
+    isSearching.value = false;
+  }
+};
+
+const selectCard = (card) => {
+  if (selectedCards.value.length >= 100) {
+    alert("最多只能指定100张卡片");
+    return;
+  }
+  if (!selectedCards.value.find(c => c.id === card.id)) {
+    selectedCards.value.push(card);
+  }
+  showSearchResults.value = false;
+};
+
+const removeSelectedCard = (index) => {
+  selectedCards.value.splice(index, 1);
+};
+
+const clearSelectedCards = () => {
+  selectedCards.value = [];
+};
+
 // --- 核心逻辑 ---
 const checkCardMatch = (card, target) => {
   if (!card || !card.text || !card.text.types) return false;
@@ -113,20 +162,18 @@ const checkCardMatch = (card, target) => {
     return types.includes(keyword);
   }
   else if (mode === 'race') {
-     // 种族匹配：必须精确匹配提取出的字段，防止"兽战士"包含"战士"，"海龙"包含"龙"
      const typeRegex = /](.*?)\/(.*?)(\n|$)/;
      const match = types.match(typeRegex);
      if (match) {
          const raceRaw = match[1].trim();
          return raceRaw === target;
      }
-     // 兜底逻辑：如果正则失败，严格限制边界（虽然后面的 fallback 很少用到）
      return false; 
   }
   else if (mode === 'attribute') {
      const typeRegex = /](.*?)\/(.*?)(\n|$)/;
      const match = types.match(typeRegex);
-     if (match) return match[2].trim() === target; // 属性也建议精确匹配
+     if (match) return match[2].trim() === target;
      return types.includes(target);
   }
   return false;
@@ -177,11 +224,8 @@ const getCardAnswer = (card) => {
     const attrRaw = match[2].trim();     
 
     if (guessMode.value === 'race') {
-      // 优先：精确全等匹配 (解决 海龙 vs 龙 的问题)
       const exactRace = RACES.find(r => raceRaw === r);
       if (exactRace) return exactRace;
-
-      // 兜底：按长度降序排列后包含匹配 (解决 兽战士 vs 战士 的问题)
       const sortedRaces = [...RACES].sort((a, b) => b.length - a.length);
       const foundRace = sortedRaces.find(r => raceRaw.includes(r));
       return foundRace || '未知';
@@ -196,7 +240,6 @@ const getCardAnswer = (card) => {
      const found = ATTRIBUTES.find(a => types.includes('/' + a) || types.includes('/ ' + a));
      return found || '未知';
   } else {
-     // 兜底逻辑同样需要按长度排序
      const sortedRaces = [...RACES].sort((a, b) => b.length - a.length);
      const found = sortedRaces.find(r => types.includes(r));
      return found || '未知';
@@ -221,12 +264,35 @@ const getRandomCards = async () => {
     sourcePool = sourcePool.filter(c => commonCardIds.has(Number(c.id)));
   }
 
+  // 2. 准备用户指定的卡片池
+  let userSelected = [];
+  if (enableSearch.value && selectedCards.value.length > 0) {
+      userSelected = selectedCards.value.filter(c => {
+        // 简单校验
+        if ((guessMode.value === 'race' || guessMode.value === 'attribute')) {
+            return c.text && c.text.types && c.text.types.includes('怪兽');
+        }
+        return true;
+      });
+  }
+
   const totalSlots = rows.value * cols.value;
 
   // --- 逻辑分支：填空题 ---
   if (quizMode.value === 'fill') {
-    const shuffled = shuffleLogArray([...sourcePool], false);
-    return shuffled.slice(0, rows.value * cols.value);
+    const userPart = shuffleLogArray([...userSelected], false).slice(0, totalSlots);
+    
+    let finalSelection = [...userPart];
+    
+    if (finalSelection.length < totalSlots) {
+       const needed = totalSlots - finalSelection.length;
+       const userIds = new Set(finalSelection.map(c => c.id));
+       const availablePool = sourcePool.filter(c => !userIds.has(c.id));
+       const randomPart = shuffleLogArray([...availablePool], false).slice(0, needed);
+       finalSelection = [...finalSelection, ...randomPart];
+    }
+    
+    return shuffleLogArray(finalSelection, false);
   }
 
   // --- 逻辑分支：判断题 ---
@@ -235,35 +301,47 @@ const getRandomCards = async () => {
     const countNeeded = Math.min(Math.max(1, judgeQuantity.value), totalSlots - 1);
     const isInvert = judgeInvert.value;
 
-    const groupMatch = sourcePool.filter(c => checkCardMatch(c, target));
-    const groupNonMatch = sourcePool.filter(c => !checkCardMatch(c, target));
-
     let cardsMatchNeeded = 0;
     let cardsNonMatchNeeded = 0;
 
     if (!isInvert) {
-      // 找 "符合条件" 的 N 个 -> 需要 N 个 Match，(Total-N) 个 NonMatch
       cardsMatchNeeded = countNeeded;
       cardsNonMatchNeeded = totalSlots - countNeeded;
     } else {
-      // 找 "不符合条件" 的 N 个 -> 需要 N 个 NonMatch, (Total-N) 个 Match
       cardsNonMatchNeeded = countNeeded;
       cardsMatchNeeded = totalSlots - countNeeded;
     }
 
-    if (groupMatch.length < cardsMatchNeeded || groupNonMatch.length < cardsNonMatchNeeded) {
-      alert(`卡池数量不足。\n需要符合卡：${cardsMatchNeeded}张 (现有${groupMatch.length})\n需要干扰卡：${cardsNonMatchNeeded}张 (现有${groupNonMatch.length})`);
+    const userMatch = userSelected.filter(c => checkCardMatch(c, target));
+    const userNonMatch = userSelected.filter(c => !checkCardMatch(c, target));
+
+    const groupMatch = sourcePool.filter(c => checkCardMatch(c, target));
+    const groupNonMatch = sourcePool.filter(c => !checkCardMatch(c, target));
+
+    let finalMatch = shuffleLogArray([...userMatch], false).slice(0, cardsMatchNeeded);
+    if (finalMatch.length < cardsMatchNeeded) {
+        const needed = cardsMatchNeeded - finalMatch.length;
+        const currentIds = new Set(finalMatch.map(c => c.id));
+        const poolAvailable = groupMatch.filter(c => !currentIds.has(c.id));
+        const randomPart = shuffleLogArray([...poolAvailable], false).slice(0, needed);
+        finalMatch = [...finalMatch, ...randomPart];
+    }
+
+    let finalNonMatch = shuffleLogArray([...userNonMatch], false).slice(0, cardsNonMatchNeeded);
+    if (finalNonMatch.length < cardsNonMatchNeeded) {
+        const needed = cardsNonMatchNeeded - finalNonMatch.length;
+        const currentIds = new Set(finalNonMatch.map(c => c.id));
+        const poolAvailable = groupNonMatch.filter(c => !currentIds.has(c.id));
+        const randomPart = shuffleLogArray([...poolAvailable], false).slice(0, needed);
+        finalNonMatch = [...finalNonMatch, ...randomPart];
+    }
+
+    if (finalMatch.length < cardsMatchNeeded || finalNonMatch.length < cardsNonMatchNeeded) {
+      alert(`卡池数量不足(含指定卡)。\n需要符合卡：${cardsMatchNeeded}张\n需要干扰卡：${cardsNonMatchNeeded}张`);
       return [];
     }
 
-    const pMatch = shuffleLogArray([...groupMatch], false);
-    const pNonMatch = shuffleLogArray([...groupNonMatch], false);
-
-    const selection = [
-      ...pMatch.slice(0, cardsMatchNeeded),
-      ...pNonMatch.slice(0, cardsNonMatchNeeded)
-    ];
-
+    const selection = [...finalMatch, ...finalNonMatch];
     return shuffleLogArray(selection, false);
   }
 };
@@ -332,14 +410,13 @@ const handleGenerate = async () => {
       
       try {
         const img = await loadImage(url);
-        // 计算该卡是否符合筛选条件
         const isMatchTarget = checkCardMatch(card, judgeTarget.value);
         
         return { 
           img, 
           isPendulum, 
           answer: getCardAnswer(card),
-          isMatchTarget, // 是否符合当前目标（用于判断题逻辑）
+          isMatchTarget, 
           name: card.cn_name || card.jp_name || '未知卡名'
         };
       } catch (e) {
@@ -396,7 +473,6 @@ const draw = (canvas, cardImages, showAnswer) => {
     optionStr = currentOptionsList.value.map((opt, i) => `${i + 1}.${opt}`).join('  ');
   } 
   else {
-    // 判断题标题
     const count = judgeQuantity.value;
     const invert = judgeInvert.value;
     
@@ -419,14 +495,12 @@ const draw = (canvas, cardImages, showAnswer) => {
 
   const headerHeight = 100;
 
-  // 1. 预先测量标题宽度
   ctx.font = `bold ${headerFontSize}px ${baseFont}`;
   const titleWidth = ctx.measureText(titleText).width;
 
   const gridWidth = (cardW * cols.value) + (gapX * (cols.value - 1));
   const minWidth = 800; 
   
-  // 2. 计算总宽度：取 预设最小宽、矩阵所需宽、标题所需宽 中的最大值
   const totalWidth = Math.max(minWidth, gridWidth + margin * 2, titleWidth + margin * 2);
   const contentWidth = totalWidth - margin * 2;
 
@@ -507,18 +581,13 @@ const draw = (canvas, cardImages, showAnswer) => {
     ctx.lineWidth = 2;
     ctx.strokeRect(x, y, 256, 256);
 
-    // 分别处理填空题和判断题的文字绘制
     if (quizMode.value === 'fill') {
-        // === 填空题模式：左侧编号，中间括号 ===
-        
-        // 1. 绘制左下角编号
         ctx.font = `bold ${indexFontSize}px ${baseFont}`;
         ctx.fillStyle = '#000';
         ctx.textAlign = 'left';
         ctx.textBaseline = 'alphabetic';
         ctx.fillText(`#${i + 1}`, x + 5, y + cardH + 33);
 
-        // 2. 绘制中间括号/答案
         const centerX = x + cardW / 2 + 13;
         const bracketY = y + cardH + 33; 
 
@@ -534,8 +603,6 @@ const draw = (canvas, cardImages, showAnswer) => {
         }
 
     } else {
-        // === 判断题模式：正下方居中 ===
-        
         const centerX = x + cardW / 2;
         const textY = y + cardH + 33;
 
@@ -544,13 +611,11 @@ const draw = (canvas, cardImages, showAnswer) => {
         ctx.textBaseline = 'alphabetic';
 
         if (showAnswer) {
-            // 答案模式：显示文字答案（带颜色/边框/遮罩）
             const invert = judgeInvert.value;
             const isTarget = item.isMatchTarget;
             const isCorrectAnswer = invert ? !isTarget : isTarget;
 
             if (isCorrectAnswer) {
-                // 正确答案：红框 + 红字
                 ctx.save();
                 ctx.strokeStyle = '#dc3545'; 
                 ctx.lineWidth = 6;
@@ -559,7 +624,6 @@ const draw = (canvas, cardImages, showAnswer) => {
 
                 ctx.fillStyle = '#dc3545'; 
             } else {
-                // 干扰项：遮罩 + 灰字
                 ctx.save();
                 ctx.fillStyle = 'rgba(255, 255, 255, 0.65)';
                 ctx.fillRect(x, y, 256, 256);
@@ -568,24 +632,22 @@ const draw = (canvas, cardImages, showAnswer) => {
                 ctx.fillStyle = '#999';
             }
             
-            // 直接显示答案，无括号，无编号
             ctx.fillText(item.answer, centerX, textY);
-            ctx.fillStyle = 'black'; // 重置颜色
+            ctx.fillStyle = 'black'; 
 
         } else {
-            // 题目模式：只显示编号，无括号
             ctx.fillStyle = '#000';
             ctx.fillText(`#${i + 1}`, centerX, textY);
         }
     }
 
-    // --- 通用：绘制卡名覆盖层 (仅在答案显示时) ---
     if (showAnswer && item.name) {
         ctx.save(); 
 
         const nameFontSize = 24;
         ctx.font = `bold ${nameFontSize}px ${baseFont}`;
         
+        // 计算文本缩放
         let textWidth = ctx.measureText(item.name).width;
         const maxNameWidth = cardW - 10; 
         let actualFontSize = nameFontSize;
@@ -593,14 +655,14 @@ const draw = (canvas, cardImages, showAnswer) => {
         if (textWidth > maxNameWidth) {
            const ratio = maxNameWidth / textWidth;
            actualFontSize = Math.floor(nameFontSize * ratio);
+           // 设置为缩放后的字体用于绘制文本
            ctx.font = `bold ${actualFontSize}px ${baseFont}`; 
-           textWidth = maxNameWidth;
         }
 
-        const boxHeight = actualFontSize + 14; 
-        const boxY = y + 256 - boxHeight; 
+        // 固定背景条高度
+        const fixedBoxHeight = nameFontSize + 16; 
+        const boxY = y + 256 - fixedBoxHeight; 
         
-        // 背景透明度逻辑
         let bgAlpha = 0.65;
         if (quizMode.value === 'judge') {
            const invert = judgeInvert.value;
@@ -610,12 +672,13 @@ const draw = (canvas, cardImages, showAnswer) => {
         }
         
         ctx.fillStyle = `rgba(0, 0, 0, ${bgAlpha})`;
-        ctx.fillRect(x, boxY, cardW, boxHeight);
+        ctx.fillRect(x, boxY, cardW, fixedBoxHeight);
 
         ctx.fillStyle = '#fff';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle'; 
-        ctx.fillText(item.name, x + cardW / 2, boxY + boxHeight / 2);
+        // 文字在固定高度的盒子内垂直居中
+        ctx.fillText(item.name, x + cardW / 2, boxY + fixedBoxHeight / 2);
 
         ctx.restore(); 
     }
@@ -695,8 +758,50 @@ const download = (isAnswer) => {
 
     <div id="modes-settings">
       <span id="matching-hint">筛选设置: </span>
-      <div>
-        <label><input type="checkbox" v-model="useCommonCards"> 只看常用卡</label>
+      <div style="display: flex; align-items: center;">
+         <label><input type="checkbox" v-model="useCommonCards"> 只看常用卡</label>
+         
+         <label><input type="checkbox" v-model="enableSearch"> 指定卡片</label>
+         
+         <div v-if="enableSearch" class="inline-search-wrapper">
+            <input 
+              type="text" 
+              v-model="searchQuery" 
+              @keyup.enter="handleSearch"
+              placeholder="输入卡名搜索" 
+              class="search-input"
+            >
+            <button @click="handleSearch" :disabled="isSearching" class="btns small-btn">
+              {{ isSearching ? '...' : '搜索' }}
+            </button>
+
+            <button @click="clearSelectedCards" :disabled="selectedCards.length === 0" class="btns small-btn" 
+              style="background-color: #dc3545; margin-left: 5px;">
+              清空
+            </button>
+            
+            <div v-if="showSearchResults && searchResults.length" class="search-results-dropdown">
+               <div 
+                 v-for="item in searchResults" 
+                 :key="item.id" 
+                 class="search-item"
+                 @click="selectCard(item)"
+               >
+                 <span class="search-name">{{ item.cn_name || item.jp_name }}</span>
+                 <span class="search-id">{{ item.id }}</span>
+               </div>
+            </div>
+            <div v-if="showSearchResults && searchResults.length === 0 && !isSearching" class="search-results-dropdown">
+                <div class="search-item" style="cursor: default;">未找到卡片</div>
+            </div>
+         </div>
+      </div>
+    </div>
+    
+    <div class="selected-cards-row" v-if="enableSearch && selectedCards.length > 0">
+      <div v-for="(card, index) in selectedCards" :key="card.id" class="selected-card-tag">
+        {{ card.cn_name || card.jp_name }}
+        <span class="remove-btn" @click="removeSelectedCard(index)">×</span>
       </div>
     </div>
 
@@ -742,7 +847,6 @@ h1 {
 
 label {
   display: inline-block;
-  margin-bottom: 10px;
   margin-left: 10px;
   font-weight: 500;
   cursor: pointer;
@@ -782,8 +886,6 @@ input[type="checkbox"] {
   font-size: 14px;
 }
 
-
-
 button {
   flex: 0 0 auto;
   color: #fff;
@@ -796,6 +898,12 @@ button {
 
 .primary-btn { background-color: cornflowerblue; }
 .download-btn { background-color: #28a745; }
+.small-btn {
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #17a2b8;
+  margin-left: 5px;
+}
 
 button:disabled {
   background-color: #6c757d;
@@ -821,12 +929,12 @@ p {
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 20px;
-  align-items: center;
+  align-items: center; /* 确保垂直居中对齐 */
+  height: 40px; /* 固定高度，防止闪烁 */
 }
 
 #matching-hint {
   margin-right: 10px;
-  margin-bottom: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -859,5 +967,91 @@ canvas {
   text-align: left;
   margin-top: 30px;
   font-size: 12px;
+}
+
+/* 搜索相关样式 */
+.inline-search-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.search-input {
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 160px;
+}
+
+.search-results-dropdown {
+  position: absolute;
+  top: 100%; /* 下拉框位置 */
+  left: 0;
+  width: 300px;
+  max-height: 300px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  z-index: 100;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  margin-top: 5px;
+}
+
+.search-item {
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.search-item:hover {
+  background-color: #f0f8ff;
+}
+
+.search-name {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.search-id {
+  color: #999;
+  font-size: 12px;
+}
+
+/* 独立行的已选卡片展示区 */
+.selected-cards-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.selected-card-tag {
+  background-color: #e9ecef;
+  border: 1px solid #ced4da;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+}
+
+.remove-btn {
+  margin-left: 6px;
+  cursor: pointer;
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.remove-btn:hover {
+  color: #a71d2a;
 }
 </style>
