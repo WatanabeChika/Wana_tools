@@ -829,8 +829,8 @@ const download = (isAnswer) => {
     <p>种族/属性/种类信息摘自：
       <a href="https://zh.wikipedia.org/wiki/%E9%81%8A%E6%88%B2%E7%8E%8B%E9%9B%86%E6%8F%9B%E7%B4%99%E7%89%8C%E9%81%8A%E6%88%B2">游戏王中文维基</a>
     </p>
-    <p>注意：数据更新有延迟。请查看
-      <a href="https://github.com/WatanabeChika/Wana_tools/blob/main/README.md"> README </a>
+    <p>注意：数据更新有延迟。请查看 
+      <a href="https://github.com/WatanabeChika/Wana_tools/blob/main/README.md">README</a> 
       获取最近更新时间。
     </p>
   </div>
