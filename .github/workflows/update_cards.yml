@@ -20,8 +20,8 @@ jobs:
       - name: Checkout Repository B
         uses: actions/checkout@v4
         with:
-          # 为了触发 deploy.yml，使用 PAT
-          token: ${{ secrets.GH_PAT }}
+          # 优先使用 PAT（可触发 deploy.yml），缺失时回退到默认 GITHUB_TOKEN 以避免检出失败
+          token: ${{ secrets.GH_PAT || github.token }}
 
       # 2. 检出 A 仓库 (获取脚本)
       - name: Checkout Repository A
