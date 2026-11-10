@@ -61718,7 +61718,7 @@
     "id": 8198712,
     "cn_name": "世界末日",
     "sc_name": "世界终灭",
-    "md_name": "世界末日",
+    "md_name": "世界终灭",
     "nwbbs_n": "世界末日",
     "cnocg_n": "世界末日",
     "jp_ruby": "エンド・オブ・ザ・ワールド",
@@ -62211,7 +62211,7 @@
     "cid": 6643,
     "id": 55615891,
     "cn_name": "元素英雄 荒野翼侠",
-    "md_name": "元素－英雄 野蛮翼侠",
+    "md_name": "元素－英雄 野蛮翼人",
     "nwbbs_n": "元素英雄 荒野翼侠",
     "cnocg_n": "E·HERO 野性翼人",
     "jp_ruby": "エレメンタルヒーロー　ワイルド・ウィングマン",
@@ -104516,7 +104516,7 @@
     "cn_name": "电子天龙头",
     "sc_name": "电子天棓四",
     "md_name": "电子天棓四",
-    "nwbbs_n": "电子天龙头",
+    "nwbbs_n": "电子天棓四星龙",
     "cnocg_n": "电子天龙座γ",
     "jp_ruby": "サイバー・エルタニン",
     "jp_name": "サイバー・エルタニン",
@@ -207162,7 +207162,7 @@
     "id": 20747792,
     "cn_name": "浆果魔术少女",
     "md_name": "浆果魔导女孩",
-    "nwbbs_n": "浆果魔术少女",
+    "nwbbs_n": "莓果魔术少女",
     "cnocg_n": "浆果魔导士少女",
     "jp_ruby": "ベリー・マジシャン・ガール",
     "jp_name": "ベリー・マジシャン・ガール",
@@ -359492,7 +359492,7 @@
     "id": 18988396,
     "cn_name": "奇迹之供物-供物的仪式-",
     "sc_name": "奇迹渡鸦－供品的仪式－",
-    "md_name": "奇迹鸦 供品的仪式",
+    "md_name": "奇迹渡鸦－供品的仪式－",
     "nwbbs_n": "奇迹之供物-供物的仪式-",
     "cnocg_n": "奇迹的供品-供品的仪式-",
     "jp_ruby": "ミラクル・レイヴン－くもつのぎしき－",
@@ -366214,6 +366214,7 @@
     "id": 11035075,
     "cn_name": "死地误算守护",
     "sc_name": "死地误算守护",
+    "md_name": "死地误算守护",
     "nwbbs_n": "死地误算守护",
     "cnocg_n": "死地误算守护",
     "jp_ruby": "しちごさんしゅご",
@@ -366839,6 +366840,7 @@
     "id": 3739500,
     "cn_name": "破灭与终焉之支配者",
     "sc_name": "世界终灭支配者",
+    "md_name": "世界终灭支配者",
     "nwbbs_n": "破灭与终焉之支配者",
     "cnocg_n": "破灭与终焉 世界末日的支配者",
     "jp_ruby": "エンド・オブ・ザ・ワールド・ルーラー",
@@ -366866,6 +366868,7 @@
     "id": 30138615,
     "cn_name": "幻惑眼纳祭神",
     "sc_name": "幻惑眼纳祭魔",
+    "md_name": "幻惑眼纳祭魔",
     "nwbbs_n": "幻惑眼纳祭神",
     "cnocg_n": "幻惑眼纳祭魔",
     "jp_ruby": "ナイトメア・アイズ・サクリファイス",
@@ -366892,6 +366895,7 @@
     "id": 66122213,
     "cn_name": "地狱俯冲轰炸机",
     "sc_name": "地狱俯冲轰炸机",
+    "md_name": "地狱俯冲轰炸机",
     "nwbbs_n": "地狱俯冲轰炸机",
     "cnocg_n": "地狱俯冲轰炸机",
     "jp_ruby": "ヘル・ダイブ・ボンバー",
@@ -366918,6 +366922,7 @@
     "id": 92517928,
     "cn_name": "银河眼反物质龙",
     "sc_name": "银河眼反物质龙",
+    "md_name": "银河眼反物质龙",
     "nwbbs_n": "银河眼反物质龙",
     "cnocg_n": "银河眼反物质龙",
     "jp_ruby": "ギャラクシーアイズ・アンチマター・ドラゴン",
@@ -366944,6 +366949,7 @@
     "id": 39016067,
     "cn_name": "龙剑士 风麒麟·平行",
     "sc_name": "龙剑士 乘风独角麒麟 别型",
+    "md_name": "龙剑士 乘风独角麒麟 别型",
     "nwbbs_n": "龙剑士 风麒麟·平行",
     "cnocg_n": "龙剑士 风麒麟平行P",
     "jp_ruby": "りゅうけんしウィンドユニコーンパラレル",
@@ -366970,6 +366976,7 @@
     "id": 65400671,
     "cn_name": "水晶机巧-继承玻纤·棱镜",
     "sc_name": "水晶机巧－玻璃光纤 棱彩",
+    "md_name": "水晶机巧－玻璃光纤 棱彩",
     "nwbbs_n": "水晶机巧-继承玻纤·棱镜",
     "cnocg_n": "水晶机巧-玻璃光纤棱镜P",
     "jp_ruby": "クリストロン－ハリファイバープリズム",
@@ -368928,6 +368935,7 @@
     "id": 44694191,
     "cn_name": "假初之幻脸师",
     "sc_name": "假形幻脸师",
+    "md_name": "假形幻脸师",
     "nwbbs_n": "假初之幻脸师",
     "cnocg_n": "假形幻脸师",
     "jp_ruby": "かりそめのげんれんし",
@@ -370196,6 +370204,7 @@
     "id": 71275181,
     "cn_name": "2选1",
     "sc_name": "二选一",
+    "md_name": "二选一",
     "nwbbs_n": "2选1",
     "cnocg_n": "二选一",
     "jp_ruby": "２つに１つ",
@@ -370413,6 +370422,7 @@
     "id": 42719764,
     "cn_name": "召唤电击",
     "sc_name": "召唤冲击",
+    "md_name": "召唤冲击",
     "nwbbs_n": "召唤电击",
     "cnocg_n": "召唤冲击",
     "jp_ruby": "サモンショック",
@@ -370466,6 +370476,7 @@
     "id": 5208118,
     "cn_name": "动点的心慌灵摆",
     "sc_name": "灵摆动点P",
+    "md_name": "灵摆动点P",
     "nwbbs_n": "动点的心慌灵摆",
     "cnocg_n": "灵摆动点P",
     "jp_ruby": "どうてんするペンデュラム",
@@ -370571,6 +370582,7 @@
     "id": 88570003,
     "cn_name": "王之仆人-黑魔术师",
     "sc_name": "王之仆从－黑魔导",
+    "md_name": "王之仆从－黑魔导",
     "nwbbs_n": "王之仆人-黑魔术师",
     "cnocg_n": "王的仆人-黑魔导士",
     "jp_ruby": "ファラオのしもべ－ブラック・マジシャン",
@@ -370597,6 +370609,7 @@
     "id": 14965712,
     "cn_name": "增殖的栗子球！",
     "sc_name": "增殖的库里波！",
+    "md_name": "增殖的库里波！",
     "nwbbs_n": "增殖的栗子球！",
     "cnocg_n": "增殖的栗子球！",
     "jp_ruby": "ぞうしょくするクリボー！",
@@ -370623,6 +370636,7 @@
     "id": 41350417,
     "cn_name": "黑魔导的幕帘",
     "sc_name": "黑之魔导的帘布",
+    "md_name": "黑之魔导的帘布",
     "nwbbs_n": "黑魔导的幕帘",
     "cnocg_n": "黑魔导的幕帘",
     "jp_ruby": "くろまどうのカーテン",
@@ -371255,7 +371269,7 @@
     "cnocg_n": "白色幻兽-蓝眼白龙",
     "jp_ruby": "しろきげんじゅう－ブルーアイズ・ホワイト・ドラゴン",
     "jp_name": "白き幻獣－青眼の白龍",
-    "wiki_en": "Blue-Eyes White Dragon, the White Phantom Beast",
+    "en_name": "Blue-Eyes White Dragon, the White Phantom Beast",
     "text": {
       "types": "[怪兽|效果] 龙/光\n[★8] 3000/2500",
       "pdesc": "",
@@ -371281,7 +371295,7 @@
     "cnocg_n": "苍之深渊 深眼白龙",
     "jp_ruby": "あおのしんえん　ディープアイズ・ホワイト・ドラゴン",
     "jp_name": "蒼の深淵 ディープアイズ・ホワイト・ドラゴン",
-    "wiki_en": "Deep-Eyes White Dragon, the Blue Abyss",
+    "en_name": "Deep-Eyes White Dragon, the Blue Abyss",
     "text": {
       "types": "[怪兽|效果] 龙/光\n[★10] 0/0",
       "pdesc": "",
@@ -371307,7 +371321,7 @@
     "cnocg_n": "龙引导的呼笛",
     "jp_ruby": "ドラゴン・みちびきのよびぶえ",
     "jp_name": "ドラゴン・導きの呼笛",
-    "wiki_en": "The Guiding Flute of Summoning Dragons",
+    "en_name": "The Guiding Flute of Summoning Dragons",
     "text": {
       "types": "[魔法]",
       "pdesc": "",
@@ -371334,8 +371348,7 @@
     "cnocg_n": "终击龙-电子终结龙",
     "jp_ruby": "しゅうげきりゅう－サイバー・エンド・ドラゴン",
     "jp_name": "終撃竜－サイバー・エンド・ドラゴン",
-    "wiki_en": "Cyber End Dragon, the Final Strike Dragon",
-    "md_en_n": "Cyber End Dragon, the Final Strike Dragon",
+    "en_name": "Cyber End Dragon, the Final Strike Dragon",
     "text": {
       "types": "[怪兽|效果|融合] 机械/光\n[★10] 4000/2800",
       "pdesc": "",
@@ -371362,8 +371375,7 @@
     "cnocg_n": "机光龙-电子龙",
     "jp_ruby": "きこうりゅう－サイバー・ドラゴン",
     "jp_name": "機光竜－サイバー・ドラゴン",
-    "wiki_en": "Cyber Dragon, the Luminous Mech Dragon",
-    "md_en_n": "Cyber Dragon, the Luminous Mech Dragon",
+    "en_name": "Cyber Dragon, the Luminous Mech Dragon",
     "text": {
       "types": "[怪兽|效果] 机械/光\n[★5] 2100/1600",
       "pdesc": "",
@@ -371390,8 +371402,7 @@
     "cnocg_n": "未来融合新星",
     "jp_ruby": "みらいゆうごう－フューチャー・フュージョン・ノヴァ",
     "jp_name": "未来融合－フューチャー・フュージョン・ノヴァ",
-    "wiki_en": "Future Fusion Nova",
-    "md_en_n": "Future Fusion Nova",
+    "en_name": "Future Fusion Nova",
     "text": {
       "types": "[魔法|永续]",
       "pdesc": "",
@@ -371418,8 +371429,7 @@
     "cnocg_n": "红龙 克察尔科亚特尔",
     "jp_ruby": "あかきりゅう　ケッツァーコアトル",
     "jp_name": "赤き竜 ケッツァーコアトル",
-    "wiki_en": "Crimson Dragon Quetzalcoatl",
-    "md_en_n": "Crimson Dragon Quetzalcoatl",
+    "en_name": "Crimson Dragon Quetzalcoatl",
     "text": {
       "types": "[怪兽|效果|同调] 龙/暗\n[★12] 0/0",
       "pdesc": "",
@@ -371446,8 +371456,7 @@
     "cnocg_n": "绯红新星龙-燃烧之魂",
     "jp_ruby": "スカーレッド・ノヴァ・ドラゴン－バーニング・ソウル",
     "jp_name": "スカーレッド・ノヴァ・ドラゴン－バーニング・ソウル",
-    "wiki_en": "Red Nova Dragon - Burning Soul",
-    "md_en_n": "Red Nova Dragon - Burning Soul",
+    "en_name": "Red Nova Dragon - Burning Soul",
     "text": {
       "types": "[怪兽|效果|同调] 龙/暗\n[★12] 3500/3000",
       "pdesc": "",
@@ -371474,8 +371483,7 @@
     "cnocg_n": "真红恶魔之锁链",
     "jp_ruby": "レッド・デーモンズ・チェーン",
     "jp_name": "レッド・デーモンズ・チェーン",
-    "wiki_en": "Red Dragon Archfiend's Chains",
-    "md_en_n": "Red Dragon Archfiend's Chains",
+    "en_name": "Red Dragon Archfiend's Chains",
     "set_ext": "恶魔",
     "text": {
       "types": "[陷阱|永续]",
@@ -371502,7 +371510,7 @@
     "cnocg_n": "超银河眼光子龙-光子咆哮",
     "jp_ruby": "ネオ・ギャラクシーアイズ・フォトン・ドラゴン－フォトン・ハウリング",
     "jp_name": "超銀河眼の光子龍－フォトン・ハウリング",
-    "wiki_en": "Neo Galaxy-Eyes Photon Dragon - Photon Howling",
+    "en_name": "Neo Galaxy-Eyes Photon Dragon - Photon Howling",
     "text": {
       "types": "[怪兽|效果|超量] 龙/光\n[☆8] 4500/3000",
       "pdesc": "",
@@ -371528,7 +371536,7 @@
     "cnocg_n": "银河眼辉光子龙",
     "jp_ruby": "ギャラクシーアイズ・フォトン・チェンジ・ドラゴン",
     "jp_name": "銀河眼の輝光子竜",
-    "wiki_en": "Galaxy-Eyes Photon Change Dragon",
+    "en_name": "Galaxy-Eyes Photon Change Dragon",
     "text": {
       "types": "[怪兽|效果] 龙/光\n[★8] 3000/2500",
       "pdesc": "",
@@ -371554,7 +371562,7 @@
     "cnocg_n": "银河防御机器人·轨道7",
     "jp_ruby": "ギャラクシーディフェンスロボ・オービタル　セブン",
     "jp_name": "GDロボ・オービタル ７",
-    "wiki_en": "Galaxy Defense Robot Orbital 7",
+    "en_name": "Galaxy Defense Robot Orbital 7",
     "text": {
       "types": "[怪兽|效果] 机械/光\n[★8] 2000/2000",
       "pdesc": "",
@@ -371581,8 +371589,7 @@
     "cnocg_n": "四天之龙 饥怨毒融合龙",
     "jp_ruby": "してんのりゅう　スターヴ・ヴェノム・フュージョン・ドラゴン",
     "jp_name": "四天の龍 スターヴ・ヴェノム・フュージョン・ドラゴン",
-    "wiki_en": "Starving Venom Fusion Dragon, Four Heavenly Dragons",
-    "md_en_n": "Starving Venom Fusion Dragon, Four Heavenly Dragons",
+    "en_name": "Starving Venom Fusion Dragon, Four Heavenly Dragons",
     "set_ext": "蛇毒",
     "text": {
       "types": "[怪兽|效果|融合] 龙/暗\n[★8] 2800/2000",
@@ -371610,8 +371617,7 @@
     "cnocg_n": "四天之龙 清透翼同调龙",
     "jp_ruby": "してんのりゅう　クリアウィング・シンクロ・ドラゴン",
     "jp_name": "四天の龍 クリアウィング・シンクロ・ドラゴン",
-    "wiki_en": "Clear Wing Synchro Dragon, Four Heavenly Dragons",
-    "md_en_n": "Clear Wing Synchro Dragon, Four Heavenly Dragons",
+    "en_name": "Clear Wing Synchro Dragon, Four Heavenly Dragons",
     "text": {
       "types": "[怪兽|效果|同调] 龙/风\n[★7] 2500/2000",
       "pdesc": "",
@@ -371638,8 +371644,7 @@
     "cnocg_n": "四天之龙 暗反叛多维龙",
     "jp_ruby": "してんのりゅう　ダーク・リベリオン・エクシーズ・ドラゴン",
     "jp_name": "四天の龍 ダーク・リベリオン・エクシーズ・ドラゴン",
-    "wiki_en": "Dark Rebellion Xyz Dragon, Four Heavenly Dragons",
-    "md_en_n": "Dark Rebellion Xyz Dragon, Four Heavenly Dragons",
+    "en_name": "Dark Rebellion Xyz Dragon, Four Heavenly Dragons",
     "text": {
       "types": "[怪兽|效果|超量] 龙/暗\n[☆4] 2500/2000",
       "pdesc": "",
@@ -371665,7 +371670,7 @@
     "cnocg_n": "枪管装填释放龙",
     "jp_ruby": "ヴァレルロード・リベレイター・ドラゴン",
     "jp_name": "ヴァレルロード・L・ドラゴン",
-    "wiki_en": "Borreload Liberator Dragon",
+    "en_name": "Borreload Liberator Dragon",
     "text": {
       "types": "[怪兽|效果|连接] 龙/暗\n[LINK-4] 3000/- [←][→][↙][↘]",
       "pdesc": "",
@@ -371691,7 +371696,7 @@
     "cnocg_n": "枪弹弹幕龙",
     "jp_ruby": "ヴァレット・バラージュ",
     "jp_name": "ヴァレット・バラージュ",
-    "wiki_en": "Rokket Barrage",
+    "en_name": "Rokket Barrage",
     "text": {
       "types": "[怪兽|效果] 龙/暗\n[★5] 1500/1600",
       "pdesc": "",
@@ -371717,7 +371722,7 @@
     "cnocg_n": "三重枪管旋转",
     "jp_ruby": "トリプル・ヴァレル・リボルブ",
     "jp_name": "トリプル・ヴァレル・リボルブ",
-    "wiki_en": "Triple Borrel Launch",
+    "en_name": "Triple Borrel Launch",
     "text": {
       "types": "[魔法|速攻]",
       "pdesc": "",
@@ -371743,7 +371748,7 @@
     "cnocg_n": "造物主EMA",
     "jp_ruby": "デミウルゴスエマ",
     "jp_name": "デミウルゴスEMA",
-    "wiki_en": "Demiurge Ema",
+    "en_name": "Demiurge Ema",
     "text": {
       "types": "[怪兽|效果] 天使/光\n[★8] 3300/2000",
       "pdesc": "",
@@ -371769,7 +371774,7 @@
     "cnocg_n": "暗之神-黑暗神",
     "jp_ruby": "やみのかみ－ダークゴッド",
     "jp_name": "闇の神－ダークゴッド",
-    "wiki_en": "Dark Creator",
+    "en_name": "Lord of Darkness",
     "text": {
       "types": "[怪兽|效果] 恶魔/暗\n[★10] 3000/1000",
       "pdesc": "",
@@ -371791,11 +371796,12 @@
     "id": 89753095,
     "cn_name": "神鸣",
     "sc_name": "神鸣",
+    "md_name": "神鸣",
     "nwbbs_n": "神鸣",
     "cnocg_n": "神鸣",
     "jp_ruby": "かみなり",
     "jp_name": "神鳴り",
-    "wiki_en": "Lightning Crash",
+    "en_name": "Lightning Crash",
     "text": {
       "types": "[魔法]",
       "pdesc": "",
@@ -371821,7 +371827,7 @@
     "cnocg_n": "黑暗调整 劫难贼",
     "jp_ruby": "ダークチューナーカタストローグ",
     "jp_name": "DTカタストローグ",
-    "wiki_en": "Dark Tuner Catastrogue",
+    "en_name": "Dark Tuner Catastrogue",
     "text": {
       "types": "[怪兽|效果|调整] 恶魔/暗\n[★8] 0/0",
       "pdesc": "",
@@ -371847,7 +371853,7 @@
     "cnocg_n": "黑暗调整 梦魇之手",
     "jp_ruby": "ダークチューナーナイトメア・ハンド",
     "jp_name": "DTナイトメア・ハンド",
-    "wiki_en": "Dark Tuner Nightmare Hand",
+    "en_name": "Dark Tuner Nightmare Hand",
     "text": {
       "types": "[怪兽|效果|调整] 战士/暗\n[★10] 0/0",
       "pdesc": "",
@@ -371873,7 +371879,7 @@
     "cnocg_n": "机炮食人魔",
     "jp_ruby": "ガトリング・オーガ",
     "jp_name": "ガトリング・オーガ",
-    "wiki_en": "Gatling Ogre",
+    "en_name": "Gatling Ogre",
     "text": {
       "types": "[怪兽|效果] 恶魔/炎\n[★3] 800/800",
       "pdesc": "",
@@ -371899,7 +371905,7 @@
     "cnocg_n": "永火死亡枪手",
     "jp_ruby": "インフェルニティ・デス・ガンマン",
     "jp_name": "インフェルニティ・デス・ガンマン",
-    "wiki_en": "Infernity Doom Slinger",
+    "en_name": "Infernity Doom Slinger",
     "text": {
       "types": "[怪兽|效果] 恶魔/暗\n[★1] 100/100",
       "pdesc": "",
@@ -371925,7 +371931,7 @@
     "cnocg_n": "混沌终焉之王-开辟与终焉的支配者-",
     "jp_ruby": "カオスエンド・ルーラー　－かいびゃくとしゅうえんのしはいしゃ－",
     "jp_name": "カオスエンド・ルーラー －開闢と終焉の支配者－",
-    "wiki_en": "Chaos End Ruler - Master of the Beginning and End",
+    "en_name": "Chaos End Ruler - Master of the Beginning and End",
     "text": {
       "types": "[怪兽|效果|特殊召唤] 战士/光\n[★10] 3500/2000",
       "pdesc": "",
@@ -371951,7 +371957,7 @@
     "cnocg_n": "超升阶魔法-究极之力",
     "jp_ruby": "ハイパーランクアップマジック－アルティメット・フォース",
     "jp_name": "HRUM－アルティメット・フォース",
-    "wiki_en": "Hyper Rank-Up-Magic Ultimate Force",
+    "en_name": "Hyper Rank-Up-Magic Ultimate Force",
     "text": {
       "types": "[魔法]",
       "pdesc": "",
@@ -371977,7 +371983,7 @@
     "cnocg_n": "完美创生高驱动龙",
     "jp_ruby": "パーフェクトロン・ハイドライブ・ドラゴン",
     "jp_name": "パーフェクトロン・ハイドライブ・ドラゴン",
-    "wiki_en": "Perfectron Hydradrive Dragon",
+    "en_name": "Perfectron Hydradrive Dragon",
     "text": {
       "types": "[怪兽|效果|连接] 电子界/地\n[LINK-5] 5000/- [←][→][↙][↓][↘]",
       "pdesc": "",
@@ -372796,6 +372802,7 @@
     "id": 22912101,
     "cn_name": "浪涌雷盟兵",
     "sc_name": "萨吉・雷盟",
+    "md_name": "萨吉・雷盟",
     "nwbbs_n": "浪涌雷盟兵",
     "cnocg_n": "汹涌沙姬·雷盟",
     "jp_ruby": "サージ・ブリッツクリーク",
@@ -372822,6 +372829,7 @@
     "id": 58916810,
     "cn_name": "裂纹雷盟兵",
     "sc_name": "克拉克・雷盟",
+    "md_name": "克拉克・雷盟",
     "nwbbs_n": "裂纹雷盟兵",
     "cnocg_n": "炸雷克拉克·雷盟",
     "jp_ruby": "クラック・ブリッツクリーク",
@@ -372848,6 +372856,7 @@
     "id": 84401954,
     "cn_name": "晶粒雷盟兵",
     "sc_name": "格瑞恩・雷盟",
+    "md_name": "格瑞恩・雷盟",
     "nwbbs_n": "晶粒雷盟兵",
     "cnocg_n": "绿纹格莱恩·雷盟",
     "jp_ruby": "グレイン・ブリッツクリーク",
@@ -372874,6 +372883,7 @@
     "id": 11895663,
     "cn_name": "电磁干扰雷盟兵",
     "sc_name": "艾米・雷盟",
+    "md_name": "艾米・雷盟",
     "nwbbs_n": "电磁干扰雷盟兵",
     "cnocg_n": "微笑爱咪·雷盟",
     "jp_ruby": "エミ・ブリッツクリーク",
@@ -373114,6 +373124,7 @@
     "id": 18738846,
     "cn_name": "系星之雷后",
     "sc_name": "牵星之雷后",
+    "md_name": "牵星之雷后",
     "nwbbs_n": "系星之雷后",
     "cnocg_n": "牵星之雷后",
     "jp_ruby": "アストゥラズマ・ウラニア",
@@ -373828,6 +373839,7 @@
     "id": 37654623,
     "cn_name": "天空城塞 库仑城寨",
     "sc_name": "天空城塞 库龙",
+    "md_name": "天空城塞 库龙",
     "nwbbs_n": "天空城塞 库仑城寨",
     "cnocg_n": "天空城塞 库仑玖龙城",
     "jp_ruby": "てんくうじょうさいクーロン",
@@ -373854,6 +373866,7 @@
     "id": 64049762,
     "cn_name": "雷盟-可断开式",
     "sc_name": "雷盟－断离粉碎",
+    "md_name": "雷盟－断离粉碎",
     "nwbbs_n": "雷盟-可断开式",
     "cnocg_n": "雷盟-突围",
     "jp_ruby": "ブリッツクリーク－ブレイクアウェイ",
@@ -373880,6 +373893,7 @@
     "id": 433377,
     "cn_name": "雷盟-梯级先导",
     "sc_name": "雷盟－先导云步",
+    "md_name": "雷盟－先导云步",
     "nwbbs_n": "雷盟-梯级先导",
     "cnocg_n": "雷盟-领步",
     "jp_ruby": "ブリッツクリーク－ステップリーダ",
@@ -374147,6 +374161,7 @@
     "id": 24461358,
     "cn_name": "朽坏的祭仪要录",
     "sc_name": "腐朽的祭仪要录",
+    "md_name": "腐朽的祭仪要录",
     "nwbbs_n": "朽坏的祭仪要录",
     "cnocg_n": "破旧的祭仪要录",
     "jp_ruby": "くちたさいぎようろく",
@@ -374304,6 +374319,7 @@
     "id": 23526128,
     "cn_name": "雷盟-回击",
     "sc_name": "雷盟－回击电冲",
+    "md_name": "雷盟－回击电冲",
     "nwbbs_n": "雷盟-回击",
     "cnocg_n": "雷盟-回击",
     "jp_ruby": "ブリッツクリーク－リターンストローク",
@@ -374330,6 +374346,7 @@
     "id": 59921227,
     "cn_name": "雷盟-交流发电机",
     "sc_name": "雷盟－交电夹击",
+    "md_name": "雷盟－交电夹击",
     "nwbbs_n": "雷盟-交流发电机",
     "cnocg_n": "雷盟-交电",
     "jp_ruby": "ブリッツクリーク－オルタネータ",
@@ -374671,11 +374688,13 @@
     "cid": 23128,
     "id": 80222045,
     "cn_name": "勒库纳斯之吸雷 闪电比熊犬",
+    "md_name": "鲁库纳斯之吸雷 布利泽",
     "nwbbs_n": "勒库纳斯之吸雷 闪电比熊犬",
     "cnocg_n": "露克纳斯之吸雷 布利泽",
     "jp_ruby": "ルクナスのきゅうらい ブリーゼ",
     "jp_name": "ルクナスの吸雷 ブリーゼ",
-    "wiki_en": "Breeze the Electrovore of Rkunas",
+    "wiki_en": "Brise the Lightning Lampreyer of Lukunas",
+    "md_en_n": "Brise the Lightning Lampreyer of Lukunas",
     "text": {
       "types": "[怪兽|通常] 雷/光\n[★1] 100/2100",
       "pdesc": "",
@@ -374852,7 +374871,7 @@
     "cnocg_n": "E·HERO 黏土防御人",
     "jp_ruby": "エレメンタルヒーロー　クレイガードマン",
     "jp_name": "E・HERO クレイガードマン",
-    "wiki_en": "Elemental HERO Clay Guardian",
+    "wiki_en": "Elemental HERO Clay Guardsman",
     "text": {
       "types": "[怪兽|效果|融合] 战士/地\n[★4] 0/2800",
       "pdesc": "",
@@ -374954,7 +374973,7 @@
     "cnocg_n": "趣怪黑暗兔子",
     "jp_ruby": "ファニー・ダーク・ラビット",
     "jp_name": "ファニー・ダーク・ラビット",
-    "wiki_en": "Funny Dark Rabbit",
+    "en_name": "Funny Dark Rabbit",
     "text": {
       "types": "[怪兽|效果] 兽/暗\n[★4] 1100/1500",
       "pdesc": "",
@@ -374980,7 +374999,7 @@
     "cnocg_n": "漫画猫",
     "jp_ruby": "コミックキャット",
     "jp_name": "コミックキャット",
-    "wiki_en": "Comic Cat",
+    "en_name": "Animimicat",
     "text": {
       "types": "[怪兽|效果] 兽/暗\n[★1] 0/0",
       "pdesc": "",
@@ -375006,7 +375025,7 @@
     "cnocg_n": "邪恶箱",
     "jp_ruby": "エビル・ボックス",
     "jp_name": "エビル・ボックス",
-    "wiki_en": "Evil Box",
+    "en_name": "Evil Box",
     "text": {
       "types": "[怪兽|效果] 恶魔/暗\n[★6] 2300/2000",
       "pdesc": "",
@@ -375032,7 +375051,7 @@
     "cnocg_n": "有暗眼的幻想师·无脸",
     "jp_ruby": "ダーク・アイズ・イリュージョニスト・ノー・フェイス",
     "jp_name": "闇の眼を持つ幻想師・ノー・フェイス",
-    "wiki_en": "Dark-Eyes Illusionist Faceless Mage",
+    "en_name": "Dark-Eyes Illusionist Faceless Mage",
     "text": {
       "types": "[怪兽|效果] 幻想魔/暗\n[★4] 0/0",
       "pdesc": "",
@@ -375059,8 +375078,7 @@
     "cnocg_n": "蓝眼卡通究极龙",
     "jp_ruby": "ブルーアイズ・トゥーン・アルティメットドラゴン",
     "jp_name": "ブルーアイズ・トゥーン・アルティメットドラゴン",
-    "wiki_en": "Blue-Eyes Ultimate Toon Dragon",
-    "md_en_n": "Blue-Eyes Toon Ultimate Dragon",
+    "en_name": "Blue-Eyes Toon Ultimate Dragon",
     "text": {
       "types": "[怪兽|效果|融合|卡通] 龙/光\n[★12] 4500/3800",
       "pdesc": "",
@@ -375087,8 +375105,7 @@
     "cnocg_n": "完全的世界 卡通世界",
     "jp_ruby": "かんぜんなるせかい　トゥーン・ワールド",
     "jp_name": "完全なる世界 トゥーン・ワールド",
-    "wiki_en": "Perfect Toon World",
-    "md_en_n": "Perfect Toon World",
+    "en_name": "Perfect Toon World",
     "text": {
       "types": "[魔法|场地]",
       "pdesc": "",
@@ -375114,7 +375131,7 @@
     "cnocg_n": "透视心灵之眼",
     "jp_ruby": "マインド・スキャン",
     "jp_name": "心を見通す眼",
-    "wiki_en": "Mind Scan",
+    "en_name": "Mind Scan",
     "text": {
       "types": "[陷阱|永续]",
       "pdesc": "",
@@ -375136,11 +375153,12 @@
     "id": 70686400,
     "cn_name": "魔女术赤陶偶",
     "sc_name": "魔女工艺・陶俑魔像",
+    "md_name": "魔女工艺・陶俑魔像",
     "nwbbs_n": "魔女术赤陶偶",
     "cnocg_n": "魔女工坊赤陶土偶",
     "jp_ruby": "ウィッチクラフト・テラコッタン",
     "jp_name": "ウィッチクラフト・テラコッタン",
-    "wiki_en": "Witchcrafter Terracottan",
+    "en_name": "Witchcrafter Terracottan",
     "text": {
       "types": "[怪兽|效果] 魔法师/地\n[★2] 0/2000",
       "pdesc": "",
@@ -375162,11 +375180,12 @@
     "id": 6071005,
     "cn_name": "魔女术工匠·商标女巫",
     "sc_name": "魔女工艺・书匠玛尔卡",
+    "md_name": "魔女工艺・书匠玛尔卡",
     "nwbbs_n": "魔女术工匠·商标女巫",
     "cnocg_n": "魔女工坊 书匠",
     "jp_ruby": "ウィッチクラフト・マルカ",
     "jp_name": "ウィッチクラフト・マルカ",
-    "wiki_en": "Witchcrafter Marka",
+    "en_name": "Witchcrafter Marka",
     "text": {
       "types": "[怪兽|效果] 魔法师/暗\n[★6] 2500/0",
       "pdesc": "",
@@ -375193,8 +375212,7 @@
     "cnocg_n": "魔女工坊师傅-大魔女桑德里永",
     "jp_ruby": "ウィッチクラフトマスターサンドリヨン",
     "jp_name": "大魔女サンドリヨン",
-    "wiki_en": "Witchcrafter Madame Rilliona",
-    "md_en_n": "Witchcrafter Madame Rilliona",
+    "en_name": "Witchcrafter Madame Rilliona",
     "set_ext": "魔女术",
     "text": {
       "types": "[怪兽|效果|融合] 魔法师/光\n[★8] 3800/2800",
@@ -375217,11 +375235,12 @@
     "id": 69964858,
     "cn_name": "魔女术学童组合",
     "sc_name": "魔女工艺・学徒组",
+    "md_name": "魔女工艺・学徒组",
     "nwbbs_n": "魔女术学童组合",
     "cnocg_n": "魔女工坊学徒组",
     "jp_ruby": "ウィッチクラフト・ピューピルズ",
     "jp_name": "ウィッチクラフト・ピューピルズ",
-    "wiki_en": "Witchcrafter Pupils",
+    "en_name": "Witchcrafter Pupils",
     "text": {
       "types": "[怪兽|效果|融合] 魔法师/炎\n[★8] 1800/2100",
       "pdesc": "",
@@ -375243,11 +375262,12 @@
     "id": 6958567,
     "cn_name": "魔女术的庆祝会",
     "sc_name": "魔女工艺・庆典",
+    "md_name": "魔女工艺・庆典",
     "nwbbs_n": "魔女术的庆祝会",
     "cnocg_n": "魔女工坊庆典",
     "jp_ruby": "ウィッチクラフト・セレブレーション",
     "jp_name": "ウィッチクラフト・セレブレーション",
-    "wiki_en": "Witchcrafter Celebration",
+    "en_name": "Witchcrafter Celebration",
     "text": {
       "types": "[魔法|速攻]",
       "pdesc": "",
@@ -375274,8 +375294,7 @@
     "cnocg_n": "魔女工坊圣夜行",
     "jp_ruby": "ウィッチクラフト・ワルプルギース",
     "jp_name": "魔女の聖夜行",
-    "wiki_en": "Witchcrafter Walpurgis",
-    "md_en_n": "Witchcrafter Walpurgis",
+    "en_name": "Witchcrafter Walpurgis",
     "set_ext": "魔女术",
     "text": {
       "types": "[魔法|场地]",
@@ -375298,11 +375317,12 @@
     "id": 69748261,
     "cn_name": "魔女术的歪曲",
     "sc_name": "魔女工艺・消散",
+    "md_name": "魔女工艺・消散",
     "nwbbs_n": "魔女术的歪曲",
     "cnocg_n": "魔女工坊消散",
     "jp_ruby": "ウィッチクラフト・ディストーション",
     "jp_name": "ウィッチクラフト・ディストーション",
-    "wiki_en": "Witchcrafter Distortion",
+    "en_name": "Witchcrafter Distortion",
     "text": {
       "types": "[陷阱|反击]",
       "pdesc": "",
@@ -375328,7 +375348,7 @@
     "cnocg_n": "破械式鬼 奢罗",
     "jp_ruby": "はかいしきシャラ",
     "jp_name": "破械式鬼シャラ",
-    "wiki_en": "Unchained Ogre Shara",
+    "en_name": "Unchained Oni of Shara",
     "text": {
       "types": "[怪兽|效果] 恶魔/炎\n[★4] 1500/2000",
       "pdesc": "",
@@ -375354,7 +375374,7 @@
     "cnocg_n": "破械式鬼 修摩",
     "jp_ruby": "はかいしきシュマ",
     "jp_name": "破械式鬼シュマ",
-    "wiki_en": "Unchained Ogre Shma",
+    "en_name": "Unchained Oni of Shyma",
     "text": {
       "types": "[怪兽|效果] 恶魔/水\n[★4] 1500/2000",
       "pdesc": "",
@@ -375380,7 +375400,7 @@
     "cnocg_n": "破械冥官 迦牟罗",
     "jp_ruby": "はかいめいかんカムラ",
     "jp_name": "破械冥官カムラ",
-    "wiki_en": "Unchained Malevolent Magistrate Kamura",
+    "en_name": "Unchained Zealot - Kamra",
     "text": {
       "types": "[怪兽|效果] 恶魔/暗\n[★8] 2000/2500",
       "pdesc": "",
@@ -375407,8 +375427,7 @@
     "cnocg_n": "破械焰魔天 阎摩",
     "jp_ruby": "はかいえんまてんヤマ",
     "jp_name": "破械焔魔天ヤマ",
-    "wiki_en": "Unchained Enma Lord Yama",
-    "md_en_n": "Unchained Firelord of Yama",
+    "en_name": "Unchained Firelord of Yama",
     "text": {
       "types": "[怪兽|效果|连接] 恶魔/暗\n[LINK-4] 3000/- [↑][↙][↓][↘]",
       "pdesc": "",
@@ -375434,7 +375453,7 @@
     "cnocg_n": "破械神双 罗仪亚",
     "jp_ruby": "はかいしんそうラギア",
     "jp_name": "破械神雙ラギア",
-    "wiki_en": "Unchained Soul Rage Abominator",
+    "en_name": "Unchained Soul of Abominable Rage",
     "text": {
       "types": "[怪兽|效果|连接] 恶魔/暗\n[LINK-3] 2100/- [←][→][↓]",
       "pdesc": "",
@@ -375460,7 +375479,7 @@
     "cnocg_n": "破械转生",
     "jp_ruby": "はかいてんしょう",
     "jp_name": "破械転生",
-    "wiki_en": "Reincarnation of the Unchained",
+    "en_name": "Reincarnation of the Unchained",
     "text": {
       "types": "[魔法|永续]",
       "pdesc": "",
@@ -375486,7 +375505,7 @@
     "cnocg_n": "破械习合",
     "jp_ruby": "はかいしゅうごう",
     "jp_name": "破械習合",
-    "wiki_en": "Unchained Syncretism",
+    "en_name": "Unchained Hunger",
     "text": {
       "types": "[陷阱]",
       "pdesc": "",
@@ -375573,8 +375592,10 @@
     "cid": 23299,
     "id": 53754391,
     "cn_name": "设陷雷轰稻草人",
+    "md_name": "崩电稻草人",
     "cnocg_n": "雷轰诱捕稻草人",
     "en_name": "Thundercrash Snarecrow",
+    "md_jp_n": "崩電スネアクロウ",
     "text": {
       "types": "[怪兽|效果] 雷/光\n[★8] 1600/2800",
       "pdesc": "",
@@ -375595,8 +375616,10 @@
     "cid": 23300,
     "id": 80843006,
     "cn_name": "权柄交络者 米克修希亚",
+    "md_name": "昏淆的米库西亚",
     "cnocg_n": "混杂体 密克苏西亚",
     "en_name": "Mixousia the Confounder",
+    "md_jp_n": "昏淆するミクシィア",
     "text": {
       "types": "[怪兽|效果|融合] 魔法师/暗\n[★8] 2700/1500",
       "pdesc": "",
@@ -376201,7 +376224,7 @@
     "id": 1710647,
     "cn_name": "疫神之依鬼 夜亚",
     "sc_name": "疫神之依艮鬼 夜亚",
-    "nwbbs_n": "疫神之依鬼 夜亚",
+    "nwbbs_n": "疫神之依鬼 夜阿",
     "cnocg_n": "疫神之依艮鬼 夜亚",
     "jp_ruby": "えきじんのアシュトラ　ヨア",
     "jp_name": "疫神の依鬼 ヨア",
@@ -376724,6 +376747,7 @@
     "id": 55585856,
     "cn_name": "秘召水巫女士",
     "sc_name": "秘召刻漏淑女",
+    "md_name": "秘召刻漏淑女",
     "nwbbs_n": "秘召水巫女士",
     "cnocg_n": "秘召刻漏淑女",
     "jp_ruby": "ミズティックコール",
@@ -377642,6 +377666,7 @@
     "id": 30945251,
     "cn_name": "雷盟-过电压",
     "sc_name": "雷盟－电压过载",
+    "md_name": "雷盟－电压过载",
     "nwbbs_n": "雷盟-过电压",
     "cnocg_n": "雷盟-超电压",
     "jp_ruby": "ブリッツクリーク－オーバーボルテージ",
@@ -378085,11 +378110,13 @@
     "cid": 23416,
     "id": 59106048,
     "cn_name": "魔女术工匠·种子女巫",
+    "md_name": "魔女工艺・育种希德",
     "nwbbs_n": "魔女术工匠·种子女巫",
     "cnocg_n": "魔女工坊 种植匠",
     "jp_ruby": "ウィッチクラフト・シード",
     "jp_name": "ウィッチクラフト・シード",
     "wiki_en": "Witchcrafter Seed",
+    "md_en_n": "Witchcrafter Seed",
     "text": {
       "types": "[怪兽|效果] 魔法师/风\n[★4] 1300/1500",
       "pdesc": "",
@@ -378256,7 +378283,7 @@
     "jp_ruby": "いにしえのひぎ",
     "jp_name": "古の秘儀",
     "wiki_en": "Ancient Secrets",
-    "md_en_n": "古の秘儀",
+    "md_en_n": "Ancient Arcanum",
     "text": {
       "types": "[魔法]",
       "pdesc": "",
@@ -378284,7 +378311,7 @@
     "jp_ruby": "せいなるこころのバリア　－マインドフォース－",
     "jp_name": "聖なる心のバリア －マインドフォース－",
     "wiki_en": "Mind Mirror Force",
-    "md_en_n": "聖なる心のバリア　－マインドフォース－",
+    "md_en_n": "Mind Mirror Force",
     "text": {
       "types": "[陷阱]",
       "pdesc": "",
@@ -378312,7 +378339,7 @@
     "jp_ruby": "めいふよりのししゃ",
     "jp_name": "冥府よりの使者",
     "wiki_en": "Emissaries from Darkness",
-    "md_en_n": "冥府よりの使者",
+    "md_en_n": "Emissaries from Darkness",
     "text": {
       "types": "[怪兽|效果] 恶魔/暗\n[★7] 2700/2500",
       "pdesc": "",
@@ -378340,7 +378367,7 @@
     "jp_ruby": "ダーク・アームド・ドラゴン・バニッシャー",
     "jp_name": "ダーク・アームド・ドラゴン・バニッシャー",
     "wiki_en": "Dark Armed Dragon Punisher",
-    "md_en_n": "ダーク・アームド・ドラゴン・バニッシャー",
+    "md_en_n": "Dark Armed Dragon Vanisher",
     "text": {
       "types": "[怪兽|效果|特殊召唤] 龙/暗\n[★7] 2800/1000",
       "pdesc": "",
@@ -378368,7 +378395,7 @@
     "jp_ruby": "ひょうけっかいのりゅういん　エクハジャール",
     "jp_name": "氷結界の龍胤 エクハジャール",
     "wiki_en": "Ekhajar, Descendant Dragon of the Ice Barrier",
-    "md_en_n": "氷結界の龍胤　エクハジャール",
+    "md_en_n": "Ekhajar, Dragon Descendant of the Ice Barrier",
     "text": {
       "types": "[怪兽|效果|同调] 龙/水\n[★9] 3000/1000",
       "pdesc": "",
@@ -378466,7 +378493,7 @@
   },
   "23513": {
     "cid": 23513,
-    "id": 101306281,
+    "id": 52245126,
     "cn_name": "冰原之始祖 欧德姆布拉",
     "en_name": "Audhumla, Progenitor of the Frozen Expanse",
     "text": {
@@ -378487,7 +378514,7 @@
   },
   "23514": {
     "cid": 23514,
-    "id": 101306082,
+    "id": 99630221,
     "cn_name": "静寂猛虎",
     "en_name": "Tigress in Silent Repose",
     "text": {
@@ -378508,7 +378535,7 @@
   },
   "23515": {
     "cid": 23515,
-    "id": 101306083,
+    "id": 25024929,
     "cn_name": "听天投命",
     "en_name": "Just Flip a Coin",
     "text": {
@@ -378529,7 +378556,7 @@
   },
   "23516": {
     "cid": 23516,
-    "id": 101306084,
+    "id": 52123534,
     "cn_name": "九色鹿 九面妖",
     "en_name": "Kumenyo, the Nine-Hued Deer",
     "text": {
@@ -378550,7 +378577,7 @@
   },
   "23517": {
     "cid": 23517,
-    "id": 101306085,
+    "id": 98518633,
     "cn_name": "贪玩的呱呱公主",
     "en_name": "Kerolia the Frolicsome",
     "text": {
@@ -378571,7 +378598,7 @@
   },
   "23518": {
     "cid": 23518,
-    "id": 101306086,
+    "id": 24902348,
     "cn_name": "魔道乌贼 大王",
     "en_name": "Archidux, the Squid Sorcerer",
     "text": {
@@ -378592,7 +378619,7 @@
   },
   "23519": {
     "cid": 23519,
-    "id": 101306087,
+    "id": 51307986,
     "cn_name": "飞临的蓝锯手",
     "en_name": "Skyborne Blue Cularsaw",
     "text": {
@@ -378613,7 +378640,7 @@
   },
   "23520": {
     "cid": 23520,
-    "id": 101306088,
+    "id": 87395095,
     "cn_name": "红砷镍半身矿",
     "en_name": "Half Slice of Nickeline",
     "text": {
@@ -378634,7 +378661,7 @@
   },
   "23521": {
     "cid": 23521,
-    "id": 101306089,
+    "id": 24780790,
     "cn_name": "混沌诞生主教",
     "en_name": "Chaospawn Bishop",
     "text": {
@@ -378655,7 +378682,7 @@
   },
   "23522": {
     "cid": 23522,
-    "id": 101306090,
+    "id": 50284408,
     "cn_name": "城主之具象天使",
     "en_name": "Angelechy Castellan",
     "text": {
@@ -378676,7 +378703,7 @@
   },
   "23523": {
     "cid": 23523,
-    "id": 101306091,
+    "id": 86673403,
     "cn_name": "具象天使的元帅",
     "en_name": "Angelechy Seneschal",
     "text": {
@@ -378697,7 +378724,7 @@
   },
   "23524": {
     "cid": 23524,
-    "id": 101306092,
+    "id": 13068112,
     "cn_name": "具象天使的战略分值",
     "en_name": "Angelechy Strategy Score",
     "text": {
@@ -378718,7 +378745,7 @@
   },
   "23525": {
     "cid": 23525,
-    "id": 101306093,
+    "id": 59062857,
     "cn_name": "具象天使的精妙一手",
     "en_name": "Angelechy Brilliant Move",
     "text": {
@@ -378739,7 +378766,7 @@
   },
   "23526": {
     "cid": 23526,
-    "id": 101306094,
+    "id": 86457955,
     "cn_name": "具象天使的对峙格位",
     "en_name": "Angelechy Opposition",
     "text": {
@@ -378760,7 +378787,7 @@
   },
   "23527": {
     "cid": 23527,
-    "id": 101306095,
+    "id": 12845564,
     "cn_name": "具象天使的终局之问",
     "en_name": "Angelechy Endgame Problem",
     "text": {
@@ -378781,7 +378808,7 @@
   },
   "23528": {
     "cid": 23528,
-    "id": 101306096,
+    "id": 48340269,
     "cn_name": "具象天使之裁",
     "en_name": "Angelechy Verdict",
     "text": {
@@ -378889,7 +378916,7 @@
     "cnocg_n": "塞尼特胜利者·斯芬克斯",
     "jp_ruby": "セネトナクト・スフィンクス",
     "jp_name": "セネトナクト・スフィンクス",
-    "wiki_en": "Zenetnakht Sphinx",
+    "wiki_en": "Zenet-Nakhte Sphinx",
     "md_en_n": "Zenet-Nakhte Sphinx",
     "text": {
       "types": "[怪兽|效果|仪式] 不死/暗\n[★12] 5000/2500",
@@ -379700,7 +379727,7 @@
   },
   "23565": {
     "cid": 23565,
-    "id": 100268001,
+    "id": 91583378,
     "cn_name": "业火之魔神 艾克佐迪亚",
     "nwbbs_n": "业火之魔神 艾克佐迪亚",
     "jp_ruby": "ごうかのまじんエクゾディア",
@@ -379724,7 +379751,7 @@
   },
   "23566": {
     "cid": 23566,
-    "id": 100268002,
+    "id": 38578076,
     "cn_name": "完全羽化-究极完全态大飞蛾",
     "nwbbs_n": "完全羽化-究极完全态大飞蛾",
     "jp_ruby": "かんぜんなるうか－きゅうきょくかんぜんたい・グレート・モス",
@@ -379748,7 +379775,7 @@
   },
   "23567": {
     "cid": 23567,
-    "id": 100268003,
+    "id": 64972181,
     "cn_name": "鹰身女郎-华丽的分身-",
     "nwbbs_n": "鹰身女郎-华丽的分身-",
     "jp_ruby": "ハーピィ・レディ－かれいなるぶんしん－",
@@ -379772,7 +379799,7 @@
   },
   "23568": {
     "cid": 23568,
-    "id": 100268004,
+    "id": 91461780,
     "cn_name": "超越神的仆人-青眼究极龙",
     "nwbbs_n": "超越神的仆人-青眼究极龙",
     "jp_ruby": "かみをこえたしもべ－ブルーアイズ・アルティメットドラゴン",
@@ -379796,7 +379823,7 @@
   },
   "23569": {
     "cid": 23569,
-    "id": 100268005,
+    "id": 27855495,
     "cn_name": "机械龙-左轮手枪龙",
     "nwbbs_n": "机械龙-左轮手枪龙",
     "jp_ruby": "きかいりゅう－リボルバー・ドラゴン",
@@ -379820,7 +379847,7 @@
   },
   "23570": {
     "cid": 23570,
-    "id": 100268006,
+    "id": 63250533,
     "cn_name": "幻想之邪眼-纳祭之魔",
     "nwbbs_n": "幻想之邪眼-纳祭之魔",
     "jp_ruby": "げんそうのじゃがん－サクリファイス",
@@ -379844,7 +379871,7 @@
   },
   "23571": {
     "cid": 23571,
-    "id": 100268007,
+    "id": 90249148,
     "cn_name": "死之世界的支配者-暗黑人偶 妮可罗菲娅",
     "nwbbs_n": "死之世界的支配者-暗黑人偶 妮可罗菲娅",
     "jp_ruby": "しのせかいのしはいしゃ－ダーク・ネクロフィア",
@@ -379868,7 +379895,7 @@
   },
   "23572": {
     "cid": 23572,
-    "id": 100268008,
+    "id": 26633847,
     "cn_name": "闪电战士-闪电之战士 吉尔福德",
     "nwbbs_n": "闪电战士-闪电之战士 吉尔福德",
     "jp_ruby": "いなずまのせんし－ギルフォード・ザ・ライトニング",
@@ -379892,7 +379919,7 @@
   },
   "23573": {
     "cid": 23573,
-    "id": 100268201,
+    "id": 53038955,
     "cn_name": "波动之超魔导剑士-黑魔导剑士",
     "nwbbs_n": "波动之超魔导剑士-黑魔导剑士",
     "jp_ruby": "はどうのちょうまどうけんし－ブラック・パラディン",
@@ -379916,7 +379943,7 @@
   },
   "23574": {
     "cid": 23574,
-    "id": 100268010,
+    "id": 99522650,
     "cn_name": "沉默斗者-沉默魔术师",
     "nwbbs_n": "沉默斗者-沉默魔术师",
     "jp_ruby": "ちんもくのとうしゃ－サイレント・マジシャン",
@@ -379940,7 +379967,7 @@
   },
   "23575": {
     "cid": 23575,
-    "id": 100268011,
+    "id": 26511269,
     "cn_name": "惩罚游戏「GREED-欲望的幻象-」",
     "nwbbs_n": "惩罚游戏「GREED-欲望的幻象-」",
     "jp_ruby": "ばつゲーム「グリード－よくぼうのげんぞう－」",
@@ -379964,7 +379991,7 @@
   },
   "23576": {
     "cid": 23576,
-    "id": 100268012,
+    "id": 52915304,
     "cn_name": "尸魔侠",
     "nwbbs_n": "尸魔侠",
     "jp_ruby": "ゾンバイア",
@@ -379988,7 +380015,7 @@
   },
   "23577": {
     "cid": 23577,
-    "id": 100268013,
+    "id": 88300002,
     "cn_name": "魔之龙札-土龙",
     "nwbbs_n": "魔之龙札-土龙",
     "jp_ruby": "まのドラゴン・カード－どりゅう",
@@ -380012,7 +380039,7 @@
   },
   "23578": {
     "cid": 23578,
-    "id": 100268014,
+    "id": 25799717,
     "cn_name": "魔之龙札-金龙",
     "nwbbs_n": "魔之龙札-金龙",
     "jp_ruby": "まのドラゴン・カード－きんりゅう",
@@ -380036,7 +380063,7 @@
   },
   "23579": {
     "cid": 23579,
-    "id": 100268015,
+    "id": 51193716,
     "cn_name": "超级暴击",
     "nwbbs_n": "超级暴击",
     "jp_ruby": "スーパークリティカル",
@@ -380060,7 +380087,7 @@
   },
   "23580": {
     "cid": 23580,
-    "id": 100268016,
+    "id": 88288421,
     "cn_name": "环境适应力",
     "nwbbs_n": "环境适应力",
     "jp_ruby": "フィールド・パワーソース",
@@ -380084,7 +380111,7 @@
   },
   "23581": {
     "cid": 23581,
-    "id": 100268017,
+    "id": 24672129,
     "cn_name": "香水战术",
     "nwbbs_n": "香水战术",
     "jp_ruby": "アロマ・タクティクス",
@@ -380109,7 +380136,7 @@
   },
   "23582": {
     "cid": 23582,
-    "id": 100268018,
+    "id": 50071178,
     "cn_name": "暗魔导的霸王",
     "nwbbs_n": "暗魔导的霸王",
     "jp_ruby": "やみまどうのはおう",
@@ -380133,7 +380160,7 @@
   },
   "23583": {
     "cid": 23583,
-    "id": 100268019,
+    "id": 87465873,
     "cn_name": "属性反拨作用",
     "nwbbs_n": "属性反拨作用",
     "jp_ruby": "ぞくせいはんぱつさよう",
@@ -380157,7 +380184,7 @@
   },
   "23584": {
     "cid": 23584,
-    "id": 100268020,
+    "id": 13450581,
     "cn_name": "二刀公爵",
     "nwbbs_n": "二刀公爵",
     "jp_ruby": "デューカー・ツイン・ソード",
@@ -380181,7 +380208,7 @@
   },
   "23585": {
     "cid": 23585,
-    "id": 100268021,
+    "id": 50849686,
     "cn_name": "闪光之封杀剑",
     "nwbbs_n": "闪光之封杀剑",
     "jp_ruby": "せんこうのふうさつけん",
@@ -380205,7 +380232,7 @@
   },
   "23586": {
     "cid": 23586,
-    "id": 100268022,
+    "id": 86343295,
     "cn_name": "暗黑魔族 基尔法恶魔-暗黑魔炎葬",
     "nwbbs_n": "暗黑魔族 基尔法恶魔-暗黑魔炎葬",
     "jp_ruby": "あんこくまぞくギルファー・デーモン－ギルファーフレイム",
@@ -380229,7 +380256,7 @@
   },
   "23587": {
     "cid": 23587,
-    "id": 100268023,
+    "id": 12738990,
     "cn_name": "钢铁骑士 基亚·弗里德",
     "nwbbs_n": "钢铁骑士 基亚·弗里德",
     "jp_ruby": "こうてつのきし　ギア・フリード",
@@ -380253,7 +380280,7 @@
   },
   "23588": {
     "cid": 23588,
-    "id": 100268024,
+    "id": 49122098,
     "cn_name": "魔法卡「敌人操纵器」",
     "nwbbs_n": "魔法卡「敌人操纵器」",
     "jp_ruby": "マジックカード「エネミーコントローラー」",
@@ -380277,7 +380304,7 @@
   },
   "23589": {
     "cid": 23589,
-    "id": 100268025,
+    "id": 85121747,
     "cn_name": "对灵魂的引导",
     "nwbbs_n": "对灵魂的引导",
     "jp_ruby": "たましいへのいんどう",
@@ -380323,9 +380350,1957 @@
       "attribute": 16
     }
   },
+  "23812": {
+    "cid": 23812,
+    "id": 82951145,
+    "cn_name": "太阳神的诗咏者-地狱诗人",
+    "nwbbs_n": "太阳神灵的诗咏者-地狱诗人",
+    "jp_ruby": "たいようしんのしえいしゃ－ヘルポエマー",
+    "jp_name": "太陽神の詩詠者－ヘルポエマー",
+    "wiki_en": "Helpoemer, Chanter of the Sun God",
+    "text": {
+      "types": "[怪兽|效果] 恶魔/暗\n[★5] 2000/1400",
+      "pdesc": "",
+      "desc": "这个卡名的①②③的效果1回合各能使用1次。\r\n①：从手卡丢弃1张其他卡才能发动。这张卡从手卡特殊召唤。\r\n②：这张卡特殊召唤的场合才能发动。从卡组把「太阳神的诗咏者-地狱诗人」以外的1张「太阳神」卡加入手卡。自己基本分比对方少2000以上的场合，可以再把对方手卡随机1张丢弃。\r\n③：这个回合有「不死的太阳神」被送去自己墓地的场合，结束阶段才能发动。墓地的这张卡加入手卡。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 751,
+      "type": 33,
+      "atk": 2000,
+      "def": 1400,
+      "level": 5,
+      "race": 8,
+      "attribute": 32
+    }
+  },
+  "23813": {
+    "cid": 23813,
+    "id": 18446859,
+    "cn_name": "太阳神的处刑人-摩休罗",
+    "nwbbs_n": "太阳神灵的处刑人-摩休罗",
+    "jp_ruby": "たいようしんのしょけいにん－マキュラ",
+    "jp_name": "太陽神の処刑人－マキュラ",
+    "wiki_en": "Makyura, Destructor of the Sun God",
+    "text": {
+      "types": "[怪兽|效果] 战士/暗\n[★4] 1600/1200",
+      "pdesc": "",
+      "desc": "这个卡名的①②的效果1回合各能使用1次。\r\n①：这张卡召唤·特殊召唤的场合或者从手卡·场上送去墓地的场合才能发动。从手卡·卡组把1张「太阳神」魔法·陷阱卡在自己场上盖放。把速攻魔法·陷阱卡盖放的场合，那张卡在盖放的回合也能发动。\r\n②：这个回合有「不死的太阳神」被送去自己墓地的场合，结束阶段才能发动。墓地的这张卡加入手卡。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 751,
+      "type": 33,
+      "atk": 1600,
+      "def": 1200,
+      "level": 4,
+      "race": 1,
+      "attribute": 32
+    }
+  },
+  "23814": {
+    "cid": 23814,
+    "id": 45430558,
+    "cn_name": "太阳神的杀戮机-屠杀巨灵",
+    "nwbbs_n": "太阳神灵的杀戮机-屠杀巨灵",
+    "jp_ruby": "たいようしんのさつりくき－ギル・ガース",
+    "jp_name": "太陽神の殺戮機－ギル・ガース",
+    "wiki_en": "Gil Garth, Exterminator of the Sun God",
+    "text": {
+      "types": "[怪兽|效果] 恶魔/暗\n[★4] 1800/1200",
+      "pdesc": "",
+      "desc": "这个卡名的①②③的效果1回合各能使用1次。\r\n①：这张卡在手卡存在，自己场上有「太阳神」卡存在的场合才能发动。这张卡特殊召唤。\r\n②：把这张卡解放，以这张卡以外的自己或对方的墓地1张卡为对象才能发动。从卡组把1张「太阳神」卡送去墓地，作为对象的卡回到卡组最下面。\r\n③：这个回合有「不死的太阳神」被送去自己墓地的场合，结束阶段才能发动。墓地的这张卡加入手卡。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 751,
+      "type": 33,
+      "atk": 1800,
+      "def": 1200,
+      "level": 4,
+      "race": 8,
+      "attribute": 32
+    }
+  },
+  "23815": {
+    "cid": 23815,
+    "id": 81839663,
+    "cn_name": "太阳神的拷问具-电击死亡拷问机",
+    "nwbbs_n": "太阳神灵的拷问具-电击死亡拷问机",
+    "jp_ruby": "たいようしんのごうもんぐ－バイサー・デス・ショック",
+    "jp_name": "太陽神の拷問具－バイサー・デス・ショック",
+    "wiki_en": "Viser Des Shock, Tormentor of the Sun God",
+    "text": {
+      "types": "[怪兽|效果] 恶魔/暗\n[★4] 800/1200",
+      "pdesc": "",
+      "desc": "这个卡名的①③的效果1回合各能使用1次。\r\n①：怪兽被送去对方墓地的场合，若自己场上有「太阳神」卡存在则能发动（伤害步骤也能发动）。这张卡从手卡特殊召唤，场上1张其他卡回到手卡·额外卡组，给与对方800伤害。\r\n②：这张卡不会被战斗破坏。\r\n③：这个回合有「不死的太阳神」被送去自己墓地的场合，结束阶段才能发动。墓地的这张卡加入手卡。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 751,
+      "type": 33,
+      "atk": 800,
+      "def": 1200,
+      "level": 4,
+      "race": 8,
+      "attribute": 32
+    }
+  },
+  "23816": {
+    "cid": 23816,
+    "id": 17223202,
+    "cn_name": "亚马逊锁链使-临终锁舞-",
+    "nwbbs_n": "亚马逊锁链使-临死的锁链舞-",
+    "jp_ruby": "アマゾネスのくさりつかい－しにぎわのくさりまい－",
+    "jp_name": "アマゾネスの鎖使い－死に際の鎖舞い－",
+    "wiki_en": "Amazoness Chain Master - Brink of Death Chain Dance",
+    "text": {
+      "types": "[怪兽|效果] 战士/地\n[★4] 1500/1300",
+      "pdesc": "",
+      "desc": "这个卡名的效果1回合只能使用1次。\r\n①：这张卡被送去墓地的场合，若自己墓地有其他「亚马逊」怪兽存在，则能支付1000基本分发动。对方可以从自身卡组·额外卡组选1只10星怪兽。那个场合，自己可以把那只怪兽无视召唤条件在自己场上特殊召唤。没有选的场合，自己把对方手卡随机丢弃1张。这个效果特殊召唤的怪兽在这个回合不能把效果发动。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 4,
+      "type": 33,
+      "atk": 1500,
+      "def": 1300,
+      "level": 4,
+      "race": 1,
+      "attribute": 1
+    }
+  },
+  "23817": {
+    "cid": 23817,
+    "id": 44618916,
+    "cn_name": "亚马逊格斗战士-蹴杀之舞-",
+    "nwbbs_n": "亚马逊格斗战士-蹴杀之舞-",
+    "jp_ruby": "アマゾネスのかくとうせんし－しゅうさつのまい－",
+    "jp_name": "アマゾネスの格闘戦士－蹴殺の舞い－",
+    "wiki_en": "Amazoness Fighter - Instant Kill Dance",
+    "text": {
+      "types": "[怪兽|效果] 战士/地\n[★4] 1500/1300",
+      "pdesc": "",
+      "desc": "这个卡名的①②③的效果1回合各能使用1次。\r\n①：这张卡用抽卡以外的方法加入手卡的场合才能发动。这张卡特殊召唤。\r\n②：这张卡召唤·特殊召唤的场合才能发动。从卡组把有「鹰身女郎」的卡名记述的1张魔法·陷阱卡在自己场上盖放。\r\n③：自己的「亚马逊」怪兽和对方怪兽进行战斗的伤害计算时才能发动。那2只不会被那次战斗破坏，那次战斗发生的对自己的战斗伤害变成0。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 4,
+      "type": 33,
+      "atk": 1500,
+      "def": 1300,
+      "level": 4,
+      "race": 1,
+      "attribute": 1
+    }
+  },
+  "23818": {
+    "cid": 23818,
+    "id": 70612015,
+    "cn_name": "亚马逊诅咒师-咒印之舞-",
+    "nwbbs_n": "亚马逊诅咒师-咒印之舞-",
+    "jp_ruby": "アマゾネスのじゅそし－じゅいんのまい－",
+    "jp_name": "アマゾネスの呪詛師－呪印の舞い－",
+    "wiki_en": "Amazoness Spellcaster - Forbidden Spell Dance",
+    "text": {
+      "types": "[怪兽|效果] 战士/地\n[★3] 400/800",
+      "pdesc": "",
+      "desc": "这个卡名的①②③的效果1回合各能使用1次。\r\n①：这张卡召唤·特殊召唤的场合才能发动。从卡组把3星以外的1只「亚马逊」怪兽加入手卡。\r\n②：自己主要阶段才能发动。自己的手卡·场上的怪兽作为融合素材，把1只地·风属性融合怪兽融合召唤。\r\n③：自己的「亚马逊」怪兽和对方怪兽进行战斗的伤害计算时，把墓地的这张卡除外才能发动。那2只的攻击力直到回合结束时交换。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 4,
+      "type": 33,
+      "atk": 400,
+      "def": 800,
+      "level": 3,
+      "race": 1,
+      "attribute": 1
+    }
+  },
+  "23819": {
+    "cid": 23819,
+    "id": 17101624,
+    "cn_name": "鹰身女郎-诱惑之舞-",
+    "nwbbs_n": "鹰身女郎-魅惑之舞-",
+    "jp_ruby": "ハーピィ・レディ－みわくのまい－",
+    "jp_name": "ハーピィ・レディ－魅惑の舞い－",
+    "wiki_en": "Harpie Lady - Alluring Dance",
+    "text": {
+      "types": "[怪兽|效果] 鸟兽/风\n[★4] 1300/1400",
+      "pdesc": "",
+      "desc": "这个卡名的②③的效果1回合各能使用1次。\r\n①：这张卡的卡名只要在场上·墓地存在当作「鹰身女郎」使用。\r\n②：这张卡在手卡存在的场合，自己·对方的主要阶段，以自己场上1只风·地属性怪兽为对象才能发动。那只怪兽回到手卡·额外卡组，这张卡特殊召唤。\r\n③：这张卡召唤·特殊召唤的场合才能发动。从卡组把有「鹰身女郎」的卡名记述的1张魔法·陷阱卡加入手卡。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 4196,
+      "type": 33,
+      "atk": 1300,
+      "def": 1400,
+      "level": 4,
+      "race": 512,
+      "attribute": 8
+    }
+  },
+  "23820": {
+    "cid": 23820,
+    "id": 43596329,
+    "cn_name": "白鸦之森的炎魔",
+    "nwbbs_n": "白鸦森林的炎魔",
+    "jp_ruby": "はくあのもりのえんま",
+    "jp_name": "白鴉の森の炎魔",
+    "wiki_en": "Purifire of the Winter Raven's Forest",
+    "text": {
+      "types": "[怪兽|效果] 炎/炎\n[★1] 700/200",
+      "pdesc": "",
+      "desc": "这个卡名的，①的方法的特殊召唤1回合只能有1次，②③的效果1回合各能使用1次。\r\n①：自己场上有「白鸦」卡存在的场合，这张卡可以从手卡特殊召唤。\r\n②：这张卡召唤·特殊召唤的场合才能发动。从卡组把1张「白鸦」魔法·陷阱卡或「罪宝」卡加入手卡。\r\n③：以自己或对方的魔法与陷阱区域的1张「白鸦」怪兽卡或者7·8星怪兽卡为对象才能发动。那张卡在自己场上特殊召唤。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 754,
+      "type": 33,
+      "atk": 700,
+      "def": 200,
+      "level": 1,
+      "race": 128,
+      "attribute": 4
+    }
+  },
+  "23821": {
+    "cid": 23821,
+    "id": 79980427,
+    "cn_name": "白鸦骑士 马特",
+    "nwbbs_n": "白鸦骑士 马特",
+    "jp_ruby": "はくあのきしマルト",
+    "jp_name": "白鴉の騎士マルト",
+    "wiki_en": "Mart, Knight of the Winter Raven",
+    "text": {
+      "types": "[怪兽|效果|调整] 幻想魔/光\n[★4] 1700/0",
+      "pdesc": "",
+      "desc": "这个卡名的①②的效果1回合各能使用1次。\r\n①：把场上的这张卡以外的自己手卡·场上1张卡送去墓地才能发动。这张卡当作永续魔法卡使用在原本持有者的魔法与陷阱区域以表侧表示放置，从卡组把「白鸦骑士 马特」以外的最多2只「白鸦」怪兽特殊召唤（同名卡最多1张）。\r\n②：这张卡当作永续魔法卡使用的场合，怪兽的攻击宣言时以自己魔法与陷阱区的1张「白鸦」怪兽卡为对象才能发动。那张卡特殊召唤。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 754,
+      "type": 4129,
+      "atk": 1700,
+      "def": 0,
+      "level": 4,
+      "race": 33554432,
+      "attribute": 16
+    }
+  },
+  "23822": {
+    "cid": 23822,
+    "id": 16389132,
+    "cn_name": "白鸦骑士 安",
+    "nwbbs_n": "白鸦骑士 阿努",
+    "jp_ruby": "はくあのきしアン",
+    "jp_name": "白鴉の騎士アン",
+    "wiki_en": "Anu, Knight of the Winter Raven",
+    "text": {
+      "types": "[怪兽|效果|调整] 幻想魔/光\n[★4] 1400/900",
+      "pdesc": "",
+      "desc": "这个卡名的①②的效果1回合各能使用1次。\r\n①：把手卡的这张卡给对方观看才能发动。从手卡把「白鸦骑士 安」以外的1只「白鸦」怪兽特殊召唤。\r\n②：自己·对方的主要阶段，以自己场上1只「白鸦」怪兽为对象才能发动。那只怪兽当作永续魔法卡使用在原本持有者的魔法与陷阱区域以表侧表示放置，从自己的手卡·墓地把「白鸦骑士 安」以外的1只「白鸦」怪兽特殊召唤。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 754,
+      "type": 4129,
+      "atk": 1400,
+      "def": 900,
+      "level": 4,
+      "race": 33554432,
+      "attribute": 16
+    }
+  },
+  "23823": {
+    "cid": 23823,
+    "id": 42373771,
+    "cn_name": "白鸦之森的罪宝",
+    "nwbbs_n": "白鸦森林的罪宝",
+    "jp_ruby": "はくあのもりのざいほう",
+    "jp_name": "白鴉の森の罪宝",
+    "wiki_en": "Sinful Spoils of the Winter Raven's Forest",
+    "text": {
+      "types": "[怪兽|效果|调整] 魔法师/炎\n[★7] 2500/2000",
+      "pdesc": "",
+      "desc": "这个卡名的，①的方法的特殊召唤1回合只能有1次，②的效果1回合只能使用1次。\r\n①：这张卡可以让自己场上（表侧表示）·墓地的1张炎属性·1星怪兽卡回到卡组最下面，从手卡特殊召唤。\r\n②：对方把效果发动时，让场上的这张卡回到手卡，以自己或对方场上（表侧表示）·墓地1只怪兽为对象才能发动。那只怪兽当作永续魔法卡使用在原本持有者的魔法与陷阱区域以表侧表示放置。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 27132658,
+      "type": 4129,
+      "atk": 2500,
+      "def": 2000,
+      "level": 7,
+      "race": 2,
+      "attribute": 4
+    }
+  },
+  "23824": {
+    "cid": 23824,
+    "id": 79768885,
+    "cn_name": "转生炎兽 捻角山羊",
+    "nwbbs_n": "转生炎兽 捻角山羊",
+    "jp_ruby": "サラマングレイトマーコール",
+    "jp_name": "転生炎獣マーコール",
+    "wiki_en": "Salamangreat Markhor",
+    "text": {
+      "types": "[怪兽|效果] 电子界/炎\n[★4] 300/2100",
+      "pdesc": "",
+      "desc": "这个卡名的①②的效果1回合各能使用1次，这些效果发动的回合，自己不是炎属性怪兽不能特殊召唤。\r\n①：这张卡召唤·特殊召唤的场合才能发动。从自己的卡组·墓地把1张「转生炎兽」魔法·陷阱卡加入手卡。\r\n②：这张卡作为连接3以上的炎属性连接怪兽的连接素材被送去墓地的场合才能发动。从卡组把1只电子界族·炎属性怪兽特殊召唤。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 281,
+      "type": 33,
+      "atk": 300,
+      "def": 2100,
+      "level": 4,
+      "race": 16777216,
+      "attribute": 4
+    }
+  },
+  "23825": {
+    "cid": 23825,
+    "id": 5266584,
+    "cn_name": "转生炎兽 宽耳蝠",
+    "nwbbs_n": "转生炎兽 宽耳蝠",
+    "jp_ruby": "サラマングレイトバステラ",
+    "jp_name": "転生炎獣バステラ",
+    "wiki_en": "Salamangreat Bastella",
+    "text": {
+      "types": "[怪兽|效果|调整] 电子界/炎\n[★3] 1600/1000",
+      "pdesc": "",
+      "desc": "这个卡名的①②的效果1回合各能使用1次。\r\n①：自己场上的怪兽，不存在的场合或者只有「转生炎兽」怪兽存在的场合才能发动。这张卡从手卡特殊召唤。那之后，可以让场上1只怪兽的等级上升或下降1。\r\n②：这张卡在墓地存在的状态，自己把连接3以上的炎属性连接怪兽连接召唤的场合，把这张卡除外才能发动。从卡组把1张「转生炎兽」陷阱卡在自己场上盖放。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 281,
+      "type": 4129,
+      "atk": 1600,
+      "def": 1000,
+      "level": 3,
+      "race": 16777216,
+      "attribute": 4
+    }
+  },
+  "23826": {
+    "cid": 23826,
+    "id": 42651293,
+    "cn_name": "六花双精 报春来",
+    "md_name": "六花双精报春蔷薇",
+    "nwbbs_n": "六花双精 报春花",
+    "jp_ruby": "りっかそうせいプリムローズ",
+    "jp_name": "六花双精プリムローズ",
+    "wiki_en": "Primrose the Rikka Fairy Duo",
+    "md_en_n": "Primrose the Rikka Fairy Duo",
+    "set_ext": "蔷薇",
+    "text": {
+      "types": "[怪兽|效果] 植物/水\n[★8] 2600/2600",
+      "pdesc": "",
+      "desc": "这个卡名的①②③的效果1回合各能使用1次。\r\n①：怪兽被解放的场合才能发动。「六花双精 报春来」以外的卡组1只「六花」怪兽，和手卡的这张卡以守备表示特殊召唤。这个效果的发动后，直到回合结束时自己不是植物族怪兽不能特殊召唤。\r\n②：以自己场上1只植物族怪兽为对象才能发动。那只怪兽的等级上升或者下降2。\r\n③：对方主要阶段才能发动。进行1只植物族超量怪兽的超量召唤。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 19071297,
+      "type": 33,
+      "atk": 2600,
+      "def": 2600,
+      "level": 8,
+      "race": 1024,
+      "attribute": 2
+    }
+  },
+  "23827": {
+    "cid": 23827,
+    "id": 78646298,
+    "cn_name": "六花的黑姬",
+    "md_name": "六花的黑姬",
+    "nwbbs_n": "六花的黑姬",
+    "jp_ruby": "りっかのくろひめ",
+    "jp_name": "六花のくろひめ",
+    "wiki_en": "Rikka Black Princess",
+    "md_en_n": "Rikka Black Princess",
+    "text": {
+      "types": "[怪兽|效果] 植物/水\n[★6] 0/0",
+      "pdesc": "",
+      "desc": "这个卡名的①②的效果1回合各能使用1次。\r\n①：自己场上的怪兽，不存在的场合或者只有植物族怪兽的场合才能发动。这张卡从手卡·墓地特殊召唤。这个效果特殊召唤的这张卡从场上离开的场合除外。这个效果的发动后，直到回合结束时自己不是植物族怪兽不能特殊召唤。\r\n②：把自己手卡·场上的1只植物族怪兽解放才能发动。从卡组把「六花的黑姬」以外的1只「六花」怪兽特殊召唤。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 321,
+      "type": 33,
+      "atk": 0,
+      "def": 0,
+      "level": 6,
+      "race": 1024,
+      "attribute": 2
+    }
+  },
+  "23828": {
+    "cid": 23828,
+    "id": 4040906,
+    "cn_name": "无敌的火箭战士",
+    "nwbbs_n": "无敌的火箭战士",
+    "jp_ruby": "むてきのロケットせんし",
+    "jp_name": "無敵のロケット戦士",
+    "wiki_en": "Invincible Rocket Warrior",
+    "text": {
+      "types": "[怪兽|效果] 战士/光\n[★4] 1500/1300",
+      "pdesc": "",
+      "desc": "这个卡名的①③的效果1回合各能使用1次。\r\n①：从卡组把有「时间黑魔术师」的卡名记述的1张魔法·陷阱卡送去墓地才能发动。这张卡从手卡特殊召唤。那之后，可以把对方场上1只怪兽的攻击力下降1500。这个效果的发动后，直到回合结束时自己不是融合怪兽不能从额外卡组特殊召唤。\r\n②：场上的这张卡不会被效果破坏。\r\n③：这张卡的攻击宣言时才能发动。从卡组把1只战士族·4星怪兽加入手卡。 "
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 0,
+      "type": 33,
+      "atk": 1500,
+      "def": 1300,
+      "level": 4,
+      "race": 1,
+      "attribute": 16
+    }
+  },
+  "23829": {
+    "cid": 23829,
+    "id": 31439641,
+    "cn_name": "鬼神童鸱 玉依",
+    "nwbbs_n": "鬼神童鵄 玉依",
+    "jp_ruby": "アシュトラータ　タマヨリ",
+    "jp_name": "鬼神童鵄 タマヨリ",
+    "wiki_en": "Ashtrata Tamayori",
+    "set_ext": "艮神鬼",
+    "text": {
+      "types": "[怪兽|效果|调整] 天使/炎\n[★1] 0/0",
+      "pdesc": "",
+      "desc": "这个卡名的①②的效果1回合各能使用1次。\r\n①：这张卡召唤·特殊召唤的场合才能发动。从卡组把调整以外的1只「艮神鬼」怪兽以守备表示特殊召唤。那之后，可以把自己场上1只表侧表示怪兽变成里侧守备表示。这个回合，自己不用以1星调整为素材的同调召唤不能从额外卡组把怪兽特殊召唤。\r\n②：自己场上的「艮神鬼」卡或里侧表示卡被效果破坏的场合，可以作为代替把墓地的这张卡除外。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 484,
+      "type": 4129,
+      "atk": 0,
+      "def": 0,
+      "level": 1,
+      "race": 4,
+      "attribute": 4
+    }
+  },
+  "23830": {
+    "cid": 23830,
+    "id": 77823650,
+    "cn_name": "亚特兰蒂斯的暴翼",
+    "nwbbs_n": "亚特兰蒂斯的暴翼",
+    "jp_ruby": "アトランティスのぼうよく",
+    "jp_name": "アトランティスの暴翼",
+    "wiki_en": "Rampant Wings of Atlantis",
+    "text": {
+      "types": "[怪兽|效果] 海龙/水\n[★5] 2000/2400",
+      "pdesc": "",
+      "desc": "这个卡名的①③的效果1回合各能使用1次。\r\n①：把手卡的这张卡和自己手卡·场上（表侧表示）的1张魔法·陷阱卡或「海」送去墓地，以对方场上1张卡为对象才能发动。那张卡送去墓地。\r\n②：这张卡只要在怪兽区域存在，卡名当作「海」使用。\r\n③：自己场上有「龙都 亚特兰蒂斯」存在的场合，把墓地的这张卡除外才能发动。从手卡·卡组把1只4星以下的海龙族怪兽特殊召唤。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 0,
+      "type": 33,
+      "atk": 2000,
+      "def": 2400,
+      "level": 5,
+      "race": 262144,
+      "attribute": 2
+    }
+  },
+  "23831": {
+    "cid": 23831,
+    "id": 4328355,
+    "cn_name": "香草白兔冰：摩卡模组",
+    "nwbbs_n": "香草醛兔：摩卡MOD",
+    "jp_ruby": "バニリン：モカモッド",
+    "jp_name": "バニリン：モカMOD",
+    "wiki_en": "Bunnillin: Mocha MOD",
+    "text": {
+      "types": "[怪兽|效果] 电子界/光\n[★4] 0/2000",
+      "pdesc": "",
+      "desc": "这个卡名的①②③的效果1回合各能使用1次。\r\n①：从卡组把1只攻击力2000以下的通常怪兽送去墓地才能发动。这张卡从手卡特殊召唤。\r\n②：这张卡召唤·特殊召唤的场合才能发动。从自己的卡组·墓地把1张「香草白兔冰」永续魔法·永续陷阱卡在自己场上以表侧表示放置。\r\n③：这张卡在怪兽区域存在的状态，对方把效果怪兽特殊召唤的场合，把这张卡解放才能发动。从自己墓地把1只通常怪兽特殊召唤。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 755,
+      "type": 33,
+      "atk": 0,
+      "def": 2000,
+      "level": 4,
+      "race": 16777216,
+      "attribute": 16
+    }
+  },
+  "23832": {
+    "cid": 23832,
+    "id": 30316053,
+    "cn_name": "灾祸的根绝者",
+    "nwbbs_n": "灾祸的根绝者",
+    "jp_ruby": "ヘレティック・エラディケイター",
+    "jp_name": "災禍の根絶者",
+    "wiki_en": "Heretic Eradicator",
+    "text": {
+      "types": "[怪兽|效果] 战士/地\n[★7] 2700/400",
+      "pdesc": "",
+      "desc": "这个卡名的①②的效果1回合各能使用1次。\r\n①：这张卡在手卡存在，不能通常召唤的怪兽在对方场上（表侧表示）·墓地·除外状态有4只以上存在的场合，对方只把怪兽1只特殊召唤之际才能发动（自己场上没有怪兽存在的场合，这个发动和这个效果不会被无效化）。那次特殊召唤无效，那只怪兽破坏，这张卡特殊召唤。\r\n②：把场上的这张卡送去墓地才能发动。场上1只怪兽的攻击力变成一半。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 0,
+      "type": 33,
+      "atk": 2700,
+      "def": 400,
+      "level": 7,
+      "race": 1,
+      "attribute": 1
+    }
+  },
+  "23833": {
+    "cid": 23833,
+    "id": 66701162,
+    "cn_name": "幻惑的绮罗星",
+    "nwbbs_n": "幻惑之绮罗星",
+    "jp_ruby": "ナイトメア・トゥインクル",
+    "jp_name": "幻惑の綺羅星",
+    "wiki_en": "Nightmare Twinkle",
+    "text": {
+      "types": "[怪兽|效果] 幻想魔/光\n[★4] 1700/1700",
+      "pdesc": "",
+      "desc": "这个卡名的①的效果1回合只能使用1次。\r\n①：这张卡召唤·特殊召唤的场合才能发动。从卡组把除「幻惑的绮罗星」外的，7星以下的1只幻想魔族怪兽特殊召唤。这个效果特殊召唤的怪兽在结束阶段回到手卡。\r\n②：这张卡和怪兽进行战斗的场合，那2只不会被那次战斗破坏。\r\n③：1回合1次，怪兽进行战斗的伤害步骤结束时才能发动。场上的全部怪兽的表示形式变更。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 0,
+      "type": 33,
+      "atk": 1700,
+      "def": 1700,
+      "level": 4,
+      "race": 33554432,
+      "attribute": 16
+    }
+  },
+  "23834": {
+    "cid": 23834,
+    "id": 3106767,
+    "cn_name": "返身报恩的鹤秘姬",
+    "nwbbs_n": "回报的鹤秘姬",
+    "jp_ruby": "おかえしつるひめ",
+    "jp_name": "お返し鶴秘姫",
+    "wiki_en": "The Secret Crane Princess Who Returns A Favor",
+    "text": {
+      "types": "[怪兽|效果|调整] 鸟兽/光\n[★1] 0/0",
+      "pdesc": "",
+      "desc": "这个卡名的①②③的效果1回合各能使用1次。\r\n①：对方结束阶段才能发动。墓地的这张卡回到卡组最上面。\r\n②：自己·对方的主要阶段才能发动。场上的这张卡回到手卡，双方各自抽1张。那之后，对方可以适用以下效果。\r\n●自己抽1张，这个主要阶段中，对方手卡全部持续公开。\r\n③：自己·对方回合，把在手卡公开中的这张卡除外才能发动。对方场上的表侧表示卡全部破坏。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 0,
+      "type": 4129,
+      "atk": 0,
+      "def": 0,
+      "level": 1,
+      "race": 512,
+      "attribute": 16
+    }
+  },
+  "23835": {
+    "cid": 23835,
+    "id": 39590415,
+    "cn_name": "轮回虫龙 大紫蛱蝶",
+    "nwbbs_n": "无死虫龙·紫蛱蝶鳞虫",
+    "jp_ruby": "リインゼルム・アムルサ",
+    "jp_name": "リインゼルム・アムルサ",
+    "wiki_en": "Reindsurm Amurusa",
+    "text": {
+      "types": "[怪兽|效果|仪式] 昆虫/风\n[★4] 1000/2200",
+      "pdesc": "",
+      "desc": "「龙之骸歌」降临。\r\n这个卡名的①②的效果1回合各能使用1次。\r\n①：这张卡仪式召唤的场合才能发动。从卡组把风属性以外的2只「轮回虫龙」怪兽加入手卡。\r\n②：这张卡因战斗以外被送去墓地的场合才能发动。等级合计直到变成仪式召唤的怪兽的等级以上为止，把自己手卡·场上的怪兽解放，或者作为解放的代替让自己墓地的昆虫族·龙族怪兽回到卡组，从手卡把1只昆虫族仪式怪兽仪式召唤。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 753,
+      "type": 161,
+      "atk": 1000,
+      "def": 2200,
+      "level": 4,
+      "race": 2048,
+      "attribute": 8
+    }
+  },
+  "23836": {
+    "cid": 23836,
+    "id": 66589510,
+    "cn_name": "轮回虫龙 秘鲁蜈蚣",
+    "nwbbs_n": "无死虫龙·秘鲁蜈蚣鳞虫",
+    "jp_ruby": "リインゼルム・ルヴィアン",
+    "jp_name": "リインゼルム・ルヴィアン",
+    "wiki_en": "Reindsurm Luvian",
+    "text": {
+      "types": "[怪兽|效果|仪式] 昆虫/水\n[★4] 1900/1100",
+      "pdesc": "",
+      "desc": "「龙之骸歌」降临。\r\n这个卡名的①②的效果1回合各能使用1次。\r\n①：这张卡仪式召唤的场合才能发动。从卡组把2张「轮回虫龙」魔法·陷阱卡加入手卡。\r\n②：这张卡因战斗以外被送去墓地的场合才能发动。等级合计直到变成仪式召唤的怪兽的等级以上为止，把自己手卡·场上的怪兽解放，或者作为解放的代替让自己墓地的昆虫族·龙族怪兽回到卡组，从手卡把1只昆虫族仪式怪兽仪式召唤。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 753,
+      "type": 161,
+      "atk": 1900,
+      "def": 1100,
+      "level": 4,
+      "race": 2048,
+      "attribute": 2
+    }
+  },
+  "23837": {
+    "cid": 23837,
+    "id": 2083229,
+    "cn_name": "轮回虫龙 高加索南洋大兜虫",
+    "nwbbs_n": "无死虫龙·高加索独角仙鳞虫",
+    "jp_ruby": "リインゼルム・カルカサス",
+    "jp_name": "リインゼルム・カルカサス",
+    "wiki_en": "Reindsurm Carcasas",
+    "text": {
+      "types": "[怪兽|效果|仪式] 昆虫/光\n[★4] 2000/1300",
+      "pdesc": "",
+      "desc": "「龙之骸歌」降临。\r\n这个卡名的①②的效果1回合各能使用1次。\r\n①：这张卡仪式召唤的场合才能发动。从卡组把2张「轮回虫龙」卡送去墓地。\r\n②：这张卡因战斗以外被送去墓地的场合才能发动。等级合计直到变成仪式召唤的怪兽的等级以上为止，把自己手卡·场上的怪兽解放，或者作为解放的代替让自己墓地的昆虫族·龙族怪兽回到卡组，从手卡把1只昆虫族仪式怪兽仪式召唤。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 753,
+      "type": 161,
+      "atk": 2000,
+      "def": 1300,
+      "level": 4,
+      "race": 2048,
+      "attribute": 16
+    }
+  },
+  "23838": {
+    "cid": 23838,
+    "id": 38478224,
+    "cn_name": "轮回虫龙 秘鲁巨人蜈蚣",
+    "nwbbs_n": "无死虫龙·巨人蜈蚣鳞虫",
+    "jp_ruby": "リインゼルム・ギガロヴェンドラ",
+    "jp_name": "リインゼルム・ギガロヴェンドラ",
+    "wiki_en": "Reindsurm Gigalovendra",
+    "text": {
+      "types": "[怪兽|效果|仪式] 昆虫/炎\n[★8] 3000/1100",
+      "pdesc": "",
+      "desc": "「龙之骸歌」降临。\r\n这个卡名的①②③的效果1回合各能使用1次。\r\n①：自己·对方回合，把包含这张卡的2张手卡送去墓地才能发动。从卡组把炎属性以外的1只「轮回虫龙」怪兽加入手卡。\r\n②：这张卡仪式召唤的场合，或者对方把怪兽特殊召唤的场合才能发动。场上最多2只怪兽回到卡组。\r\n③：自己墓地有这张卡和水属性「轮回虫龙」怪兽存在的场合才能发动。这张卡加入手卡。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 753,
+      "type": 161,
+      "atk": 3000,
+      "def": 1100,
+      "level": 8,
+      "race": 2048,
+      "attribute": 4
+    }
+  },
+  "23839": {
+    "cid": 23839,
+    "id": 65866932,
+    "cn_name": "轮回虫龙 奇伦南洋大兜虫",
+    "md_name": "轮回虫龙・铜身三戟龙",
+    "nwbbs_n": "无死虫龙·喀戎独角仙鳞虫",
+    "jp_ruby": "リインゼルム・ギリアカルマ",
+    "jp_name": "リインゼルム・ギリアカルマ",
+    "wiki_en": "Reindsurm Giriakarma",
+    "md_en_n": "Reinzwurm Giriakarma",
+    "text": {
+      "types": "[怪兽|效果|仪式] 昆虫/暗\n[★8] 3300/1300",
+      "pdesc": "",
+      "desc": "「龙之骸歌」降临。\r\n这个卡名的①②的效果1回合各能使用1次。\r\n①：这张卡是已仪式召唤的场合，对方把场上·墓地的怪兽的效果发动时才能发动。那个发动无效。那之后，可以让对方场上以及墓地的怪兽各1只回到卡组。这个效果选的是龙族怪兽的场合，这张卡的攻击力变成2倍。\r\n②：自己墓地有这张卡和光属性「轮回虫龙」怪兽存在的场合才能发动。这张卡加入手卡。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 753,
+      "type": 161,
+      "atk": 3300,
+      "def": 1300,
+      "level": 8,
+      "race": 2048,
+      "attribute": 32
+    }
+  },
+  "23840": {
+    "cid": 23840,
+    "id": 91251637,
+    "cn_name": "盟约之标枪甲虫",
+    "nwbbs_n": "盟约的标枪甲虫",
+    "jp_ruby": "めいやくのジャベリンビートル",
+    "jp_name": "盟約のジャベリンビートル",
+    "wiki_en": "Javelin Beetle of the Alliance",
+    "text": {
+      "types": "[怪兽|效果|仪式] 昆虫/地\n[★8] 2450/2550",
+      "pdesc": "",
+      "desc": "「盟约之标枪甲虫」降临。\r\n这个卡名的①的效果在决斗中只能使用1次。\r\n①：自己·对方的主要阶段，把手卡的这张卡给对方出示才能发动。等级合计直到变成仪式召唤的怪兽的等级以上为止，把自己的手卡·场上的怪兽解放，从手卡把1只昆虫族仪式怪兽仪式召唤。\r\n②：这张卡仪式召唤的场合，以和这张卡相同纵列的1张其他卡为对象才能发动。那张卡破坏，这张卡的攻击力上升600。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 0,
+      "type": 161,
+      "atk": 2450,
+      "def": 2550,
+      "level": 8,
+      "race": 2048,
+      "attribute": 1
+    }
+  },
+  "23841": {
+    "cid": 23841,
+    "id": 10000100,
+    "cn_name": "暗黑之太阳神-拉之翼神龙",
+    "md_name": "暗黑太阳神－拉之翼神龙",
+    "nwbbs_n": "暗黑之太阳神灵-太阳神之翼神龙",
+    "jp_ruby": "あんこくのたいようしん－ラーのよくしんりゅう",
+    "jp_name": "暗黒の太陽神－ラーの翼神竜",
+    "wiki_en": "The Winged Dragon of Ra, Sun God of Darkness",
+    "md_en_n": "The Winged Dragon of Ra, Sun God of Darkness",
+    "text": {
+      "types": "[怪兽|效果|融合] 幻神兽/神\n[★10] ?/?",
+      "pdesc": "",
+      "desc": "「拉之翼神龙」＋「太阳神」怪兽×3\r\n①：场上的这张卡不受其他卡的效果影响。\r\n②：1回合1次，自己·对方的主要阶段，从手卡把「太阳神」卡任意数量丢弃，指定那个数量的使用中的对方的主要怪兽区域才能发动。对方必须把那些区域的怪兽送去墓地。\r\n③：这张卡进行战斗的攻击宣言时，把基本分支付到变成1基本分才能发动。这张卡的攻击力·守备力上升支付的数值以及自己墓地的「太阳神」怪兽的攻击力的合计数值。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 49283823,
+      "type": 97,
+      "atk": -2,
+      "def": -2,
+      "level": 10,
+      "race": 2097152,
+      "attribute": 64
+    }
+  },
+  "23842": {
+    "cid": 23842,
+    "id": 64740385,
+    "cn_name": "太阳神的铁槛-熔岩魔神",
+    "nwbbs_n": "太阳神灵的铁槛-熔岩魔神",
+    "jp_ruby": "たいようしんのてつおり－ラヴァ・ゴーレム",
+    "jp_name": "太陽神の鉄檻－ラヴァ・ゴーレム",
+    "wiki_en": "Lava Golem, Steelcage of the Sun God",
+    "text": {
+      "types": "[怪兽|效果|融合] 恶魔/炎\n[★8] 3000/2500",
+      "pdesc": "",
+      "desc": "自己场上的「太阳神」怪兽＋场上的表侧表示怪兽×2\r\n这张卡不能作为融合素材。「太阳神的铁槛-熔岩魔神」1回合1次用融合召唤以及以下方法才能特殊召唤。\r\n●把自己·对方场上的上记的卡送去墓地的场合可以从额外卡组往对方的主要怪兽区域特殊召唤（这个方法的特殊召唤后，直到回合结束时自己只能有1次把怪兽特殊召唤）。\r\n①：自己准备阶段发动。自己受到1000伤害。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 751,
+      "type": 97,
+      "atk": 3000,
+      "def": 2500,
+      "level": 8,
+      "race": 8,
+      "attribute": 4
+    }
+  },
+  "23843": {
+    "cid": 23843,
+    "id": 90139089,
+    "cn_name": "亚马逊剑圣",
+    "nwbbs_n": "亚马逊剑圣",
+    "jp_ruby": "アマゾネスのけんせい",
+    "jp_name": "アマゾネスの剣聖",
+    "wiki_en": "Amazoness Swordmaster",
+    "text": {
+      "types": "[怪兽|效果|融合] 战士/地\n[★7] 2600/2200",
+      "pdesc": "",
+      "desc": "「亚马逊」怪兽×2\r\n这个卡名的①③的效果1回合各能使用1次。\r\n①：这张卡融合召唤的场合才能发动。从卡组把1只4星以下的「亚马逊」怪兽特殊召唤。\r\n②：自己的「亚马逊」怪兽战斗破坏对方怪兽时才能发动。自己抽1张。\r\n③：自己·对方回合，把自己场上1只怪兽解放，以场上1只效果怪兽为对象才能发动。那只怪兽的攻击力下降500，效果无效化。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 4,
+      "type": 97,
+      "atk": 2600,
+      "def": 2200,
+      "level": 7,
+      "race": 1,
+      "attribute": 1
+    }
+  },
+  "23844": {
+    "cid": 23844,
+    "id": 27533198,
+    "cn_name": "鹰身女郎三姐妹 三角神迷",
+    "md_name": "神鹰女郎三姐妹・三角狂欢",
+    "nwbbs_n": "鹰身女郎三姐妹 三角神迷",
+    "jp_ruby": "ハーピィ・レディさんしまい・トライアングル・エクスタシー",
+    "jp_name": "ハーピィ・レディ三姉妹・TX",
+    "wiki_en": "Triangle Ecstasy Harpie Lady Sisters",
+    "md_en_n": "Harpie Lady Sisters - Triangle Ecstasy",
+    "text": {
+      "types": "[怪兽|效果|融合] 鸟兽/风\n[★8] 3000/2100",
+      "pdesc": "",
+      "desc": "「鹰身女郎」怪兽×3\r\n这张卡用融合召唤才能从额外卡组特殊召唤。\r\n①：这张卡的卡名只要在场上·墓地存在当作「鹰身女郎」使用。\r\n②：这张卡的攻击力上升自己墓地的「鹰身女郎」的数量×500，对方不能把这张卡作为风属性以外的怪兽的效果的对象。\r\n③：自己·对方回合1次，可以发动。对方场上的魔法·陷阱卡全部破坏。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 4196,
+      "type": 97,
+      "atk": 3000,
+      "def": 2100,
+      "level": 8,
+      "race": 512,
+      "attribute": 8
+    }
+  },
+  "23845": {
+    "cid": 23845,
+    "id": 63928793,
+    "cn_name": "白鸦之森的女主人 迪亚贝尔泽",
+    "md_name": "白鸦之森的女主人 迪亚贝尔赛",
+    "nwbbs_n": "白鸦森林的女主人 迪亚贝尔泽",
+    "jp_ruby": "はくあのもりのおんなしゅじんディアベルゼ",
+    "jp_name": "白鴉の森の女主人ディアベルゼ",
+    "wiki_en": "Diabellze, Heiress of the Winter Raven's Forest",
+    "md_en_n": "Diabellze, Heiress of the Winter Raven's Forest",
+    "text": {
+      "types": "[怪兽|效果|融合] 幻想魔/光\n[★8] 2500/2100",
+      "pdesc": "",
+      "desc": "融合·同调怪兽＋魔法师族·幻想魔族怪兽\r\n这个卡名的①的效果1回合只能使用1次。\r\n①：这张卡特殊召唤的场合才能发动。选自己场上的任意数量怪兽，当作永续魔法卡使用在原本持有者的魔法与陷阱区域以表侧表示放置。那之后，可以让最多有自己场上的魔法·陷阱卡的数量的场上的卡回到手卡。\r\n②：这张卡的攻击力·守备力，上升场上的魔法·陷阱卡的数量×700。\r\n③：融合召唤的表侧表示的这张卡不能作为融合素材。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 26936050,
+      "type": 97,
+      "atk": 2500,
+      "def": 2100,
+      "level": 8,
+      "race": 33554432,
+      "attribute": 16
+    }
+  },
+  "23846": {
+    "cid": 23846,
+    "id": 90917401,
+    "cn_name": "终天狱神Ω比托利姆",
+    "nwbbs_n": "终天狱神 Ω比托利姆",
+    "jp_ruby": "しゅうてんごくしんオメガヴィードリウム",
+    "jp_name": "終天獄神Ωヴィードリウム",
+    "wiki_en": "Omega Vidolium the Power Patron of Heaven's End",
+    "text": {
+      "types": "[怪兽|效果|融合|灵摆] 龙/暗\n[★12] 4000/4000  11/11",
+      "pdesc": "①：从额外卡组有怪兽特殊召唤的场合才能发动。这张卡回到额外卡组。那之后，可以把包含自己场上的「狱神」怪兽的，自己·对方场上的怪兽作为融合素材，把1只融合怪兽融合召唤。",
+      "desc": "从额外卡组特殊召唤的攻击力3000以上的怪兽×3\n这张卡用融合召唤才能从额外卡组特殊召唤。\n①：这张卡只要在怪兽区域存在，不受「狱神」卡以外的卡的效果影响。\n②：对方把怪兽的效果发动时，若和那只怪兽相同种族的怪兽在对方场上有2只以上存在，从卡组上面把3张卡以里侧除外才能发动。那个发动无效并以里侧除外。\n③：自己准备阶段发动。这张卡在自己的灵摆区域放置。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 462,
+      "type": 16777313,
+      "atk": 4000,
+      "def": 4000,
+      "level": 185270284,
+      "race": 8192,
+      "attribute": 32
+    }
+  },
+  "23847": {
+    "cid": 23847,
+    "id": 26311506,
+    "cn_name": "幻之昆虫女王",
+    "nwbbs_n": "幻之昆虫女王",
+    "jp_ruby": "まぼろしのインセクトクイーン",
+    "jp_name": "幻のインセクト女王",
+    "wiki_en": "The Legendary Insect Queen",
+    "text": {
+      "types": "[怪兽|效果|融合] 昆虫/地\n[★8] 2600/2400",
+      "pdesc": "",
+      "desc": "有「时间黑魔术师」的卡名记述的怪兽、地属性·1星衍生物×2\r\n「幻之昆虫女王」1回合1次，用融合召唤以及以下方法才能特殊召唤。\r\n●把自己场上的上记怪兽解放的场合可以从额外卡组特殊召唤。\r\n①：这张卡特殊召唤的场合才能发动。从自己的墓地·除外状态把最多2张有「时间黑魔术师」的卡名记述的卡加入手卡。\r\n②：对方不能把有「时间黑魔术师」的卡名记述的自己场上的其他卡作为效果的对象。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 0,
+      "type": 97,
+      "atk": 2600,
+      "def": 2400,
+      "level": 8,
+      "race": 2048,
+      "attribute": 1
+    }
+  },
+  "23848": {
+    "cid": 23848,
+    "id": 52806255,
+    "cn_name": "白鸦骑士 扎尔蒂斯",
+    "nwbbs_n": "白鸦骑士 萨尔蒂斯",
+    "jp_ruby": "はくあのきしザルティス",
+    "jp_name": "白鴉の騎士ザルティス",
+    "wiki_en": "Zaltys, Knight of the Winter Raven",
+    "text": {
+      "types": "[怪兽|效果|同调] 幻想魔/炎\n[★5] 2600/1700",
+      "pdesc": "",
+      "desc": "幻想魔族调整＋调整以外的怪兽1只以上\r\n这个卡名的①②的效果1回合各能使用1次。\r\n①：这张卡特殊召唤的场合，以场上最多2张魔法·陷阱卡为对象才能发动。那些卡回到手卡。\r\n②：这张卡被送去墓地的场合，可以根据从何处送去墓地发动以下效果。\r\n●场上：从卡组把1张「白鸦」陷阱卡在自己场上盖放。\r\n●额外卡组：从自己墓地把1张「白鸦」卡加入手卡。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 754,
+      "type": 8225,
+      "atk": 2600,
+      "def": 1700,
+      "level": 5,
+      "race": 33554432,
+      "attribute": 4
+    }
+  },
+  "23849": {
+    "cid": 23849,
+    "id": 95294854,
+    "cn_name": "白鸦骑士 艾特瓦拉斯",
+    "nwbbs_n": "白鸦骑士 埃特瓦罗斯",
+    "jp_ruby": "はくあのきしアイトワラス",
+    "jp_name": "白鴉の騎士アイトワラス",
+    "wiki_en": "Aitvaras, Knight of the Winter Raven",
+    "text": {
+      "types": "[怪兽|效果|同调] 幻想魔/炎\n[★5] 900/2600",
+      "pdesc": "",
+      "desc": "幻想魔族调整＋调整以外的怪兽1只以上\r\n这个卡名的①②的效果1回合各能使用1次。\r\n①：这张卡特殊召唤的场合，以自己以及对方场上的卡各1张为对象才能发动。那些卡回到手卡。\r\n②：这张卡被送去墓地的场合，可以根据从何处送去墓地发动以下效果。\r\n●场上：以场上1张卡为对象才能发动。那张卡回到卡组。\r\n●额外卡组：从自己墓地把1只「白鸦」怪兽特殊召唤。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 754,
+      "type": 8225,
+      "atk": 900,
+      "def": 2600,
+      "level": 5,
+      "race": 33554432,
+      "attribute": 4
+    }
+  },
+  "23850": {
+    "cid": 23850,
+    "id": 21299968,
+    "cn_name": "鬼神 夜魅",
+    "nwbbs_n": "鬼神 夜魅",
+    "jp_ruby": "アシュトラーマ　ヨアミ",
+    "jp_name": "鬼神 夜魅",
+    "wiki_en": "Ashtrama Yoami",
+    "set_ext": "艮神鬼",
+    "text": {
+      "types": "[怪兽|效果|同调] 魔法师/风\n[★8] 2400/3000",
+      "pdesc": "",
+      "desc": "调整＋调整以外的怪兽1只以上\r\n这个卡名的①②的效果1回合各能使用1次。\r\n①：这张卡特殊召唤的场合，或者从场上被送去墓地的场合才能发动。从卡组选1张「艮神鬼」陷阱卡，加入手卡或在自己场上盖放。\r\n②：自己墓地有陷阱卡存在的场合才能发动。场上的里侧表示卡全部回到手卡。那之后，自己墓地的陷阱卡是5张以上的场合，可以让对方场上的卡全部回到手卡。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 484,
+      "type": 8225,
+      "atk": 2400,
+      "def": 3000,
+      "level": 8,
+      "race": 2,
+      "attribute": 8
+    }
+  },
+  "23851": {
+    "cid": 23851,
+    "id": 58683667,
+    "cn_name": "达懒斯龙",
+    "nwbbs_n": "拖拉达拉斯龙",
+    "jp_ruby": "ダラダラサウルス",
+    "jp_name": "ダラダラサウルス",
+    "wiki_en": "Lethargisaurus",
+    "text": {
+      "types": "[怪兽|效果|同调] 海龙/水\n[★8] 1000/2100",
+      "pdesc": "",
+      "desc": "守备表示调整+调整以外的守备表示怪兽1只以上\r\n①：这张卡以攻击表示特殊召唤的场合发动。这张卡变成守备表示。\r\n②：守备表示的这张卡得到以下效果。\r\n●场上的表侧表示怪兽变成守备表示。\r\n●双方不能对应自身的卡的效果的发动把卡的效果发动。\r\n●自己·对方的结束阶段发动。双方各自回复自身场上的守备表示怪兽的数量×500的基本分。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 0,
+      "type": 8225,
+      "atk": 1000,
+      "def": 2100,
+      "level": 8,
+      "race": 262144,
+      "attribute": 2
+    }
+  },
+  "23852": {
+    "cid": 23852,
+    "id": 94078362,
+    "cn_name": "六花深圣 泪滴花束雪花莲",
+    "md_name": "六花深圣泪滴花束",
+    "nwbbs_n": "六花深圣 泪滴花束雪花莲",
+    "jp_ruby": "りっかしんせいティアドロップ",
+    "jp_name": "六花深聖ティアドロップ",
+    "wiki_en": "Teardrop the Rikka Sacred Queen",
+    "md_en_n": "Teardrop the Rikka Sacred Queen",
+    "text": {
+      "types": "[怪兽|效果|超量] 植物/水\n[☆10] 3200/3200",
+      "pdesc": "",
+      "desc": "植物族10星怪兽×2\r\n这张卡也能在自己场上的「六花圣 泪滴花束雪花莲」上面重叠来超量召唤。这个卡名的①的效果1回合只能使用1次。\r\n①：自己·对方回合，把这张卡最多6个超量素材取除才能发动。以那个数量把场上的魔法·陷阱卡送去墓地。那之后，可以把自己或对方场上1只怪兽解放。\r\n②：怪兽被解放的场合发动。对方墓地1张卡作为自己场上的1只植物族超量怪兽的超量素材。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 321,
+      "type": 8388641,
+      "atk": 3200,
+      "def": 3200,
+      "level": 10,
+      "race": 1024,
+      "attribute": 2
+    }
+  },
+  "23853": {
+    "cid": 23853,
+    "id": 20477370,
+    "cn_name": "六花深圣 力量女神花圈",
+    "md_name": "六花深圣花环",
+    "nwbbs_n": "六花深圣 力量女神花圈",
+    "jp_ruby": "りっかしんせいストレナエ",
+    "jp_name": "六花深聖ストレナエ",
+    "wiki_en": "Rikka Sacred Queen Strenna",
+    "md_en_n": "Rikka Sacred Queen Strenna",
+    "text": {
+      "types": "[怪兽|效果|超量] 植物/水\n[☆6] 2000/2000",
+      "pdesc": "",
+      "desc": "植物族6星怪兽×2\r\n这个卡名的①②的效果1回合各能使用1次。\r\n①：把这张卡2个超量素材取除才能发动。从额外卡组把「六花深圣 力量女神花圈」以外的1只植物族超量怪兽以守备表示特殊召唤。这个效果把「六花」超量怪兽特殊召唤的场合，可以再从卡组把1只「六花」怪兽作为那个超量素材。\r\n②：怪兽被解放的场合才能发动。从自己的卡组·墓地把1张「六花」陷阱卡在自己场上盖放。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 321,
+      "type": 8388641,
+      "atk": 2000,
+      "def": 2000,
+      "level": 6,
+      "race": 1024,
+      "attribute": 2
+    }
+  },
+  "23854": {
+    "cid": 23854,
+    "id": 57961015,
+    "cn_name": "No.96 黑偶",
+    "nwbbs_n": "No.96 黑傀儡师",
+    "jp_ruby": "ナンバーズ９６　ブラック・マリオネッター",
+    "jp_name": "No.96 ブラック・マリオネッター",
+    "wiki_en": "Number 96: Dark Manipulator",
+    "text": {
+      "types": "[怪兽|效果|超量] 恶魔/暗\n[☆2] 100/1000",
+      "pdesc": "",
+      "desc": "暗属性2星怪兽×3\r\n这个卡名的①②的效果1回合各能使用1次。\r\n①：把这张卡1个超量素材取除才能发动。这张卡的攻击力，上升对方场上的怪兽的原本攻击力合计数值。\r\n②：对方把卡的效果发动时，把持有超量素材中的这张卡送去墓地才能发动。从自己墓地把最多有这张卡持有过的超量素材数量的「阴影」、「食恶」怪兽特殊召唤。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 72,
+      "type": 8388641,
+      "atk": 100,
+      "def": 1000,
+      "level": 2,
+      "race": 8,
+      "attribute": 32
+    }
+  },
+  "23855": {
+    "cid": 23855,
+    "id": 23956724,
+    "cn_name": "高岭之天仙 火轮",
+    "nwbbs_n": "高岭之天仙 迦陵",
+    "jp_ruby": "たかねのてんせんカリン",
+    "jp_name": "高嶺の天仙カリン",
+    "wiki_en": "Karin the Celestial Sage of the Highest Heights",
+    "text": {
+      "types": "[怪兽|效果|超量] 魔法师/光\n[☆7] 2500/600",
+      "pdesc": "",
+      "desc": "7星怪兽×2\r\n这个卡名的①②的效果1回合各能使用1次。\r\n①：包含从卡组把怪兽特殊召唤的效果的，卡的效果由对方发动时，把这张卡1个超量素材取除才能发动。对方抽1张。那之后，那个发动的效果无效并破坏。\r\n②：自己主要阶段2，以自己墓地1只7星怪兽为对象才能发动。自己受到那只怪兽的攻击力数值的伤害，那只怪兽和场上的这张卡回到手卡·额外卡组。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 0,
+      "type": 8388641,
+      "atk": 2500,
+      "def": 600,
+      "level": 7,
+      "race": 2,
+      "attribute": 16
+    }
+  },
+  "23856": {
+    "cid": 23856,
+    "id": 60344723,
+    "cn_name": "无垢牵绊 神艺学徒",
+    "md_name": "无垢奥艺之绊 神艺",
+    "nwbbs_n": "无垢大牵绊 神艺学徒",
+    "jp_ruby": "アルス＝マグナ　アルトメギア",
+    "jp_name": "無垢なる絆 アルトメギア",
+    "wiki_en": "Ars Magna Artmage",
+    "md_en_n": "Ars Magna Artmage",
+    "set_ext": "无垢大艺术",
+    "text": {
+      "types": "[怪兽|效果|连接] 天使/光\n[LINK-4] 2500/- [↑][←][→][↓]",
+      "pdesc": "",
+      "desc": "包含「无垢大艺术」、「神艺」怪兽之内任意种的怪兽2只以上\r\n这个卡名的②的效果1回合只能使用1次。\r\n①：对方不能把自己场上的连接状态的怪兽作为效果的对象。\r\n②：自己主要阶段才能发动。从卡组选1只「无垢大艺术」、「神艺」、「终刻」、「耀圣」怪兽，加入手卡或特殊召唤。那之后，自己场上的怪兽的种族是3种类以上的场合，可以把自己墓地·除外状态的1只怪兽特殊召唤。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 30212582,
+      "type": 67108897,
+      "atk": 2500,
+      "def": 170,
+      "level": 4,
+      "race": 4,
+      "attribute": 16
+    }
+  },
+  "23857": {
+    "cid": 23857,
+    "id": 96749437,
+    "cn_name": "无垢血盟 终刻龙卫",
+    "nwbbs_n": "无垢大血盟 终刻龙机",
+    "jp_ruby": "アルス＝マグナ　ドゥームズ",
+    "jp_name": "無垢なる血盟 ドゥームズ",
+    "wiki_en": "Ars Magna DoomZ",
+    "set_ext": "无垢大艺术",
+    "text": {
+      "types": "[怪兽|效果|连接] 龙/光\n[LINK-2] 1500/- [←][↙]",
+      "pdesc": "",
+      "desc": "包含「无垢大艺术」、「终刻」怪兽之内任意种的怪兽2只\r\n这个卡名的②③的效果1回合各能使用1次。\r\n①：连接状态的自己怪兽战斗破坏的怪兽不去墓地而除外。\r\n②：自己主要阶段才能发动。选自己场上1张卡，破坏或除外。那之后，可以让自己·对方墓地的卡合计最多2张回到卡组。\r\n③：把墓地的这张卡除外才能发动。从手卡把1只「终刻」怪兽特殊召唤。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 30540262,
+      "type": 67108897,
+      "atk": 1500,
+      "def": 9,
+      "level": 2,
+      "race": 8192,
+      "attribute": 16
+    }
+  },
+  "23858": {
+    "cid": 23858,
+    "id": 23133136,
+    "cn_name": "无垢协奏 耀圣诗团",
+    "nwbbs_n": "无垢大协奏 耀圣之诗",
+    "jp_ruby": "アルス＝マグナ　エルフェンノーツ",
+    "jp_name": "無垢なる協奏 エルフェンノーツ",
+    "wiki_en": "Ars Magna Elfnote",
+    "set_ext": "无垢大艺术",
+    "text": {
+      "types": "[怪兽|效果|连接] 魔法师/光\n[LINK-2] 1500/- [→][↘]",
+      "pdesc": "",
+      "desc": "包含「无垢大艺术」、「耀圣」怪兽之内任意种的怪兽2只\r\n这个卡名的②③的效果1回合各能使用1次。\r\n①：自己场上的连接状态的怪兽的攻击力，上升场上的怪兽的种族种类×300。\r\n②：自己主要阶段才能发动。选自己场上1张卡，送去墓地或除外。那之后，可以让场上1只怪兽回到手卡。\r\n③：把墓地的这张卡除外才能发动。从手卡把1只「耀圣」怪兽特殊召唤。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 30933478,
+      "type": 67108897,
+      "atk": 1500,
+      "def": 36,
+      "level": 2,
+      "race": 2,
+      "attribute": 16
+    }
+  },
+  "23859": {
+    "cid": 23859,
+    "id": 59128241,
+    "cn_name": "驰驱于火炎平原的百兽之王",
+    "md_name": "驰骋横越炎之平原的百兽之王",
+    "nwbbs_n": "炎之平原上奔驰而过的百兽之王",
+    "jp_ruby": "ほのおのへいげんをかけぬけるひゃくじゅうのおう",
+    "jp_name": "炎の平原を駆け抜ける百獣の王",
+    "wiki_en": "King of Beasts, Risen from the Valley of Flames",
+    "md_en_n": "King of Beasts, Risen from the Valley of Flames",
+    "text": {
+      "types": "[怪兽|效果|连接] 电子界/炎\n[LINK-3] 2300/- [↑][↙][↘]",
+      "pdesc": "",
+      "desc": "炎属性效果怪兽3只\r\n这个卡名在规则上当作「转生炎兽 炽热多头狮」使用。这个卡名的②的效果1回合只能使用1次。\r\n①：场上的表侧表示怪兽变成炎属性。\r\n②：这张卡是已用「转生炎兽 炽热多头狮」为素材作连接召唤的场合，自己·对方的主要阶段，以对方场上1张卡为对象才能发动。那张卡回到卡组。那之后，可以把对方场上1只炎属性怪兽的攻击力，变成和自己墓地1只怪兽的攻击力相同。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 0,
+      "type": 67108897,
+      "atk": 2300,
+      "def": 133,
+      "level": 3,
+      "race": 16777216,
+      "attribute": 4
+    }
+  },
+  "23860": {
+    "cid": 23860,
+    "id": 95627840,
+    "cn_name": "科泰达路斯",
+    "nwbbs_n": "科泰达路斯",
+    "jp_ruby": "コダイダロス",
+    "jp_name": "コダイダロス",
+    "wiki_en": "Codaedalus",
+    "text": {
+      "types": "[怪兽|效果|连接] 海龙/水\n[LINK-2] 1400/- [→][↓]",
+      "pdesc": "",
+      "desc": "水属性怪兽2只\r\n自己对「科泰达路斯」1回合只能有1次特殊召唤。\r\n①：这张卡连接召唤的场合才能发动。这个回合的结束阶段，从自己墓地把除「科泰达路斯」外的，有「龙都 亚特兰蒂斯」的卡名记述的1张卡加入手卡。\r\n②：这张卡只要在怪兽区域存在，卡名当作「海」使用。\r\n③：1回合1次，把自己场上1张表侧表示的「海」送去墓地才能发动。场上最多2张魔法·陷阱卡送去墓地。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 485,
+      "type": 67108897,
+      "atk": 1400,
+      "def": 34,
+      "level": 2,
+      "race": 262144,
+      "attribute": 2
+    }
+  },
+  "23861": {
+    "cid": 23861,
+    "id": 22011594,
+    "cn_name": "龙魔导降灵师",
+    "nwbbs_n": "龙魔导降灵师",
+    "jp_ruby": "りゅうまどうのこうれいし",
+    "jp_name": "竜魔導の降霊師",
+    "wiki_en": "Necromancer of Dragon Magic",
+    "text": {
+      "types": "[怪兽|效果|连接] 龙/风\n[LINK-2] 900/- [↙][↘]",
+      "pdesc": "",
+      "desc": "效果怪兽2只\r\n这个卡名的效果1回合只能使用1次。\r\n①：自己主要阶段才能发动。从额外卡组把1只融合怪兽给对方观看。从自己墓地选除融合怪兽外的，那只怪兽有卡名记述的1只怪兽，这张卡直到结束阶段当作和那只怪兽同名卡使用。那之后，可以把自己手卡·场上·墓地的怪兽作为融合素材除外，把观看的融合怪兽融合召唤。这个回合，自己不是融合怪兽不能从额外卡组特殊召唤。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 0,
+      "type": 67108897,
+      "atk": 900,
+      "def": 5,
+      "level": 2,
+      "race": 8192,
+      "attribute": 8
+    }
+  },
+  "23862": {
+    "cid": 23862,
+    "id": 58406693,
+    "cn_name": "不死的太阳神",
+    "nwbbs_n": "不死的太阳神灵",
+    "jp_ruby": "ふしなるたいようしん",
+    "jp_name": "不死なる太陽神",
+    "wiki_en": "The Immortal Sun God",
+    "text": {
+      "types": "[魔法|速攻]",
+      "pdesc": "",
+      "desc": "这个卡名的①②的效果1回合各能使用1次。\r\n①：自己的墓地·除外状态的1只「拉之翼神龙」怪兽无视召唤条件特殊召唤。这个效果把「拉之翼神龙」特殊召唤的场合，可以再把那只怪兽送去墓地，从额外卡组把1只「拉之翼神龙」怪兽特殊召唤。这个效果特殊召唤的怪兽在结束阶段送去墓地。\r\n②：自己主要阶段有这张卡在墓地存在的场合，从手卡丢弃1张「太阳神」卡才能发动。这张卡加入手卡。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 751,
+      "type": 65538,
+      "atk": 0,
+      "def": 0,
+      "level": 0,
+      "race": 0,
+      "attribute": 0
+    }
+  },
+  "23863": {
+    "cid": 23863,
+    "id": 85804398,
+    "cn_name": "诱向黑暗的太阳神",
+    "nwbbs_n": "诱向黑暗的太阳神灵",
+    "jp_ruby": "やみへいざなうたいようしん",
+    "jp_name": "闇へ誘う太陽神",
+    "wiki_en": "The Sun God Leading Down into Darkness",
+    "text": {
+      "types": "[魔法|永续]",
+      "pdesc": "",
+      "desc": "从手卡·卡组·场上（表侧表示）把1只「拉之翼神龙」怪兽送去墓地才能把这张卡发动。这个卡名的①②的效果1回合各能使用1次。\r\n①：这张卡发动的回合的自己主要阶段才能发动。从卡组把1只「太阳神」怪兽加入手卡。\r\n②：怪兽被战斗破坏的场合发动。破坏的怪兽的控制者受到那原本攻击力数值的伤害。自己墓地有「拉之翼神龙」存在的场合，再让自己回复1000基本分。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 751,
+      "type": 131074,
+      "atk": 0,
+      "def": 0,
+      "level": 0,
+      "race": 0,
+      "attribute": 0
+    }
+  },
+  "23864": {
+    "cid": 23864,
+    "id": 21899906,
+    "cn_name": "华丽的三面镜",
+    "nwbbs_n": "华丽的三面镜",
+    "jp_ruby": "かれいなるさんめんきょう",
+    "jp_name": "華麗なる三面鏡",
+    "wiki_en": "Elegant Tri-Mirror",
+    "text": {
+      "types": "[魔法]",
+      "pdesc": "",
+      "desc": "这个卡名的①②的效果1回合各能使用1次。\r\n①：从卡组把1只「鹰身」怪兽加入手卡。只有对方场上有怪兽存在的场合，可以再从自己的手卡·墓地把1只「鹰身女郎」或者有那个卡名记述的怪兽特殊召唤。\r\n②：把墓地的这张卡除外才能发动。自己手卡·场上的怪兽作为融合素材，把1只风·地属性融合怪兽融合召唤。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 0,
+      "type": 2,
+      "atk": 0,
+      "def": 0,
+      "level": 0,
+      "race": 0,
+      "attribute": 0
+    }
+  },
+  "23865": {
+    "cid": 23865,
+    "id": 57283005,
+    "cn_name": "鹰身&亚马逊 -罗刹之阵-",
+    "nwbbs_n": "鹰身女妖与亚马逊 -罗刹之阵-",
+    "jp_ruby": "ハーピィアンドアマゾネス　－らせつのじん－",
+    "jp_name": "ハーピィ＆アマゾネス －羅刹の陣－",
+    "wiki_en": "Harpie & Amazoness Rakshasa Formation",
+    "text": {
+      "types": "[魔法|速攻]",
+      "pdesc": "",
+      "desc": "这个卡名的卡在1回合只能发动1张。\r\n①：以自己墓地·除外状态的1只「鹰身」怪兽或「亚马逊」怪兽为对象才能发动。那只怪兽特殊召唤。那之后，可以根据自己场上的「鹰身女郎」以及「亚马逊」怪兽的数量从以下选1个适用。\r\n●1只以上：从卡组把1张「诱惑之镜壁」在自己的魔法与陷阱区域以表侧表示放置。\r\n●2只以上：得到对方场上1只怪兽的控制权。\r\n●3只以上：对方场上的怪兽全部破坏。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 262244,
+      "type": 65538,
+      "atk": 0,
+      "def": 0,
+      "level": 0,
+      "race": 0,
+      "attribute": 0
+    }
+  },
+  "23866": {
+    "cid": 23866,
+    "id": 84788710,
+    "cn_name": "龙之骸歌",
+    "nwbbs_n": "龙之骸歌",
+    "jp_ruby": "リインゼルム・コンクエスト",
+    "jp_name": "竜の骸歌",
+    "wiki_en": "Reindsurm Conquest",
+    "text": {
+      "types": "[魔法|仪式]",
+      "pdesc": "",
+      "desc": "这个卡名的①②的效果1回合各能使用1次。\r\n①：等级合计直到变成仪式召唤的怪兽的等级合计以上为止，让自己·对方墓地的昆虫族·龙族怪兽回到卡组，从手卡把昆虫族仪式怪兽任意数量仪式召唤。\r\n②：这张卡在墓地存在的场合，从自己的手卡·场上（表侧表示）把1只昆虫族怪兽送去墓地才能发动。这张卡加入手卡。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 753,
+      "type": 130,
+      "atk": 0,
+      "def": 0,
+      "level": 0,
+      "race": 0,
+      "attribute": 0
+    }
+  },
+  "23867": {
+    "cid": 23867,
+    "id": 10177359,
+    "cn_name": "无死之龙的鼓动",
+    "nwbbs_n": "无死虫龙的鼓动",
+    "jp_ruby": "リインゼルム・カーネーション",
+    "jp_name": "無死なる竜の鼓動",
+    "wiki_en": "Reindsurm Carnation",
+    "text": {
+      "types": "[魔法|场地]",
+      "pdesc": "",
+      "desc": "①：只要自己场上有原本等级是8以上的「轮回虫龙」怪兽存在，或者对方场上或墓地有龙族怪兽存在，自己发动的「轮回虫龙」怪兽的效果不会被无效化。\r\n②：1回合1次，从自己的手卡·场上（表侧表示）把1只「轮回虫龙」怪兽或龙族怪兽送去墓地才能发动。从卡组把和那只怪兽原本卡名不同，原本等级相同的1只昆虫族怪兽加入手卡。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 753,
+      "type": 524290,
+      "atk": 0,
+      "def": 0,
+      "level": 0,
+      "race": 0,
+      "attribute": 0
+    }
+  },
+  "23868": {
+    "cid": 23868,
+    "id": 57561463,
+    "cn_name": "翅龙的羽击",
+    "nwbbs_n": "翅龙的羽击",
+    "jp_ruby": "リインゼルム・バタフライ",
+    "jp_name": "翅竜の羽撃",
+    "wiki_en": "Reindsurm Butterfly",
+    "text": {
+      "types": "[魔法]",
+      "pdesc": "",
+      "desc": "这个卡名的①②的效果1回合只能有1次使用其中任意1个。\r\n①：从卡组把包含昆虫族怪兽的2只怪兽送去墓地。这张卡的发动后，直到下个回合的结束时，自己不是昆虫族怪兽不能特殊召唤。\r\n②：这张卡在墓地存在的状态，自己把昆虫族怪兽仪式召唤的场合，把这张卡除外才能发动。自己场上的全部的「轮回虫龙」怪兽的攻击力·守备力上升800。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 753,
+      "type": 2,
+      "atk": 0,
+      "def": 0,
+      "level": 0,
+      "race": 0,
+      "attribute": 0
+    }
+  },
+  "23869": {
+    "cid": 23869,
+    "id": 83566162,
+    "cn_name": "角龙的修炼",
+    "nwbbs_n": "角龙的修练",
+    "jp_ruby": "リインゼルム・プラクティス",
+    "jp_name": "角竜の修練",
+    "wiki_en": "Reindsurm Practice",
+    "text": {
+      "types": "[魔法]",
+      "pdesc": "",
+      "desc": "这个卡名的①②的效果1回合各能使用1次。\r\n①：从卡组把2张「轮回虫龙」怪兽加入手卡。那之后，选自己1张手卡送去墓地。那之后，对方场上或墓地有龙族怪兽存在的场合，可以从自己墓地把1只昆虫族怪兽加入手卡。\r\n②：这张卡在墓地存在的状态，自己把昆虫族怪兽仪式召唤的场合，把这张卡除外才能发动。从卡组把1张「轮回虫龙」场地魔法卡在自己场上表侧表示放置。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 753,
+      "type": 2,
+      "atk": 0,
+      "def": 0,
+      "level": 0,
+      "race": 0,
+      "attribute": 0
+    }
+  },
+  "23870": {
+    "cid": 23870,
+    "id": 19954877,
+    "cn_name": "白鸦的大森林",
+    "nwbbs_n": "白鸦的幽深森林",
+    "jp_ruby": "はくあのふかきもり",
+    "jp_name": "白鴉の深き森",
+    "wiki_en": "Deep Forest of the Winter Raven",
+    "text": {
+      "types": "[魔法|场地]",
+      "pdesc": "",
+      "desc": "这个卡名的卡在1回合只能发动1张，这个卡名的③的效果1回合只能使用1次。\r\n①：作为这张卡的发动时的效果处理，可以从卡组把1只「白鸦」怪兽加入手卡。\r\n②：只要这张卡在场地区域存在，自己场上的「白鸦」怪兽卡不会被效果破坏。\r\n③：自己结束阶段才能发动。从自己的卡组·墓地把1张「白鸦」陷阱卡在自己场上盖放。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 754,
+      "type": 524290,
+      "atk": 0,
+      "def": 0,
+      "level": 0,
+      "race": 0,
+      "attribute": 0
+    }
+  },
+  "23871": {
+    "cid": 23871,
+    "id": 56349876,
+    "cn_name": "狱神封门-共灭之剑-",
+    "nwbbs_n": "狱神封门-共灭之剑-",
+    "jp_ruby": "ごくしんふうもん－きょうめつのつるぎ－",
+    "jp_name": "獄神封門－共滅の剣－",
+    "wiki_en": "Power Patron Portal Plugging -Sword of Mutual Destruction-",
+    "text": {
+      "types": "[魔法]",
+      "pdesc": "",
+      "desc": "这个卡名的①②的效果1回合各能使用1次。\r\n①：从手卡丢弃1张「狱神」卡才能发动。从额外卡组把1只「狱神」灵摆怪兽在自己的灵摆区域放置。这个效果把融合怪兽放置的场合，可以再从卡组把1只「狱神」灵摆怪兽在自己的灵摆区域放置。\r\n②：自己场上有「狱神」怪兽存在的场合，把墓地的这张卡除外，以场上1只表侧表示怪兽为对象才能发动。那只怪兽的攻击力上升1500，这个回合不能攻击。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 462,
+      "type": 2,
+      "atk": 0,
+      "def": 0,
+      "level": 0,
+      "race": 0,
+      "attribute": 0
+    }
+  },
+  "23872": {
+    "cid": 23872,
+    "id": 82833574,
+    "cn_name": "神幻学都 无垢大艺术学园",
+    "nwbbs_n": "神幻学都 无垢大艺学园",
+    "jp_ruby": "しんげんがくとアルス＝マグナ",
+    "jp_name": "神幻学都アルス＝マグナ",
+    "wiki_en": "Ars Magna Academic Arcane Apparition Acropolis",
+    "text": {
+      "types": "[魔法|场地]",
+      "pdesc": "",
+      "desc": "这个卡名在规则上也当作「神艺」卡使用。\r\n①：自己发动的「米底乌斯」怪兽的效果不会被无效化。\r\n②：自己墓地有「狱神」怪兽存在的场合，从自己墓地把1只融合·同调·超量怪兽除外，宣言1个「无垢大艺术」连接怪兽的卡名才能发动（这个回合，不能为让这个卡名的这个效果的发动而宣言相同卡名）。宣言的1只怪兽从额外卡组特殊召唤。这个效果特殊召唤的怪兽不能作为连接素材。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 30212582,
+      "type": 524290,
+      "atk": 0,
+      "def": 0,
+      "level": 0,
+      "race": 0,
+      "attribute": 0
+    }
+  },
+  "23873": {
+    "cid": 23873,
+    "id": 19832229,
+    "cn_name": "转生炎兽的神域",
+    "nwbbs_n": "转生炎兽的神域",
+    "jp_ruby": "サラマングレイト・サンガ",
+    "jp_name": "転生炎獣の神域",
+    "wiki_en": "Salamangreat Shrine",
+    "text": {
+      "types": "[魔法|场地]",
+      "pdesc": "",
+      "desc": "这个卡名在规则上当作「转生炎兽的圣域」使用。这个卡名的①③的效果1回合各能使用1次。\r\n①：自己把「转生炎兽」连接怪兽连接召唤的场合，可以只用自己场上1只同名「转生炎兽」连接怪兽为素材作连接召唤。\r\n②：自己场上的「转生炎兽」怪兽不受对方的炎属性怪兽发动的效果的影响。\r\n③：自己主要阶段才能发动。手卡的「转生炎兽」卡任意数量回到卡组。那之后，自己抽出回去数量。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 281,
+      "type": 524290,
+      "atk": 0,
+      "def": 0,
+      "level": 0,
+      "race": 0,
+      "attribute": 0
+    }
+  },
+  "23874": {
+    "cid": 23874,
+    "id": 45227328,
+    "cn_name": "转生炎兽的神剑",
+    "nwbbs_n": "转生炎兽的神剑",
+    "jp_ruby": "サラマングレイト・ギア・ブレード",
+    "jp_name": "転生炎獣の神剣",
+    "wiki_en": "Salamangreat Gearblade",
+    "text": {
+      "types": "[魔法|装备]",
+      "pdesc": "",
+      "desc": "这个卡名的①②③的效果1回合各能使用1次。\r\n①：从自己的手卡·墓地把1只「转生炎兽」怪兽特殊召唤，把这张卡装备。\r\n②：从卡组把1只「转生炎兽」怪兽送去墓地才能发动。装备怪兽的攻击力，上升送去墓地的怪兽的等级×300。\r\n③：这张卡在墓地存在的场合才能发动。从自己墓地让装备魔法卡以外的3张「转生炎兽」卡回到卡组，这张卡加入手卡。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 281,
+      "type": 262146,
+      "atk": 0,
+      "def": 0,
+      "level": 0,
+      "race": 0,
+      "attribute": 0
+    }
+  },
+  "23875": {
+    "cid": 23875,
+    "id": 81611932,
+    "cn_name": "六花水月",
+    "md_name": "六花水月",
+    "nwbbs_n": "六花水月",
+    "jp_ruby": "りっかすいげつ",
+    "jp_name": "六花水月",
+    "wiki_en": "Rikka Moonlit Waters",
+    "md_en_n": "Rikka Moonlit Waters",
+    "text": {
+      "types": "[魔法]",
+      "pdesc": "",
+      "desc": "这个卡名的卡在1回合只能发动1张。\r\n这张卡也能把自己场上1只植物族怪兽解放来发动。\r\n①：从卡组选等级相同而卡名不同的2只「六花」怪兽，那之内的1只加入手卡，另1只送去墓地。把怪兽解放来把这张卡发动的场合，这个回合中，对方不能把自己场上的「六花」怪兽作为效果的对象。这张卡的发动后，直到回合结束时自己不是植物族超量怪兽不能从额外卡组特殊召唤。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 321,
+      "type": 2,
+      "atk": 0,
+      "def": 0,
+      "level": 0,
+      "race": 0,
+      "attribute": 0
+    }
+  },
+  "23876": {
+    "cid": 23876,
+    "id": 18016631,
+    "cn_name": "混沌异晶人的变身",
+    "nwbbs_n": "混沌异晶人的变身",
+    "jp_ruby": "カオス・バリアンズ・チェンジ",
+    "jp_name": "カオス・バリアンズ・チェンジ",
+    "wiki_en": "Chaos Barian's Change",
+    "text": {
+      "types": "[魔法]",
+      "pdesc": "",
+      "desc": "这个卡名的①②的效果1回合只能有1次使用其中任意1个。\r\n①：以自己场上1只「假面魔蹈士」超量怪兽为对象才能发动。从额外卡组把比那只自己怪兽阶级高1或低2的1只「No.」怪兽，在作为对象的怪兽上面重叠当作超量召唤从额外卡组特殊召唤。\r\n②：把墓地的这张卡除外，以自己墓地的「阴影」怪兽或「假面魔蹈士」超量怪兽合计3只为对象才能发动。那些怪兽用喜欢的顺序回到卡组下面。那之后，自己抽1张。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 708694114511,
+      "type": 2,
+      "atk": 0,
+      "def": 0,
+      "level": 0,
+      "race": 0,
+      "attribute": 0
+    }
+  },
+  "23877": {
+    "cid": 23877,
+    "id": 44504746,
+    "cn_name": "香草白兔冰的精粹",
+    "nwbbs_n": "香草醛兔提取物",
+    "jp_ruby": "バニリン・エキストラクト",
+    "jp_name": "バニリン・エキストラクト",
+    "wiki_en": "Bunnillin Extract",
+    "text": {
+      "types": "[魔法|永续]",
+      "pdesc": "",
+      "desc": "这个卡名的②③的效果1回合各能使用1次。\r\n①：只要自己场上有衍生物以外的通常怪兽2只以上存在，自己抽卡阶段的通常抽卡变成2张。\r\n②：从对方卡组有卡被送去墓地的场合才能发动。从手卡·卡组把1只通常怪兽特殊召唤。\r\n③：5星以上而原本攻击力和原本守备力是2000以下的通常怪兽，特殊召唤的场合或者攻击宣言时，以对方场上1张卡为对象才能发动。那张卡破坏。 "
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 755,
+      "type": 131074,
+      "atk": 0,
+      "def": 0,
+      "level": 0,
+      "race": 0,
+      "attribute": 0
+    }
+  },
+  "23878": {
+    "cid": 23878,
+    "id": 71599345,
+    "cn_name": "决斗者之力",
+    "nwbbs_n": "决斗者之力",
+    "jp_ruby": "パワー・オブ・ザ・デュエリスト",
+    "jp_name": "パワー・オブ・ザ・デュエリスト",
+    "wiki_en": "Power of the Duelist",
+    "text": {
+      "types": "[魔法|速攻]",
+      "pdesc": "",
+      "desc": "这个卡名的卡在1回合只能发动1张。\r\n①：宣言以下数量的属性才能发动。那个效果适用。这个回合的结束阶段，除非是自己在这个回合把宣言的各属性的怪兽的效果在场上·墓地发动过的场合，自己必须把自己场上的卡全部送去墓地。\r\n●2：以场上1只怪兽为对象才能发动。那个除外。\r\n●3：自己抽2张。那之后，选自己1张手卡丢弃。\r\n●4：场上2张表侧表示卡的效果无效。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 0,
+      "type": 65538,
+      "atk": 0,
+      "def": 0,
+      "level": 0,
+      "race": 0,
+      "attribute": 0
+    }
+  },
+  "23879": {
+    "cid": 23879,
+    "id": 17993053,
+    "cn_name": "凯帕之金字塔",
+    "nwbbs_n": "赫普鲁金字塔",
+    "jp_ruby": "ケペルのきんじとう",
+    "jp_name": "ケペルの金字塔",
+    "wiki_en": "The Pyramid of Kepher",
+    "text": {
+      "types": "[魔法]",
+      "pdesc": "",
+      "desc": "这个卡名的①②的效果1回合各能使用1次。\r\n①：从卡组把1只不死族仪式怪兽送去墓地才能发动。从自己的卡组·墓地把1张场地魔法卡在自己场上以表侧表示放置。这张卡的发动后，直到回合结束时自己不能把不死族以外的怪兽的效果发动。\r\n②：对方场上有效果怪兽存在的场合，把墓地的这张卡除外，以自己墓地1只仪式怪兽为对象才能发动。那只怪兽加入手卡。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 0,
+      "type": 2,
+      "atk": 0,
+      "def": 0,
+      "level": 0,
+      "race": 0,
+      "attribute": 0
+    }
+  },
+  "23880": {
+    "cid": 23880,
+    "id": 43382198,
+    "cn_name": "魔兽的昂进",
+    "nwbbs_n": "魔兽的昂进",
+    "jp_ruby": "カード・クロール",
+    "jp_name": "魔獣の昂進",
+    "wiki_en": "Card Crawl",
+    "text": {
+      "types": "[魔法|永续]",
+      "pdesc": "",
+      "desc": "这个卡名的①的效果1回合只能使用1次。\r\n①：从自己卡组上面把以下数量的卡以里侧除外，以场上1只表侧表示怪兽为对象才能发动。作为对象的怪兽适用那个效果。\r\n●5张：攻击力·守备力变成0。\r\n●10张：效果无效。\r\n●15张：以里侧除外。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 0,
+      "type": 131074,
+      "atk": 0,
+      "def": 0,
+      "level": 0,
+      "race": 0,
+      "attribute": 0
+    }
+  },
+  "23881": {
+    "cid": 23881,
+    "id": 70777807,
+    "cn_name": "吸血鬼城堡",
+    "nwbbs_n": "吸血鬼魔城",
+    "jp_ruby": "キャッスル・オブ・ヴァンパイア",
+    "jp_name": "キャッスル・オブ・ヴァンパイア",
+    "wiki_en": "Castle of Vampire",
+    "text": {
+      "types": "[魔法|永续]",
+      "pdesc": "",
+      "desc": "这个卡名的卡1回合只能发动1张。\r\n①：作为这张卡发动时的效果处理，从自己的卡组·墓地把1只不死族·暗属性怪兽特殊召唤。那个怪兽从场上离开的场合这张卡破坏。\r\n②：这张卡的①效果特殊召唤的怪兽，不受暗属性以外的其他怪兽发动的效果影响。\r\n③：表侧表示的这张卡从场上离开的场合发动。自己场上的卡全部破坏，自己受到破坏数量×400的伤害。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 142,
+      "type": 131074,
+      "atk": 0,
+      "def": 0,
+      "level": 0,
+      "race": 0,
+      "attribute": 0
+    }
+  },
+  "23882": {
+    "cid": 23882,
+    "id": 6771402,
+    "cn_name": "秋",
+    "nwbbs_n": "秋",
+    "jp_ruby": "あき",
+    "jp_name": "秋",
+    "wiki_en": "Autumn",
+    "text": {
+      "types": "[魔法|场地]",
+      "pdesc": "",
+      "desc": "①：这张卡只要在场地区域存在，卡名当作「夏」使用。\r\n②：1回合1次，可以发动。以对方手卡数量给这张卡放置四季指示物。\r\n③：自己·对方的战斗阶段开始时才能发动。从自己的手卡·卡组·墓地把「秋」以外的1张可以放置四季指示物的场地魔法卡在自己场上以表侧表示放置（这张卡的四季指示物移给那张卡）。\r\n④：场地区域的卡被效果破坏的场合，可以作为代替把墓地的这张卡除外。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 0,
+      "type": 524290,
+      "atk": 0,
+      "def": 0,
+      "level": 0,
+      "race": 0,
+      "attribute": 0
+    }
+  },
+  "23883": {
+    "cid": 23883,
+    "id": 43266500,
+    "cn_name": "太阳神的支配",
+    "nwbbs_n": "太阳神灵的支配",
+    "jp_ruby": "たいようしんのしはい",
+    "jp_name": "太陽神の支配",
+    "wiki_en": "Sun God Domination",
+    "text": {
+      "types": "[陷阱]",
+      "pdesc": "",
+      "desc": "这个卡名的①②的效果1回合各能使用1次。\r\n①：场上有「拉之翼神龙」怪兽存在的场合才能发动。以下效果各适用。\r\n●从自己以及对方的墓地把怪兽各1只在自己场上特殊召唤。\r\n●场上有「拉之翼神龙」存在的场合，得到对方场上的全部怪兽的控制权。\r\n②：把墓地的这张卡除外，把自己场上1只「拉之翼神龙」怪兽解放才能发动。自己基本分回复那只怪兽的攻击力的数值。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 751,
+      "type": 4,
+      "atk": 0,
+      "def": 0,
+      "level": 0,
+      "race": 0,
+      "attribute": 0
+    }
+  },
+  "23884": {
+    "cid": 23884,
+    "id": 79654215,
+    "cn_name": "太阳神的守护者-神·史莱姆",
+    "nwbbs_n": "太阳神灵的守护者-神·史莱姆",
+    "jp_ruby": "たいようしんのしゅごしゃ－ゴッド・スライム",
+    "jp_name": "太陽神の守護者－神・スライム",
+    "wiki_en": "Egyptian God Slime, Protector of the Sun God",
+    "text": {
+      "types": "[陷阱|永续]",
+      "pdesc": "",
+      "desc": "这个卡名的卡在1回合只能发动1张。\r\n①：这张卡发动后变成持有以下效果的效果怪兽（水族·水·10星·攻/守3000）在怪兽区域守备表示特殊召唤（也当作陷阱卡使用）。\r\n●这张卡特殊召唤的场合才能发动。从卡组把1张「太阳神」卡加入手卡。对方回合用这个效果把怪兽加入手卡的场合，可以再把那只怪兽特殊召唤。\r\n●这张卡不会被效果破坏。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 751,
+      "type": 131076,
+      "atk": 3000,
+      "def": 3000,
+      "level": 10,
+      "race": 64,
+      "attribute": 2
+    }
+  },
+  "23885": {
+    "cid": 23885,
+    "id": 5059914,
+    "cn_name": "亚马逊救出剧",
+    "nwbbs_n": "亚马逊救出剧",
+    "jp_ruby": "アマゾネスきゅうしゅつげき",
+    "jp_name": "アマゾネス救出劇",
+    "wiki_en": "Amazoness Dramatic Rescue",
+    "text": {
+      "types": "[陷阱]",
+      "pdesc": "",
+      "desc": "这个卡名的①②的效果1回合各能使用1次。自己场上有「鹰身女郎」或「亚马逊」怪兽存在的场合，这张卡在盖放的回合也能发动。\r\n①：以场上1只怪兽为对象才能发动。从手卡·卡组把1只「鹰身」怪兽或「亚马逊」怪兽特殊召唤，作为对象的怪兽回到手卡。\r\n②：把墓地的这张卡除外才能发动。自己墓地·除外状态的1只「鹰身」怪兽或「亚马逊」怪兽加入手卡。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 4,
+      "type": 4,
+      "atk": 0,
+      "def": 0,
+      "level": 0,
+      "race": 0,
+      "attribute": 0
+    }
+  },
+  "23886": {
+    "cid": 23886,
+    "id": 42443968,
+    "cn_name": "诱惑之镜壁",
+    "nwbbs_n": "诱惑之镜壁",
+    "jp_ruby": "ゆうわくのミラーウォール",
+    "jp_name": "誘惑の鏡壁",
+    "wiki_en": "Eyelluring Mirror Wall",
+    "text": {
+      "types": "[陷阱|永续]",
+      "pdesc": "",
+      "desc": "①：只要自己场上有「鹰身女郎」或「亚马逊」怪兽存在，这张卡得到以下效果。\r\n●对方场上的表侧表示怪兽变成攻击表示，可以攻击的对方怪兽必须作出攻击。\r\n●对方怪兽的攻击宣言时1次，可以发动。那只怪兽的攻击力变成一半。\r\n②：自己·对方的准备阶段1次，可以发动。从自己的墓地·除外状态把除「诱惑之镜壁」外的，有「鹰身女郎」的卡名记述的1张魔法·陷阱卡在自己场上盖放。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 0,
+      "type": 131076,
+      "atk": 0,
+      "def": 0,
+      "level": 0,
+      "race": 0,
+      "attribute": 0
+    }
+  },
+  "23887": {
+    "cid": 23887,
+    "id": 78432667,
+    "cn_name": "百龙的交战",
+    "nwbbs_n": "百龙的交战",
+    "jp_ruby": "リインゼルム・エンカウント",
+    "jp_name": "百竜の交戦",
+    "wiki_en": "Reindsurm Encounter",
+    "text": {
+      "types": "[陷阱|反击]",
+      "pdesc": "",
+      "desc": "这个卡名的①②的效果1回合各能使用1次。\r\n①：自己场上有「轮回虫龙」怪兽存在，怪兽的效果·魔法·陷阱卡发动时才能发动。那个发动无效。那之后，可以适用以下效果。\r\n●从自己的卡组·墓地把1只「轮回虫龙」怪兽加入手卡，自己场上1只昆虫族怪兽送去墓地。\r\n②：自己场上的「轮回虫龙」怪兽被战斗·效果破坏的场合，可以作为代替让墓地的这张卡回到卡组最下面。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 753,
+      "type": 1048580,
+      "atk": 0,
+      "def": 0,
+      "level": 0,
+      "race": 0,
+      "attribute": 0
+    }
+  },
+  "23888": {
+    "cid": 23888,
+    "id": 5837376,
+    "cn_name": "白鸦魔女的光彩",
+    "nwbbs_n": "白鸦魔女的光彩",
+    "jp_ruby": "はくあのまじょのひかり",
+    "jp_name": "白鴉の魔女の光彩",
+    "wiki_en": "Splendor of the Winter Raven Witch",
+    "text": {
+      "types": "[陷阱|永续]",
+      "pdesc": "",
+      "desc": "这个卡名的①的效果1回合只能使用1次。\r\n①：可以从以下效果选择1个发动。\r\n●从自己的手卡·墓地把1只「白鸦」怪兽特殊召唤。\r\n●从自己的手卡·额外卡组·场上把各最多1只「白鸦」怪兽作为融合素材，把1只「迪亚贝尔」融合怪兽融合召唤。\r\n●自己场上有「迪亚贝尔」怪兽存在的场合，以场上1张表侧表示卡为对象才能发动。那张卡的效果直到回合结束时无效。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 754,
+      "type": 131076,
+      "atk": 0,
+      "def": 0,
+      "level": 0,
+      "race": 0,
+      "attribute": 0
+    }
+  },
+  "23889": {
+    "cid": 23889,
+    "id": 31321471,
+    "cn_name": "白鸦魔女的幻姿",
+    "nwbbs_n": "白鸦魔女的幻姿",
+    "jp_ruby": "はくあのまじょのまぼろし",
+    "jp_name": "白鴉の魔女の幻姿",
+    "wiki_en": "Illusion of the Winter Raven Witch",
+    "text": {
+      "types": "[陷阱]",
+      "pdesc": "",
+      "desc": "这个卡名的卡在1回合只能发动1张。\r\n①：自己额外卡组·场上的怪兽作为融合素材，把1只幻想魔族融合怪兽融合召唤。这张卡的发动后，直到回合结束时自己不能把幻想魔族以外的手卡·墓地的怪兽的效果发动。\r\n②：对方让这张卡的发动无效，这张卡被送去墓地的场合才能发动。这张卡在自己场上盖放，对方场上的卡全部回到手卡。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 754,
+      "type": 4,
+      "atk": 0,
+      "def": 0,
+      "level": 0,
+      "race": 0,
+      "attribute": 0
+    }
+  },
+  "23890": {
+    "cid": 23890,
+    "id": 78716089,
+    "cn_name": "向无预幻世托付的约定",
+    "nwbbs_n": "托付给无预幻世界的约定",
+    "jp_ruby": "エフェメ・ラル・テオリアライズ",
+    "jp_name": "予幻なき世界に託す約束",
+    "wiki_en": "Theorealize Ephemeral Lull",
+    "text": {
+      "types": "[陷阱]",
+      "pdesc": "",
+      "desc": "这个卡名在规则上也当作「狱神」卡使用。这个卡名的①②的效果1回合各能使用1次。\r\n①：从自己的手卡·场上（表侧表示）把1只「米底乌斯」怪兽除外才能发动。从额外卡组特殊召唤的场上的怪兽全部除外。那之后，可以从自己墓地把1只「神艺」怪兽特殊召唤。\r\n②：自己场上的怪兽的种族是3种类以上的场合，把墓地的这张卡除外才能发动。自己除外状态的1只「米底乌斯」怪兽特殊召唤。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 30278112,
+      "type": 4,
+      "atk": 0,
+      "def": 0,
+      "level": 0,
+      "race": 0,
+      "attribute": 0
+    }
+  },
+  "23891": {
+    "cid": 23891,
+    "id": 4104784,
+    "cn_name": "软软香草白兔冰",
+    "nwbbs_n": "香草醛兔软件冰淇淋",
+    "jp_ruby": "バニリン・ソフト",
+    "jp_name": "バニリン・ソフト",
+    "wiki_en": "Bunnillin Soft",
+    "text": {
+      "types": "[陷阱|永续]",
+      "pdesc": "",
+      "desc": "这个卡名的②③的效果1回合各能使用1次。\r\n①：只要自己场上有衍生物以外的通常怪兽2只以上存在，自己场上的通常怪兽的攻击力上升1000。\r\n②：以种族·属性·等级不同的自己墓地的2只通常怪兽为对象才能发动。那些怪兽特殊召唤。\r\n③：5星以上而原本攻击力和原本守备力是2000以下的通常怪兽，特殊召唤的场合或者攻击宣言时才能发动。从自己墓地把1张卡加入手卡。"
+    },
+    "data": {
+      "ot": 1,
+      "setcode": 755,
+      "type": 131076,
+      "atk": 0,
+      "def": 0,
+      "level": 0,
+      "race": 0,
+      "attribute": 0
+    }
+  },
   "23902": {
     "cid": 23902,
-    "id": 100262301,
+    "id": 64537714,
     "cn_name": "乌尔素姆之魔龙王",
     "nwbbs_n": "乌尔素姆之魔龙王",
     "jp_ruby": "ウルトゥムのまりゅうおう",
@@ -380349,7 +382324,7 @@
   },
   "24035": {
     "cid": 24035,
-    "id": 100200298,
+    "id": 88421252,
     "cn_name": "反击魔法「攻击无力化」",
     "nwbbs_n": "反击魔法「攻击无力化」",
     "jp_ruby": "カウンターマジック「こうげきのむりょくか」",
@@ -380358,7 +382333,7 @@
     "text": {
       "types": "[魔法|速攻]",
       "pdesc": "",
-      "desc": "①：自己·对方的战斗阶段，可以从以下效果选择1个发动。\r\n●对方场上的怪兽的数量比自己场上多的场合，对方怪兽的攻击宣言时才能发动。那次攻击无效。那之后，战斗阶段结束。\r\n●对方把怪兽的效果发动时才能发动。那个发动无效并破坏。\r\n②：自己抽卡阶段通常抽卡时，把墓地的这张卡除外才能发动。从手卡把1只怪兽特殊召唤。"
+      "desc": "①：自己·对方的战斗阶段，可以从以下效果选择1个发动。\r\n●对方场上的怪兽数量比自己场上的怪兽多的场合，对方怪兽的攻击宣言时才能发动。那次攻击无效。那之后，战斗阶段结束。\r\n●对方把怪兽的效果发动时才能发动。那个效果无效并破坏。\r\n②：自己抽卡阶段通常抽卡时，把墓地的这张卡除外才能发动。从手卡把1只怪兽特殊召唤。"
     },
     "data": {
       "ot": 1,
