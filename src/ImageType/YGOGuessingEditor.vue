@@ -76,14 +76,14 @@ const Font1 = new FontFaceObserver('KaiTi');
 onMounted(async () => {
   const fontPromise = Font1.check();
   
-  const dataPromise = fetch('cards/cards.json')
+  const dataPromise = fetch(`${import.meta.env.BASE_URL}cards/cards.json`)
     .then(res => res.json())
     .then(raw => {
       const dataSource = raw.default || raw;
       poolAll = Object.values(dataSource);
     });
 
-  const commonDataPromise = fetch('cards/common_cards.json')
+  const commonDataPromise = fetch(`${import.meta.env.BASE_URL}cards/common_cards.json`)
     .then(res => res.json())
     .then(data => {
       const ids = data.default || data;
@@ -97,6 +97,9 @@ onMounted(async () => {
     dataLoading.value = false;
   } catch (err) {
     console.error("初始化失败", err);
+    console.error("错误名称:", err.name);
+    console.error("错误信息:", err.message);
+    console.error("卡片池数量:", poolAll.length);
     alert("数据加载发生错误，请刷新重试");
   }
 });
