@@ -407,26 +407,45 @@ const handleGenerate = async () => {
     
     const cardImages = await Promise.all(cards.map(async (card) => {
       const isPendulum = card.text.types.includes('灵摆');
-      const suffix = isPendulum ? '!artp' : '!art'; 
+      const suffix = isPendulum ? '!artp' : '!art';
       const originalUrl = `cdn.233.momobako.com/ygopro/pics/${card.id}.jpg${suffix}`;
-      const url = `https://wsrv.nl/?url=${encodeURIComponent(originalUrl)}&t=${new Date().getTime()}_${Math.random()}`;
-      
-      try {
-        const img = await loadImage(url);
-        const isMatchTarget = checkCardMatch(card, judgeTarget.value);
-        
-        return { 
-          img, 
-          isPendulum, 
-          answer: getCardAnswer(card),
-          isMatchTarget, 
-          name: card.cn_name || card.jp_name || '未知卡名'
-        };
-      } catch (e) {
-        console.warn(`Failed to load image for card ${card.id}`, e);
-        return null; 
+
+      const isMatchTarget = checkCardMatch(card, judgeTarget.value);
+      const answer = getCardAnswer(card);
+      const name = card.cn_name || card.jp_name || '未知卡名';
+
+      let img = null;
+
+      // 最多尝试三次
+      for (let attempt = 0; attempt < 3; attempt++) {
+        const url = `https://wsrv.nl/?url=${encodeURIComponent(originalUrl)}`;
+
+        try {
+          img = await loadImage(url);
+          break;
+        } catch (e) {
+          console.warn(
+            `卡片 ${card.id} 图片加载失败，第 ${attempt + 1} 次尝试`,
+            e
+          );
+        }
       }
+
+      if (!img) {
+        console.error(`卡片 ${card.id} 图片最终加载失败`);
+      }
+
+      // 无论图片是否成功，都保留完整卡片信息
+      return {
+        img,
+        isPendulum,
+        answer,
+        isMatchTarget,
+        name,
+        imageFailed: !img
+      };
     }));
+
 
     setTimeout(() => {
       generated.value = true;
@@ -573,12 +592,26 @@ const draw = (canvas, cardImages, showAnswer) => {
     const x = startX + c * (cardW + gapX);
     const y = gridStartY + r * (cardH + gapY);
 
-    if (item.isPendulum) {
-      const offset = (256 - 216) / 2;
-      ctx.drawImage(item.img, x, y + offset, 256, 216);
+    
+    if (item.img) {
+      if (item.isPendulum) {
+        const offset = (256 - 216) / 2;
+        ctx.drawImage(item.img, x, y + offset, 256, 216);
+      } else {
+        ctx.drawImage(item.img, x, y, 256, 256);
+      }
     } else {
-      ctx.drawImage(item.img, x, y, 256, 256);
+      // 图片加载失败时绘制占位区域
+      ctx.fillStyle = '#eeeeee';
+      ctx.fillRect(x, y, cardW, cardH);
+
+      ctx.fillStyle = '#999999';
+      ctx.font = `20px ${baseFont}`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('图片加载失败', x + cardW / 2, y + cardH / 2);
     }
+
 
     ctx.strokeStyle = '#ddd';
     ctx.lineWidth = 2;
