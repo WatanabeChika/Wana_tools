@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch, onMounted } from 'vue';
+import { ref, computed, watch, onMounted, onDeactivated, onBeforeUnmount } from 'vue';
 import { MinPriorityQueue } from '@datastructures-js/priority-queue';
 
 // 游戏参数
@@ -18,6 +18,16 @@ const messageClass = ref('');
 const showingAnswer = ref(false);
 const solutionPath = ref([]);
 const isGenerating = ref(false);
+let generationId = 0;
+const answerTimers = new Set();
+function cancelAnswer() {
+  for (const timer of answerTimers) clearTimeout(timer);
+  answerTimers.clear();
+}
+function scheduleAnswer(callback, delay) {
+  const timer = setTimeout(() => { answerTimers.delete(timer); callback(); }, delay);
+  answerTimers.add(timer);
+}
 
 // 计算属性
 const gridStyle = computed(() => ({
@@ -26,46 +36,53 @@ const gridStyle = computed(() => ({
 
 const visitedCount = computed(() => visitedCells.value.length);
 
-const walkableCount = computed(() => 
+const walkableCount = computed(() =>
   cells.value.filter(cell => !cell.isObstacle).length
 );
 
 // 生成新地图
 const generateNewMap = async () => {
+  const id = ++generationId;
+  cancelAnswer();
   // 设置生成状态
   isGenerating.value = true;
-  
+
   // 使用 setTimeout 让 UI 有机会更新
   await new Promise(resolve => setTimeout(resolve, 50));
-  
+
+  if (id !== generationId) return;
   // 重置游戏状态
   resetGame();
-  
+
   const maxAttempts = 10000;
   let success = false;
-  
+
   for (let attempt = 0; attempt < maxAttempts && !success; attempt++) {
+    if (attempt && attempt % 10 === 0) {
+      await new Promise(resolve => setTimeout(resolve, 0));
+      if (id !== generationId) return;
+    }
     // 创建初始网格
     const newCells = createInitialGrid();
-    
+
     // 先放置障碍物
     const cellsWithObstacles = placeObstacles(newCells);
-    
+
     // 在剩余区域生成一笔画路径
     const result = generateOneStrokePath(cellsWithObstacles);
-    
+
     if (result && result.path.length > 0) {
       cells.value = result.cells;
       solutionPath.value = result.path;
-      startCell.value = result.start;
-      currentCell.value = result.start;
+      startCell.value = cells.value.find(cell => cell.isStart);
+      currentCell.value = startCell.value;
       message.value = '点击起点开始一笔画';
       messageClass.value = '';
       showingAnswer.value = false;
       success = true;
     }
   }
-  
+
   if (!success) {
     // 如果失败,生成一个简单的无障碍物版本
     const simpleCells = createInitialGrid();
@@ -73,14 +90,14 @@ const generateNewMap = async () => {
     if (result) {
       cells.value = result.cells;
       solutionPath.value = result.path;
-      startCell.value = result.start;
-      currentCell.value = result.start;
+      startCell.value = cells.value.find(cell => cell.isStart);
+      currentCell.value = startCell.value;
       message.value = '点击起点开始一笔画 (简化版本)';
       messageClass.value = '';
       showingAnswer.value = false;
     }
   }
-  
+
   // 清除生成状态
   isGenerating.value = false;
 };
@@ -105,29 +122,29 @@ const createInitialGrid = () => {
 
 // 放置障碍物
 const placeObstacles = (cells) => {
-  const newCells = [...cells.map(cell => ({...cell}))];
+  const newCells = [...cells.map(cell => ({ ...cell }))];
   const totalCells = width.value * height.value;
   const targetObstacles = Math.floor(totalCells * obstacleRatio.value);
-  
+
   // 确保至少有一些可行走的格子
   const minWalkable = Math.max(4, Math.floor(totalCells * 0.3));
   const maxObstacles = totalCells - minWalkable;
   const actualObstacles = Math.min(targetObstacles, maxObstacles);
-  
+
   if (actualObstacles <= 0) return newCells;
-  
+
   // 随机选择障碍物位置,但要保持连通性
   let obstaclesPlaced = 0;
   const attempts = actualObstacles * 10; // 限制尝试次数
-  
+
   for (let i = 0; i < attempts && obstaclesPlaced < actualObstacles; i++) {
     const randomIndex = Math.floor(Math.random() * newCells.length);
     const cell = newCells[randomIndex];
-    
+
     if (!cell.isObstacle) {
       // 临时设置为障碍物
       cell.isObstacle = true;
-      
+
       // 检查连通性
       if (isConnected(newCells)) {
         obstaclesPlaced++;
@@ -137,7 +154,7 @@ const placeObstacles = (cells) => {
       }
     }
   }
-  
+
   return newCells;
 };
 
@@ -145,16 +162,16 @@ const placeObstacles = (cells) => {
 const isConnected = (cells) => {
   const walkableCells = cells.filter(c => !c.isObstacle);
   if (walkableCells.length === 0) return false;
-  
+
   // 使用Set优化查找
   const visited = new Set();
   const queue = [walkableCells[0]];
   visited.add(getCellKey(walkableCells[0]));
-  
+
   while (queue.length > 0) {
     const current = queue.shift();
     const neighbors = getNeighbors(current, cells);
-    
+
     for (const neighbor of neighbors) {
       const key = getCellKey(neighbor);
       if (!visited.has(key)) {
@@ -163,7 +180,7 @@ const isConnected = (cells) => {
       }
     }
   }
-  
+
   return visited.size === walkableCells.length;
 };
 
@@ -171,10 +188,10 @@ const isConnected = (cells) => {
 const generateOneStrokePath = (cells) => {
   const walkableCells = cells.filter(c => !c.isObstacle);
   if (walkableCells.length === 0) return null;
-  
+
   // 尝试多个起点
   const shuffledCells = shuffleArray([...walkableCells]);
-  
+
   for (const startCell of shuffledCells) {
     const result = findHamiltonianPath(cells, startCell);
     if (result && result.path.length === walkableCells.length) {
@@ -188,7 +205,7 @@ const generateOneStrokePath = (cells) => {
       };
     }
   }
-  
+
   return null;
 };
 
@@ -196,35 +213,35 @@ const generateOneStrokePath = (cells) => {
 const findHamiltonianPath = (cells, startCell) => {
   const walkableCells = cells.filter(c => !c.isObstacle);
   const targetLength = walkableCells.length;
-  
+
   // 预计算邻居关系以提高性能
   const neighborCache = new Map();
   walkableCells.forEach(cell => {
     const key = getCellKey(cell);
     neighborCache.set(key, getNeighbors(cell, cells));
   });
-  
+
   const path = [];
   const visited = new Set();
-  
+
   // 使用Warnsdorff启发式优化回溯
   const backtrack = (current) => {
     const key = getCellKey(current);
     if (visited.has(key)) return false;
-    
+
     visited.add(key);
     path.push(current);
-    
+
     // 如果访问了所有可行走格子,成功
     if (path.length === targetLength) {
       return true;
     }
-    
+
     // 获取未访问的邻居(使用缓存)
     const cachedNeighbors = neighborCache.get(key) || [];
     const unvisitedNeighbors = cachedNeighbors
       .filter(neighbor => !visited.has(getCellKey(neighbor)));
-    
+
     // 使用优先队列优化邻居选择
     const priorityQueue = new MinPriorityQueue((neighbor) => {
       // 计算该邻居的未访问邻居数量(越少越优先)
@@ -232,9 +249,9 @@ const findHamiltonianPath = (cells, startCell) => {
       const neighborNeighbors = neighborCache.get(neighborKey) || [];
       return neighborNeighbors.filter(n => !visited.has(getCellKey(n))).length;
     });
-    
+
     unvisitedNeighbors.forEach(n => priorityQueue.enqueue(n));
-    
+
     // 按优先级尝试每个邻居
     while (!priorityQueue.isEmpty()) {
       const neighbor = priorityQueue.dequeue();
@@ -242,17 +259,17 @@ const findHamiltonianPath = (cells, startCell) => {
         return true;
       }
     }
-    
+
     // 回溯
     visited.delete(key);
     path.pop();
     return false;
   };
-  
+
   if (backtrack(startCell)) {
     return { path: [...path] };
   }
-  
+
   return null;
 };
 
@@ -268,11 +285,11 @@ const getNeighbors = (cell, cellList) => {
     { dx: 0, dy: 1 },  // 下
     { dx: -1, dy: 0 }  // 左
   ];
-  
+
   for (const dir of directions) {
     const nx = cell.x + dir.dx;
     const ny = cell.y + dir.dy;
-    
+
     if (nx >= 0 && nx < width.value && ny >= 0 && ny < height.value) {
       const neighbor = cellList[ny * width.value + nx];
       if (!neighbor.isObstacle) {
@@ -280,7 +297,7 @@ const getNeighbors = (cell, cellList) => {
       }
     }
   }
-  
+
   return neighbors;
 };
 
@@ -307,19 +324,19 @@ const getCellClasses = (cell) => {
 
 // 点击格子处理
 const onCellClick = (cell) => {
-  if (gameComplete.value || cell.isObstacle || showingAnswer.value) return;
-  
+  if (isGenerating.value || gameComplete.value || cell.isObstacle || showingAnswer.value) return;
+
   // 如果是起点且游戏未开始,开始游戏
   if (cell.isStart && visitedCells.value.length === 0) {
     startGame();
     return;
   }
-  
+
   // 如果游戏已开始,检查移动是否合法
   if (visitedCells.value.length > 0) {
     const current = currentCell.value;
     const neighbors = getNeighbors(current, cells.value);
-    
+
     if (neighbors.some(n => n.x === cell.x && n.y === cell.y) && !cell.isVisited) {
       // 合法移动
       moveToCell(cell);
@@ -348,7 +365,7 @@ const moveToCell = (cell) => {
   cell.isVisited = true;
   visitedCells.value.push(cell);
   currentCell.value = cell;
-  
+
   // 检查游戏是否完成
   checkGameCompletion();
 };
@@ -357,7 +374,7 @@ const moveToCell = (cell) => {
 const checkGameCompletion = () => {
   // 检查是否所有非障碍物格子都被访问
   const totalWalkableCells = cells.value.filter(c => !c.isObstacle).length;
-  
+
   if (visitedCells.value.length === totalWalkableCells) {
     gameComplete.value = true;
     message.value = '恭喜!你成功完成了一笔画!';
@@ -370,13 +387,15 @@ const checkGameCompletion = () => {
 
 // 重新开始游戏
 const restartGame = () => {
+  if (isGenerating.value) return;
+  cancelAnswer();
   resetGame();
   cells.value.forEach(cell => {
     cell.isVisited = false;
     cell.isCurrent = false;
     cell.isInPath = false;
   });
-  
+
   if (startCell.value) {
     startCell.value.isCurrent = true;
     currentCell.value = startCell.value;
@@ -388,27 +407,29 @@ const restartGame = () => {
 
 // 显示答案
 const showAnswer = () => {
+  if (isGenerating.value) return;
+  cancelAnswer();
   // 清除玩家的路径状态
   cells.value.forEach(cell => {
     cell.isInPath = false;
     cell.isVisited = false;
     cell.isCurrent = false;
   });
-  
+
   // 重置游戏状态
   visitedCells.value = [];
   currentCell.value = null;
   gameComplete.value = false;
-  
+
   // 显示预先生成的路径
   if (solutionPath.value && solutionPath.value.length > 0) {
     showingAnswer.value = true;
     let delay = 0;
-    
+
     solutionPath.value.forEach((pathCell, index) => {
-      setTimeout(() => {
+      scheduleAnswer(() => {
         // 通过坐标匹配找到对应的格子
-        const actualCell = cells.value.find(c => 
+        const actualCell = cells.value.find(c =>
           c.x === pathCell.x && c.y === pathCell.y && !c.isObstacle
         );
         if (actualCell) {
@@ -417,12 +438,12 @@ const showAnswer = () => {
       }, delay);
       delay += 100; // 每100ms显示一个格子
     });
-    
-    setTimeout(() => {
+
+    scheduleAnswer(() => {
       message.value = `答案路径已显示完成 (${solutionPath.value.length} 步)`;
       messageClass.value = 'success';
     }, delay);
-    
+
     message.value = '正在显示答案路径...';
     messageClass.value = '';
   } else {
@@ -433,6 +454,7 @@ const showAnswer = () => {
 
 // 重置游戏状态
 const resetGame = () => {
+  cancelAnswer();
   visitedCells.value = [];
   currentCell.value = null;
   gameComplete.value = false;
@@ -447,10 +469,15 @@ watch([width, height, obstacleRatio], () => {
 onMounted(() => {
   generateNewMap();
 });
+onDeactivated(() => {
+  cancelAnswer();
+  if (showingAnswer.value) restartGame();
+});
+onBeforeUnmount(() => { generationId++; cancelAnswer(); });
 </script>
 
 <template>
-  <h1>一笔画游戏</h1>
+  <h1 class="tool-title">一笔画游戏</h1>
   <p style="margin-bottom: 10px; margin-top: 0px">点击起点开始游戏，访问所有格子即获胜。</p>
   <p style="margin-bottom: 10px; margin-top: 0px">每次只能移动到相邻的格子。不能访问已经走过的格子，不能穿过障碍物。</p>
 
@@ -462,13 +489,8 @@ onMounted(() => {
           <div class="loading-text">正在生成地图中...</div>
         </div>
         <div class="grid" :class="{ 'generating': isGenerating }" :style="gridStyle">
-          <div 
-            v-for="(cell, index) in cells" 
-            :key="index"
-            class="cell"
-            :class="getCellClasses(cell)"
-            @click="onCellClick(cell)"
-          >
+          <div v-for="(cell, index) in cells" :key="index" class="cell" :class="getCellClasses(cell)"
+            @click="onCellClick(cell)">
             <span v-if="cell.isStart" class="start-label">起</span>
           </div>
         </div>
@@ -504,9 +526,9 @@ onMounted(() => {
         </div>
 
         <div class="buttons">
-          <button @click="generateNewMap">生成新地图</button>
-          <button @click="restartGame" style="background-color: gray;">重新开始</button>
-          <button @click="showAnswer" style="background-color: cornflowerblue;">查看答案</button>
+          <button @click="generateNewMap" :disabled="isGenerating">生成新地图</button>
+          <button @click="restartGame" :disabled="isGenerating" class="neutral-button">重新开始</button>
+          <button @click="showAnswer" :disabled="isGenerating" class="primary-btn">查看答案</button>
         </div>
 
         <div class="result" :class="messageClass">{{ message }}</div>
@@ -539,16 +561,9 @@ onMounted(() => {
 </template>
 
 <style scoped>
-h1 {
-  font-family: sans-serif;
-  color: #333;
-  text-align: center;
-  margin-bottom: 50px;
-}
-
 p {
-  font-family: sans-serif;
-  color: rgba(128,128,128,0.75);
+  font-family: inherit;
+  color: var(--muted);
   text-align: center;
 }
 
@@ -557,36 +572,21 @@ input[type="range"] {
   margin: 0 10px;
 }
 
-button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 6px;
-  background-color: #28a745;
-  color: white;
-  cursor: pointer;
-  font-size: 14px;
-  flex: 1;
-  min-width: 120px;
-  transition: opacity 0.2s;
-}
-
-button:hover {
-  opacity: 0.9;
-}
-
 .container {
   display: flex;
   flex-direction: column;
-  gap: 30px;
-  max-width: min(1200px, 90vw);
+  gap: 24px;
+  max-width: 1200px;
+  width: 100%;
+  box-sizing: border-box;
   margin: 30px auto 0;
-  padding: 0 20px;
+  padding: 0;
 }
 
 .top-area {
   display: grid;
-  grid-template-columns: 1fr 400px;
-  gap: 30px;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 24px;
   width: 100%;
 }
 
@@ -595,8 +595,8 @@ button:hover {
   justify-content: center;
   align-items: center;
   min-height: 400px;
-  background-color: #333;
-  border-radius: 15px;
+  background-color: var(--text);
+  border-radius: var(--radius);
   padding: 0 50px;
   position: relative;
 }
@@ -612,7 +612,7 @@ button:hover {
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 15px;
+  border-radius: var(--radius);
   z-index: 10;
 }
 
@@ -629,12 +629,14 @@ button:hover {
   margin-top: 20px;
   color: white;
   font-size: 18px;
-  font-weight: bold;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  font-weight: 600;
+
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .grid {
@@ -642,7 +644,7 @@ button:hover {
   gap: 3px;
   background-color: #555;
   padding: 4px;
-  border-radius: 8px;
+  border-radius: var(--radius);
   transition: filter 0.3s;
 }
 
@@ -660,18 +662,17 @@ button:hover {
   background-color: #ecf0f1;
   cursor: pointer;
   border-radius: 4px;
-  transition: all 0.2s;
+  transition: background-color 150ms;
   font-size: 14px;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .cell:hover:not(.obstacle) {
-  transform: scale(1.05);
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+  background-color: #dce5ec;
 }
 
 .cell.start {
-  background-color: #2ecc71;
+  background-color: var(--success);
   color: white;
 }
 
@@ -691,26 +692,23 @@ button:hover {
 }
 
 .cell.current {
-  background-color: #e74c3c;
+  background-color: var(--danger);
   color: white;
-  animation: pulse 0.5s infinite;
+
 }
 
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-}
+
 
 .start-label {
   font-size: 14px;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .controls {
   background: white;
-  padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  padding: 20px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -719,9 +717,9 @@ button:hover {
 .game-info {
   text-align: center;
   margin-bottom: 20px;
-  font-weight: bold;
-  font-size: 16px;
-  color: #333;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text);
 }
 
 .game-info p {
@@ -739,13 +737,13 @@ button:hover {
   align-items: center;
   justify-content: space-between;
   font-size: 14px;
-  color: #666;
+  color: var(--muted);
 }
 
 .ratio-value {
   min-width: 40px;
-  font-weight: bold;
-  color: #333;
+  font-weight: 600;
+  color: var(--text);
   text-align: right;
 }
 
@@ -765,18 +763,18 @@ button:hover {
   min-height: 24px;
   padding: 10px;
   border-radius: 6px;
-  font-size: 16px;
+  font-size: 14px;
   text-align: center;
 }
 
 .result.success {
-  color: #2ecc71;
-  background-color: #d5f4e6;
+  color: var(--success);
+  background-color: var(--success-soft);
 }
 
 .result.error {
-  color: #e74c3c;
-  background-color: #fadbd8;
+  color: var(--danger);
+  background-color: var(--danger-soft);
 }
 
 .legend {
@@ -785,8 +783,8 @@ button:hover {
   gap: 15px;
   background: white;
   padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
 }
 
 .legend-item {
@@ -794,8 +792,8 @@ button:hover {
   align-items: center;
   gap: 10px;
   padding: 8px 12px;
-  background: #f8f8f8;
-  border-radius: 8px;
+  background: var(--surface-soft);
+  border-radius: var(--radius);
   font-size: 14px;
 }
 
@@ -807,7 +805,7 @@ button:hover {
 }
 
 .color-box.start {
-  background-color: #2ecc71;
+  background-color: var(--success);
 }
 
 .color-box.obstacle {
@@ -823,18 +821,18 @@ button:hover {
 }
 
 .color-box.current {
-  background-color: #e74c3c;
+  background-color: var(--danger);
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 800px) {
   .top-area {
     grid-template-columns: 1fr;
   }
-  
+
   .controls {
     order: 2;
   }
-  
+
   .grid-container {
     order: 1;
   }
@@ -845,12 +843,12 @@ button:hover {
     padding: 20px;
     min-height: 300px;
   }
-  
+
   .cell {
     width: 35px;
     height: 35px;
   }
-  
+
   .legend {
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   }
@@ -861,18 +859,18 @@ button:hover {
     padding: 15px;
     min-height: 250px;
   }
-  
+
   .cell {
     width: 30px;
     height: 30px;
     font-size: 12px;
   }
-  
+
   .legend {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
   }
-  
+
   input[type="range"] {
     width: 100px;
   }

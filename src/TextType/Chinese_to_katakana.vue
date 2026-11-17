@@ -11,9 +11,9 @@ const dot = ref(false);
 const number = ref(false);
 
 const modeItems = ref([
-  { name: '不分隔', mark: empty},
-  { name: '以空格分隔', mark: space},
-  { name: '以点分隔', mark: dot}
+  { name: '不分隔', mark: empty },
+  { name: '以空格分隔', mark: space },
+  { name: '以点分隔', mark: dot }
 ])
 
 // 数字预处理
@@ -31,14 +31,14 @@ function convert(ini, finh, finb, fint) {
   // 无声母
   if (ini == '') {
     // 特殊：er音
-    if (finh == '' && finb == 'e' && fint == 'r') 
+    if (finh == '' && finb == 'e' && fint == 'r')
       return 'ア';
     else
       return fin_conv(finh) + fin_conv(finb) + fin_conv(fint);
   }
   // 有韵头
   else if (finh != '') {
-    return fin_ini_conv(ini, finh, true) + fin2_conv(finb+fint);
+    return fin_ini_conv(ini, finh, true) + fin2_conv(finb + fint);
   }
   // 无韵尾
   else if (fint == '') {
@@ -54,7 +54,7 @@ const update_output = () => {
   let input = inputText.value;
 
   if (!number.value) input = numconv(inputText.value);
-  
+
   const message = pinyin(input, { type: 'array' });
   const initial = pinyin(input, { pattern: 'initial', type: 'array' });
   const finalhead = pinyin(input, { pattern: 'finalHead', toneType: 'none', v: true, type: 'array' });
@@ -66,7 +66,7 @@ const update_output = () => {
       res.push(message[i]);
       continue;
     }
-    if (i > 0 && finalbody[i-1] != '') {
+    if (i > 0 && finalbody[i - 1] != '') {
       if (space.value) res.push(' ');
       if (dot.value) res.push('・');
       if (empty.value) res.push('');
@@ -101,93 +101,79 @@ const update_format = (item) => {
 
 <template>
   <div id="m2kcontainer">
-    <h1>汉字片假名转换器</h1>
-    <label id="in-out">汉字: </label>
-    <textarea type="text" id="inputBox" v-model="inputText" placeholder="输入汉字就可以得到对应读音的假名啦！" @input="update_output"></textarea>
-    <div v-for="item in modeItems" :key="item.name" id="settings">
-      <label :for="item.name">{{ item.name }}</label>
-      <input type="radio" name="check" :checked="item.mark" :value="item.mark" :id="item.name" @change="update_format(item)">
+    <h1 class="tool-title">汉字片假名转换器</h1>
+    <label class="field-label" for="inputBox">汉字: </label>
+    <textarea id="inputBox" v-model="inputText" placeholder="输入汉字就可以得到对应读音的假名啦！" @input="update_output"></textarea>
+    <div class="text-options">
+      <label v-for="item in modeItems" :key="item.name" class="option-label">
+        <input type="radio" name="kana-format" :checked="item.mark" @change="update_format(item)">{{ item.name }}
+      </label>
+      <label class="option-label"><input type="checkbox" v-model="number" @change="update_output">保留数字</label>
     </div>
-    <label id="number">保留数字</label>
-    <input type="checkbox" id="numberBox" v-model="number" @change="update_output">
-    <label id="in-out">片假名: </label>
-    <textarea type="text" id="outputBox" v-model="outputText" placeholder="シュルハンズジウクイドダオドイインドインドジアミンラ！" readonly></textarea>
+    <label class="field-label" for="outputBox">片假名: </label>
+    <textarea id="outputBox" v-model="outputText" placeholder="シュルハンズジウクイドダオドイインドインドジアミンラ！" readonly></textarea>
   </div>
   <div id="notice">
-      <p>注意：英文保留原样，将“2”一律读作“二”。</p>
+    <p>注意：英文保留原样，将“2”一律读作“二”。</p>
   </div>
 </template>
 
 
 
 <style scoped>
-
-h1 {
-  font-family: sans-serif;
-  color: #333;
-  text-align: center;
-  margin-bottom: 50px;
-}
-
-label {
-  display: inline-block;
-  margin-bottom: 10px;
-  margin-left: 10px;
-  font-weight: 600;
-}
-
-textarea {
-  width: 100%;
-  height: 230px;
-  padding: 10px;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  resize: none; 
-  overflow-y: display; 
-}
-
-input[type="radio"] {
-  display: inline-block;
-  margin-right: 30px;
-}
-
-input[type="checkbox"] {
-  display: inline-block;
-  margin-bottom: 10px;
-  margin-right: 30px;
-}
-
-p {
-  font-family: sans-serif;
-  color: rgba(128,128,128,0.75);
-  text-align: left;
-}
-
 #m2kcontainer {
   width: 100%;
 }
 
-#settings {
-  display: inline-block;
-  margin-right: 20px;
-  margin-top: 30px;
-}
-
-#in-out{
+.field-label {
   display: block;
   text-align: left;
-  margin-top: 30px;
-  margin-bottom: 10px;
-  margin-left: 5px;
+  margin: 24px 0 8px;
+  font-size: 14px;
   font-weight: 600;
+}
+
+textarea {
+  display: block;
+  width: 100%;
+  height: 210px;
+  padding: 12px 14px;
+  resize: vertical;
+  overflow-y: auto;
+}
+
+.text-options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+  margin: 18px 0;
+  text-align: left;
+}
+
+.option-label {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.convert-btn {
+  margin-left: auto;
 }
 
 #notice {
   width: 100%;
   text-align: left;
-  margin-top: 30px;
 }
 
+@media (max-width: 600px) {
+  textarea {
+    height: 180px;
+  }
+
+  .convert-btn {
+    margin-left: 0;
+  }
+}
 </style>

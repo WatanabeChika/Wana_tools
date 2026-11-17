@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onActivated, onDeactivated, onBeforeUnmount } from 'vue';
 
 const morseCodeMap = {
   'A': '· -', 'B': '- · · ·', 'C': '- · - ·', 'D': '- · ·', 'E': '·', 'F': '· · - ·',
@@ -10,18 +10,18 @@ const morseCodeMap = {
 };
 
 const words = [
-  'ABOVE', 'ACTOR', 'ADULT', 'AFTER', 'AGENT', 'ALARM', 'APPLE', 'BEACH', 
-  'BEARD', 'BEAST', 'BECOME', 'BEGIN', 'BEING', 'BELOW', 'BIRTH', 'BLACK', 
-  'BLOCK', 'BOARD', 'BRAIN', 'BREAD', 'BRICK', 'BRING', 'BROWN', 'BUILD', 
-  'CANDY', 'CHAIR', 'CHEST', 'CHILD', 'CLEAN', 'CLEAR', 'CLOUD', 'COAST', 
-  'COLOR', 'COURT', 'COVER', 'CROWD', 'DANCE', 'DIRTY', 'DOUBT', 'DREAM', 
-  'DRINK', 'EARTH', 'EMPTY', 'ENJOY', 'ENTER', 'EVERY', 'FAITH', 'FALSE', 
-  'FAULT', 'FIELD', 'FIFTH', 'FINAL', 'FLOOR', 'FLOWER', 'FORCE', 'FRUIT', 
-  'GLASS', 'GRASS', 'GREEN', 'GROUP', 'GUIDE', 'HAPPY', 'HEART', 'HONEY', 
-  'HORSE', 'HOTEL', 'HOUSE', 'HUMAN', 'IDEAL', 'INPUT', 'JELLY', 'JEWEL', 
-  'JUICE', 'KNIFE', 'LARGE', 'LAUGH', 'LEMON', 'LIGHT', 'MAGIC', 'MARCH', 
-  'MONEY', 'MONTH', 'MUSIC', 'NIGHT', 'NOISE', 'NORTH', 'OCEAN', 'PAPER', 
-  'PARTY', 'PEACE', 'PHONE', 'PIANO', 'PLANT', 'PLATE', 'RADIO', 'RAINY', 
+  'ABOVE', 'ACTOR', 'ADULT', 'AFTER', 'AGENT', 'ALARM', 'APPLE', 'BEACH',
+  'BEARD', 'BEAST', 'BECOME', 'BEGIN', 'BEING', 'BELOW', 'BIRTH', 'BLACK',
+  'BLOCK', 'BOARD', 'BRAIN', 'BREAD', 'BRICK', 'BRING', 'BROWN', 'BUILD',
+  'CANDY', 'CHAIR', 'CHEST', 'CHILD', 'CLEAN', 'CLEAR', 'CLOUD', 'COAST',
+  'COLOR', 'COURT', 'COVER', 'CROWD', 'DANCE', 'DIRTY', 'DOUBT', 'DREAM',
+  'DRINK', 'EARTH', 'EMPTY', 'ENJOY', 'ENTER', 'EVERY', 'FAITH', 'FALSE',
+  'FAULT', 'FIELD', 'FIFTH', 'FINAL', 'FLOOR', 'FLOWER', 'FORCE', 'FRUIT',
+  'GLASS', 'GRASS', 'GREEN', 'GROUP', 'GUIDE', 'HAPPY', 'HEART', 'HONEY',
+  'HORSE', 'HOTEL', 'HOUSE', 'HUMAN', 'IDEAL', 'INPUT', 'JELLY', 'JEWEL',
+  'JUICE', 'KNIFE', 'LARGE', 'LAUGH', 'LEMON', 'LIGHT', 'MAGIC', 'MARCH',
+  'MONEY', 'MONTH', 'MUSIC', 'NIGHT', 'NOISE', 'NORTH', 'OCEAN', 'PAPER',
+  'PARTY', 'PEACE', 'PHONE', 'PIANO', 'PLANT', 'PLATE', 'RADIO', 'RAINY',
   'RIVER', 'ROBOT', 'ROUND', 'SALAD', 'SHAPE', 'SHARK', 'SHEEP', 'SHEET'
 ];
 
@@ -38,25 +38,30 @@ const generateRandomWord = () => {
 // 将单词转换为摩斯码序列
 const wordToMorse = (word) => {
   return word.split('').map(char => {
-    return morseCodeMap[char] || ''}).join('    '); // 字母间隔4个单位
+    return morseCodeMap[char] || ''
+  }).join('    '); // 字母间隔4个单位
 };
 
 // 开始摩斯码显示
-let timer = null
+let timer = null;
+let resultTimer = null;
+const stopMorseDisplay = () => { clearTimeout(timer); isLightOn.value = false; };
+const stopTimers = () => { stopMorseDisplay(); clearTimeout(resultTimer); };
 const startMorseDisplay = () => {
+  stopMorseDisplay();
   let index = 0;
   const sequence = wordToMorse(currentWord.value).split('');
-  
+
   const playNext = () => {
     if (index >= sequence.length) {
       index = 0;
-      setTimeout(playNext, 3000); // 单词间隔
+      timer = setTimeout(playNext, 3000); // 单词间隔
       return;
     }
 
     const char = sequence[index];
     let duration = 0;
-    
+
     if (char === '·') {
       isLightOn.value = true;
       duration = 300; // 点持续时间
@@ -82,13 +87,15 @@ const startMorseDisplay = () => {
 const checkAnswer = () => {
   const answer = userAnswer.value.toUpperCase().trim();
   result.value = answer === currentWord.value ? '正确！🎉' : '错误，再试试！';
-  setTimeout(() => result.value = '', 2000);
+  clearTimeout(resultTimer);
+  resultTimer = setTimeout(() => result.value = '', 2000);
 };
 
 // 查看答案
 const showAnswer = () => {
   result.value = `答案是：${currentWord.value}`;
-  setTimeout(() => result.value = '', 10000);
+  clearTimeout(resultTimer);
+  resultTimer = setTimeout(() => result.value = '', 10000);
 };
 
 // 切换单词
@@ -96,19 +103,23 @@ const switchWord = () => {
   currentWord.value = generateRandomWord();
   userAnswer.value = '';
   result.value = '';
-  clearTimeout(timer);
+  stopTimers();
   startMorseDisplay();
 };
 
-onMounted(() => {
-  currentWord.value = generateRandomWord();
+const resumeDisplay = () => {
+  if (!currentWord.value) currentWord.value = generateRandomWord();
   startMorseDisplay();
-});
+};
+onMounted(resumeDisplay);
+onActivated(resumeDisplay);
+onDeactivated(stopTimers);
+onBeforeUnmount(stopTimers);
 </script>
 
 
 <template>
-  <h1>摩斯电码</h1>
+  <h1 class="tool-title">摩斯电码</h1>
   <div class="container">
     <div class="main-area">
       <div class="morse-container">
@@ -118,8 +129,8 @@ onMounted(() => {
         <input v-model="userAnswer" placeholder="输入你看到的单词" @keyup.enter="checkAnswer">
         <div class="buttons">
           <button @click="checkAnswer">提交答案</button>
-          <button @click="showAnswer" style="background-color: cornflowerblue;">查看答案</button>
-          <button @click="switchWord" style="background-color: gray;">切换单词</button>
+          <button @click="showAnswer" class="primary-btn">查看答案</button>
+          <button @click="switchWord" class="neutral-button">切换单词</button>
         </div>
         <div class="result">{{ result }}</div>
       </div>
@@ -139,49 +150,31 @@ onMounted(() => {
 
 
 <style scoped>
-
-h1 {
-  font-family: sans-serif;
-  color: #333;
-  text-align: center;
-  margin-bottom: 50px;
-}
-
 input {
-  width: 95%;
+  width: 100%;
+  box-sizing: border-box;
   padding: 12px;
   margin-bottom: 15px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border);
   border-radius: 6px;
-  font-size: 16px;
-}
-
-button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 6px;
-  background-color: #28a745;
-  color: white;
-  cursor: pointer;
   font-size: 14px;
-  flex: 1;
-  min-width: 120px;
 }
 
 .container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 40px;
-  max-width: min(1400px, 90vw);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px;
+  width: 100%;
+  box-sizing: border-box;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0;
 }
 
 .main-area {
   display: flex;
   flex-direction: column;
-  gap: 30px;
-  min-width: 350px;
+  gap: 24px;
+  min-width: 0;
 }
 
 .morse-container {
@@ -189,25 +182,26 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #333;
-  border-radius: 15px;
+  background-color: var(--text);
+  border-radius: var(--radius);
   order: 1;
 }
 
 .controls {
   order: 2;
   background: white;
-  padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  padding: 20px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
 }
 
 .reference {
+  text-align: left;
   background: white;
-  padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  min-width: 350px;
+  padding: 20px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  min-width: 0;
 }
 
 .light {
@@ -220,33 +214,45 @@ button {
 
 .light.on {
   background-color: yellow;
-  box-shadow: 0 0 30px yellow;
+  box-shadow: 0 0 18px #ffff0040;
+}
+
+.reference h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 16px;
 }
 
 .code-table {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-  gap: 15px;
-  margin-top: 20px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 16px;
 }
 
 .code-item {
   display: flex;
   justify-content: space-between;
-  padding: 12px 15px;
-  background: #f8f8f8;
-  border-radius: 8px;
-  font-size: 16px;
+  padding: 8px 12px;
+  background: var(--surface-soft);
+  border-radius: var(--radius);
+  font-size: 14px;
 }
 
 .code-item span:first-child {
-  font-weight: bold;
-  margin-right: 20px;
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.code-item span:last-child {
+  font-family: Consolas, monospace;
+  font-size: 16px;
+  white-space: nowrap;
 }
 
 .buttons {
   display: flex;
-  gap: 15px;
+  gap: 10px;
   margin-top: 15px;
   flex-wrap: wrap;
 }
@@ -254,19 +260,19 @@ button {
 .result {
   margin-top: 15px;
   min-height: 24px;
-  color: #666;
-  font-size: 16px;
+  color: var(--muted);
+  font-size: 14px;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 800px) {
   .container {
     grid-template-columns: 1fr;
   }
-  
+
   .main-area {
     order: 1;
   }
-  
+
   .reference {
     order: 2;
   }
@@ -274,30 +280,31 @@ button {
 
 @media (max-width: 768px) {
   .container {
-    gap: 30px;
+    gap: 24px;
   }
-  
+
   .morse-container {
     height: 200px;
   }
-  
+
   .code-table {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 480px) {
+
   .main-area,
   .reference {
     min-width: auto;
   }
-  
+
   .code-table {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .buttons button {
-    min-width: 100%;
+    flex: 1 1 auto;
   }
 }
 </style>

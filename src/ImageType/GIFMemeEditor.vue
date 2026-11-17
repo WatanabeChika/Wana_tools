@@ -1,20 +1,22 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import FontFaceObserver from 'font-face-observer';
+import { loadFonts } from '../utils/resources';
+import { useResource } from '../utils/useResource';
+import ResourceStatus from '../components/ResourceStatus.vue';
 import { createGIF } from 'gifshot'
 import { fillCanvasText, loadImage } from './utils';
 import { LoveLive_characters, LoveLive_groups } from './data';
 
 // ------- 变量声明 -------
 const canvas = ref(null);
-const images = ref([]);
+const renderError = ref('');
 const loading = ref(false);
 const resultGif = ref(null);
 
 const anime = ref(true);
 const seiyuu = ref(false);
 
-const Font1 = new FontFaceObserver('KaiTi');
+const { ready: fontsReady, loading: fontLoading, error: fontError, retry: retryFonts } = useResource(() => loadFonts('KaiTi'));
 const titleFont = 'bold 50px KaiTi';
 const basicPath = 'images/'
 
@@ -22,72 +24,51 @@ const bgColor = 'white';
 const fontColor = 'black';
 const titleText = '今天单推谁？'
 
-const characters = ref(LoveLive_characters);
-const school_modes = ref(LoveLive_groups);
+const characters = ref(LoveLive_characters.map(item => ({ ...item })));
+const school_modes = ref(LoveLive_groups.map(item => ({ ...item })));
 
 const modeItems = ref([
   { name: '角色', mark: anime },
   // { name: '声优', mark: seiyuu },
 ]);
 
-let ctx, imgPath;
+let ctx;
 
 // ------- 主要逻辑 -------
 
 async function update_canvas() {
-  // 角色 or 声优
-  if (anime.value) {
-    imgPath = basicPath + 'characters/';
-  } else {
-    imgPath = basicPath + 'seiyuus/';
-  }
-
-  // 标题
-  fillCanvasText(ctx, fontColor, titleFont, false, 210, 75, titleText);
-  
-  // 清空之前的图片状态
-  resultGif.value = null; 
-  images.value = [];
+  if (loading.value || !fontsReady.value) return;
+  const selected = characters.value.filter(char => char.checked);
+  if (!selected.length) { renderError.value = '请至少选择一个角色'; return; }
+  const imgPath = basicPath + (anime.value ? 'characters/' : 'seiyuus/');
   loading.value = true;
-
-  // 绘制角色/声优，添加到图片数组
-  for (let i = 0; i < characters.value.length; i++) {
-    if (characters.value[i].checked) {
-      const char = characters.value[i];
+  renderError.value = '';
+  try {
+    const frames = [];
+    for (const char of selected) {
       const img = await loadImage(imgPath + char.Eng + '.png');
-      ctx.drawImage(img, 48, 130, 300, 300);
-
-      const dataURL = canvas.value.toDataURL('image/png');
-      images.value.push(dataURL);
-
       ctx.fillStyle = bgColor;
-      ctx.fillRect(48, 130, canvas.value.width, canvas.value.height);
+      ctx.fillRect(0, 0, canvas.value.width, canvas.value.height);
+      fillCanvasText(ctx, fontColor, titleFont, false, 210, 75, titleText);
+      ctx.drawImage(img, 48, 130, 300, 300);
+      frames.push(canvas.value.toDataURL('image/png'));
     }
-  }
-  
-  if (images.value.length === 0) {
+    resultGif.value = await new Promise((resolve, reject) => {
+      const timer = setTimeout(() => reject(new Error('GIF 生成超时')), 90000);
+      try {
+        createGIF({ images: frames, gifWidth: 400, gifHeight: 500 }, result => {
+          clearTimeout(timer);
+          if (result.error) reject(new Error(result.errorMsg || 'GIF 生成失败'));
+          else resolve(result.image);
+        });
+      } catch (error) { clearTimeout(timer); reject(error); }
+    });
+  } catch (error) {
+    renderError.value = error.message || 'GIF 生成失败';
+  } finally {
     loading.value = false;
-    alert("请至少选择一个角色！");
-    return;
   }
-  
-  create();
 }
-
-// 绘制GIF图
-const create = () => {
-  createGIF({
-    'images': images.value,
-    'gifWidth': canvas.value.width,
-    'gifHeight': canvas.value.height,
-    }, function(obj) {
-    if(!obj.error) {
-      loading.value = false;
-      // 修改点：直接将生成的 Base64 赋值给响应式变量，而非操作 DOM
-      resultGif.value = obj.image; 
-    }
-  })
-};
 
 // 下载图片
 function downloadImage() {
@@ -102,16 +83,11 @@ function downloadImage() {
 
 // ------- 事件侦听 -------
 // 初始化
-onMounted(async () => {
-  try {
-    await Promise.all([Font1.check()]);
-    ctx = canvas.value.getContext('2d');
-    ctx.fillStyle = bgColor;
-    ctx.fillRect(0, 0, canvas.value.width, canvas.value.height);
-  } catch (error) {
-    console.error(error);
-  }
-})
+onMounted(() => {
+  ctx = canvas.value.getContext('2d');
+  ctx.fillStyle = bgColor;
+  ctx.fillRect(0, 0, canvas.value.width, canvas.value.height);
+});
 
 // 清空
 const empty_char = () => {
@@ -166,27 +142,26 @@ const toggleCheck = (char) => {
 
 <template>
   <div class="page-container">
-    <h1>"今天单推谁"GIF生成器</h1>
+    <ResourceStatus :loading="fontLoading" :error="fontError" label="楷体字体" @retry="retryFonts" />
+    <p v-if="renderError" class="operation-error" role="alert">{{ renderError }}，可点击绘制按钮重试。</p>
+    <h1 class="tool-title">"今天单推谁"GIF生成器</h1>
     <div id="input-container">
-      
+
       <div id="modes-settings">
         <span id="matching-hint">类型选择: </span>
         <div class="radio-group">
           <div v-for="item in modeItems" :key="item.name" class="radio-item">
-            <input type="radio" name="check" :checked="item.mark" :value="item.mark" :id="item.name" @change="update_settings(item)">
+            <input type="radio" name="check" :checked="item.mark" :value="item.mark" :id="item.name"
+              @change="update_settings(item)">
             <label :for="item.name">{{ item.name }}</label>
           </div>
         </div>
       </div>
 
       <div class="character-grid">
-        <div 
-          v-for="char in characters" 
-          :key="char.label" 
-          class="grid-item"
-          :class="{ character_selected: char.checked }" 
-          @click="toggleCheck(char)"
-        >
+        <div v-for="char in characters" :key="char.label" class="grid-item"
+          :class="{ character_selected: char.checked }" role="button" tabindex="0" :aria-pressed="char.checked"
+          @keydown.enter="toggleCheck(char)" @keydown.space.prevent="toggleCheck(char)" @click="toggleCheck(char)">
           {{ char.label }}
         </div>
       </div>
@@ -202,17 +177,17 @@ const toggleCheck = (char) => {
       </div>
 
       <div id="button-container">
-        <button @click="update_canvas" class="btns primary-btn">绘制GIF图</button>
-        <button @click="empty_char" class="btns reset-btn">清空选择</button>
-        <button @click="downloadImage" class="btns download-btn">下载GIF图</button>
+        <button @click="update_canvas" :disabled="loading || !fontsReady" class="btns primary-btn">绘制GIF图</button>
+        <button @click="empty_char" :disabled="loading" class="btns reset-btn">清空选择</button>
+        <button @click="downloadImage" :disabled="loading || !resultGif" class="btns download-btn">下载GIF图</button>
       </div>
     </div>
 
     <div id="image-container-wrapper">
       <canvas id="GIF-canvas" ref="canvas" width="400" height="500" style="display: none;"></canvas>
-      
+
       <span v-if="loading" style="text-align: center; display: block; margin: 20px 0;">生成中······</span>
-      
+
       <div v-if="resultGif" class="result-box">
         <img :src="resultGif" class="generated-gif" alt="Result GIF" />
       </div>
@@ -222,38 +197,30 @@ const toggleCheck = (char) => {
 </template>
 
 <style scoped>
-/* 全局容器 */
-.page-container {
-  padding: 10px;
-  max-width: 100%;
-  box-sizing: border-box;
+.operation-error {
+  color: #b42318;
+  text-align: left;
 }
 
-h1 {
-  font-family: sans-serif;
-  color: #333;
-  text-align: center;
-  margin-bottom: 50px;
+/* 全局容器 */
+.page-container {
+  padding: 0;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* 角色网格布局 */
 .character-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));
-  grid-auto-rows: 55px; 
+  grid-auto-rows: 46px;
   gap: 0;
   width: 100%;
   margin-bottom: 30px;
-  border-top: 1px solid #ddd;
-  border-left: 1px solid #ddd;
-  
-  background-image: repeating-linear-gradient(
-    to bottom,
-    #f9f9f9 0px,
-    #f9f9f9 55px, 
-    #ffffff 55px,
-    #ffffff 110px  
-  );
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+
+
 }
 
 .grid-item {
@@ -261,16 +228,28 @@ h1 {
   align-items: center;
   justify-content: center;
   padding: 0 4px;
-  border-right: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
   cursor: pointer;
-  line-height: 1.2; 
+  line-height: 1.2;
   user-select: none;
-  background-color: transparent; 
+  background-color: transparent;
+}
+
+.grid-item:hover {
+  background: var(--surface-soft);
+}
+
+.grid-item {
+  font-size: 14px;
+  transition: background-color 150ms;
 }
 
 .character_selected {
-  background-color: aquamarine !important;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+  box-shadow: inset 0 0 0 1px var(--accent);
 }
 
 /* 输入控件样式 */
@@ -280,7 +259,8 @@ label {
   font-weight: 500;
 }
 
-input[type="radio"], input[type="checkbox"] {
+input[type="radio"],
+input[type="checkbox"] {
   vertical-align: middle;
 }
 
@@ -305,22 +285,24 @@ input[type="radio"], input[type="checkbox"] {
 }
 
 #matching-hint {
-  font-weight: bold;
+  font-weight: 600;
   margin-bottom: 10px;
   margin-right: 5px;
   min-width: 80px;
 }
 
-.radio-group, .checkbox-group {
+.radio-group,
+.checkbox-group {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
 
-.radio-item, .checkbox-item {
+.radio-item,
+.checkbox-item {
   display: flex;
   align-items: center;
-  margin-right: 15px;
+  margin-right: 8px;
   margin-bottom: 5px;
 }
 
@@ -329,29 +311,15 @@ input[type="radio"], input[type="checkbox"] {
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
-  gap: 20px;
+  gap: 10px;
   margin-bottom: 30px;
 }
-
-button {
-  flex: 0 0 auto;
-  color: #fff;
-  padding: 9px 13px;
-  font-size: 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.primary-btn { background-color: cornflowerblue; }
-.reset-btn { background-color: gray; }
-.download-btn { background-color: #28a745; }
 
 /* 结果展示区关键样式 */
 #image-container-wrapper {
   width: 100%;
   text-align: center;
-  padding-bottom: 50px;
+  padding-bottom: 12px;
 }
 
 .result-box {
@@ -362,8 +330,7 @@ button {
 .generated-gif {
   max-width: 100%;
   height: auto;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border: 1px solid var(--border);
   border-radius: 4px;
 }
-
 </style>

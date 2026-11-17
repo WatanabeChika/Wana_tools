@@ -117,12 +117,9 @@ const formatCommandTokens = (tokens) => {
 const update_output = () => {
   let input = inputText.value;
 
-  // 去掉命令中的续行反斜杠与换行符，并将多个空白折叠为一个空格
-  let new_input = input
-    .replace(/\\\s*\r?\n/g, ' ')
-    .replace(/\\/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
+  // Preserve literal backslashes and spacing inside quoted arguments.
+  const joined = input.replace(/\\[^\S\r\n]*\r?\n/g, ' ');
+  const new_input = tokenize(joined).join(' ');
 
   outputText.value = new_input;
 };
@@ -167,58 +164,80 @@ const update_input = () => {
 
 <template>
   <div id="m2kcontainer">
-    <h1>反斜杠</h1>
+    <h1 class="tool-title">反斜杠</h1>
 
-    <label id="in-out">带反斜杠的命令: </label>
-    <textarea type="text" id="inputBox" v-model="inputText" placeholder="sudo rm -rf \ &#10;I \ &#10;dont \ &#10;want \ &#10;backslash" @input="update_output"></textarea>
-    
-    <label id="in-out">不带反斜杠的命令: </label>
-    <textarea type="text" id="outputBox" v-model="outputText" placeholder="sudo rm -rf I dont want backslash" @input="update_input"></textarea>
+    <label class="field-label" for="inputBox">带反斜杠的命令: </label>
+    <textarea id="inputBox" v-model="inputText"
+      placeholder="python train.py \&#10;  --epochs 10 \&#10;  --batch-size 32" @input="update_output"></textarea>
+
+    <label class="field-label" for="outputBox">不带反斜杠的命令: </label>
+    <textarea id="outputBox" v-model="outputText" placeholder="python train.py --epochs 10 --batch-size 32"
+      @input="update_input"></textarea>
   </div>
 </template>
 
 
 
 <style scoped>
-
-h1 {
-  font-family: sans-serif;
-  color: #333;
-  text-align: center;
-  margin-bottom: 50px;
-}
-
-label {
-  display: inline-block;
-  margin-bottom: 10px;
-  margin-left: 10px;
-  font-weight: 600;
-}
-
-textarea {
-  width: 100%;
-  height: 230px;
-  padding: 10px;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  resize: none; 
-  overflow-y: display; 
-}
-
 #m2kcontainer {
   width: 100%;
 }
 
-#in-out{
+.field-label {
   display: block;
   text-align: left;
-  margin-top: 30px;
-  margin-bottom: 10px;
-  margin-left: 5px;
+  margin: 24px 0 8px;
+  font-size: 14px;
   font-weight: 600;
 }
 
+textarea {
+  display: block;
+  width: 100%;
+  height: 210px;
+  padding: 12px 14px;
+  resize: vertical;
+  overflow-y: auto;
+}
 
+.text-options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+  margin: 18px 0;
+  text-align: left;
+}
+
+.option-label {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.convert-btn {
+  margin-left: auto;
+}
+
+#notice {
+  width: 100%;
+  text-align: left;
+}
+
+textarea {
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+@media (max-width: 600px) {
+  textarea {
+    height: 180px;
+  }
+
+  .convert-btn {
+    margin-left: 0;
+  }
+}
 </style>

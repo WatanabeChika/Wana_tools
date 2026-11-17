@@ -1,6 +1,8 @@
 <script setup>
-import { onMounted, ref } from 'vue';
-import FontFaceObserver from 'font-face-observer';
+import { ref } from 'vue';
+import { loadFonts } from '../utils/resources';
+import { useResource } from '../utils/useResource';
+import ResourceStatus from '../components/ResourceStatus.vue';
 import { fillCanvasText, loadImage, shuffleLogArray } from './utils';
 import { LoveLive_characters, LoveLive_groups, LoveLive_support_colors, LoveLive_character_birthdays } from './data';
 
@@ -14,7 +16,7 @@ const character_icon = ref(false);
 const eye_color = ref(false);
 const black_and_white = ref(false);
 
-const Font1 = new FontFaceObserver('KaiTi');
+const { ready: fontsReady, loading: fontLoading, error: fontError, retry: retryFonts } = useResource(() => loadFonts('KaiTi'), () => update_canvas());
 
 const baseFont = 'KaiTi';
 const titleFont = `bold 50px ${baseFont}`;
@@ -26,119 +28,144 @@ const fontColor = 'black';
 const titleText1 = '连线题：'
 const titleText2 = '请将各角色连至其对应的'
 
-const school_modes = ref(LoveLive_groups);
-const color_modes = ref(LoveLive_support_colors);
-const birthday_modes = ref(LoveLive_character_birthdays);
-const characters = ref(LoveLive_characters);
+const school_modes = ref(LoveLive_groups.map(item => ({ ...item })));
+const color_modes = ref(LoveLive_support_colors.map(item => ({ ...item })));
+const birthday_modes = ref(LoveLive_character_birthdays.map(item => ({ ...item })));
+const characters = ref(LoveLive_characters.map(item => ({ ...item })));
 
 const modeItems = ref([
   { name: '应援色', mark: character_color },
-  { name: '生日'  , mark: character_birthday },
-  { name: '图标'  , mark: character_icon },
-  { name: '瞳色'  , mark: eye_color },
+  { name: '生日', mark: character_birthday },
+  { name: '图标', mark: character_icon },
+  { name: '瞳色', mark: eye_color },
 ]);
 
-let ctx, ctxAns, originHeight;
-let imgPath = basicPath + 'characters/';
+const loading = ref(false);
+const generated = ref(false);
+const renderError = ref('');
+
 
 
 // -------主要功能-------
 // 更新Canvas
 async function update_canvas() {
-  // 获取选中的角色（以调整画布高度）
-  let charList = [];
-  for (let i = 0; i < characters.value.length; i++) {
-    if (characters.value[i].checked) {
-      charList.push(characters.value[i]);
-    }
-  }
-  canvas.value.height = originHeight + charList.length * 175 + 50;
-  canvas_ans.value.height = originHeight + charList.length * 175 + 50;
-
-  // 白色背景
-  ctx.fillStyle = bgColor;
-  ctx.fillRect(0, 0, canvas.value.width, canvas.value.height);
-
-  // 标题 功能嵌入
-  fillCanvasText(ctx, fontColor, titleFont, false, 520, 60, titleText1);
-  fillCanvasText(ctx, fontColor, titleFont, false, 410, 135, titleText2);
-  for (let i = 0; i < modeItems.value.length; i++) {
-    if (modeItems.value[i].mark) {
-      fillCanvasText(ctx, fontColor, titleFont, false, 760, 135, modeItems.value[i].name);
-      break;
-    }
-  }
-
-  // 左半部分
-  const basicX = 170;
-  const basicY = 300;
-  for (let i = 0; i < charList.length; i++) {
-    // 瞳色连线写角色名
-    if (eye_color.value) {
-      fillCanvasText(ctx, fontColor, normalFont, false, basicX - 30, basicY + i * 175, charList[i].label);
-    }
-    // 其余情况绘制角色头像
-    else {
-      const img = await loadImage(imgPath + charList[i].Eng + '.png');
-      ctx.drawImage(img, basicX - 80, basicY + i * 175 - 70, 130, 130);
-    }
-  }
-
-  // 右半部分
-  const [themeList, relation] = shuffleLogArray(charList, true);
-  // 应援色 -> 色块
-  if (character_color.value) {
-    for (let i = 0; i < themeList.length; i++) {
-      ctx.fillStyle = themeList[i].color;
-      ctx.fillRect(basicX + 570, basicY + i * 175 - 50, 180, 100);
-    }
-  }
-  // 生日 -> 文字
-  else if (character_birthday.value) {
-    for (let i = 0; i < themeList.length; i++) {
-      fillCanvasText(ctx, fontColor, normalFont, false, basicX + 640, basicY + i * 175, themeList[i].birthday);
-    }
-  }
-  // 图标 -> 图片
-  else if (character_icon.value) {
-    // 调整图片路径
-    imgPath = basicPath + 'character_icons/';
-    for (let i = 0; i < themeList.length; i++) {
-      const img = await loadImage(imgPath + themeList[i].Eng + '.png');
-      if (black_and_white.value) {
-        ctx.filter = 'grayscale(100%)';
+  if (loading.value || !fontsReady.value) return;
+  loading.value = true;
+  renderError.value = '';
+  // Render offscreen and commit only a complete question/answer pair.
+  const question = document.createElement('canvas');
+  const answer = document.createElement('canvas');
+  question.width = answer.width = 1000;
+  const ctx = question.getContext('2d');
+  const ctxAns = answer.getContext('2d');
+  const originHeight = 200;
+  const eyeMode = eye_color.value;
+  const colorMode = character_color.value;
+  const birthdayMode = character_birthday.value;
+  const iconMode = character_icon.value;
+  const grayscale = black_and_white.value;
+  const themeName = modeItems.value.find(item => item.mark)?.name || '';
+  try {
+    // 获取选中的角色（以调整画布高度）
+    let charList = [];
+    for (let i = 0; i < characters.value.length; i++) {
+      if (characters.value[i].checked) {
+        charList.push(characters.value[i]);
       }
-      ctx.drawImage(img, basicX + 570, basicY + i * 175 - 70, 130, 130);
-      ctx.filter = 'none';
     }
-    imgPath = basicPath + 'characters/';
-  }
-  // 瞳色 -> 图片
-  else if (eye_color.value) {
-    // 调整图片路径
-    imgPath = basicPath + 'eye_color/';
-    for (let i = 0; i < themeList.length; i++) {
-      const img = await loadImage(imgPath + themeList[i].Eng + '.png');
-      ctx.drawImage(img, basicX + 570, basicY + i * 175 - 70, 130, 130);
+    question.height = originHeight + charList.length * 175 + 50;
+    answer.height = originHeight + charList.length * 175 + 50;
+
+    // 白色背景
+    ctx.fillStyle = bgColor;
+    ctx.fillRect(0, 0, question.width, question.height);
+
+    // 标题 功能嵌入
+    fillCanvasText(ctx, fontColor, titleFont, false, 520, 60, titleText1);
+    fillCanvasText(ctx, fontColor, titleFont, false, 410, 135, titleText2);
+    fillCanvasText(ctx, fontColor, titleFont, false, 760, 135, themeName);
+
+    // 左半部分
+    const basicX = 170;
+    const basicY = 300;
+    for (let i = 0; i < charList.length; i++) {
+      // 瞳色连线写角色名
+      if (eyeMode) {
+        fillCanvasText(ctx, fontColor, normalFont, false, basicX - 30, basicY + i * 175, charList[i].label);
+      }
+      // 其余情况绘制角色头像
+      else {
+        const img = await loadImage(basicPath + 'characters/' + charList[i].Eng + '.png');
+        ctx.drawImage(img, basicX - 80, basicY + i * 175 - 70, 130, 130);
+      }
     }
-    imgPath = basicPath + 'characters/';
-  }
 
-  // 底部水印
-  ctx.fillStyle = '#999';
-  ctx.font = `14px ${baseFont}`;
-  ctx.textAlign = 'right';
-  ctx.fillText('Created by Wanakachi', canvas.value.width - 8, canvas.value.height - 10);
+    // 右半部分
+    const [themeList, relation] = shuffleLogArray(charList, true);
+    // 应援色 -> 色块
+    if (colorMode) {
+      for (let i = 0; i < themeList.length; i++) {
+        ctx.fillStyle = themeList[i].color;
+        ctx.fillRect(basicX + 570, basicY + i * 175 - 50, 180, 100);
+      }
+    }
+    // 生日 -> 文字
+    else if (birthdayMode) {
+      for (let i = 0; i < themeList.length; i++) {
+        fillCanvasText(ctx, fontColor, normalFont, false, basicX + 640, basicY + i * 175, themeList[i].birthday);
+      }
+    }
+    // 图标 -> 图片
+    else if (iconMode) {
+      // 调整图片路径
 
-  // 连线（答案）
-  ctxAns.drawImage(canvas.value, 0, 0);
-  for (let i = 0; i < relation.length; i++) {
-    ctxAns.beginPath();
-    ctxAns.moveTo(basicX + 75, basicY + relation[i][0] * 175);
-    ctxAns.lineTo(basicX + 550, basicY + relation[i][1] * 175);
-    ctxAns.strokeStyle = 'black';
-    ctxAns.lineWidth = 3;
-    ctxAns.stroke();
+      for (let i = 0; i < themeList.length; i++) {
+        const img = await loadImage(basicPath + (iconMode ? 'character_icons/' : 'eye_color/') + themeList[i].Eng + '.png');
+        if (grayscale) {
+          ctx.filter = 'grayscale(100%)';
+        }
+        ctx.drawImage(img, basicX + 570, basicY + i * 175 - 70, 130, 130);
+        ctx.filter = 'none';
+      }
+
+    }
+    // 瞳色 -> 图片
+    else if (eyeMode) {
+      // 调整图片路径
+
+      for (let i = 0; i < themeList.length; i++) {
+        const img = await loadImage(basicPath + (iconMode ? 'character_icons/' : 'eye_color/') + themeList[i].Eng + '.png');
+        ctx.drawImage(img, basicX + 570, basicY + i * 175 - 70, 130, 130);
+      }
+
+    }
+
+    // 底部水印
+    ctx.fillStyle = '#999';
+    ctx.font = `14px ${baseFont}`;
+    ctx.textAlign = 'right';
+    ctx.fillText('Created by Wanakachi', question.width - 8, question.height - 10);
+
+    // 连线（答案）
+    ctxAns.drawImage(question, 0, 0);
+    for (let i = 0; i < relation.length; i++) {
+      ctxAns.beginPath();
+      ctxAns.moveTo(basicX + 75, basicY + relation[i][0] * 175);
+      ctxAns.lineTo(basicX + 550, basicY + relation[i][1] * 175);
+      ctxAns.strokeStyle = 'black';
+      ctxAns.lineWidth = 3;
+      ctxAns.stroke();
+    }
+    if (!canvas.value || !canvas_ans.value) return;
+    canvas.value.height = question.height;
+    canvas_ans.value.height = answer.height;
+    canvas.value.getContext('2d').drawImage(question, 0, 0);
+    canvas_ans.value.getContext('2d').drawImage(answer, 0, 0);
+    generated.value = true;
+  } catch (error) {
+    renderError.value = error.message || '图片绘制失败';
+  } finally {
+    loading.value = false;
   }
 }
 
@@ -166,22 +193,6 @@ function downloadAnswer() {
 
 
 // -------事件侦听-------
-// 初始化
-onMounted(async () => {
-  try {
-    await Promise.all([Font1.check()]);
-
-    ctx = canvas.value.getContext('2d');
-    ctxAns = canvas_ans.value.getContext('2d');
-    originHeight = canvas.value.height;
-
-    update_canvas();
-
-  } catch (error) {
-    console.error(error);
-  }
-})
-
 // 清空
 const empty_char = () => {
   for (let i = 0; i < characters.value.length; i++) {
@@ -249,15 +260,15 @@ const toggleCheck = (char) => {
     school_modes.value[i].checked = false;
   }
   if (character_birthday.value && char.birthday == "暂无") {
-    alert("该角色暂无生日信息！");  // 高咲侑暂无生日信息
+    renderError.value = "该角色暂无生日信息！";  // 高咲侑暂无生日信息
     return;
   }
   if (character_icon.value && (!char.icon)) {
-    alert("该角色暂无图标信息！");  // 高咲侑暂无图标信息
+    renderError.value = "该角色暂无图标信息！";  // 高咲侑暂无图标信息
     return;
   }
   if (eye_color.value && (!char.eye)) {
-    alert("该角色暂无瞳色信息！");  // 薇恩、冬毬、莲104期暂无瞳色信息
+    renderError.value = "该角色暂无瞳色信息！";  // 薇恩、冬毬、莲104期暂无瞳色信息
     return;
   }
   char.checked = !char.checked;
@@ -270,26 +281,25 @@ const toggleCheck = (char) => {
 
 <template>
   <div class="page-container">
-    <h1>LoveLive!连线梗图制作器</h1>
+    <ResourceStatus :loading="fontLoading" :error="fontError" label="楷体字体" @retry="retryFonts" />
+    <p v-if="renderError" class="operation-error" role="alert">{{ renderError }}可点击绘制按钮重试。</p>
+    <h1 class="tool-title">LoveLive!连线梗图制作器</h1>
     <div id="input-container">
       <div id="modes-settings">
         <span id="matching-hint">主题选择: </span>
         <div class="radio-group">
           <div v-for="item in modeItems" :key="item.name" class="radio-item">
-            <input type="radio" name="check" :checked="item.mark" :value="item.mark" :id="item.name" @change="update_settings(item)">
+            <input type="radio" name="check" :checked="item.mark" :value="item.mark" :id="item.name"
+              @change="update_settings(item)">
             <label :for="item.name">{{ item.name }}</label>
           </div>
         </div>
       </div>
 
       <div class="character-grid">
-        <div 
-          v-for="char in characters" 
-          :key="char.label" 
-          class="grid-item"
-          :class="{ character_selected: char.checked }" 
-          @click="toggleCheck(char)"
-        >
+        <div v-for="char in characters" :key="char.label" class="grid-item"
+          :class="{ character_selected: char.checked }" role="button" tabindex="0" :aria-pressed="char.checked"
+          @keydown.enter="toggleCheck(char)" @keydown.space.prevent="toggleCheck(char)" @click="toggleCheck(char)">
           {{ char.label }}
         </div>
       </div>
@@ -321,10 +331,10 @@ const toggleCheck = (char) => {
       </div>
 
       <div id="button-container">
-        <button @click="update_canvas" class="btns primary-btn">绘制图片</button>
+        <button @click="update_canvas" :disabled="loading || !fontsReady" class="btns primary-btn">绘制图片</button>
         <button @click="empty_char" class="btns reset-btn">清空选择</button>
-        <button @click="downloadImage" class="btns download-btn">下载图片</button>
-        <button @click="downloadAnswer" class="btns download-btn">下载答案</button>
+        <button @click="downloadImage" :disabled="!generated || loading" class="btns download-btn">下载图片</button>
+        <button @click="downloadAnswer" :disabled="!generated || loading" class="btns download-btn">下载答案</button>
       </div>
     </div>
 
@@ -348,56 +358,60 @@ const toggleCheck = (char) => {
 
 
 <style scoped>
-.page-container {
-  padding: 10px;
-  max-width: 100%;
-  box-sizing: border-box;
+.operation-error {
+  color: #b42318;
+  text-align: left;
 }
 
-h1 {
-  font-family: sans-serif;
-  color: #333;
-  text-align: center;
-  margin-bottom: 50px;
+.page-container {
+  padding: 0;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* 角色网格布局 */
 .character-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));
-  grid-auto-rows: 55px; 
+  grid-auto-rows: 46px;
   gap: 0;
   width: 100%;
   margin-bottom: 30px;
-  border-top: 1px solid #ddd;
-  border-left: 1px solid #ddd;
-  
-  background-image: repeating-linear-gradient(
-    to bottom,
-    #f9f9f9 0px,
-    #f9f9f9 55px, 
-    #ffffff 55px,
-    #ffffff 110px  
-  );
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+
+
 }
 
 .grid-item {
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   padding: 0 4px;
-  border-right: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
   cursor: pointer;
-  
-  line-height: 1.2; 
+
+  line-height: 1.2;
   user-select: none;
-  background-color: transparent; 
+  background-color: transparent;
+}
+
+.grid-item:hover {
+  background: var(--surface-soft);
+}
+
+.grid-item {
+  font-size: 14px;
+  transition: background-color 150ms;
 }
 
 .character_selected {
-  background-color: aquamarine !important;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+  box-shadow: inset 0 0 0 1px var(--accent);
 }
 
 label {
@@ -406,7 +420,8 @@ label {
   font-weight: 500;
 }
 
-input[type="radio"], input[type="checkbox"] {
+input[type="radio"],
+input[type="checkbox"] {
   vertical-align: middle;
 }
 
@@ -431,22 +446,24 @@ input[type="radio"], input[type="checkbox"] {
 }
 
 #matching-hint {
-  font-weight: bold;
+  font-weight: 600;
   margin-bottom: 10px;
   margin-right: 5px;
   min-width: 80px;
 }
 
-.radio-group, .checkbox-group {
+.radio-group,
+.checkbox-group {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
 
-.radio-item, .checkbox-item {
+.radio-item,
+.checkbox-item {
   display: flex;
   align-items: center;
-  margin-right: 15px;
+  margin-right: 8px;
   margin-bottom: 5px;
 }
 
@@ -454,23 +471,9 @@ input[type="radio"], input[type="checkbox"] {
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
-  gap: 20px;
+  gap: 10px;
   margin-bottom: 30px;
 }
-
-button {
-  flex: 0 0 auto;
-  color: #fff;
-  padding: 9px 13px;
-  font-size: 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.primary-btn { background-color: cornflowerblue; }
-.reset-btn { background-color: gray; }
-.download-btn { background-color: #28a745; }
 
 #canvas-container {
   width: 100%;
@@ -491,8 +494,8 @@ canvas {
 }
 
 p {
-  font-family: sans-serif;
-  color: rgba(128,128,128,0.75);
+  font-family: inherit;
+  color: var(--muted);
   margin: 5px 0;
 }
 </style>

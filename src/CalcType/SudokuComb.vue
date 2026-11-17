@@ -1,10 +1,11 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 
 const mainContainer = ref(null);
 const sum = ref(0);
 const n = ref(0);
 const results = ref([]);
+const containerWidth = ref(1);
 
 const numbers = ref([
   { name: 1, checked: false, excluded: false, included: false },
@@ -19,51 +20,51 @@ const numbers = ref([
 ]);
 
 const sums = ref([
-  { name: 1, checked: false},
-  { name: 2, checked: false},
-  { name: 3, checked: false},
-  { name: 4, checked: false},
-  { name: 5, checked: false},
-  { name: 6, checked: false},
-  { name: 7, checked: false},
-  { name: 8, checked: false},
-  { name: 9, checked: false},
-  { name: 10, checked: false},
-  { name: 11, checked: false},
-  { name: 12, checked: false},
-  { name: 13, checked: false},
-  { name: 14, checked: false},
-  { name: 15, checked: false},
-  { name: 16, checked: false},
-  { name: 17, checked: false},
-  { name: 18, checked: false},
-  { name: 19, checked: false},
-  { name: 20, checked: false},
-  { name: 21, checked: false},
-  { name: 22, checked: false},
-  { name: 23, checked: false},
-  { name: 24, checked: false},
-  { name: 25, checked: false},
-  { name: 26, checked: false},
-  { name: 27, checked: false},
-  { name: 28, checked: false},
-  { name: 29, checked: false},
-  { name: 30, checked: false},
-  { name: 31, checked: false},
-  { name: 32, checked: false},
-  { name: 33, checked: false},
-  { name: 34, checked: false},
-  { name: 35, checked: false},
-  { name: 36, checked: false},
-  { name: 37, checked: false},
-  { name: 38, checked: false},
-  { name: 39, checked: false},
-  { name: 40, checked: false},
-  { name: 41, checked: false},
-  { name: 42, checked: false},
-  { name: 43, checked: false},
-  { name: 44, checked: false},
-  { name: 45, checked: false},
+  { name: 1, checked: false },
+  { name: 2, checked: false },
+  { name: 3, checked: false },
+  { name: 4, checked: false },
+  { name: 5, checked: false },
+  { name: 6, checked: false },
+  { name: 7, checked: false },
+  { name: 8, checked: false },
+  { name: 9, checked: false },
+  { name: 10, checked: false },
+  { name: 11, checked: false },
+  { name: 12, checked: false },
+  { name: 13, checked: false },
+  { name: 14, checked: false },
+  { name: 15, checked: false },
+  { name: 16, checked: false },
+  { name: 17, checked: false },
+  { name: 18, checked: false },
+  { name: 19, checked: false },
+  { name: 20, checked: false },
+  { name: 21, checked: false },
+  { name: 22, checked: false },
+  { name: 23, checked: false },
+  { name: 24, checked: false },
+  { name: 25, checked: false },
+  { name: 26, checked: false },
+  { name: 27, checked: false },
+  { name: 28, checked: false },
+  { name: 29, checked: false },
+  { name: 30, checked: false },
+  { name: 31, checked: false },
+  { name: 32, checked: false },
+  { name: 33, checked: false },
+  { name: 34, checked: false },
+  { name: 35, checked: false },
+  { name: 36, checked: false },
+  { name: 37, checked: false },
+  { name: 38, checked: false },
+  { name: 39, checked: false },
+  { name: 40, checked: false },
+  { name: 41, checked: false },
+  { name: 42, checked: false },
+  { name: 43, checked: false },
+  { name: 44, checked: false },
+  { name: 45, checked: false },
 ]);
 
 const findCombinations = () => {
@@ -90,6 +91,8 @@ const findCombinationsHelper = (current, start, sum, n) => {
     results.value.push([...current]);
     return;
   }
+
+  if (n <= 0 || sum <= 0 || n > 10 - start) return;
 
   for (let i = start; i <= sum && i <= 9; i++) {
     current.push(i);
@@ -155,10 +158,9 @@ const chunkOfNumber = () => {
 
 // 将结果分组
 const chunkOfRows = () => {
-  // get editor_container width
-  const screenWidth = mainContainer.value.getBoundingClientRect().width;
-  const itemWidth = results.value[0].length * 28;
-  const columns = Math.floor(screenWidth / itemWidth); // 每行放置的格子数
+  if (!results.value.length || !results.value[0].length) return [];
+  const itemWidth = results.value[0].length * 28 + 16;
+  const columns = Math.max(1, Math.floor(containerWidth.value / itemWidth));
   let rows = [];
 
   let currentRow = [];
@@ -184,23 +186,26 @@ const chunkOfRows = () => {
   return rows;
 };
 
-// 监听窗口大小变化
+let resizeObserver;
 onMounted(() => {
-  window.addEventListener('resize', chunkOfRows);
+  resizeObserver = new ResizeObserver(entries => {
+    containerWidth.value = entries[0].contentRect.width;
+  });
+  resizeObserver.observe(mainContainer.value);
 });
-
+onBeforeUnmount(() => resizeObserver?.disconnect());
 
 </script>
 
 <template>
-  <h1>和分解器</h1>
+  <h1 class="tool-title">和分解器</h1>
   <p style="margin-bottom: 10px; margin-top: 0px">输入一个目标和与数字个数，找出所有和为目标和的数字组合。</p>
   <p style="margin-bottom: 10px; margin-top: 0px">可以选择排除某些数字或者包含某些数字。</p>
   <div id="main-container" ref="mainContainer">
     <div id="sum-input">
       <label style="margin-left: 0px;">目标和 </label>
       <table>
-        <tr v-for="row in chunkOfSum()" :key="row[0].label">
+        <tr v-for="row in chunkOfSum()" :key="row[0].name">
           <td v-for="sum in row" :key="sum.name" :class="{ sum_checked: sum.checked }" @click="toggleSum(sum)">
             {{ sum.name }}
           </td>
@@ -210,7 +215,7 @@ onMounted(() => {
     <div id="number-input">
       <label style="margin-left: 0px;">数字个数 </label>
       <table>
-        <tr v-for="row in chunkOfNumber()" :key="row[0].label">
+        <tr v-for="row in chunkOfNumber()" :key="row[0].name">
           <td v-for="num in row" :key="num.name" :class="{ number_checked: num.checked }" @click="toggleNumber(num, 0)">
             {{ num.name }}
           </td>
@@ -220,8 +225,9 @@ onMounted(() => {
     <div id="exclude">
       <label style="margin-left: 0px;">排除</label>
       <table>
-        <tr v-for="row in chunkOfNumber()" :key="row[0].label">
-          <td v-for="num in row" :key="num.name" :class="{ number_excluded: num.excluded }" @click="toggleNumber(num, 1)">
+        <tr v-for="row in chunkOfNumber()" :key="row[0].name">
+          <td v-for="num in row" :key="num.name" :class="{ number_excluded: num.excluded }"
+            @click="toggleNumber(num, 1)">
             {{ num.name }}
           </td>
         </tr>
@@ -230,18 +236,20 @@ onMounted(() => {
     <div id="include">
       <label style="margin-left: 0px;">包含</label>
       <table>
-        <tr v-for="row in chunkOfNumber()" :key="row[0].label">
-          <td v-for="num in row" :key="num.name" :class="{ number_included: num.included }" @click="toggleNumber(num, 2)">
+        <tr v-for="row in chunkOfNumber()" :key="row[0].name">
+          <td v-for="num in row" :key="num.name" :class="{ number_included: num.included }"
+            @click="toggleNumber(num, 2)">
             {{ num.name }}
           </td>
         </tr>
       </table>
     </div>
-    
+
   </div>
 
-  <div>
-    <table v-if="results.length!=0&&results[0].length!=0">
+  <div class="combination-results" v-if="results.length && results[0].length">
+    <h2>组合结果 <span>{{ results.length }} 组</span></h2>
+    <table v-if="results.length != 0 && results[0].length != 0">
       <tr v-for="(row, index) in chunkOfRows()" :key="index">
         <td v-for="(result, idx) in row" :key="idx">
           {{ result.join(', ') }}
@@ -253,18 +261,10 @@ onMounted(() => {
 </template>
 
 <style scoped>
-
-h1 {
-  font-family: sans-serif;
-  color: #333;
-  text-align: center;
-  margin-bottom: 50px;
-}
-
 p {
-  font-family: sans-serif;
-  color: rgba(128,128,128,0.75);
-  text-align: left;
+  font-family: inherit;
+  color: var(--muted);
+  text-align: center;
 }
 
 label {
@@ -282,38 +282,84 @@ table {
 }
 
 td {
-  width: 14.28%;
+  min-width: 28px;
+  box-sizing: border-box;
   padding: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border);
   cursor: pointer;
 }
 
 tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: var(--surface-soft);
+}
+
+td:hover {
+  background: var(--accent-soft);
 }
 
 #main-container {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 30px;
   margin-top: 30px;
 }
 
-#exclude, #include, #sum-input, #number-input {
-  margin-right: 30px;
-}
-
-.sum_checked, .number_checked {
-  background-color: yellow;
+.sum_checked,
+.number_checked {
+  background: var(--accent-soft);
+  color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+  font-weight: 600;
 }
 
 .number_excluded {
-  background-color: crimson;
+  background: var(--danger-soft);
+  color: var(--danger);
+  box-shadow: inset 0 0 0 1px var(--danger);
 }
 
 .number_included {
-  background-color: aquamarine;
+  background: var(--success-soft);
+  color: var(--success);
+  box-shadow: inset 0 0 0 1px var(--success);
 }
 
+.combination-results {
+  max-width: 100%;
+  overflow-x: auto;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+}
 
+.combination-results h2 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 14px;
+}
 
+.combination-results h2 span {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--muted);
+  margin-left: 8px;
+}
+
+.combination-results td {
+  white-space: nowrap;
+  cursor: default;
+}
+
+@media (max-width: 420px) {
+  #main-container {
+    column-gap: 20px;
+  }
+
+  #sum-input td {
+    padding: 8px 5px;
+    min-width: 25px;
+    font-size: 13px;
+  }
+}
 </style>

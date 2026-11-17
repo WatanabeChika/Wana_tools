@@ -8,54 +8,54 @@ const empty = ref(true);
 const space = ref(false);
 
 const modeItems = ref([
-  { name: '保持原格式', mark: empty},
-  { name: '下划线格式', mark: space},
+  { name: '保持原格式', mark: empty },
+  { name: '下划线格式', mark: space },
 ]);
 
 const update_output = () => {
-    let input = inputText.value;
-    // 基本替换
-    let new_input = input.replace(/A|a/g, '4').replace(/E|e/g, '3').replace(/I|i/g, '1')
-                    .replace(/O|o/g, '0').replace(/Z|z/g, '2');
-    // 特殊替换（s,t和l）
-    for (let i = 0; i < new_input.length; i++) {
-      switch (new_input[i]) {
-        case 's':
-        case 'S':
-            if (Math.random() < 0.33) {
-                new_input = new_input.slice(0, i) + '5' + new_input.slice(i+1);
-            } else if (Math.random() < 0.66) {
-                new_input = new_input.slice(0, i) + '$' + new_input.slice(i+1);
-            }
-            break;
-        case 't':
-        case 'T':
-            if (Math.random() < 0.5) {
-                new_input = new_input.slice(0, i) + '7' + new_input.slice(i+1);
-            }
-            break;
-        case 'l':
-            if (i > 0 && i < new_input.length-1 && isLetter(new_input[i-1]) && isLetter(new_input[i+1])) {
-                    new_input = new_input.slice(0, i) + '1' + new_input.slice(i+1);
-                }
-            break;
-        default:
-            break;
-      }
-    }
-    // 字符大小写随机化
-    for (let i = 0; i < new_input.length; i++) {
-        if (Math.random() > 0.75) {
-            new_input = new_input.slice(0, i) + new_input[i].toUpperCase() + new_input.slice(i+1);
+  let input = inputText.value;
+  // 基本替换
+  let new_input = input.replace(/A|a/g, '4').replace(/E|e/g, '3').replace(/I|i/g, '1')
+    .replace(/O|o/g, '0').replace(/Z|z/g, '2');
+  // 特殊替换（s,t和l）
+  for (let i = 0; i < new_input.length; i++) {
+    switch (new_input[i]) {
+      case 's':
+      case 'S':
+        if (Math.random() < 0.33) {
+          new_input = new_input.slice(0, i) + '5' + new_input.slice(i + 1);
+        } else if (Math.random() < 0.66) {
+          new_input = new_input.slice(0, i) + '$' + new_input.slice(i + 1);
         }
+        break;
+      case 't':
+      case 'T':
+        if (Math.random() < 0.5) {
+          new_input = new_input.slice(0, i) + '7' + new_input.slice(i + 1);
+        }
+        break;
+      case 'l':
+        if (i > 0 && i < new_input.length - 1 && isLetter(new_input[i - 1]) && isLetter(new_input[i + 1])) {
+          new_input = new_input.slice(0, i) + '1' + new_input.slice(i + 1);
+        }
+        break;
+      default:
+        break;
     }
-    // 下划线输出模式
-    if (space.value) {
-        new_input = new_input.replace(/[^A-Za-z0-9|$]/g, '_');
-        // 去掉头尾下划线，连续下划线合并
-        new_input = new_input.replace(/_+/g, '_').replace(/^_|_$/g, '');
+  }
+  // 字符大小写随机化
+  for (let i = 0; i < new_input.length; i++) {
+    if (Math.random() > 0.75) {
+      new_input = new_input.slice(0, i) + new_input[i].toUpperCase() + new_input.slice(i + 1);
     }
-    outputText.value = new_input;
+  }
+  // 下划线输出模式
+  if (space.value) {
+    new_input = new_input.replace(/[^A-Za-z0-9|$]/g, '_');
+    // 去掉头尾下划线，连续下划线合并
+    new_input = new_input.replace(/_+/g, '_').replace(/^_|_$/g, '');
+  }
+  outputText.value = new_input;
 };
 
 const update_format = (item) => {
@@ -76,72 +76,76 @@ const update_format = (item) => {
 
 <template>
   <div id="m2kcontainer">
-    <h1>Leetspeak转换器</h1>
-    <label id="in-out">英文文段: </label>
-    <textarea type="text" id="inputBox" v-model="inputText" placeholder="I love leetspeak!" @input="update_output"></textarea>
-    <div v-for="item in modeItems" :key="item.name" id="settings">
-      <label :for="item.name">{{ item.name }}</label>
-      <input type="radio" name="check" :checked="item.mark" :value="item.mark" :id="item.name" @change="update_format(item)">
+    <h1 class="tool-title">Leetspeak转换器</h1>
+    <label class="field-label" for="inputBox">英文文段: </label>
+    <textarea id="inputBox" v-model="inputText" placeholder="I love leetspeak!" @input="update_output"></textarea>
+    <div class="text-options">
+      <label v-for="item in modeItems" :key="item.name" class="option-label">
+        <input type="radio" name="leet-format" :checked="item.mark" @change="update_format(item)">{{ item.name }}
+      </label>
+      <button type="button" class="convert-btn" :disabled="!inputText.trim()" @click="update_output">重新转换</button>
     </div>
-    <label id="in-out">Leetspeak文段: </label>
-    <textarea type="text" id="outputBox" v-model="outputText" placeholder="1 l0v3 l337$p34k!" readonly></textarea>
+    <label class="field-label" for="outputBox">Leetspeak文段: </label>
+    <textarea id="outputBox" v-model="outputText" placeholder="1 l0v3 l337$p34k!" readonly></textarea>
   </div>
 </template>
 
 
 
 <style scoped>
-
-h1 {
-  font-family: sans-serif;
-  color: #333;
-  text-align: center;
-  margin-bottom: 50px;
-}
-
-label {
-  display: inline-block;
-  margin-bottom: 10px;
-  margin-left: 10px;
-  font-weight: 600;
-}
-
-textarea {
-  width: 100%;
-  height: 230px;
-  padding: 10px;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  resize: none; 
-  overflow-y: display; 
-}
-
-input[type="radio"] {
-  display: inline-block;
-  margin-right: 30px;
-}
-
 #m2kcontainer {
   width: 100%;
 }
 
-#in-out{
+.field-label {
   display: block;
   text-align: left;
-  margin-top: 30px;
-  margin-bottom: 10px;
-  margin-left: 5px;
+  margin: 24px 0 8px;
+  font-size: 14px;
   font-weight: 600;
 }
 
-#settings {
-  display: inline-block;
-  margin-right: 20px;
-  margin-top: 30px;
+textarea {
+  display: block;
+  width: 100%;
+  height: 210px;
+  padding: 12px 14px;
+  resize: vertical;
+  overflow-y: auto;
 }
 
+.text-options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+  margin: 18px 0;
+  text-align: left;
+}
+
+.option-label {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.convert-btn {
+  margin-left: auto;
+}
+
+#notice {
+  width: 100%;
+  text-align: left;
+}
+
+@media (max-width: 600px) {
+  textarea {
+    height: 180px;
+  }
+
+  .convert-btn {
+    margin-left: 0;
+  }
+}
 </style>
-
-

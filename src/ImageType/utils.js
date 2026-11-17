@@ -33,14 +33,29 @@ export function getTextWidth(text, font) {
 }
 
 // func: 加载图片
+const imageCache = new Map();
 export function loadImage(src) {
-    return new Promise((resolve, reject) => {
+    const url = /^(?:[a-z]+:|\/\/|\/)/i.test(src) ? src : `${import.meta.env.BASE_URL}${src}`;
+    if (imageCache.has(url)) return imageCache.get(url);
+    const promise = new Promise((resolve, reject) => {
         const img = new Image();
-        img.crossOrigin = "Anonymous"; 
-        img.src = src;
-        img.onload = () => resolve(img);
-        img.onerror = reject;
+        img.crossOrigin = 'anonymous';
+        const timer = setTimeout(() => finish(new Error('图片加载超时，请重试')), 20000);
+        function finish(error) {
+            clearTimeout(timer);
+            img.onload = img.onerror = null;
+            if (error) { img.src = ''; reject(error); }
+            else resolve(img);
+        }
+        img.onload = () => finish();
+        img.onerror = () => finish(new Error('图片加载失败，请重试'));
+        img.src = url;
     });
+    imageCache.set(url, promise);
+    promise.catch(() => { if (imageCache.get(url) === promise) imageCache.delete(url); });
+    // Bound decoded-image retention when generating many different cards.
+    if (imageCache.size > 160) imageCache.delete(imageCache.keys().next().value);
+    return promise;
 }
 
 // func: 打乱数组并记录相对位置
@@ -60,4 +75,4 @@ export function shuffleLogArray(originArray, saveRelativePositions) {
         relativePositions.push([i, array.indexOf(element)]);      
     }
     return [array, relativePositions];
-}  
+}

@@ -11,9 +11,9 @@ export function fin_conv(fin) {
 export function fin2_conv(fin) {
     const fin_map = {
         '': '', 'a': 'ア', 'o': 'オ', 'e': 'エ', 'i': 'イ', 'u': 'ウ', 'v': 'ウ',
-        'ai': 'アイ', 'ei': 'エイ', 'ui': 'ウイ', 'ao': 'アオ', 'ou': 'オウ', 
-        'iu': 'イウ', 'ie': 'イエ', 've': 'ウエ', 'an': 'アン', 'en': 'エン', 
-        'in': 'イン', 'un': 'ウン', 'vn': 'ウン', 'ang': 'アン', 'eng': 'エン', 
+        'ai': 'アイ', 'ei': 'エイ', 'ui': 'ウイ', 'ao': 'アオ', 'ou': 'オウ',
+        'iu': 'イウ', 'ie': 'イエ', 've': 'ウエ', 'an': 'アン', 'en': 'エン',
+        'in': 'イン', 'un': 'ウン', 'vn': 'ウン', 'ang': 'アン', 'eng': 'エン',
         'ing': 'イン', 'ong': 'オン',
     };
     return fin_map[fin];
@@ -112,7 +112,7 @@ export function num_conv(num) {
     // 判断是不是小数
     if (num.indexOf('.') != -1) float = true;
     // 读数
-    for (let i = num.length-1; i >= 0; --i) {
+    for (let i = num.length - 1; i >= 0; --i) {
         // 正负号
         if (num[i] == '-') {
             res = '负' + res;
@@ -131,7 +131,7 @@ export function num_conv(num) {
         // 小数部分
         if (float) {
             res = num_map[num[i]] + res;
-        } 
+        }
         // 整数部分
         else {
             if (num[i] == '0') {
@@ -151,7 +151,7 @@ export function num_conv(num) {
                     if (digit % 4 == 0) {
                         res = num_map[num[i]] + digit_map[digit] + res;
                     } else {
-                        res = num_map[num[i]] + digit_map[digit] + digit_map[Math.floor(digit/4)*4] + res;
+                        res = num_map[num[i]] + digit_map[digit] + digit_map[Math.floor(digit / 4) * 4] + res;
                     }
                 } else {
                     res = num_map[num[i]] + digit_map[digit] + res;
@@ -165,7 +165,7 @@ export function num_conv(num) {
     // 合并连续的零
     res = res.replace(/零+/g, '零');
     return res;
-  }
+}
 
 // 判断该字符是否为字母
 export function isLetter(char) {
