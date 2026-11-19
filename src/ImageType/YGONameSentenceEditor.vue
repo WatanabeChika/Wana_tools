@@ -150,6 +150,12 @@ async function initialize() {
 function matchesFor(character, reading) {
   const exact = exactIndex.get(character);
   if (exact?.length) return { candidates: exact, mode: 'exact' };
+  // 英文字母优先保留原大小写，缺字时使用另一种大小写；候选仍保留实际字形和裁切位置。
+  if (/^[A-Za-z]$/.test(character)) {
+    const alternate = character === character.toLowerCase() ? character.toUpperCase() : character.toLowerCase();
+    const candidates = exactIndex.get(alternate);
+    if (candidates?.length) return { candidates, mode: 'case' };
+  }
   if (allowHomophones.value && reading?.isZh) {
     const sameTone = toneIndex.get(reading.pinyin);
     if (sameTone?.length) return { candidates: sameTone, mode: 'homophone' };
@@ -467,9 +473,10 @@ async function changeCard(manual = false) {
   if (manual) {
     const characters = Array.from(replacement.value.trim());
     if (characters.length !== 1) { error.value = '请输入一个替代字。'; return; }
-    candidates = exactIndex.get(characters[0]) || [];
+    const result = matchesFor(characters[0]);
+    candidates = result.candidates;
     if (!candidates.length) { error.value = `卡名中找不到“${characters[0]}”，请换一个字。`; return; }
-    mode = characters[0] === token.input ? 'exact' : 'manual';
+    mode = characters[0] === token.input ? result.mode : 'manual';
   }
   if (!candidates?.length) return;
   busy.value = true;
@@ -731,6 +738,7 @@ onBeforeUnmount(() => {
                 rel="noopener noreferrer">{{ selectedToken.candidate.name }}</a>（{{ selectedToken.candidate.id }}）</p>
             <p v-if="selectedToken.matchMode === 'homophone'" class="substitution-note">原字未收录，已使用同声调的同音字。</p>
             <p v-else-if="selectedToken.matchMode === 'near'" class="substitution-note">原字未收录，已使用不同声调的近音字。</p>
+            <p v-else-if="selectedToken.matchMode === 'case'" class="substitution-note">已使用同一字母的另一种大小写。</p>
             <p v-else-if="selectedToken.matchMode === 'manual'" class="substitution-note">使用你指定的替代字。</p>
             <button class="secondary-button small-button" :disabled="busy" @click="changeCard()">{{ selectedToken.status
               === 'failed' ? '换卡 / 重试' : '换一张卡' }}</button>
